@@ -580,6 +580,80 @@
       color: var(--muted);
     }
 
+    /* ─── REALM ──────────────────────────────────────────────── */
+    .realm-section {
+      background: var(--dark-bg);
+      padding: 10rem 5vw;
+    }
+    .realm-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6rem; align-items: center;
+    }
+    .realm-text .section-label { color: var(--copper); }
+    .realm-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      font-weight: 300; line-height: 1.15;
+      margin-bottom: 1.4rem;
+    }
+    .realm-text p {
+      font-size: 0.95rem; line-height: 1.8; color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+    .realm-text p em { color: var(--copper-lt); font-style: normal; }
+    .realm-list { margin-top: 0.5rem; }
+    .realm-list li { color: var(--muted); }
+    .realm-list li::before { color: var(--copper); }
+
+    .realm-tiers {
+      display: flex; flex-direction: column;
+      padding: 2.5rem;
+      border: 1px solid rgba(250,247,242,0.07);
+      background: var(--dark-surf);
+    }
+    .tier-item {
+      display: flex; align-items: center; gap: 1.2rem;
+    }
+    .tier-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      border: 1px solid rgba(250,247,242,0.2);
+      flex-shrink: 0;
+    }
+    .current-dot {
+      background: var(--copper);
+      border-color: var(--copper);
+      box-shadow: 0 0 0 4px rgba(201,130,74,0.15);
+    }
+    .tier-item.active .tier-dot { border-color: rgba(250,247,242,0.5); }
+    .tier-info { flex: 1; }
+    .tier-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 400;
+      color: var(--text-light);
+    }
+    .tier-item.active .tier-name { color: var(--muted); }
+    .tier-item.current .tier-name { color: var(--copper-lt); }
+    .tier-sub {
+      font-size: 0.75rem; color: rgba(250,247,242,0.3);
+      margin-top: 0.15rem;
+    }
+    .tier-xp {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.1em;
+      color: rgba(250,247,242,0.25);
+    }
+    .tier-item.current .tier-xp { color: var(--copper); }
+    .tier-connector {
+      width: 1px; height: 2rem;
+      background: rgba(250,247,242,0.08);
+      margin-left: 4.5px; margin: 0.6rem 0 0.6rem 4.5px;
+    }
+
+    @media (max-width: 900px) {
+      .realm-inner { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
     /* ─── PRICING ────────────────────────────────────────────── */
     .pricing-section {
       background: var(--cream);
@@ -742,10 +816,12 @@
     <span class="k">Karmic</span><span class="c">Compass</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#karma">Karma Engine</a></li>
-    <li><a href="#arya">Arya</a></li>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#journal">Journal</a></li>
+    <li><a href="#mentor">Mentor</a></li>
     <li><a href="#align">Align</a></li>
     <li><a href="#stars">Stars</a></li>
+    <li><a href="#realm">Realm</a></li>
     <li><a href="#pricing">Pricing</a></li>
   </ul>
   <a class="nav-cta" href="#pricing">Begin Free Trial</a>
@@ -808,7 +884,7 @@
 
   <div class="hero-actions reveal reveal-delay-3">
     <a href="#pricing" class="btn-primary">Begin Your 11-Day Journey</a>
-    <a href="#arya" class="btn-ghost">Meet Arya</a>
+    <a href="#mentor" class="btn-ghost">Meet Arya</a>
   </div>
   <p class="hero-note reveal reveal-delay-4">No credit card required · 11 days free · iOS &amp; Android</p>
 
@@ -828,9 +904,9 @@
 </div>
 
 <!-- ─── KARMA ENGINE ──────────────────────────────────────────── -->
-<section class="feature-split karma-section" id="karma">
+<section class="feature-split karma-section" id="home">
   <div class="feature-text">
-    <p class="section-label reveal">Karma Engine</p>
+    <p class="section-label reveal">Home</p>
     <h2 class="reveal reveal-delay-1">Your karma,<br>measured daily.</h2>
     <p class="reveal reveal-delay-2">
       Every action, every intention — scored and reflected back to you. 
@@ -892,7 +968,7 @@
 </section>
 
 <!-- ─── ARYA ──────────────────────────────────────────────────── -->
-<section class="arya-section" id="arya">
+<section class="arya-section" id="mentor">
   <div class="arya-inner">
     <div class="arya-chat reveal">
       <div class="chat-bubble user">
@@ -911,7 +987,7 @@
       </div>
     </div>
     <div class="arya-text-col">
-      <p class="section-label reveal">Your AI Mentor</p>
+      <p class="section-label reveal">Mentor</p>
       <h2 class="reveal reveal-delay-1">Meet Arya.<br>Wisdom, always on.</h2>
       <p class="reveal reveal-delay-2">
         Arya is your personal dharmic guide — an AI mentor trained to hold space for your deepest questions 
@@ -1002,11 +1078,12 @@
 </section>
 
 <!-- ─── JOURNAL ────────────────────────────────────────────────── -->
-<section class="journal-section">
+<section class="journal-section" id="journal">
   <div class="journal-inner">
     <div class="journal-text-col">
       <p class="section-label reveal">Journal</p>
       <h2 class="reveal reveal-delay-1">Write your path.<br>Understand your karma.</h2>
+
       <p class="reveal reveal-delay-2">
         The KarmicCompass journal isn't a diary — it's a karmic mirror. 
         Every entry is analysed by the Karma Engine, surfacing patterns 
@@ -1072,6 +1149,67 @@
     <div class="zodiac-item"><div class="zodiac-glyph">♑</div><div class="zodiac-name">Capricorn</div></div>
     <div class="zodiac-item"><div class="zodiac-glyph">♒</div><div class="zodiac-name">Aquarius</div></div>
     <div class="zodiac-item"><div class="zodiac-glyph">♓</div><div class="zodiac-name">Pisces</div></div>
+  </div>
+</section>
+
+<!-- ─── REALM ────────────────────────────────────────────────── -->
+<section class="realm-section" id="realm">
+  <div class="realm-inner">
+    <div class="realm-text reveal">
+      <p class="section-label">Realm</p>
+      <h2 class="reveal reveal-delay-1">Your sacred space.<br>Visualise your arc.</h2>
+      <p class="reveal reveal-delay-2">
+        Realm is your personal karmic universe within KarmicCompass — a full-screen, 
+        immersive view of your evolution. Track your tier progression from 
+        <em>Seeker</em> to <em>Karma Architect</em>, set sacred intentions, 
+        and witness your dharmic journey unfold in real time.
+      </p>
+      <ul class="feature-list realm-list reveal reveal-delay-3">
+        <li>Karma tier progression — Seeker → Karma Architect</li>
+        <li>Sacred intention-setting and tracking</li>
+        <li>XP milestones and badges for consistent practice</li>
+        <li>Monthly karma arc visualisation</li>
+      </ul>
+    </div>
+    <div class="realm-visual reveal reveal-delay-2">
+      <div class="realm-tiers">
+        <div class="tier-item active">
+          <div class="tier-dot"></div>
+          <div class="tier-info">
+            <div class="tier-name">Karma Architect</div>
+            <div class="tier-sub">Mastery of dharmic action</div>
+          </div>
+          <div class="tier-xp">2500+ XP</div>
+        </div>
+        <div class="tier-connector"></div>
+        <div class="tier-item">
+          <div class="tier-dot"></div>
+          <div class="tier-info">
+            <div class="tier-name">Dharma Walker</div>
+            <div class="tier-sub">Consistent on the path</div>
+          </div>
+          <div class="tier-xp">1200 XP</div>
+        </div>
+        <div class="tier-connector"></div>
+        <div class="tier-item">
+          <div class="tier-dot"></div>
+          <div class="tier-info">
+            <div class="tier-name">Virtue Keeper</div>
+            <div class="tier-sub">Living with intention</div>
+          </div>
+          <div class="tier-xp">500 XP</div>
+        </div>
+        <div class="tier-connector"></div>
+        <div class="tier-item current">
+          <div class="tier-dot current-dot"></div>
+          <div class="tier-info">
+            <div class="tier-name">Seeker</div>
+            <div class="tier-sub">The journey begins here</div>
+          </div>
+          <div class="tier-xp">0 XP</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
