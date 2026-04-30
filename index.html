@@ -3,277 +3,560 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>KarmicCompass</title>
+<title>KarmicCompass — From Chaos to Clarity</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400&family=DM+Mono:wght@300&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
 <style>
+/* ─ RESET ───────────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{width:100%;height:100%;overflow:hidden;background:#08080F;color:#FAF7F2;font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased}
+:root{
+  --ink:#08080F; --paper:#FAF7F2; --copper:#C9824A;
+  --copper-lt:#E8A97A; --sage:#7A9E7E;
+  --muted-dark:rgba(250,247,242,.45);
+  --muted-light:rgba(8,8,15,.45);
+}
+html{font-size:16px}
+body{
+  font-family:'DM Sans',sans-serif;font-weight:300;
+  background:var(--ink);color:var(--paper);
+  height:100vh;overflow-y:scroll;overflow-x:hidden;
+  scroll-snap-type:y mandatory;
+  -webkit-font-smoothing:antialiased;
+  scrollbar-width:none;
+}
+body::-webkit-scrollbar{display:none}
 
-/* NAV */
+/* ─ NAV ─────────────────────────────────────────────────────── */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:10;
+  position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 4vw;height:58px;
+  padding:0 5vw;height:52px;
+  transition:background .4s,backdrop-filter .4s;
 }
-.logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;text-decoration:none;color:#FAF7F2;letter-spacing:.02em}
-.logo span{color:#C9824A}
-.nav-r{display:flex;align-items:center;gap:2rem}
-.nav-links{display:flex;gap:1.8rem;list-style:none}
-.nav-links a{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(250,247,242,.35);text-decoration:none;transition:color .2s}
-.nav-links a:hover{color:rgba(250,247,242,.8)}
-.nav-btn{
-  font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
-  color:#C9824A;border:1px solid rgba(201,130,74,.4);background:transparent;
-  padding:8px 18px;border-radius:2px;cursor:pointer;text-decoration:none;
-  transition:background .2s,color .2s;
+nav.dark{background:rgba(8,8,15,.75);backdrop-filter:blur(20px)}
+nav.light{background:rgba(250,247,242,.85);backdrop-filter:blur(20px)}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;text-decoration:none;transition:color .3s}
+nav.dark .logo{color:var(--paper)}
+nav.light .logo{color:var(--ink)}
+.logo b{color:var(--copper);font-weight:400}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;transition:color .2s;
 }
-.nav-btn:hover{background:#C9824A;color:#fff}
+nav.dark .nav-links a{color:rgba(250,247,242,.38)}
+nav.light .nav-links a{color:rgba(8,8,15,.4)}
+.nav-links a:hover{color:var(--copper)!important}
+.nav-cta{
+  font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:7px 16px;border-radius:20px;text-decoration:none;
+  transition:background .2s,color .2s,border-color .2s;
+}
+nav.dark .nav-cta{border:1px solid rgba(201,130,74,.5);color:var(--copper)}
+nav.light .nav-cta{border:1px solid rgba(8,8,15,.25);color:var(--ink)}
+.nav-cta:hover{background:var(--copper)!important;color:#fff!important;border-color:var(--copper)!important}
 
-/* STAGE */
-.stage{
-  width:100vw;height:100vh;
+/* progress dot */
+.pbar{position:fixed;top:0;left:0;height:2px;background:var(--copper);z-index:200;transition:width .1s linear}
+
+/* ─ SECTIONS ────────────────────────────────────────────────── */
+section{
+  scroll-snap-align:start;
+  height:100vh;width:100vw;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
-  gap:0;
+  padding:80px 5vw 60px;
 }
 
-/* ambient glow */
-.glow{
+/* ─ S1 HERO ──────────────────────────────────────────────────── */
+#s1{background:var(--ink)}
+.hero-mandala{
   position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:60vmin;height:60vmin;border-radius:50%;
-  background:radial-gradient(circle,rgba(201,130,74,.13) 0%,transparent 65%);
-  animation:breathe 6s ease-in-out infinite;
-  pointer-events:none;
+  width:min(90vmin,680px);height:min(90vmin,680px);pointer-events:none;
 }
-@keyframes breathe{0%,100%{opacity:.7;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.18)}}
+.hr{animation:spin var(--s,100s) linear infinite;transform-origin:250px 250px}
+.hr.r{animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-/* MANDALA */
-.mandala{
+.hero-glow{
   position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:min(80vmin,520px);height:min(80vmin,520px);
-  pointer-events:none;
+  width:50vmin;height:50vmin;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,130,74,.15) 0%,transparent 70%);
+  animation:glow 5s ease-in-out infinite;pointer-events:none;
 }
-.mandala svg{width:100%;height:100%}
-.r1{animation:cw 120s linear infinite;transform-origin:250px 250px}
-.r2{animation:ccw 70s linear infinite;transform-origin:250px 250px}
-.r3{animation:cw 35s linear infinite;transform-origin:250px 250px}
-@keyframes cw{to{transform:rotate(360deg)}}
-@keyframes ccw{to{transform:rotate(-360deg)}}
+@keyframes glow{0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}}
 
-/* CONTENT — layered over mandala */
-.content{
-  position:relative;z-index:2;
-  display:flex;flex-direction:column;align-items:center;
-  text-align:center;
-  gap:0;
-}
-
-.eyebrow{
+.hero-content{position:relative;z-index:2;text-align:center}
+.hero-tag{
   font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;
-  color:#C9824A;margin-bottom:1.6rem;
-  opacity:0;animation:up .8s .2s forwards;
+  color:var(--copper);display:block;margin-bottom:1.2rem;
 }
-
-.title{
+.hero-title{
   font-family:'Cormorant Garamond',serif;font-weight:300;
-  font-size:clamp(4.5rem,12vmin,9.5rem);line-height:.88;letter-spacing:-.01em;
-  opacity:0;animation:up .9s .35s forwards;
+  font-size:clamp(5.5rem,14vmin,12rem);line-height:.86;letter-spacing:-.02em;
 }
-.title .t1{display:block;color:#FAF7F2}
-.title .t2{display:block;color:#C9824A;animation:cop 5s ease-in-out infinite}
-@keyframes cop{0%,100%{color:#C9824A}50%{color:#E8A97A}}
-
-/* karma ring — sits between title and tagline */
-.ring-wrap{
-  margin:2.2rem 0 1.8rem;
-  position:relative;
-  opacity:0;animation:fadein .9s .6s forwards;
-}
-.ring-wrap svg{width:min(22vmin,110px);height:min(22vmin,110px)}
-.ring-num{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  font-family:'Cormorant Garamond',serif;font-size:clamp(1.2rem,4vmin,2rem);font-weight:300;
-  color:#FAF7F2;line-height:1;
-}
-.ring-lbl{
-  position:absolute;bottom:-1.4rem;left:50%;transform:translateX(-50%);
-  font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;
-  color:rgba(250,247,242,.28);white-space:nowrap;
-}
-.garc{transition:stroke-dashoffset 2.4s cubic-bezier(.22,1,.36,1)}
-
-.tagline{
+.hero-title .line2{color:var(--copper);display:block}
+.hero-sub{
   font-family:'Cormorant Garamond',serif;font-style:italic;
-  font-size:clamp(1rem,2.5vmin,1.35rem);color:rgba(250,247,242,.45);
-  line-height:1.55;margin-top:1.4rem;
-  opacity:0;animation:up .9s .75s forwards;
+  font-size:clamp(1rem,2.2vmin,1.4rem);color:var(--muted-dark);
+  margin:1.8rem auto 0;max-width:500px;line-height:1.6;
 }
-.tagline em{color:rgba(232,169,122,.7);font-style:normal}
+.hero-sub em{color:rgba(232,169,122,.8);font-style:normal}
+.hero-btns{display:flex;gap:.75rem;justify-content:center;margin-top:2.2rem;flex-wrap:wrap}
+.btn-fill{
+  background:var(--copper);color:#fff;font-family:'DM Sans',sans-serif;font-size:.8rem;
+  font-weight:400;letter-spacing:.06em;padding:13px 32px;border:none;border-radius:6px;
+  cursor:pointer;text-decoration:none;transition:background .2s,transform .2s;
+}
+.btn-fill:hover{background:var(--copper-lt);transform:scale(1.03)}
+.btn-outline{
+  color:rgba(250,247,242,.5);font-family:'DM Sans',sans-serif;font-size:.8rem;
+  font-weight:300;letter-spacing:.04em;padding:13px 28px;
+  border:1px solid rgba(250,247,242,.18);border-radius:6px;
+  cursor:pointer;text-decoration:none;transition:color .2s,border-color .2s;
+}
+.btn-outline:hover{color:var(--paper);border-color:rgba(250,247,242,.5)}
+.hero-note{
+  font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(250,247,242,.2);margin-top:1rem;
+}
+/* scroll cue */
+.scroll-cue{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+.cue-line{width:1px;height:40px;background:linear-gradient(to bottom,transparent,rgba(201,130,74,.6))}
+.cue-dot{width:4px;height:4px;border-radius:50%;background:var(--copper)}
 
-.actions{
-  display:flex;gap:.8rem;align-items:center;margin-top:2.2rem;
-  opacity:0;animation:up .8s .95s forwards;
+/* ─ S2 BIG NUMBER ────────────────────────────────────────────── */
+#s2{background:var(--ink)}
+.big-num{
+  font-family:'Cormorant Garamond',serif;font-weight:300;
+  font-size:clamp(8rem,28vmin,22rem);line-height:1;color:var(--paper);
+  position:relative;z-index:1;
 }
-.btn-a{
-  background:#C9824A;color:#fff;
-  font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;
-  padding:13px 30px;border:none;border-radius:2px;cursor:pointer;text-decoration:none;
-  transition:background .2s,transform .2s cubic-bezier(.34,1.56,.64,1);
+.big-num-label{
+  font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:1rem;
 }
-.btn-a:hover{background:#E8A97A;transform:scale(1.05)}
-.btn-b{
-  font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(250,247,242,.3);text-decoration:none;
-  transition:color .2s;cursor:pointer;background:none;border:none;padding:0;
-}
-.btn-b:hover{color:rgba(250,247,242,.7)}
-
-.footnote{
-  font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;
-  color:rgba(250,247,242,.18);margin-top:1rem;
-  opacity:0;animation:fadein .8s 1.2s forwards;
+.big-num-sub{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:clamp(1.1rem,2.5vmin,1.6rem);color:var(--muted-dark);
+  margin-top:1rem;text-align:center;
 }
 
-/* VIRTUE DOTS — compass points around mandala */
-.vdots{position:absolute;top:50%;left:50%;width:0;height:0;pointer-events:none;z-index:3}
-.vd{
-  position:absolute;
-  font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;
-  color:rgba(201,130,74,.35);white-space:nowrap;
-  transform:translate(-50%,-50%);
-  opacity:0;animation:fadein .6s forwards;
+/* ─ S3 ARYA ──────────────────────────────────────────────────── */
+#s3{background:var(--ink);flex-direction:row;gap:8vw;align-items:center;justify-content:center;padding:80px 8vw 60px}
+.arya-text{max-width:420px}
+.arya-text .sec-tag{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--copper);display:block;margin-bottom:1.2rem}
+.arya-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,6vmin,5rem);font-weight:300;line-height:1;margin-bottom:1.4rem}
+.arya-text p{font-size:.92rem;line-height:1.8;color:var(--muted-dark);margin-bottom:.8rem}
+.arya-chat{display:flex;flex-direction:column;gap:.75rem;max-width:380px;flex-shrink:0}
+.bubble{
+  padding:.9rem 1.1rem;border-radius:14px;font-size:.86rem;line-height:1.65;
+  opacity:0;transform:translateY(14px);
+  transition:opacity .5s ease,transform .5s cubic-bezier(.22,1,.36,1);
 }
+.bubble.show{opacity:1;transform:none}
+.bubble.u{
+  background:rgba(250,247,242,.06);border:1px solid rgba(250,247,242,.09);
+  font-style:italic;color:rgba(250,247,242,.7);border-radius:14px 14px 14px 4px;
+}
+.bubble.a{
+  background:rgba(201,130,74,.1);border:1px solid rgba(201,130,74,.2);
+  color:rgba(250,247,242,.85);border-radius:14px 14px 4px 14px;
+}
+.bubble .aname{font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--copper);display:block;margin-bottom:.3rem}
+@media(max-width:820px){#s3{flex-direction:column;gap:3rem}}
 
-/* TICKER */
+/* ─ S4 JOURNAL ───────────────────────────────────────────────── */
+#s4{background:var(--paper);color:var(--ink)}
+.sec-tag-light{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--copper);display:block;margin-bottom:1.2rem}
+#s4 h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,7vmin,6rem);font-weight:300;line-height:.95;text-align:center;margin-bottom:3rem;max-width:800px}
+.journal-cards{display:flex;gap:1.2rem;max-width:900px;width:100%}
+.jcard{
+  flex:1;background:#fff;border:1px solid rgba(8,8,15,.08);
+  border-radius:12px;padding:1.6rem;
+  transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s;
+}
+.jcard:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(201,130,74,.12)}
+.jdate{font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(8,8,15,.3);margin-bottom:.6rem}
+.jtext{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;line-height:1.65;color:rgba(8,8,15,.75)}
+.jinsight{margin-top:.8rem;padding-top:.8rem;border-top:1px solid rgba(8,8,15,.07);font-size:.78rem;line-height:1.6;color:rgba(8,8,15,.45)}
+.jinsight::before{content:'Insight · ';font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:var(--copper)}
+.jxp{display:inline-flex;align-items:center;gap:.3rem;margin-top:.6rem;font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);border:1px solid rgba(122,158,126,.3);padding:3px 9px;border-radius:4px}
+@media(max-width:720px){.journal-cards{flex-direction:column}}
+
+/* ─ S5 ALIGN ─────────────────────────────────────────────────── */
+#s5{background:var(--ink)}
+#s5 h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,6vmin,5.5rem);font-weight:300;line-height:.95;text-align:center;margin-bottom:.8rem}
+#s5 .sub{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);margin-bottom:3rem}
+.align-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(250,247,242,.06);
+  border:1px solid rgba(250,247,242,.06);border-radius:12px;overflow:hidden;
+  max-width:900px;width:100%;
+}
+.acard{
+  background:var(--ink);padding:2rem 1.8rem;
+  transition:background .25s;
+}
+.acard:hover{background:rgba(201,130,74,.07)}
+.acard .icon{width:32px;height:32px;margin-bottom:1rem;opacity:.7}
+.acard h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;margin-bottom:.4rem}
+.acard p{font-size:.78rem;line-height:1.65;color:var(--muted-dark)}
+@media(max-width:700px){.align-grid{grid-template-columns:1fr 1fr}}
+
+/* ─ S6 STARS ─────────────────────────────────────────────────── */
+#s6{background:var(--ink)}
+#s6 h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,7vmin,6rem);font-weight:300;line-height:.95;text-align:center;margin-bottom:.6rem}
+#s6 .sub-p{font-size:.92rem;color:var(--muted-dark);text-align:center;max-width:460px;margin-bottom:3rem;line-height:1.75}
+.zodiac{display:flex;gap:0;flex-wrap:wrap;justify-content:center;max-width:720px}
+.zi{
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  padding:1.2rem 1.4rem;width:calc(100%/6);
+  border:1px solid rgba(250,247,242,.05);
+  transition:background .2s;cursor:default;
+}
+.zi:hover{background:rgba(201,130,74,.06)}
+.zi .g{font-size:1.6rem;opacity:.55;transition:opacity .2s,transform .25s cubic-bezier(.34,1.56,.64,1)}
+.zi:hover .g{opacity:1;transform:scale(1.25) translateY(-3px)}
+.zi .n{font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,247,242,.28)}
+@media(max-width:600px){.zi{width:calc(100%/4)}}
+
+/* ─ S7 REALM ─────────────────────────────────────────────────── */
+#s7{background:var(--paper);color:var(--ink);flex-direction:row;gap:8vw;align-items:center;justify-content:center;padding:80px 8vw 60px}
+.realm-text{max-width:420px}
+.realm-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,6vmin,5rem);font-weight:300;line-height:1;margin-bottom:1.2rem;color:var(--ink)}
+.realm-text p{font-size:.9rem;line-height:1.8;color:rgba(8,8,15,.55);margin-bottom:1rem}
+.realm-text p em{color:var(--copper);font-style:normal}
+.tiers{border:1px solid rgba(8,8,15,.1);border-radius:12px;padding:1.8rem;min-width:300px;background:#fff}
+.tier-row{display:flex;align-items:center;gap:.9rem;padding:.65rem 0}
+.td{width:9px;height:9px;border-radius:50%;border:1px solid rgba(8,8,15,.2);flex-shrink:0}
+.td.on{background:var(--copper);border-color:var(--copper)}
+.tname{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--ink);flex:1}
+.tname.curr{color:var(--copper)}
+.txp{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.08em;color:rgba(8,8,15,.3)}
+.txp.curr{color:var(--copper)}
+.tconn{width:1px;height:22px;background:rgba(8,8,15,.1);margin-left:4px}
+@media(max-width:820px){#s7{flex-direction:column;gap:3rem}}
+
+/* ─ S8 PRICING ───────────────────────────────────────────────── */
+#s8{background:var(--ink)}
+#s8 h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,7vmin,6rem);font-weight:300;line-height:.95;text-align:center;margin-bottom:.6rem}
+#s8 .sub-p{font-size:.9rem;color:var(--muted-dark);text-align:center;margin-bottom:3rem}
+.cards{display:flex;gap:1.5rem;max-width:780px;width:100%}
+.pcard{
+  flex:1;border-radius:16px;padding:2.2rem;
+  background:rgba(250,247,242,.04);border:1px solid rgba(250,247,242,.08);
+  transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .3s;
+}
+.pcard:hover{transform:translateY(-6px);border-color:rgba(201,130,74,.3)}
+.pcard.feat{background:rgba(201,130,74,.09);border-color:rgba(201,130,74,.25)}
+.pcard.feat:hover{border-color:rgba(201,130,74,.5)}
+.pbadge{display:inline-block;background:var(--copper);color:#fff;font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:1rem}
+.pname{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--copper);margin-bottom:.8rem}
+.pamount{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:var(--paper);line-height:1}
+.pperiod{font-size:.78rem;color:rgba(250,247,242,.3);margin-bottom:1.5rem;margin-top:.2rem}
+.plist{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.8rem}
+.pli{font-size:.84rem;color:rgba(250,247,242,.55);display:flex;gap:.55rem;align-items:flex-start;line-height:1.5}
+.pli::before{content:'✓';color:var(--sage);flex-shrink:0}
+.btn-card{display:block;text-align:center;padding:12px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:400;letter-spacing:.04em;text-decoration:none;transition:background .2s,transform .2s}
+.btn-card.primary{background:var(--copper);color:#fff}
+.btn-card.primary:hover{background:var(--copper-lt)}
+.btn-card.secondary{background:rgba(250,247,242,.08);color:rgba(250,247,242,.6);border:1px solid rgba(250,247,242,.12)}
+.btn-card.secondary:hover{background:rgba(250,247,242,.12);color:var(--paper)}
+@media(max-width:600px){.cards{flex-direction:column}}
+
+/* ─ S9 FINAL CTA ─────────────────────────────────────────────── */
+#s9{background:var(--ink)}
+#s9 h2{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,9vmin,8rem);font-weight:300;line-height:.9;text-align:center;max-width:900px}
+#s9 h2 span{color:var(--copper)}
+#s9 .sub-p{font-style:italic;font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2.2vmin,1.4rem);color:var(--muted-dark);margin:1.8rem 0 2.8rem;text-align:center}
+.footer-strip{
+  position:absolute;bottom:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1rem 5vw;border-top:1px solid rgba(250,247,242,.07);
+  flex-wrap:wrap;gap:.5rem;
+}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:rgba(250,247,242,.3)}
+.footer-logo b{color:var(--copper);font-weight:400}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.footer-links a{font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,247,242,.2);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:rgba(250,247,242,.5)}
+.footer-copy{font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,247,242,.15)}
+
+/* bottom ticker */
 .ticker{
-  position:fixed;bottom:0;left:0;right:0;
-  height:36px;display:flex;align-items:center;overflow:hidden;
-  border-top:1px solid rgba(250,247,242,.05);
-  background:rgba(8,8,15,.7);backdrop-filter:blur(12px);
+  position:absolute;bottom:48px;left:0;right:0;height:30px;
+  display:flex;align-items:center;overflow:hidden;pointer-events:none;
 }
-.tick-inner{display:flex;gap:0;width:max-content;animation:tick 30s linear infinite}
-.tick-inner span{
-  font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;
-  color:rgba(201,130,74,.25);padding:0 2rem;
-}
-@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tick{display:flex;gap:0;width:max-content;animation:tickmove 32s linear infinite}
+.tick span{font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,130,74,.22);padding:0 2rem;white-space:nowrap}
+@keyframes tickmove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ANIMATIONS */
-@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-@keyframes fadein{from{opacity:0}to{opacity:1}}
+/* ─ SCROLL REVEAL ────────────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.reveal.show{opacity:1;transform:none}
+.reveal.d1{transition-delay:.12s}.reveal.d2{transition-delay:.24s}.reveal.d3{transition-delay:.38s}.reveal.d4{transition-delay:.52s}
 
-/* PARTICLES */
-canvas{position:fixed;inset:0;pointer-events:none;z-index:0}
+/* particle canvas */
+canvas{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5}
 </style>
 </head>
 <body>
 
+<div class="pbar" id="prog"></div>
 <canvas id="cv"></canvas>
 
-<nav>
-  <a class="logo" href="#">Karmic<span>Compass</span></a>
-  <div class="nav-r">
-    <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Journal</a></li>
-      <li><a href="#">Mentor</a></li>
-      <li><a href="#">Align</a></li>
-      <li><a href="#">Stars</a></li>
-      <li><a href="#">Realm</a></li>
-    </ul>
-    <a class="nav-btn" href="#">Begin Free</a>
-  </div>
+<nav id="nav" class="dark">
+  <a class="logo" href="#">Karmic<b>Compass</b></a>
+  <ul class="nav-links">
+    <li><a href="#s1">Home</a></li>
+    <li><a href="#s3">Mentor</a></li>
+    <li><a href="#s4">Journal</a></li>
+    <li><a href="#s5">Align</a></li>
+    <li><a href="#s6">Stars</a></li>
+    <li><a href="#s7">Realm</a></li>
+  </ul>
+  <a class="nav-cta" href="#s8">Pricing</a>
 </nav>
 
-<div class="stage">
-  <div class="glow"></div>
-
-  <!-- Mandala behind everything -->
-  <div class="mandala">
+<!-- ─ S1 HERO ──────────────────────────────────────────────────── -->
+<section id="s1">
+  <div class="hero-glow"></div>
+  <div class="hero-mandala">
     <svg viewBox="0 0 500 500" fill="none">
-      <g class="r1">
-        <circle cx="250" cy="250" r="244" stroke="rgba(201,130,74,.14)" stroke-width=".6"/>
-        <circle cx="250" cy="250" r="224" stroke="rgba(201,130,74,.07)" stroke-width=".4"/>
-        <line x1="250" y1="6" x2="250" y2="494" stroke="rgba(201,130,74,.09)" stroke-width=".4"/>
-        <line x1="6" y1="250" x2="494" y2="250" stroke="rgba(201,130,74,.09)" stroke-width=".4"/>
-        <line x1="78" y1="78" x2="422" y2="422" stroke="rgba(201,130,74,.07)" stroke-width=".4"/>
-        <line x1="422" y1="78" x2="78" y2="422" stroke="rgba(201,130,74,.07)" stroke-width=".4"/>
+      <g class="hr" style="--s:150s">
+        <circle cx="250" cy="250" r="243" stroke="rgba(201,130,74,.15)" stroke-width=".6"/>
+        <circle cx="250" cy="250" r="222" stroke="rgba(201,130,74,.07)" stroke-width=".4"/>
+        <line x1="250" y1="7" x2="250" y2="493" stroke="rgba(201,130,74,.09)" stroke-width=".4"/>
+        <line x1="7" y1="250" x2="493" y2="250" stroke="rgba(201,130,74,.09)" stroke-width=".4"/>
+        <line x1="79" y1="79" x2="421" y2="421" stroke="rgba(201,130,74,.07)" stroke-width=".4"/>
+        <line x1="421" y1="79" x2="79" y2="421" stroke="rgba(201,130,74,.07)" stroke-width=".4"/>
         <polygon points="250,8 312,196 496,196 350,314 406,498 250,382 94,498 150,314 4,196 188,196" stroke="rgba(201,130,74,.16)" stroke-width=".5" fill="none"/>
       </g>
-      <g class="r2">
-        <circle cx="250" cy="250" r="174" stroke="rgba(201,130,74,.2)" stroke-width=".8"/>
-        <circle cx="250" cy="250" r="154" stroke="rgba(201,130,74,.09)" stroke-width=".4"/>
-        <line x1="250" y1="76" x2="250" y2="424" stroke="rgba(201,130,74,.12)" stroke-width=".4"/>
-        <line x1="76" y1="250" x2="424" y2="250" stroke="rgba(201,130,74,.12)" stroke-width=".4"/>
+      <g class="hr r" style="--s:80s">
+        <circle cx="250" cy="250" r="174" stroke="rgba(201,130,74,.22)" stroke-width=".8"/>
+        <circle cx="250" cy="250" r="152" stroke="rgba(201,130,74,.09)" stroke-width=".4"/>
+        <line x1="250" y1="76" x2="250" y2="424" stroke="rgba(201,130,74,.13)" stroke-width=".4"/>
+        <line x1="76" y1="250" x2="424" y2="250" stroke="rgba(201,130,74,.13)" stroke-width=".4"/>
         <line x1="127" y1="127" x2="373" y2="373" stroke="rgba(201,130,74,.09)" stroke-width=".3"/>
         <line x1="373" y1="127" x2="127" y2="373" stroke="rgba(201,130,74,.09)" stroke-width=".3"/>
         <polygon points="250,82 280,162 368,168 304,226 326,314 250,268 174,314 196,226 132,168 220,162" stroke="rgba(201,130,74,.26)" stroke-width=".6" fill="none"/>
       </g>
-      <g class="r3">
-        <circle cx="250" cy="250" r="108" stroke="rgba(201,130,74,.3)" stroke-width=".9"/>
-        <circle cx="250" cy="250" r="85"  stroke="rgba(201,130,74,.16)" stroke-width=".6"/>
-        <circle cx="250" cy="250" r="62"  stroke="rgba(201,130,74,.12)" stroke-width=".5"/>
-        <circle cx="250" cy="250" r="40"  stroke="rgba(201,130,74,.22)" stroke-width=".7"/>
-        <line x1="142" y1="250" x2="358" y2="250" stroke="rgba(201,130,74,.16)" stroke-width=".4"/>
-        <line x1="250" y1="142" x2="250" y2="358" stroke="rgba(201,130,74,.16)" stroke-width=".4"/>
-        <line x1="174" y1="174" x2="326" y2="326" stroke="rgba(201,130,74,.1)" stroke-width=".3"/>
-        <line x1="326" y1="174" x2="174" y2="326" stroke="rgba(201,130,74,.1)" stroke-width=".3"/>
+      <g class="hr" style="--s:38s">
+        <circle cx="250" cy="250" r="108" stroke="rgba(201,130,74,.32)" stroke-width=".9"/>
+        <circle cx="250" cy="250" r="84"  stroke="rgba(201,130,74,.15)" stroke-width=".6"/>
+        <circle cx="250" cy="250" r="62"  stroke="rgba(201,130,74,.1)" stroke-width=".5"/>
+        <circle cx="250" cy="250" r="40"  stroke="rgba(201,130,74,.2)" stroke-width=".7"/>
+        <line x1="142" y1="250" x2="358" y2="250" stroke="rgba(201,130,74,.18)" stroke-width=".4"/>
+        <line x1="250" y1="142" x2="250" y2="358" stroke="rgba(201,130,74,.18)" stroke-width=".4"/>
+        <line x1="172" y1="172" x2="328" y2="328" stroke="rgba(201,130,74,.1)" stroke-width=".3"/>
+        <line x1="328" y1="172" x2="172" y2="328" stroke="rgba(201,130,74,.1)" stroke-width=".3"/>
       </g>
-      <circle cx="250" cy="250" r="5" fill="rgba(201,130,74,.75)"/>
-      <circle cx="250" cy="250" r="2.5" fill="rgba(250,247,242,.6)"/>
+      <circle cx="250" cy="250" r="5" fill="rgba(201,130,74,.8)"/>
+      <circle cx="250" cy="250" r="2.5" fill="rgba(250,247,242,.65)"/>
     </svg>
   </div>
-
-  <!-- Floating virtue compass labels -->
-  <div class="vdots" id="vdots"></div>
-
-  <!-- Centered text content -->
-  <div class="content">
-    <p class="eyebrow">From Chaos to Clarity</p>
-    <h1 class="title">
-      <span class="t1">Karmic</span>
-      <span class="t2">Compass</span>
+  <div class="hero-content">
+    <span class="hero-tag reveal">From Chaos to Clarity</span>
+    <h1 class="hero-title reveal d1">
+      Karmic<br><span class="line2">Compass</span>
     </h1>
-
-    <div class="ring-wrap">
-      <svg viewBox="0 0 120 120">
-        <circle cx="60" cy="60" r="52" stroke="rgba(250,247,242,.06)" stroke-width="6" fill="none"/>
-        <circle cx="60" cy="60" r="52"
-          class="garc" id="garc"
-          stroke="url(#cg)" stroke-width="6" fill="none"
-          stroke-dasharray="327" stroke-dashoffset="327"
-          stroke-linecap="round" transform="rotate(-90 60 60)"/>
-        <defs>
-          <linearGradient id="cg" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#C9824A"/>
-            <stop offset="100%" stop-color="#E8A97A"/>
-          </linearGradient>
-        </defs>
-      </svg>
-      <div class="ring-num" id="rnum">0</div>
-      <div class="ring-lbl">Karma Score</div>
+    <p class="hero-sub reveal d2">Your actions create your <em>Destiny</em>.<br>Your duty defines your <em>Character</em>.</p>
+    <div class="hero-btns reveal d3">
+      <a href="#s8" class="btn-fill">Begin Free — 11 Days</a>
+      <a href="#s3" class="btn-outline">Meet Arya</a>
     </div>
-
-    <p class="tagline">
-      Your actions create your <em>Destiny</em>.<br>
-      Your duty defines your <em>Character</em>.
-    </p>
-
-    <div class="actions">
-      <a href="#" class="btn-a">Begin Free — 11 Days</a>
-      <button class="btn-b">Meet Arya &rarr;</button>
-    </div>
-
-    <p class="footnote">No credit card &nbsp;·&nbsp; iOS &amp; Android &nbsp;·&nbsp; $11 / month after trial</p>
+    <p class="hero-note reveal d4">No credit card &nbsp;·&nbsp; iOS &amp; Android &nbsp;·&nbsp; $11 / month after trial</p>
   </div>
-</div>
+  <div class="scroll-cue"><div class="cue-line"></div><div class="cue-dot"></div></div>
+</section>
 
-<!-- Bottom ticker -->
-<div class="ticker">
-  <div class="tick-inner" id="ticker"></div>
-</div>
+<!-- ─ S2 BIG STAT ───────────────────────────────────────────────── -->
+<section id="s2">
+  <div class="big-num-label reveal">Your karma score, live.</div>
+  <div class="big-num reveal d1" id="bnum">0</div>
+  <p class="big-num-sub reveal d2">Measured across 7 sacred virtues.<br>Yours to improve, every single day.</p>
+</section>
+
+<!-- ─ S3 ARYA MENTOR ────────────────────────────────────────────── -->
+<section id="s3">
+  <div class="arya-text">
+    <span class="sec-tag reveal">Mentor</span>
+    <h2 class="reveal d1">Meet Arya.<br>Wisdom,<br>always on.</h2>
+    <p class="reveal d2">Arya remembers your journey, tracks your patterns, and meets you exactly where you are — with compassion, not judgement.</p>
+    <p class="reveal d3">Voice. Text. Photos. However you need to be heard.</p>
+  </div>
+  <div class="arya-chat" id="chat">
+    <div class="bubble u">"I feel completely disconnected from my purpose."</div>
+    <div class="bubble a"><span class="aname">Arya</span>That feeling is dharmic information — your compass pointing away from misalignment. When did you last feel genuinely present?</div>
+    <div class="bubble u">"When I was helping my team last month."</div>
+    <div class="bubble a"><span class="aname">Arya</span>There it is. Seva — the karma of service. Your purpose isn't lost. It's waiting inside acts of genuine contribution.</div>
+  </div>
+</section>
+
+<!-- ─ S4 JOURNAL ────────────────────────────────────────────────── -->
+<section id="s4">
+  <span class="sec-tag-light reveal">Journal</span>
+  <h2 class="reveal d1">Your words<br>become karma.</h2>
+  <div class="journal-cards">
+    <div class="jcard reveal d1">
+      <div class="jdate">Apr 28 · Morning</div>
+      <div class="jtext">"I turned down the shortcut today. It would have saved an hour. Chose the honest path instead."</div>
+      <div class="jinsight">Strong Satya expression. Integrity under pressure — a rare, high-karma act.</div>
+      <span class="jxp">+12 XP</span>
+    </div>
+    <div class="jcard reveal d2">
+      <div class="jdate">Apr 27 · Evening</div>
+      <div class="jtext">"Spent the afternoon helping a colleague understand a system I built. Didn't feel like work."</div>
+      <div class="jinsight">Seva in action. Teaching freely amplifies collective karma.</div>
+      <span class="jxp">+8 XP</span>
+    </div>
+    <div class="jcard reveal d3">
+      <div class="jdate">Apr 26 · Night</div>
+      <div class="jtext">"Meditated for the first time in two weeks. The silence was uncomfortable. Then it wasn't."</div>
+      <div class="jinsight">Returning to practice after a gap is itself a dharmic act.</div>
+      <span class="jxp">+6 XP</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─ S5 ALIGN ──────────────────────────────────────────────────── -->
+<section id="s5">
+  <span class="sub reveal">Align</span>
+  <h2 class="reveal d1">Six practices.<br>One path.</h2>
+  <div class="align-grid">
+    <div class="acard reveal d1">
+      <svg class="icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#C9824A" stroke-width=".9"/><circle cx="16" cy="16" r="8" stroke="#C9824A" stroke-width=".9" opacity=".5"/><circle cx="16" cy="16" r="3" fill="#C9824A"/></svg>
+      <h3>Breath</h3><p>Pranayama sessions synced to your karma state.</p>
+    </div>
+    <div class="acard reveal d2">
+      <svg class="icon" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="16" rx="2" stroke="#C9824A" stroke-width=".9"/><path d="M10 16h12M16 12v8" stroke="#C9824A" stroke-width="1.1"/></svg>
+      <h3>Karma Quiz</h3><p>Score your actions across virtue dimensions. Earn XP.</p>
+    </div>
+    <div class="acard reveal d3">
+      <svg class="icon" viewBox="0 0 32 32" fill="none"><path d="M16 3 L29 10 L29 22 L16 29 L3 22 L3 10 Z" stroke="#C9824A" stroke-width=".9" fill="none"/><path d="M16 9 L23 13 L23 19 L16 23 L9 19 L9 13 Z" stroke="#C9824A" stroke-width=".9" fill="none" opacity=".5"/></svg>
+      <h3>Memory</h3><p>Sacred mindfulness game that trains present-moment attention.</p>
+    </div>
+    <div class="acard reveal d1">
+      <svg class="icon" viewBox="0 0 32 32" fill="none"><path d="M16 6 C11 6 6 11 6 16 C6 21 11 26 16 26" stroke="#C9824A" stroke-width=".9" stroke-linecap="round"/><path d="M16 6 C21 6 26 11 26 16 C26 21 21 26 16 26" stroke="#C9824A" stroke-width=".9" stroke-linecap="round" opacity=".5"/></svg>
+      <h3>Yoga</h3><p>Asana flows tailored to your weekly karmic focus.</p>
+    </div>
+    <div class="acard reveal d2">
+      <svg class="icon" viewBox="0 0 32 32" fill="none"><path d="M6 26 L16 6 L26 26" stroke="#C9824A" stroke-width=".9" fill="none"/><path d="M10 20 L22 20" stroke="#C9824A" stroke-width=".9"/></svg>
+      <h3>Realm</h3><p>Your sacred personal space. Intentions. Progress. Evolution.</p>
+    </div>
+    <div class="acard reveal d3">
+      <svg class="icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="13" r="6" stroke="#C9824A" stroke-width=".9"/><path d="M6 28 C6 22 26 22 26 28" stroke="#C9824A" stroke-width=".9" stroke-linecap="round"/></svg>
+      <h3>AI Insights</h3><p>Monthly AI summaries of your full karma arc.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─ S6 STARS ──────────────────────────────────────────────────── -->
+<section id="s6">
+  <span class="sec-tag reveal" style="margin-bottom:1rem">Stars</span>
+  <h2 class="reveal d1">Your cosmic context,<br>every morning.</h2>
+  <p class="sub-p reveal d2">Horoscope as another lens on your karmic path — aligned daily.</p>
+  <div class="zodiac reveal d3" id="zodiac">
+    <div class="zi"><div class="g">♈</div><div class="n">Aries</div></div>
+    <div class="zi"><div class="g">♉</div><div class="n">Taurus</div></div>
+    <div class="zi"><div class="g">♊</div><div class="n">Gemini</div></div>
+    <div class="zi"><div class="g">♋</div><div class="n">Cancer</div></div>
+    <div class="zi"><div class="g">♌</div><div class="n">Leo</div></div>
+    <div class="zi"><div class="g">♍</div><div class="n">Virgo</div></div>
+    <div class="zi"><div class="g">♎</div><div class="n">Libra</div></div>
+    <div class="zi"><div class="g">♏</div><div class="n">Scorpio</div></div>
+    <div class="zi"><div class="g">♐</div><div class="n">Sagittarius</div></div>
+    <div class="zi"><div class="g">♑</div><div class="n">Capricorn</div></div>
+    <div class="zi"><div class="g">♒</div><div class="n">Aquarius</div></div>
+    <div class="zi"><div class="g">♓</div><div class="n">Pisces</div></div>
+  </div>
+</section>
+
+<!-- ─ S7 REALM ──────────────────────────────────────────────────── -->
+<section id="s7">
+  <div class="realm-text">
+    <span class="sec-tag-light reveal">Realm</span>
+    <h2 class="reveal d1">Seeker to<br>Karma<br>Architect.</h2>
+    <p class="reveal d2">Your personal dharmic universe. Watch your tier rise as <em>practice becomes habit</em>.</p>
+    <p class="reveal d3">XP for every journal, breath, quiz, and conversation with Arya.</p>
+  </div>
+  <div class="tiers reveal d2" id="tiers">
+    <div class="tier-row"><div class="td"></div><div class="tname">Karma Architect</div><div class="txp">2500+ XP</div></div>
+    <div class="tconn"></div>
+    <div class="tier-row"><div class="td"></div><div class="tname">Dharma Walker</div><div class="txp">1200 XP</div></div>
+    <div class="tconn"></div>
+    <div class="tier-row"><div class="td"></div><div class="tname">Virtue Keeper</div><div class="txp">500 XP</div></div>
+    <div class="tconn"></div>
+    <div class="tier-row"><div class="td on"></div><div class="tname curr">Seeker</div><div class="txp curr">You are here</div></div>
+  </div>
+</section>
+
+<!-- ─ S8 PRICING ────────────────────────────────────────────────── -->
+<section id="s8">
+  <span class="sec-tag reveal" style="margin-bottom:1rem">Pricing</span>
+  <h2 class="reveal d1">Begin free.<br>Walk further.</h2>
+  <p class="sub-p reveal d2">11 days to experience everything. Then keep going.</p>
+  <div class="cards">
+    <div class="pcard reveal d1">
+      <div class="pname">Trial</div>
+      <div class="pamount">Free</div>
+      <div class="pperiod">11 calendar days</div>
+      <ul class="plist">
+        <li class="pli">Full Karma Engine</li>
+        <li class="pli">Arya AI Mentor</li>
+        <li class="pli">Unlimited Journaling</li>
+        <li class="pli">All Align practices</li>
+        <li class="pli">Stars horoscope</li>
+      </ul>
+      <a href="#" class="btn-card secondary">Start Free Trial</a>
+    </div>
+    <div class="pcard feat reveal d2">
+      <div class="pbadge">Most Popular</div>
+      <div class="pname">Basic</div>
+      <div class="pamount">$11</div>
+      <div class="pperiod">per month · billed monthly</div>
+      <ul class="plist">
+        <li class="pli">Everything in Trial</li>
+        <li class="pli">Arya Deep Memory</li>
+        <li class="pli">Incognito Journal mode</li>
+        <li class="pli">Full chat history</li>
+        <li class="pli">Monthly AI karma summary</li>
+        <li class="pli">Priority insights</li>
+      </ul>
+      <a href="#" class="btn-card primary">Begin Your Path</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─ S9 FINAL CTA ───────────────────────────────────────────────── -->
+<section id="s9">
+  <h2 class="reveal">Your path.<br>Your karma.<br><span>Your dharma.</span></h2>
+  <p class="sub-p reveal d1">"Your actions create your Destiny.<br>Your duty defines your Character."</p>
+  <a href="#s8" class="btn-fill reveal d2">Begin Free — No Card Required</a>
+
+  <div class="ticker">
+    <div class="tick" id="ticker"></div>
+  </div>
+
+  <div class="footer-strip">
+    <div class="footer-logo">Karmic<b>Compass</b></div>
+    <ul class="footer-links">
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Legal</a></li>
+      <li><a href="mailto:app.karmiccompass@gmail.com">Support</a></li>
+      <li><a href="https://twitter.com/CompassKarmic" target="_blank">Twitter</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 KarmicCompass Private Limited</div>
+  </div>
+</section>
 
 <script>
 /* PARTICLES */
@@ -282,12 +565,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:0}
   let W,H,P=[];
   const resize=()=>{
     W=cv.width=innerWidth;H=cv.height=innerHeight;
-    P=Array.from({length:70},()=>({
-      x:Math.random()*W,y:Math.random()*H,
-      r:Math.random()*.9+.2,
-      vx:(Math.random()-.5)*.12,vy:(Math.random()-.5)*.12,
-      a:Math.random()*.5+.08,ph:Math.random()*6.28
-    }));
+    P=Array.from({length:60},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*.8+.2,vx:(Math.random()-.5)*.1,vy:(Math.random()-.5)*.1,a:Math.random()*.35+.05,ph:Math.random()*6.28}));
   };
   const draw=()=>{
     ctx.clearRect(0,0,W,H);
@@ -295,8 +573,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:0}
     P.forEach(p=>{
       p.x=(p.x+p.vx+W)%W;p.y=(p.y+p.vy+H)%H;
       ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.28);
-      ctx.fillStyle=`rgba(201,130,74,${p.a*(.5+.5*Math.sin(t+p.ph))})`;
-      ctx.fill();
+      ctx.fillStyle=`rgba(201,130,74,${p.a*(.5+.5*Math.sin(t+p.ph))})`;ctx.fill();
     });
     requestAnimationFrame(draw);
   };
@@ -310,50 +587,60 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:0}
   [...v,...v,...v].forEach(x=>{const s=document.createElement('span');s.textContent=x;t.appendChild(s)});
 })();
 
-/* VIRTUE DOTS around mandala */
-(function(){
-  const virtues=[
-    {label:'Journal',  angle:-60},
-    {label:'Mentor',   angle:-20},
-    {label:'Align',    angle:20},
-    {label:'Stars',    angle:60},
-    {label:'Realm',    angle:130},
-    {label:'Home',     angle:-130},
-  ];
-  const wrap=document.getElementById('vdots');
-  const r=Math.min(window.innerWidth,window.innerHeight)*.31;
-  virtues.forEach(({label,angle},i)=>{
-    const rad=angle*(Math.PI/180);
-    const x=Math.cos(rad)*r, y=Math.sin(rad)*r;
-    const el=document.createElement('div');
-    el.className='vd';
-    el.textContent=label;
-    el.style.cssText=`left:${x}px;top:${y}px;animation-delay:${.8+i*.15}s`;
-    wrap.appendChild(el);
-  });
-})();
+/* NAV + PROGRESS */
+const nav=document.getElementById('nav'),prog=document.getElementById('prog');
+const lightSections=new Set(['s4','s7']);
+const body=document.body;
+body.addEventListener('scroll',()=>{
+  const sy=body.scrollTop,mh=body.scrollHeight-body.clientHeight;
+  prog.style.width=(sy/mh*100)+'%';
+  // detect current section for nav theme
+  const current=document.elementFromPoint(innerWidth/2,innerHeight/2)?.closest('section');
+  if(current){
+    const dark=!lightSections.has(current.id);
+    nav.className=dark?'dark':'light';
+  }
+},{passive:true});
 
-/* KARMA GAUGE */
-(function(){
-  const arc=document.getElementById('garc'),num=document.getElementById('rnum');
-  const total=327,target=total*.78;
-  let s=null;
-  const run=ts=>{
-    if(!s)s=ts;
-    const p=Math.min((ts-s)/2200,1),e=1-Math.pow(1-p,4);
-    arc.style.strokeDashoffset=total-(target*e);
-    num.textContent=Math.round(78*e);
-    if(p<1)requestAnimationFrame(run);else num.textContent=78;
-  };
-  setTimeout(()=>requestAnimationFrame(run),700);
-})();
+/* REVEAL on scroll */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}});
+},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// hero reveals immediately
+document.querySelectorAll('#s1 .reveal').forEach(el=>el.classList.add('show'));
 
-/* MAGNETIC CTA */
-document.querySelectorAll('.btn-a,.nav-btn').forEach(b=>{
-  b.addEventListener('mousemove',e=>{
-    const r=b.getBoundingClientRect();
-    b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.14}px,${(e.clientY-r.top-r.height/2)*.14}px)`;
+/* BIG KARMA NUMBER */
+const bnumEl=document.getElementById('bnum');
+const bnumObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    let s=null;
+    const run=ts=>{
+      if(!s)s=ts;const p=Math.min((ts-s)/2000,1),ease=1-Math.pow(1-p,4);
+      bnumEl.textContent=Math.round(78*ease);
+      if(p<1)requestAnimationFrame(run);else bnumEl.textContent=78;
+    };
+    requestAnimationFrame(run);
+    bnumObs.unobserve(e.target);
   });
+},{threshold:.5});
+bnumObs.observe(bnumEl);
+
+/* CHAT BUBBLES */
+const chatEl=document.getElementById('chat');
+const chatObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.querySelectorAll('.bubble').forEach((b,i)=>setTimeout(()=>b.classList.add('show'),i*480));
+    chatObs.unobserve(e.target);
+  });
+},{threshold:.2});
+chatObs.observe(chatEl);
+
+/* MAGNETIC */
+document.querySelectorAll('.btn-fill,.nav-cta').forEach(b=>{
+  b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.14}px,${(e.clientY-r.top-r.height/2)*.14}px)`;});
   b.addEventListener('mouseleave',()=>b.style.transform='');
 });
 </script>
