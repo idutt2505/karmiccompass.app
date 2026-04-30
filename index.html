@@ -6,1029 +6,505 @@
   <title>KarmicCompass — From Chaos to Clarity</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --cream:     #FAF7F2;
-      --parchment: #F0EBE0;
-      --navy:      #1A2744;
-      --navy-mid:  #2D3F66;
-      --copper:    #C9824A;
-      --copper-lt: #E8A97A;
-      --sage:      #7A9E7E;
-      --gold:      #C9A84A;
-      --dark-bg:   #0F0F16;
-      --dark-surf: #14141E;
-      --dark-card: #1A1A28;
-      --text-light:#FAF7F2;
-      --muted:     rgba(250,247,242,0.55);
+      --cream: #FAF7F2; --parchment: #F0EBE0;
+      --navy: #1A2744; --navy-mid: #2D3F66;
+      --copper: #C9824A; --copper-lt: #E8A97A; --copper-dk: #A0622E;
+      --sage: #7A9E7E; --gold: #C9A84A;
+      --dark: #080810; --dark-2: #0F0F1A; --dark-3: #14141E; --dark-4: #1A1A28;
+      --light: #FAF7F2; --muted: rgba(250,247,242,0.5);
     }
-
     html { scroll-behavior: smooth; }
-
     body {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      background: var(--dark-bg);
-      color: var(--text-light);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
+      font-family: 'DM Sans', sans-serif; font-weight: 300;
+      background: var(--dark); color: var(--light);
+      overflow-x: hidden; -webkit-font-smoothing: antialiased;
     }
 
-    /* ─── NAV ───────────────────────────────────────────────── */
+    /* ── PROGRESS ─────────────────────────────────────── */
+    #prog { position:fixed;top:0;left:0;height:2px;width:0;background:var(--copper);z-index:300;pointer-events:none;transition:width .08s linear; }
+
+    /* ── NAV ──────────────────────────────────────────── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5vw;
-      height: 64px;
-      background: rgba(15,15,22,0); 
+      position: fixed; top:0; left:0; right:0; z-index:200;
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 0 5vw; height:60px;
+      transition: background .5s, backdrop-filter .5s, border-color .5s;
       border-bottom: 1px solid transparent;
-      transition: background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
     }
-    nav.scrolled {
-      background: rgba(15,15,22,0.82);
-      border-color: rgba(250,247,242,0.08);
-      backdrop-filter: blur(20px);
-    }
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
-      letter-spacing: 0.01em;
-      color: var(--text-light);
-      text-decoration: none;
-      display: flex; gap: 0;
-    }
-    .nav-logo .k { color: var(--text-light); }
-    .nav-logo .c { color: var(--copper); }
-    .nav-links {
-      display: flex; gap: 2.5rem; list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--muted); text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--text-light); }
-    .nav-cta {
-      background: var(--copper);
-      color: #fff;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
-      border: none; border-radius: 2px; cursor: pointer;
-      padding: 10px 22px;
-      transition: background 0.2s, opacity 0.2s;
-      text-decoration: none;
-    }
-    .nav-cta:hover { background: var(--copper-lt); }
+    nav.sc { background:rgba(8,8,16,.8); backdrop-filter:blur(24px); border-color:rgba(250,247,242,.07); }
+    .logo { font-family:'Cormorant Garamond',serif; font-size:1.3rem; text-decoration:none; color:var(--light); }
+    .logo span { color:var(--copper); }
+    .nav-links { display:flex; gap:2rem; list-style:none; }
+    .nav-links a { font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s; position:relative; }
+    .nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:1px; background:var(--copper); transition:width .3s; }
+    .nav-links a:hover, .nav-links a.on { color:var(--light); }
+    .nav-links a.on::after { width:100%; }
+    .nav-btn { background:var(--copper); color:#fff; font-size:.75rem; font-weight:500; letter-spacing:.09em; text-transform:uppercase; border:none; border-radius:2px; padding:9px 20px; cursor:pointer; transition:background .2s, transform .2s; text-decoration:none; }
+    .nav-btn:hover { background:var(--copper-lt); transform:scale(1.04); }
+    @media(max-width:780px){ .nav-links{display:none} }
 
-    /* ─── HERO ───────────────────────────────────────────────── */
+    /* ── HERO ─────────────────────────────────────────── */
     .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      padding: 120px 5vw 80px;
-      position: relative;
-      overflow: hidden;
+      min-height:100vh; display:flex; flex-direction:column; align-items:center;
+      justify-content:center; text-align:center; padding:130px 5vw 100px;
+      position:relative; overflow:hidden;
     }
-
-    /* Mandala SVG background */
-    .hero-mandala {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: min(90vw, 700px); height: min(90vw, 700px);
-      opacity: 0.045;
-      animation: slowSpin 80s linear infinite;
-      pointer-events: none;
+    /* starfield */
+    .stars { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+    .star {
+      position:absolute; border-radius:50%; background:#fff;
+      animation:twinkle var(--d,4s) ease-in-out infinite;
+      animation-delay:var(--dl,0s);
     }
-    @keyframes slowSpin { to { transform: translate(-50%,-50%) rotate(360deg); } }
-
-    .hero-mandala-2 {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: min(60vw, 460px); height: min(60vw, 460px);
-      opacity: 0.035;
-      animation: slowSpin 50s linear infinite reverse;
-      pointer-events: none;
+    @keyframes twinkle {
+      0%,100%{opacity:.1;transform:scale(1)}
+      50%{opacity:.7;transform:scale(1.4)}
     }
-
-    .hero-virtue-bar {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--copper);
-      margin-bottom: 2.5rem;
-      height: 1.1em; overflow: hidden; position: relative;
+    /* mandala glow */
+    .mandala-wrap {
+      position:absolute; top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      width:min(110vw,900px); height:min(110vw,900px);
+      pointer-events:none;
     }
-    .virtue-list {
-      display: flex; flex-direction: column;
-      animation: virtueScroll 9s steps(1) infinite;
+    .mandala-wrap svg { width:100%; height:100%; }
+    .m-ring { animation:spinRing var(--spd,120s) linear infinite; transform-origin:center; }
+    .m-ring.rev { animation-direction:reverse; }
+    @keyframes spinRing { to { transform:rotate(360deg); } }
+    /* copper glow behind mandala */
+    .mandala-glow {
+      position:absolute; top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      width:min(70vw,600px); height:min(70vw,600px);
+      border-radius:50%;
+      background: radial-gradient(circle, rgba(201,130,74,.18) 0%, transparent 70%);
+      pointer-events:none;
+      animation: glowPulse 5s ease-in-out infinite;
     }
-    .virtue-list span { line-height: 1.1em; }
-    @keyframes virtueScroll {
-      0%   { transform: translateY(0); }
-      14%  { transform: translateY(-1.1em); }
-      28%  { transform: translateY(-2.2em); }
-      42%  { transform: translateY(-3.3em); }
-      57%  { transform: translateY(-4.4em); }
-      71%  { transform: translateY(-5.5em); }
-      85%  { transform: translateY(-6.6em); }
-      100% { transform: translateY(0); }
+    @keyframes glowPulse {
+      0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1)}
+      50%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}
     }
 
     .hero-eyebrow {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1.8rem;
+      font-family:'DM Mono',monospace; font-size:.7rem; letter-spacing:.26em; text-transform:uppercase;
+      color:var(--copper); margin-bottom:1.6rem; position:relative; z-index:2;
+      opacity:0; animation:fadeUp .8s .2s forwards;
     }
-
     .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.8rem, 10vw, 9rem);
-      font-weight: 300;
-      line-height: 0.92;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.15em;
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(5rem,14vw,13rem);
+      font-weight:300; line-height:.88; letter-spacing:-.02em;
+      position:relative; z-index:2;
+      opacity:0; animation:fadeUp 1s .4s forwards;
     }
-    .hero-title .brand-k { color: var(--text-light); }
-    .hero-title .brand-c { color: var(--copper); }
-
+    .hero-title .k { color:var(--light); }
+    .hero-title .c { color:var(--copper); animation:copperShift 5s ease-in-out infinite; }
+    @keyframes copperShift { 0%,100%{color:var(--copper)} 50%{color:var(--copper-lt)} }
+    @keyframes fadeUp {
+      from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)}
+    }
     .hero-sub {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-      color: var(--muted);
-      margin-top: 1.5rem;
-      max-width: 600px;
-      line-height: 1.6;
+      font-family:'Cormorant Garamond',serif; font-style:italic;
+      font-size:clamp(1.2rem,2.5vw,1.8rem); color:var(--muted);
+      max-width:580px; line-height:1.5; margin:1.5rem auto 0;
+      position:relative; z-index:2;
+      opacity:0; animation:fadeUp 1s .65s forwards;
     }
-
-    .hero-sub em {
-      color: var(--copper-lt);
-      font-style: normal;
-    }
-
+    .hero-sub em { color:var(--copper-lt); font-style:normal; }
     .hero-actions {
-      margin-top: 3rem;
-      display: flex; gap: 1rem; align-items: center;
-      flex-wrap: wrap; justify-content: center;
+      display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;
+      margin-top:2.8rem; position:relative; z-index:2;
+      opacity:0; animation:fadeUp 1s .85s forwards;
     }
-    .btn-primary {
-      background: var(--copper);
-      color: #fff;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
-      border: none; border-radius: 2px; cursor: pointer;
-      padding: 16px 40px;
-      transition: background 0.2s;
-      text-decoration: none; display: inline-block;
+    .btn-p {
+      background:var(--copper); color:#fff;
+      font-size:.82rem; font-weight:500; letter-spacing:.09em; text-transform:uppercase;
+      padding:15px 38px; border:none; border-radius:2px; cursor:pointer;
+      text-decoration:none; display:inline-block;
+      transition:background .2s, transform .25s cubic-bezier(.34,1.56,.64,1);
     }
-    .btn-primary:hover { background: var(--copper-lt); }
-    .btn-ghost {
-      color: var(--muted);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase;
-      border: 1px solid rgba(250,247,242,0.18); border-radius: 2px; cursor: pointer;
-      padding: 16px 36px; background: transparent;
-      transition: color 0.2s, border-color 0.2s;
-      text-decoration: none; display: inline-block;
+    .btn-p:hover { background:var(--copper-lt); transform:scale(1.05); }
+    .btn-g {
+      color:var(--muted); font-size:.78rem; letter-spacing:.08em; text-transform:uppercase;
+      padding:15px 32px; border:1px solid rgba(250,247,242,.18); border-radius:2px;
+      cursor:pointer; text-decoration:none; display:inline-block;
+      transition:color .2s, border-color .2s, transform .25s cubic-bezier(.34,1.56,.64,1);
     }
-    .btn-ghost:hover { color: var(--text-light); border-color: rgba(250,247,242,0.4); }
-
+    .btn-g:hover { color:var(--light); border-color:rgba(250,247,242,.5); transform:scale(1.04); }
     .hero-note {
-      margin-top: 1.2rem;
-      font-size: 0.75rem; letter-spacing: 0.04em;
-      color: rgba(250,247,242,0.3);
+      font-size:.72rem; color:rgba(250,247,242,.25); letter-spacing:.04em;
+      margin-top:1rem; position:relative; z-index:2;
+      opacity:0; animation:fadeUp 1s 1.05s forwards;
+    }
+    .scroll-hint {
+      position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%);
+      display:flex; flex-direction:column; align-items:center; gap:6px;
+      z-index:2; opacity:0; animation:fadeUp 1s 1.3s forwards;
+    }
+    .sh-line { width:1px; height:50px; overflow:hidden; }
+    .sh-line::after {
+      content:''; display:block; width:1px; height:100%;
+      background:var(--copper);
+      animation:lineRun 2s ease-in-out infinite;
+    }
+    @keyframes lineRun {
+      0%{transform:translateY(-100%)} 50%{transform:translateY(0)} 100%{transform:translateY(100%)}
     }
 
-    .hero-scroll-cue {
-      position: absolute; bottom: 2.5rem; left: 50%;
-      transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      animation: breathe 3s ease-in-out infinite;
+    /* ── VIRTUE TICKER ────────────────────────────────── */
+    .ticker-wrap {
+      position:absolute; bottom:6rem; left:0; right:0;
+      overflow:hidden; pointer-events:none; z-index:2;
+      mask-image:linear-gradient(to right,transparent,black 15%,black 85%,transparent);
     }
-    .scroll-line {
-      width: 1px; height: 48px;
-      background: linear-gradient(to bottom, transparent, var(--copper));
+    .ticker {
+      display:flex; gap:4rem; width:max-content;
+      animation:tickerMove 22s linear infinite;
     }
-    .scroll-dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--copper);
+    .ticker span {
+      font-family:'DM Mono',monospace; font-size:.68rem;
+      letter-spacing:.2em; text-transform:uppercase;
+      color:rgba(201,130,74,.45); white-space:nowrap;
     }
-    @keyframes breathe {
-      0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
-      50%       { opacity: 1;   transform: translateX(-50%) translateY(8px); }
+    .ticker span.dot { color:rgba(201,130,74,.2); }
+    @keyframes tickerMove { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ── SECTION BASE ─────────────────────────────────── */
+    .sr {
+      opacity:0; transform:translateY(40px);
+      transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1);
+    }
+    .sr.in { opacity:1; transform:none; }
+    .sr.d1{transition-delay:.1s} .sr.d2{transition-delay:.22s}
+    .sr.d3{transition-delay:.36s} .sr.d4{transition-delay:.52s}
+    .chip {
+      font-family:'DM Mono',monospace; font-size:.65rem; letter-spacing:.2em;
+      text-transform:uppercase; color:var(--copper); display:inline-block;
+      margin-bottom:1rem;
     }
 
-    /* ─── SECTION UTILITIES ──────────────────────────────────── */
-    section { position: relative; }
+    /* ── INTRO TEXT ───────────────────────────────────── */
+    .intro {
+      background:var(--cream); color:var(--navy);
+      padding:clamp(5rem,12vw,10rem) 5vw; text-align:center;
+      position:relative; overflow:hidden;
+    }
+    .intro::before {
+      content:''; position:absolute; top:-2px; left:0; right:0; height:4px;
+      background:linear-gradient(to right,transparent,var(--copper),transparent);
+      opacity:.5;
+    }
+    .intro-q {
+      font-family:'Cormorant Garamond',serif; font-style:italic;
+      font-size:clamp(2rem,5vw,3.8rem); font-weight:300;
+      line-height:1.25; max-width:960px; margin:0 auto; color:var(--navy);
+    }
+    .intro-q em { color:var(--copper); font-style:normal; }
+    .intro-sub { font-size:.82rem; color:rgba(26,39,68,.4); margin-top:2rem; letter-spacing:.05em; }
 
-    .reveal-delay-1 { transition-delay: 0.12s; }
-    .reveal-delay-2 { transition-delay: 0.24s; }
-    .reveal-delay-3 { transition-delay: 0.38s; }
-    .reveal-delay-4 { transition-delay: 0.54s; }
+    /* ── BENTO GRID — HOME ─────────────────────────────── */
+    .bento-wrap {
+      background:var(--dark-2); padding:clamp(5rem,10vw,9rem) 5vw;
+    }
+    .bento-head { text-align:center; margin-bottom:3.5rem; }
+    .bento-head h2 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2.5rem,6vw,5rem); font-weight:300; line-height:1;
+    }
+    .bento-head p { font-size:.95rem; color:var(--muted); margin-top:1rem; max-width:520px; margin-inline:auto; }
+    .bento {
+      display:grid;
+      grid-template-columns:repeat(6,1fr);
+      grid-template-rows:auto;
+      gap:12px; max-width:1200px; margin:0 auto;
+    }
+    .bcard {
+      border-radius:16px; padding:2rem;
+      border:1px solid rgba(250,247,242,.06);
+      position:relative; overflow:hidden;
+      transition:transform .35s cubic-bezier(.22,1,.36,1), border-color .3s;
+    }
+    .bcard:hover { transform:translateY(-4px) scale(1.01); border-color:rgba(201,130,74,.25); }
+    .bcard.dark { background:var(--dark-3); }
+    .bcard.darker { background:var(--dark-4); }
+    .bcard.copper-bg { background:rgba(201,130,74,.08); }
+    .bcard.cream { background:var(--cream); color:var(--navy); }
+    .bcard h3 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.7rem; font-weight:400; line-height:1.15; margin-bottom:.6rem;
+    }
+    .bcard.cream h3 { color:var(--navy); }
+    .bcard p { font-size:.83rem; line-height:1.7; color:var(--muted); }
+    .bcard.cream p { color:rgba(26,39,68,.6); }
+    .bc-tag {
+      font-family:'DM Mono',monospace; font-size:.58rem;
+      letter-spacing:.15em; text-transform:uppercase; color:var(--copper);
+      margin-bottom:.8rem; display:block;
+    }
+    .bcard.cream .bc-tag { color:var(--copper-dk); }
 
-    .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--copper);
-      margin-bottom: 1.2rem;
+    /* bento layout */
+    .bc1{grid-column:span 4} .bc2{grid-column:span 2}
+    .bc3{grid-column:span 2} .bc4{grid-column:span 2} .bc5{grid-column:span 2}
+    .bc6{grid-column:span 3} .bc7{grid-column:span 3}
+    @media(max-width:900px){
+      .bento{grid-template-columns:1fr 1fr}
+      .bc1,.bc2,.bc3,.bc4,.bc5,.bc6,.bc7{grid-column:span 2}
     }
+    @media(max-width:560px){ .bento{grid-template-columns:1fr} .bc1,.bc2,.bc3,.bc4,.bc5,.bc6,.bc7{grid-column:span 1} }
 
-    /* ─── INTRO STRIP ────────────────────────────────────────── */
-    .intro-strip {
-      background: var(--cream);
-      color: var(--navy);
-      padding: 7rem 5vw;
-      text-align: center;
+    /* karma gauge inside bento */
+    .gauge-wrap { display:flex; flex-direction:column; align-items:center; gap:1rem; margin-top:.5rem; }
+    .gauge-wrap svg { width:160px; height:160px; }
+    .gauge-score { font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:300; color:var(--light); }
+    .gauge-lbl { font-family:'DM Mono',monospace; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+    .gauge-arc { transition:stroke-dashoffset 2s cubic-bezier(.22,1,.36,1); }
+    .v-row { display:flex; gap:.4rem; flex-wrap:wrap; justify-content:center; margin-top:.4rem; }
+    .vp {
+      font-family:'DM Mono',monospace; font-size:.55rem; letter-spacing:.12em; text-transform:uppercase;
+      padding:4px 10px; border:1px solid rgba(201,130,74,.3); border-radius:1px; color:var(--copper-lt);
+      opacity:0; transform:scale(.85);
+      transition:opacity .35s, transform .35s cubic-bezier(.34,1.56,.64,1), background .2s;
     }
-    .intro-strip .big-quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(1.6rem, 4vw, 3.2rem);
-      font-weight: 300;
-      line-height: 1.35;
-      max-width: 900px;
-      margin: 0 auto;
-      color: var(--navy);
-    }
-    .intro-strip .big-quote span { color: var(--copper); }
-    .intro-strip .sub-note {
-      margin-top: 1.8rem;
-      font-size: 0.85rem; letter-spacing: 0.05em;
-      color: rgba(26,39,68,0.5);
-    }
+    .vp.in { opacity:1; transform:none; }
+    .vp:hover { background:rgba(201,130,74,.12); }
 
-    /* ─── FEATURE: KARMA ENGINE ──────────────────────────────── */
-    .feature-split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 100vh;
-      align-items: stretch;
-    }
-    .feature-split.reverse { direction: rtl; }
-    .feature-split.reverse > * { direction: ltr; }
+    /* stat inside bento */
+    .big-stat { font-family:'Cormorant Garamond',serif; font-size:4.5rem; font-weight:300; color:var(--copper); line-height:1; }
+    .stat-lbl { font-size:.78rem; color:var(--muted); margin-top:.4rem; letter-spacing:.05em; }
 
-    .feature-text {
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 6rem 5vw 6rem 8vw;
+    /* ── MENTOR (ARYA) ─────────────────────────────────── */
+    .mentor {
+      background:var(--cream); color:var(--navy);
+      padding:clamp(5rem,10vw,9rem) 5vw;
+      position:relative; overflow:hidden;
     }
-    .feature-split.reverse .feature-text { padding: 6rem 8vw 6rem 5vw; }
+    .mentor::after {
+      content:''; position:absolute; top:0; right:0; bottom:0; left:50%;
+      background:var(--navy); clip-path:polygon(10% 0,100% 0,100% 100%,0 100%);
+      pointer-events:none;
+    }
+    .mentor-inner {
+      max-width:1200px; margin:0 auto;
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:5rem; align-items:center; position:relative; z-index:2;
+    }
+    .mentor-text .chip { color:var(--copper-dk); }
+    .mentor-text h2 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2.4rem,5vw,4rem); font-weight:300; line-height:1.1;
+      color:var(--navy); margin-bottom:1.2rem;
+    }
+    .mentor-text p { font-size:.9rem; line-height:1.8; color:rgba(26,39,68,.65); margin-bottom:1rem; }
+    .feat-list { list-style:none; margin-top:1.2rem; display:flex; flex-direction:column; gap:.7rem; }
+    .feat-list li { font-size:.85rem; color:rgba(26,39,68,.65); display:flex; gap:.7rem; align-items:flex-start; }
+    .feat-list li::before { content:'—'; color:var(--copper); flex-shrink:0; }
 
-    .feature-text h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 5vw, 4.2rem);
-      font-weight: 300;
-      line-height: 1.1;
-      margin-bottom: 1.4rem;
+    .chat-col { display:flex; flex-direction:column; gap:.9rem; }
+    .cbubble {
+      padding:.95rem 1.2rem; border-radius:12px; max-width:88%;
+      font-size:.88rem; line-height:1.65;
+      opacity:0; transform:translateY(16px);
+      transition:opacity .5s ease, transform .5s cubic-bezier(.22,1,.36,1);
     }
-    .feature-text p {
-      font-size: 1rem; line-height: 1.75;
-      color: var(--muted);
-      max-width: 440px;
-      margin-bottom: 2rem;
-    }
-    .feature-text .stat-row {
-      display: flex; gap: 2.5rem; flex-wrap: wrap;
-      margin-top: 0.5rem;
-    }
-    .stat-item { }
-    .stat-item .val {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.6rem; font-weight: 300;
-      color: var(--copper);
-      line-height: 1;
-    }
-    .stat-item .lbl {
-      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--muted); margin-top: 0.3rem;
-    }
+    .cbubble.in { opacity:1; transform:none; }
+    .cbubble.user { background:var(--parchment); color:var(--navy); border:1px solid rgba(26,39,68,.1); align-self:flex-end; font-style:italic; border-radius:12px 12px 4px 12px; }
+    .cbubble.arya { background:var(--navy); color:var(--light); align-self:flex-start; border-radius:12px 12px 12px 4px; }
+    .arya-lbl { font-family:'DM Mono',monospace; font-size:.58rem; letter-spacing:.16em; text-transform:uppercase; color:var(--copper-lt); display:block; margin-bottom:.35rem; }
+    @media(max-width:820px){ .mentor::after{display:none} .mentor-inner{grid-template-columns:1fr; gap:3rem} }
 
-    /* Feature visual panels */
-    .feature-visual {
-      position: relative; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-    }
-
-    /* Karma Gauge visual */
-    .karma-gauge-wrap {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 2rem;
-    }
-    .gauge-ring {
-      position: relative;
-      width: 260px; height: 260px;
-    }
-    .gauge-ring svg { width: 100%; height: 100%; }
-    .gauge-center {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%,-50%);
-      text-align: center;
-    }
-    .gauge-score {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.8rem; font-weight: 300; color: var(--text-light);
-      line-height: 1;
-    }
-    .gauge-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--muted); margin-top: 0.3rem;
-    }
-    .virtue-pills {
-      display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;
-      max-width: 320px;
-    }
-    .v-pill {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
-      padding: 5px 12px;
-      border: 1px solid rgba(201,130,74,0.35);
-      border-radius: 1px;
-      color: var(--copper-lt);
-    }
-
-    /* ─── ARYA SECTION ───────────────────────────────────────── */
-    .arya-section {
-      background: var(--cream);
-      color: var(--navy);
-      padding: 10rem 5vw;
-    }
-    .arya-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: center;
-    }
-    .arya-chat {
-      display: flex; flex-direction: column; gap: 1rem;
-    }
-    .chat-bubble {
-      padding: 1rem 1.3rem;
-      border-radius: 4px;
-      max-width: 85%;
-      font-size: 0.92rem; line-height: 1.65;
-    }
-    .chat-bubble.user {
-      background: var(--parchment);
-      color: var(--navy);
-      border: 1px solid rgba(26,39,68,0.1);
-      align-self: flex-end;
-      font-style: italic;
-    }
-    .chat-bubble.arya {
-      background: var(--navy);
-      color: var(--text-light);
-      align-self: flex-start;
-    }
-    .chat-bubble.arya .arya-name {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--copper-lt);
-      display: block; margin-bottom: 0.4rem;
-    }
-    .arya-text-col .section-label { color: var(--copper); }
-    .arya-text-col h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 4vw, 3.6rem);
-      font-weight: 300; line-height: 1.15;
-      color: var(--navy);
-      margin-bottom: 1.4rem;
-    }
-    .arya-text-col p {
-      font-size: 0.95rem; line-height: 1.8;
-      color: rgba(26,39,68,0.65);
-      margin-bottom: 1.2rem;
-    }
-    .feature-list {
-      list-style: none; margin-top: 1.5rem;
-      display: flex; flex-direction: column; gap: 0.8rem;
-    }
-    .feature-list li {
-      display: flex; align-items: flex-start; gap: 0.8rem;
-      font-size: 0.88rem; color: rgba(26,39,68,0.7);
-    }
-    .feature-list li::before {
-      content: '—';
-      color: var(--copper);
-      flex-shrink: 0;
-      margin-top: 0.05em;
-    }
-
-    /* ─── ALIGN SECTION ──────────────────────────────────────── */
-    .align-section {
-      background: var(--dark-bg);
-      padding: 10rem 5vw;
-    }
-    .align-header {
-      max-width: 700px;
-      margin: 0 auto 5rem;
-      text-align: center;
-    }
-    .align-header h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 5vw, 4rem);
-      font-weight: 300; line-height: 1.12;
-      margin-bottom: 1rem;
-    }
-    .align-header p {
-      font-size: 0.95rem; color: var(--muted); line-height: 1.75;
-    }
+    /* ── ALIGN ────────────────────────────────────────── */
+    .align { background:var(--dark); padding:clamp(5rem,10vw,9rem) 5vw; }
+    .align-head { text-align:center; max-width:640px; margin:0 auto 4rem; }
+    .align-head h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(2.5rem,6vw,4.5rem); font-weight:300; line-height:1.08; }
+    .align-head p { font-size:.9rem; color:var(--muted); line-height:1.75; margin-top:1rem; }
     .align-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      max-width: 1100px; margin: 0 auto;
-      border: 1px solid rgba(250,247,242,0.07);
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:1px; max-width:1100px; margin:0 auto;
+      border:1px solid rgba(250,247,242,.06); overflow:hidden; border-radius:8px;
     }
-    .align-card {
-      padding: 2.8rem 2.2rem;
-      border: 1px solid rgba(250,247,242,0.07);
-      position: relative;
-      transition: background 0.3s;
+    .acard {
+      padding:2.5rem 2rem; border:1px solid rgba(250,247,242,.06);
+      position:relative; overflow:hidden;
+      transition:background .3s, transform .3s cubic-bezier(.22,1,.36,1);
     }
-    .align-card:hover { background: var(--dark-card); }
-    .align-card-icon {
-      width: 40px; height: 40px; margin-bottom: 1.5rem;
-      opacity: 0.7;
-    }
-    .align-card h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem; font-weight: 400;
-      margin-bottom: 0.7rem;
-      color: var(--text-light);
-    }
-    .align-card p {
-      font-size: 0.85rem; line-height: 1.7; color: var(--muted);
-    }
-    .align-card .card-tag {
-      position: absolute; top: 1.5rem; right: 1.5rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--copper);
-    }
+    .acard:hover { background:var(--dark-4); transform:scale(1.02); z-index:2; }
+    .acard-icon { width:36px; height:36px; margin-bottom:1.3rem; }
+    .acard h3 { font-family:'Cormorant Garamond',serif; font-size:1.45rem; font-weight:400; margin-bottom:.55rem; }
+    .acard p { font-size:.82rem; line-height:1.7; color:var(--muted); }
+    .acard-tag { position:absolute; top:1.3rem; right:1.3rem; font-family:'DM Mono',monospace; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--copper); }
+    @media(max-width:720px){ .align-grid{grid-template-columns:1fr} }
 
-    /* ─── JOURNAL SECTION ────────────────────────────────────── */
-    .journal-section {
-      background: var(--parchment);
-      color: var(--navy);
-      padding: 10rem 5vw;
+    /* ── JOURNAL ──────────────────────────────────────── */
+    .journal { background:var(--parchment); color:var(--navy); padding:clamp(5rem,10vw,9rem) 5vw; }
+    .journal-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+    .jtxt .chip { color:var(--copper-dk); }
+    .jtxt h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,5vw,3.8rem); font-weight:300; line-height:1.1; color:var(--navy); margin-bottom:1.2rem; }
+    .jtxt p { font-size:.9rem; line-height:1.8; color:rgba(26,39,68,.6); margin-bottom:1rem; }
+    .jcards { display:flex; flex-direction:column; gap:.9rem; }
+    .jcard {
+      background:#fff; border:1px solid rgba(26,39,68,.08); border-radius:10px;
+      padding:1.3rem 1.5rem;
+      transition:transform .3s cubic-bezier(.22,1,.36,1), border-color .3s, box-shadow .3s;
     }
-    .journal-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 6rem; align-items: center;
-    }
-    .journal-text-col .section-label { color: var(--copper); }
-    .journal-text-col h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 4vw, 3.6rem);
-      font-weight: 300; line-height: 1.15;
-      color: var(--navy); margin-bottom: 1.4rem;
-    }
-    .journal-text-col p {
-      font-size: 0.95rem; line-height: 1.8; color: rgba(26,39,68,0.65);
-      margin-bottom: 1rem;
-    }
-    .journal-visual {
-      display: flex; flex-direction: column; gap: 1rem;
-    }
-    .journal-entry {
-      background: #fff;
-      border: 1px solid rgba(26,39,68,0.09);
-      border-radius: 4px;
-      padding: 1.4rem 1.6rem;
-    }
-    .journal-entry .je-date {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(26,39,68,0.35); margin-bottom: 0.5rem;
-    }
-    .journal-entry .je-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-size: 1rem; line-height: 1.65;
-      color: var(--navy-mid);
-    }
-    .journal-entry .je-insight {
-      margin-top: 0.8rem;
-      padding-top: 0.8rem;
-      border-top: 1px solid rgba(26,39,68,0.08);
-      font-size: 0.8rem; line-height: 1.6; color: rgba(26,39,68,0.55);
-    }
-    .journal-entry .je-insight::before {
-      content: 'Karma Insight · ';
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--copper);
-    }
-    .karma-chip {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      margin-top: 0.6rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--sage);
-      border: 1px solid rgba(122,158,126,0.3);
-      padding: 4px 10px; border-radius: 2px;
-    }
-    .karma-chip::before { content: '+'; }
+    .jcard:hover { transform:translateY(-4px); border-color:rgba(201,130,74,.35); box-shadow:0 8px 32px rgba(201,130,74,.1); }
+    .jdate { font-family:'DM Mono',monospace; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(26,39,68,.3); margin-bottom:.45rem; }
+    .jtext { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:.98rem; line-height:1.65; color:var(--navy-mid); }
+    .jinsight { margin-top:.75rem; padding-top:.75rem; border-top:1px solid rgba(26,39,68,.07); font-size:.78rem; line-height:1.6; color:rgba(26,39,68,.5); }
+    .jinsight::before { content:'Karma Insight · '; font-family:'DM Mono',monospace; font-size:.58rem; letter-spacing:.1em; text-transform:uppercase; color:var(--copper); }
+    .kchip { display:inline-flex; align-items:center; gap:.3rem; margin-top:.55rem; font-family:'DM Mono',monospace; font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; color:var(--sage); border:1px solid rgba(122,158,126,.3); padding:3px 9px; border-radius:2px; }
+    @media(max-width:820px){ .journal-inner{grid-template-columns:1fr; gap:3rem} }
 
-    /* ─── STARS SECTION ──────────────────────────────────────── */
-    .stars-section {
-      background: var(--dark-surf);
-      padding: 10rem 5vw;
-      text-align: center;
+    /* ── STARS ────────────────────────────────────────── */
+    .stars-sec {
+      background:var(--dark-3); padding:clamp(5rem,10vw,9rem) 5vw; text-align:center;
+      position:relative; overflow:hidden;
     }
-    .stars-section .section-label { margin-bottom: 1.5rem; }
-    .stars-section h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 5vw, 4.2rem);
-      font-weight: 300; line-height: 1.1;
-      max-width: 700px; margin: 0 auto 1.5rem;
+    .stars-bg { position:absolute; inset:0; pointer-events:none; }
+    .stars-sec h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(2.5rem,6vw,4.5rem); font-weight:300; line-height:1.08; max-width:700px; margin:.8rem auto 1rem; }
+    .stars-sec p { font-size:.9rem; color:var(--muted); max-width:520px; margin:0 auto 3.5rem; line-height:1.75; }
+    .zodiac-grid {
+      display:grid; grid-template-columns:repeat(6,1fr);
+      gap:0; max-width:900px; margin:0 auto;
+      border:1px solid rgba(250,247,242,.07); border-radius:8px; overflow:hidden;
     }
-    .stars-section p {
-      font-size: 0.95rem; line-height: 1.8; color: var(--muted);
-      max-width: 560px; margin: 0 auto 4rem;
+    .zi {
+      padding:1.8rem 1rem; border:1px solid rgba(250,247,242,.05);
+      display:flex; flex-direction:column; align-items:center; gap:.5rem;
+      transition:background .25s;
+      opacity:0; transform:scale(.85);
+      transition:opacity .4s ease, transform .4s cubic-bezier(.34,1.56,.64,1), background .25s;
     }
-    .zodiac-row {
-      display: flex; gap: 0; justify-content: center;
-      flex-wrap: wrap; max-width: 1000px; margin: 0 auto;
-    }
-    .zodiac-item {
-      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-      padding: 1.5rem 1.2rem;
-      transition: background 0.25s;
-      border: 1px solid transparent;
-      cursor: default; flex: 1; min-width: 80px;
-    }
-    .zodiac-item:hover { background: var(--dark-card); border-color: rgba(250,247,242,0.07); }
-    .zodiac-glyph {
-      font-size: 1.8rem; line-height: 1; opacity: 0.6;
-    }
-    .zodiac-name {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.56rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--muted);
-    }
+    .zi.in { opacity:1; transform:none; }
+    .zi:hover { background:var(--dark-4); }
+    .zg { font-size:1.9rem; line-height:1; opacity:.65; transition:opacity .25s, transform .3s cubic-bezier(.34,1.56,.64,1); }
+    .zi:hover .zg { opacity:1; transform:scale(1.3) translateY(-4px); }
+    .zn { font-family:'DM Mono',monospace; font-size:.55rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+    @media(max-width:720px){ .zodiac-grid{grid-template-columns:repeat(4,1fr)} }
+    @media(max-width:440px){ .zodiac-grid{grid-template-columns:repeat(3,1fr)} }
 
-    /* ─── REALM ──────────────────────────────────────────────── */
-    .realm-section {
-      background: var(--dark-bg);
-      padding: 10rem 5vw;
+    /* ── REALM ────────────────────────────────────────── */
+    .realm { background:var(--dark-2); padding:clamp(5rem,10vw,9rem) 5vw; }
+    .realm-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center; }
+    .rtxt h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,5vw,3.8rem); font-weight:300; line-height:1.1; margin-bottom:1.2rem; }
+    .rtxt p { font-size:.9rem; color:var(--muted); line-height:1.8; margin-bottom:1rem; }
+    .rtxt p em { color:var(--copper-lt); font-style:normal; }
+    .rtxt .feat-list li { color:var(--muted); }
+    .tiers { background:var(--dark-3); border:1px solid rgba(250,247,242,.07); border-radius:12px; padding:2rem 1.8rem; }
+    .tier {
+      display:flex; align-items:center; gap:1rem; padding:.7rem 0;
+      opacity:0; transform:translateX(-18px);
+      transition:opacity .5s ease, transform .5s cubic-bezier(.22,1,.36,1);
     }
-    .realm-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 6rem; align-items: center;
-    }
-    .realm-text .section-label { color: var(--copper); }
-    .realm-text h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 4vw, 3.6rem);
-      font-weight: 300; line-height: 1.15;
-      margin-bottom: 1.4rem;
-    }
-    .realm-text p {
-      font-size: 0.95rem; line-height: 1.8; color: var(--muted);
-      margin-bottom: 1.2rem;
-    }
-    .realm-text p em { color: var(--copper-lt); font-style: normal; }
-    .realm-list { margin-top: 0.5rem; }
-    .realm-list li { color: var(--muted); }
-    .realm-list li::before { color: var(--copper); }
+    .tier.in { opacity:1; transform:none; }
+    .tdot { width:10px; height:10px; border-radius:50%; border:1px solid rgba(250,247,242,.2); flex-shrink:0; }
+    .tdot.active { background:var(--copper); border-color:var(--copper); }
+    .tinfo { flex:1; }
+    .tname { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--light); }
+    .tname.curr { color:var(--copper-lt); }
+    .tsub { font-size:.72rem; color:rgba(250,247,242,.3); margin-top:.12rem; }
+    .txp { font-family:'DM Mono',monospace; font-size:.62rem; letter-spacing:.1em; color:rgba(250,247,242,.25); }
+    .txp.curr { color:var(--copper); }
+    .tconn { width:1px; height:28px; background:rgba(250,247,242,.08); margin-left:4px; transition:background .5s .3s; }
+    .tconn.in { background:rgba(201,130,74,.25); }
+    @media(max-width:820px){ .realm-inner{grid-template-columns:1fr; gap:3rem} }
 
-    .realm-tiers {
-      display: flex; flex-direction: column;
-      padding: 2.5rem;
-      border: 1px solid rgba(250,247,242,0.07);
-      background: var(--dark-surf);
+    /* ── PRICING ──────────────────────────────────────── */
+    .pricing {
+      background:var(--cream); color:var(--navy);
+      padding:clamp(5rem,10vw,9rem) 5vw; text-align:center;
+      position:relative; overflow:hidden;
     }
-    .tier-item {
-      display: flex; align-items: center; gap: 1.2rem;
+    .pricing::before {
+      content:''; position:absolute; top:-2px; left:0; right:0; height:4px;
+      background:linear-gradient(to right,transparent,var(--copper),transparent); opacity:.5;
     }
-    .tier-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-      border: 1px solid rgba(250,247,242,0.2);
-      flex-shrink: 0;
+    .pricing .chip { color:var(--copper-dk); }
+    .pricing h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(2.5rem,6vw,4.5rem); font-weight:300; line-height:1.05; color:var(--navy); margin-bottom:1rem; }
+    .pricing > p { font-size:.9rem; color:rgba(26,39,68,.55); margin-bottom:3.5rem; line-height:1.7; max-width:500px; margin-inline:auto; }
+    .pricing > p + p { margin-top:-2.5rem; margin-bottom:3.5rem; }
+    .pcards { display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; max-width:840px; margin:0 auto; }
+    .pcard {
+      flex:1; min-width:260px; max-width:350px;
+      border:1px solid rgba(26,39,68,.12); border-radius:12px; padding:2.5rem 2rem;
+      text-align:left; background:#fff; position:relative;
+      transition:transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s;
     }
-    .current-dot {
-      background: var(--copper);
-      border-color: var(--copper);
-      box-shadow: 0 0 0 4px rgba(201,130,74,0.15);
-    }
-    .tier-item.active .tier-dot { border-color: rgba(250,247,242,0.5); }
-    .tier-info { flex: 1; }
-    .tier-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; font-weight: 400;
-      color: var(--text-light);
-    }
-    .tier-item.active .tier-name { color: var(--muted); }
-    .tier-item.current .tier-name { color: var(--copper-lt); }
-    .tier-sub {
-      font-size: 0.75rem; color: rgba(250,247,242,0.3);
-      margin-top: 0.15rem;
-    }
-    .tier-xp {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem; letter-spacing: 0.1em;
-      color: rgba(250,247,242,0.25);
-    }
-    .tier-item.current .tier-xp { color: var(--copper); }
-    .tier-connector {
-      width: 1px; height: 2rem;
-      background: rgba(250,247,242,0.08);
-      margin-left: 4.5px; margin: 0.6rem 0 0.6rem 4.5px;
-    }
+    .pcard:hover { transform:translateY(-8px); box-shadow:0 20px 60px rgba(26,39,68,.1); }
+    .pcard.feat { background:var(--navy); color:var(--light); border-color:transparent; }
+    .pcard.feat:hover { box-shadow:0 20px 60px rgba(201,130,74,.2); }
+    .pbadge { position:absolute; top:-1px; right:1.8rem; background:var(--copper); color:#fff; font-family:'DM Mono',monospace; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; padding:4px 10px; border-radius:0 0 4px 4px; }
+    .pname { font-family:'DM Mono',monospace; font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:var(--copper); margin-bottom:1rem; }
+    .pamount { font-family:'Cormorant Garamond',serif; font-size:3.5rem; font-weight:300; line-height:1; color:var(--navy); }
+    .pcard.feat .pamount { color:var(--copper-lt); }
+    .pperiod { font-size:.76rem; color:rgba(26,39,68,.4); margin-bottom:1.8rem; margin-top:.25rem; }
+    .pcard.feat .pperiod { color:var(--muted); }
+    .plist { list-style:none; display:flex; flex-direction:column; gap:.65rem; }
+    .pli { font-size:.84rem; color:rgba(26,39,68,.68); display:flex; gap:.55rem; align-items:flex-start; }
+    .pcard.feat .pli { color:var(--muted); }
+    .pli::before { content:'✓'; color:var(--sage); flex-shrink:0; }
+    .pcard .btn-p { width:100%; text-align:center; margin-top:1.8rem; display:block; }
+    .pcard:not(.feat) .btn-p { background:var(--navy); }
+    .pnote { margin-top:2.5rem; font-size:.75rem; color:rgba(26,39,68,.35); line-height:1.7; }
 
-    @media (max-width: 900px) {
-      .realm-inner { grid-template-columns: 1fr; gap: 3rem; }
+    /* ── FINAL CTA ────────────────────────────────────── */
+    .fcta {
+      background:var(--dark); padding:clamp(8rem,16vw,14rem) 5vw;
+      text-align:center; position:relative; overflow:hidden;
     }
+    .fcta-mandala {
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      width:min(100vw,800px); height:min(100vw,800px);
+      opacity:.06; animation:spinRing 90s linear infinite; pointer-events:none;
+    }
+    .fcta-glow {
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      width:500px; height:500px; border-radius:50%;
+      background:radial-gradient(circle, rgba(201,130,74,.12) 0%,transparent 70%);
+      pointer-events:none; animation:glowPulse 6s ease-in-out infinite;
+    }
+    .fcta h2 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(3.5rem,10vw,8rem); font-weight:300; line-height:.9;
+      max-width:800px; margin:0 auto 1.5rem; position:relative;
+    }
+    .fcta h2 span { color:var(--copper); }
+    .fcta p { font-size:.92rem; color:var(--muted); max-width:480px; margin:0 auto 3rem; line-height:1.8; position:relative; }
+    .fcta-quote { margin-top:3rem; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1rem; color:rgba(250,247,242,.2); letter-spacing:.06em; position:relative; }
 
-    /* ─── PRICING ────────────────────────────────────────────── */
-    .pricing-section {
-      background: var(--cream);
-      color: var(--navy);
-      padding: 10rem 5vw;
-      text-align: center;
-    }
-    .pricing-section .section-label { color: var(--copper); margin-bottom: 1.5rem; }
-    .pricing-section h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 5vw, 4rem);
-      font-weight: 300; line-height: 1.1;
-      color: var(--navy); margin-bottom: 1.2rem;
-    }
-    .pricing-section > p {
-      font-size: 0.95rem; color: rgba(26,39,68,0.55); margin-bottom: 4rem; line-height: 1.7;
-    }
-    .pricing-cards {
-      display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
-      max-width: 900px; margin: 0 auto;
-    }
-    .pricing-card {
-      flex: 1; min-width: 260px; max-width: 360px;
-      border: 1px solid rgba(26,39,68,0.12);
-      border-radius: 4px;
-      padding: 2.5rem 2rem;
-      text-align: left;
-      background: #fff;
-      position: relative;
-    }
-    .pricing-card.featured {
-      background: var(--navy);
-      color: var(--text-light);
-      border-color: transparent;
-    }
-    .pricing-card.featured .price-amount { color: var(--copper-lt); }
-    .pricing-card.featured .price-period { color: var(--muted); }
-    .pricing-card.featured .perk-item { color: var(--muted); }
-    .pricing-card.featured .perk-item::before { color: var(--copper-lt); }
-    .badge-featured {
-      position: absolute; top: -1px; right: 2rem;
-      background: var(--copper);
-      color: #fff;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
-      padding: 4px 10px;
-    }
-    .price-name {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--copper); margin-bottom: 1.2rem;
-    }
-    .price-amount {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.2rem; font-weight: 300; line-height: 1; color: var(--navy);
-    }
-    .price-period {
-      font-size: 0.78rem; color: rgba(26,39,68,0.45); margin-bottom: 1.8rem; margin-top: 0.3rem;
-    }
-    .perk-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
-    .perk-item {
-      font-size: 0.86rem; color: rgba(26,39,68,0.7); line-height: 1.5;
-      display: flex; gap: 0.6rem; align-items: flex-start;
-    }
-    .perk-item::before { content: '✓'; color: var(--sage); flex-shrink: 0; margin-top: 0.05em; font-weight: 400; }
-    .pricing-card .btn-primary { width: 100%; text-align: center; margin-top: 2rem; display: block; }
-    .pricing-card.featured .btn-primary { background: var(--copper); }
-    .pricing-note {
-      margin-top: 2.5rem; font-size: 0.78rem; color: rgba(26,39,68,0.38); line-height: 1.6;
-    }
-
-    /* ─── FINAL CTA ──────────────────────────────────────────── */
-    .final-cta {
-      background: var(--dark-bg);
-      padding: 12rem 5vw;
-      text-align: center;
-    }
-    .final-cta .section-label { margin-bottom: 1.5rem; }
-    .final-cta h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.8rem, 6vw, 5.5rem);
-      font-weight: 300; line-height: 1.08;
-      max-width: 800px; margin: 0 auto 1.5rem;
-    }
-    .final-cta h2 span { color: var(--copper); }
-    .final-cta p {
-      font-size: 0.95rem; color: var(--muted); max-width: 500px;
-      margin: 0 auto 3rem; line-height: 1.75;
-    }
-    .final-path {
-      margin-top: 3rem;
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1rem; color: rgba(250,247,242,0.25);
-      letter-spacing: 0.06em;
-    }
-
-    /* ─── FOOTER ─────────────────────────────────────────────── */
+    /* ── FOOTER ───────────────────────────────────────── */
     footer {
-      background: var(--dark-surf);
-      padding: 3.5rem 5vw;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1.5rem;
-      border-top: 1px solid rgba(250,247,242,0.07);
+      background:var(--dark-3); padding:3rem 5vw;
+      display:flex; justify-content:space-between; align-items:center;
+      flex-wrap:wrap; gap:1.5rem;
+      border-top:1px solid rgba(250,247,242,.07);
     }
-    .footer-brand {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-    }
-    .footer-brand span { color: var(--copper); }
-    .footer-links {
-      display: flex; gap: 2rem; list-style: none;
-    }
-    .footer-links a {
-      font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
-      color: rgba(250,247,242,0.35); text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--text-light); }
-    .footer-copy {
-      font-size: 0.72rem; color: rgba(250,247,242,0.2); letter-spacing: 0.04em;
-    }
+    .flogo { font-family:'Cormorant Garamond',serif; font-size:1.1rem; }
+    .flogo span { color:var(--copper); }
+    .flinks { display:flex; gap:1.8rem; list-style:none; flex-wrap:wrap; }
+    .flinks a { font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:rgba(250,247,242,.3); text-decoration:none; transition:color .2s; }
+    .flinks a:hover { color:var(--light); }
+    .fcopy { font-size:.7rem; color:rgba(250,247,242,.18); }
 
-    /* ─── DARK FEATURE SECTION (karma engine) ──────────────── */
-    .karma-section {
-      background: var(--dark-bg);
+    /* ── RESPONSIVE FIXES ─────────────────────────────── */
+    @media(max-width:600px){
+      .pcards{flex-direction:column;align-items:center} .pcard{max-width:100%}
+      footer{flex-direction:column;text-align:center} .flinks{justify-content:center}
     }
-    .karma-section .feature-visual {
-      background: var(--dark-surf);
-      min-height: 70vh;
-      padding: 4rem;
-    }
-
-    /* ─── RESPONSIVE ─────────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .nav-links { display: none; }
-      .feature-split, .feature-split.reverse { grid-template-columns: 1fr; direction: ltr; }
-      .feature-visual { min-height: 60vw; }
-      .feature-text { padding: 4rem 6vw; }
-      .feature-split.reverse .feature-text { padding: 4rem 6vw; }
-      .arya-inner { grid-template-columns: 1fr; gap: 3.5rem; }
-      .journal-inner { grid-template-columns: 1fr; gap: 3.5rem; }
-      .align-grid { grid-template-columns: 1fr; }
-      .zodiac-row { gap: 0; }
-    }
-    @media (max-width: 600px) {
-      .hero-title { font-size: 3.2rem; }
-      .pricing-cards { flex-direction: column; align-items: center; }
-      .pricing-card { max-width: 100%; }
-      footer { flex-direction: column; text-align: center; }
-      .footer-links { flex-wrap: wrap; justify-content: center; }
-    }
-
-    /* ─── ENHANCED REVEAL (clip-path) ──────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(36px);
-      clip-path: inset(0 0 12% 0);
-      transition:
-        opacity 0.85s cubic-bezier(.22,1,.36,1),
-        transform 0.85s cubic-bezier(.22,1,.36,1),
-        clip-path 0.85s cubic-bezier(.22,1,.36,1);
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-      clip-path: inset(0 0 0% 0);
-    }
-    .reveal-left {
-      transform: translateX(-40px) translateY(0);
-      clip-path: inset(0 12% 0 0);
-    }
-    .reveal-left.visible {
-      transform: translateX(0);
-      clip-path: inset(0 0% 0 0);
-    }
-    .reveal-right {
-      transform: translateX(40px) translateY(0);
-      clip-path: inset(0 0 0 12%);
-    }
-    .reveal-right.visible {
-      transform: translateX(0);
-      clip-path: inset(0 0 0 0%);
-    }
-
-    /* ─── SECTION LABEL UNDERLINE ANIMATION ────────────────── */
-    .section-label {
-      position: relative;
-      display: inline-block;
-    }
-    .section-label::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 1px;
-      background: var(--copper);
-      transition: width 0.6s cubic-bezier(.22,1,.36,1) 0.3s;
-    }
-    .reveal.visible .section-label::after,
-    .visible .section-label::after,
-    .section-label.visible::after { width: 100%; }
-
-    /* ─── FLOATING PARTICLES ────────────────────────────────── */
-    @keyframes floatParticle {
-      0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
-      33%       { transform: translateY(-28px) translateX(12px); opacity: 0.8; }
-      66%       { transform: translateY(16px) translateX(-10px); opacity: 0.4; }
-    }
-
-    /* ─── HERO TITLE SHIMMER ────────────────────────────────── */
-    .hero-title .brand-c {
-      position: relative;
-      display: inline-block;
-      animation: copperPulse 4s ease-in-out infinite;
-    }
-    @keyframes copperPulse {
-      0%, 100% { color: var(--copper); }
-      50%       { color: var(--copper-lt); }
-    }
-
-    /* ─── VIRTUE TICKER FADE ────────────────────────────────── */
-    .hero-virtue-bar {
-      animation: none;
-    }
-    .virtue-list {
-      animation: virtueScroll 10.5s steps(1) infinite;
-    }
-    .virtue-list span {
-      opacity: 0;
-      animation: virtueFade 10.5s ease-in-out infinite;
-    }
-    .virtue-list span:nth-child(1) { animation-delay: 0s; }
-    .virtue-list span:nth-child(2) { animation-delay: 1.5s; }
-    .virtue-list span:nth-child(3) { animation-delay: 3s; }
-    .virtue-list span:nth-child(4) { animation-delay: 4.5s; }
-    .virtue-list span:nth-child(5) { animation-delay: 6s; }
-    .virtue-list span:nth-child(6) { animation-delay: 7.5s; }
-    .virtue-list span:nth-child(7) { animation-delay: 9s; }
-    @keyframes virtueFade {
-      0%, 12%, 100% { opacity: 0; }
-      2%, 10%        { opacity: 1; }
-    }
-
-    /* ─── GAUGE ARC TRANSITION ──────────────────────────────── */
-    .gauge-arc {
-      transition: stroke-dashoffset 1.8s cubic-bezier(.22,1,.36,1);
-    }
-
-    /* ─── VIRTUE PILLS ──────────────────────────────────────── */
-    .v-pill {
-      opacity: 0;
-      transform: translateY(10px) scale(0.9);
-      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(.22,1,.36,1), background 0.2s, color 0.2s;
-    }
-    .v-pill.pill-in { opacity: 1; transform: none; }
-    .v-pill:hover {
-      background: rgba(201,130,74,0.12);
-      color: var(--copper-lt);
-    }
-
-    /* ─── CHAT BUBBLES ──────────────────────────────────────── */
-    .chat-bubble {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.55s ease, transform 0.55s cubic-bezier(.22,1,.36,1);
-    }
-    .chat-bubble.bubble-in { opacity: 1; transform: none; }
-
-    /* ─── ZODIAC ────────────────────────────────────────────── */
-    .zodiac-item {
-      opacity: 0;
-      transform: translateY(20px) scale(0.85);
-      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(.22,1,.36,1),
-                  background 0.25s, border-color 0.25s;
-    }
-    .zodiac-item.zodiac-in { opacity: 1; transform: none; }
-    .zodiac-glyph { transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), opacity 0.3s; }
-    .zodiac-item:hover .zodiac-glyph { transform: scale(1.35) translateY(-4px); opacity: 1; }
-
-    /* ─── TIER ITEMS ────────────────────────────────────────── */
-    .tier-item {
-      opacity: 0;
-      transform: translateX(-20px);
-      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(.22,1,.36,1);
-    }
-    .tier-item.tier-in { opacity: 1; transform: none; }
-    .tier-connector {
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      transform-origin: top;
-    }
-    .tier-connector.conn-in { opacity: 1; }
-
-    /* ─── JOURNAL ENTRY HOVER ───────────────────────────────── */
-    .journal-entry {
-      transition: transform 0.35s cubic-bezier(.22,1,.36,1),
-                  border-color 0.35s ease;
-      cursor: default;
-    }
-
-    /* ─── ALIGN CARD TILT ───────────────────────────────────── */
-    .align-card {
-      transition: background 0.3s, transform 0.25s cubic-bezier(.22,1,.36,1);
-      transform-style: preserve-3d;
-      will-change: transform;
-    }
-
-    /* ─── BUTTON TRANSITIONS ────────────────────────────────── */
-    .btn-primary, .btn-ghost, .nav-cta {
-      transition: background 0.25s ease, color 0.25s ease,
-                  border-color 0.25s ease, transform 0.2s cubic-bezier(.34,1.56,.64,1),
-                  opacity 0.2s ease;
-      will-change: transform;
-    }
-
-    /* ─── PRICING CARD HOVER ────────────────────────────────── */
-    .pricing-card {
-      transition: transform 0.35s cubic-bezier(.22,1,.36,1);
-    }
-    .pricing-card:hover { transform: translateY(-6px); }
-
-    /* ─── NAV ACTIVE LINK ───────────────────────────────────── */
-    .nav-links a {
-      position: relative;
-      transition: color 0.2s;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 1px;
-      background: var(--copper);
-      transition: width 0.3s ease;
-    }
-    .nav-links a.nav-active { color: var(--text-light); }
-    .nav-links a.nav-active::after { width: 100%; }
-
-    /* ─── SCROLL CUE ENHANCED ───────────────────────────────── */
-    .scroll-line {
-      animation: scrollLineDrop 2.5s ease-in-out infinite;
-    }
-    @keyframes scrollLineDrop {
-      0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
-      40%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
-      80%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
-      100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
-    }
-
-    /* ─── INTRO STRIP QUOTE UNDERLINE ───────────────────────── */
-    .big-quote span {
-      position: relative;
-    }
-    .big-quote span::after {
-      content: '';
-      position: absolute;
-      bottom: 2px; left: 0; right: 0;
-      height: 2px;
-      background: var(--copper);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.8s cubic-bezier(.22,1,.36,1) 0.5s;
-    }
-    .big-quote.visible span::after { transform: scaleX(1); }
-
-    /* ─── MANDALA PARALLAX RESET ────────────────────────────── */
-    .hero-mandala, .hero-mandala-2 {
-      transition: none;
-    }
-
   </style>
 </head>
 <body>
 
-<!-- ─── SCROLL PROGRESS ──────────────────────────────────────── -->
-<div id="scroll-progress" style="position:fixed;top:0;left:0;height:2px;background:var(--copper);z-index:200;width:0;transition:width 0.1s linear;pointer-events:none;"></div>
+<div id="prog"></div>
 
-<!-- ─── NAV ─────────────────────────────────────────────────── -->
-<nav id="main-nav">
-  <a class="nav-logo" href="#">
-    <span class="k">Karmic</span><span class="c">Compass</span>
-  </a>
+<!-- ── NAV ─────────────────────────────────────────────── -->
+<nav id="nav">
+  <a class="logo" href="#">Karmic<span>Compass</span></a>
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#journal">Journal</a></li>
@@ -1038,687 +514,613 @@
     <li><a href="#realm">Realm</a></li>
     <li><a href="#pricing">Pricing</a></li>
   </ul>
-  <a class="nav-cta" href="#pricing">Begin Free Trial</a>
+  <a class="nav-btn" href="#pricing">Begin Free</a>
 </nav>
 
-<!-- ─── HERO ─────────────────────────────────────────────────── -->
-<section class="hero">
-  <!-- Mandala SVGs -->
-  <svg class="hero-mandala" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="250" cy="250" r="240" stroke="white" stroke-width="0.5"/>
-    <circle cx="250" cy="250" r="200" stroke="white" stroke-width="0.5"/>
-    <circle cx="250" cy="250" r="160" stroke="white" stroke-width="0.5"/>
-    <circle cx="250" cy="250" r="120" stroke="white" stroke-width="0.5"/>
-    <circle cx="250" cy="250" r="80"  stroke="white" stroke-width="0.5"/>
-    <circle cx="250" cy="250" r="40"  stroke="white" stroke-width="0.5"/>
-    <line x1="250" y1="10"  x2="250" y2="490" stroke="white" stroke-width="0.4"/>
-    <line x1="10"  y1="250" x2="490" y2="250" stroke="white" stroke-width="0.4"/>
-    <line x1="80"  y1="80"  x2="420" y2="420" stroke="white" stroke-width="0.4"/>
-    <line x1="420" y1="80"  x2="80"  y2="420" stroke="white" stroke-width="0.4"/>
-    <line x1="42"  y1="170" x2="458" y2="330" stroke="white" stroke-width="0.3"/>
-    <line x1="42"  y1="330" x2="458" y2="170" stroke="white" stroke-width="0.3"/>
-    <line x1="170" y1="42"  x2="330" y2="458" stroke="white" stroke-width="0.3"/>
-    <line x1="330" y1="42"  x2="170" y2="458" stroke="white" stroke-width="0.3"/>
-    <polygon points="250,10 309,191 490,191 347,309 402,490 250,382 98,490 153,309 10,191 191,191" stroke="white" stroke-width="0.4" fill="none"/>
-    <polygon points="250,70 294,160 395,175 323,248 341,350 250,302 159,350 177,248 105,175 206,160" stroke="white" stroke-width="0.4" fill="none"/>
-  </svg>
-  <svg class="hero-mandala-2" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="150" cy="150" r="140" stroke="white" stroke-width="0.6"/>
-    <circle cx="150" cy="150" r="100" stroke="white" stroke-width="0.6"/>
-    <circle cx="150" cy="150" r="60"  stroke="white" stroke-width="0.6"/>
-    <circle cx="150" cy="150" r="20"  stroke="white" stroke-width="0.6"/>
-    <line x1="150" y1="10"  x2="150" y2="290" stroke="white" stroke-width="0.5"/>
-    <line x1="10"  y1="150" x2="290" y2="150" stroke="white" stroke-width="0.5"/>
-    <line x1="51"  y1="51"  x2="249" y2="249" stroke="white" stroke-width="0.5"/>
-    <line x1="249" y1="51"  x2="51"  y2="249" stroke="white" stroke-width="0.5"/>
-  </svg>
+<!-- ── HERO ─────────────────────────────────────────────── -->
+<section class="hero" id="hero-sec">
+  <!-- starfield -->
+  <div class="stars" id="stars-bg"></div>
 
-  <div class="hero-virtue-bar reveal">
-    <div class="virtue-list">
-      <span>Satya · Truth</span>
-      <span>Dharma · Duty</span>
-      <span>Karma · Action</span>
-      <span>Ahimsa · Compassion</span>
-      <span>Shanti · Peace</span>
-      <span>Seva · Service</span>
-      <span>Viveka · Wisdom</span>
-      <span>Satya · Truth</span>
-    </div>
+  <!-- copper glow -->
+  <div class="mandala-glow"></div>
+
+  <!-- layered mandala -->
+  <div class="mandala-wrap" id="mandala-wrap">
+    <svg viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- outer slow ring -->
+      <g class="m-ring" style="--spd:160s">
+        <circle cx="300" cy="300" r="290" stroke="rgba(201,130,74,.18)" stroke-width=".8"/>
+        <circle cx="300" cy="300" r="270" stroke="rgba(201,130,74,.1)" stroke-width=".5"/>
+        <line x1="300" y1="10" x2="300" y2="590" stroke="rgba(201,130,74,.12)" stroke-width=".5"/>
+        <line x1="10" y1="300" x2="590" y2="300" stroke="rgba(201,130,74,.12)" stroke-width=".5"/>
+        <line x1="95" y1="95" x2="505" y2="505" stroke="rgba(201,130,74,.1)" stroke-width=".5"/>
+        <line x1="505" y1="95" x2="95" y2="505" stroke="rgba(201,130,74,.1)" stroke-width=".5"/>
+        <polygon points="300,10 367,215 580,215 413,348 474,560 300,430 126,560 187,348 20,215 233,215" stroke="rgba(201,130,74,.2)" stroke-width=".6" fill="none"/>
+      </g>
+      <!-- mid ring -->
+      <g class="m-ring rev" style="--spd:90s">
+        <circle cx="300" cy="300" r="220" stroke="rgba(201,130,74,.22)" stroke-width="1"/>
+        <circle cx="300" cy="300" r="200" stroke="rgba(201,130,74,.12)" stroke-width=".5"/>
+        <line x1="300" y1="80" x2="300" y2="520" stroke="rgba(201,130,74,.15)" stroke-width=".4"/>
+        <line x1="80" y1="300" x2="520" y2="300" stroke="rgba(201,130,74,.15)" stroke-width=".4"/>
+        <line x1="144" y1="144" x2="456" y2="456" stroke="rgba(201,130,74,.12)" stroke-width=".4"/>
+        <line x1="456" y1="144" x2="144" y2="456" stroke="rgba(201,130,74,.12)" stroke-width=".4"/>
+        <polygon points="300,95 337,186 432,192 362,255 385,350 300,298 215,350 238,255 168,192 263,186" stroke="rgba(201,130,74,.25)" stroke-width=".6" fill="none"/>
+      </g>
+      <!-- inner fast ring -->
+      <g class="m-ring" style="--spd:45s">
+        <circle cx="300" cy="300" r="140" stroke="rgba(201,130,74,.3)" stroke-width="1"/>
+        <circle cx="300" cy="300" r="110" stroke="rgba(201,130,74,.18)" stroke-width=".7"/>
+        <circle cx="300" cy="300" r="80"  stroke="rgba(201,130,74,.12)" stroke-width=".5"/>
+        <circle cx="300" cy="300" r="50"  stroke="rgba(201,130,74,.2)" stroke-width=".8"/>
+        <circle cx="300" cy="300" r="20"  stroke="rgba(201,130,74,.35)" stroke-width="1"/>
+        <line x1="160" y1="300" x2="440" y2="300" stroke="rgba(201,130,74,.2)" stroke-width=".5"/>
+        <line x1="300" y1="160" x2="300" y2="440" stroke="rgba(201,130,74,.2)" stroke-width=".5"/>
+        <line x1="201" y1="201" x2="399" y2="399" stroke="rgba(201,130,74,.15)" stroke-width=".4"/>
+        <line x1="399" y1="201" x2="201" y2="399" stroke="rgba(201,130,74,.15)" stroke-width=".4"/>
+      </g>
+      <!-- dot center -->
+      <circle cx="300" cy="300" r="4" fill="rgba(201,130,74,.7)"/>
+    </svg>
   </div>
 
-  <h1 class="hero-title reveal reveal-delay-1">
-    <span class="brand-k">Karmic</span><br>
-    <span class="brand-c">Compass</span>
-  </h1>
-
-  <p class="hero-sub reveal reveal-delay-2">
-    Your actions create your <em>Destiny</em>.<br>
-    Your duty defines your <em>Character</em>.
-  </p>
-
-  <div class="hero-actions reveal reveal-delay-3">
-    <a href="#pricing" class="btn-primary">Begin Your 11-Day Journey</a>
-    <a href="#mentor" class="btn-ghost">Meet Arya</a>
+  <p class="hero-eyebrow">From Chaos to Clarity</p>
+  <h1 class="hero-title"><span class="k">Karmic</span><br><span class="c">Compass</span></h1>
+  <p class="hero-sub">Your actions create your <em>Destiny</em>.<br>Your duty defines your <em>Character</em>.</p>
+  <div class="hero-actions">
+    <a href="#pricing" class="btn-p">Begin Your 11-Day Journey</a>
+    <a href="#mentor" class="btn-g">Meet Arya</a>
   </div>
-  <p class="hero-note reveal reveal-delay-4">No credit card required · 11 days free · iOS &amp; Android</p>
+  <p class="hero-note">No credit card · 11 days free · iOS &amp; Android</p>
 
-  <div class="hero-scroll-cue">
-    <div class="scroll-line"></div>
-    <div class="scroll-dot"></div>
+  <!-- virtue ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker" id="ticker"></div>
   </div>
+
+  <div class="scroll-hint"><div class="sh-line"></div></div>
 </section>
 
-<!-- ─── INTRO STRIP ────────────────────────────────────────────── -->
-<div class="intro-strip">
-  <p class="big-quote reveal">
-    "We built KarmicCompass for one reason — to help you move<br>
-    from <span>chaos to clarity</span>, one intentional action at a time."
+<!-- ── INTRO ─────────────────────────────────────────────── -->
+<div class="intro">
+  <p class="intro-q sr">
+    "We built KarmicCompass to help you move from <em>chaos to clarity</em>,
+    one intentional action at a time."
   </p>
-  <p class="sub-note reveal reveal-delay-1">KarmicCompass Private Limited · karmiccompass.app</p>
+  <p class="intro-sub sr d1">KarmicCompass Private Limited · karmiccompass.app</p>
 </div>
 
-<!-- ─── KARMA ENGINE ──────────────────────────────────────────── -->
-<section class="feature-split karma-section" id="home">
-  <div class="feature-text">
-    <p class="section-label reveal">Home</p>
-    <h2 class="reveal reveal-delay-1">Your karma,<br>measured daily.</h2>
-    <p class="reveal reveal-delay-2">
-      Every action, every intention — scored and reflected back to you. 
-      KarmicCompass tracks your karma across seven sacred virtues, 
-      building a living portrait of who you're becoming.
-    </p>
-    <div class="stat-row">
-      <div class="stat-item reveal reveal-delay-3">
-        <div class="val" data-count="7">0</div>
-        <div class="lbl">Core Virtues</div>
-      </div>
-      <div class="stat-item reveal reveal-delay-3">
-        <div class="val" data-count="11">0</div>
-        <div class="lbl">Day Free Trial</div>
-      </div>
-      <div class="stat-item reveal reveal-delay-4">
-        <div class="val">∞</div>
-        <div class="lbl">Growth Path</div>
-      </div>
-    </div>
+<!-- ── BENTO HOME ─────────────────────────────────────────── -->
+<section class="bento-wrap" id="home">
+  <div class="bento-head">
+    <span class="chip sr">Home</span>
+    <h2 class="sr d1">Your karma,<br>measured daily.</h2>
+    <p class="sr d2">Every action. Every intention. Scored and reflected back to you across seven sacred virtues.</p>
   </div>
-  <div class="feature-visual">
-    <div class="karma-gauge-wrap">
-      <div class="gauge-ring">
-        <svg viewBox="0 0 260 260">
-          <circle cx="130" cy="130" r="118" stroke="rgba(250,247,242,0.05)" stroke-width="12" fill="none"/>
-          <circle cx="130" cy="130" r="118"
-            class="gauge-arc"
-            stroke="url(#copperArc)"
-            stroke-width="12" fill="none"
-            stroke-dasharray="740"
-            stroke-dashoffset="740"
-            stroke-linecap="round"
-            transform="rotate(-90 130 130)"/>
-          <circle cx="130" cy="130" r="88" stroke="rgba(250,247,242,0.04)" stroke-width="1" fill="none"/>
-          <circle cx="130" cy="130" r="60" stroke="rgba(201,130,74,0.15)" stroke-width="1" fill="none"/>
+  <div class="bento">
+    <!-- big karma gauge card -->
+    <div class="bcard dark bc1 sr">
+      <span class="bc-tag">Karma Score</span>
+      <div class="gauge-wrap">
+        <svg viewBox="0 0 160 160" id="gauge-svg">
+          <circle cx="80" cy="80" r="70" stroke="rgba(250,247,242,.06)" stroke-width="10" fill="none"/>
+          <circle cx="80" cy="80" r="70"
+            class="gauge-arc" id="gauge-arc"
+            stroke="url(#cg)" stroke-width="10" fill="none"
+            stroke-dasharray="440" stroke-dashoffset="440"
+            stroke-linecap="round" transform="rotate(-90 80 80)"/>
           <defs>
-            <linearGradient id="copperArc" x1="0" y1="0" x2="1" y2="0">
+            <linearGradient id="cg" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stop-color="#C9824A"/>
               <stop offset="100%" stop-color="#E8A97A"/>
             </linearGradient>
           </defs>
         </svg>
-        <div class="gauge-center">
-          <div class="gauge-score">78</div>
-          <div class="gauge-label">Karma Score</div>
+        <div style="margin-top:-1rem;text-align:center">
+          <div class="gauge-score" id="gauge-num">0</div>
+          <div class="gauge-lbl">Karma Score</div>
+        </div>
+        <div class="v-row" id="vpills">
+          <div class="vp">Satya</div><div class="vp">Dharma</div><div class="vp">Ahimsa</div>
+          <div class="vp">Seva</div><div class="vp">Shanti</div><div class="vp">Viveka</div><div class="vp">Tapas</div>
         </div>
       </div>
-      <div class="virtue-pills">
-        <div class="v-pill">Satya</div>
-        <div class="v-pill">Dharma</div>
-        <div class="v-pill">Ahimsa</div>
-        <div class="v-pill">Seva</div>
-        <div class="v-pill">Shanti</div>
-        <div class="v-pill">Viveka</div>
-        <div class="v-pill">Tapas</div>
-      </div>
+    </div>
+    <!-- stat: virtues -->
+    <div class="bcard copper-bg bc2 sr d1">
+      <span class="bc-tag">Core Virtues</span>
+      <div class="big-stat" data-count="7">0</div>
+      <div class="stat-lbl">Ancient pillars of dharmic living</div>
+    </div>
+    <!-- stat: trial -->
+    <div class="bcard darker bc3 sr d1">
+      <span class="bc-tag">Free Trial</span>
+      <div class="big-stat" data-count="11">0</div>
+      <div class="stat-lbl">Days to experience the full path</div>
+    </div>
+    <!-- feature blurb -->
+    <div class="bcard dark bc4 sr d2">
+      <span class="bc-tag">AI Insights</span>
+      <h3>Monthly<br>Karma Arc</h3>
+      <p>AI-generated reports mapping your dharmic evolution over time.</p>
+    </div>
+    <!-- tier card -->
+    <div class="bcard cream bc5 sr d2">
+      <span class="bc-tag">Realm</span>
+      <h3>Seeker → Architect</h3>
+      <p>Progress through tiers as your practice deepens.</p>
+    </div>
+    <!-- tagline card -->
+    <div class="bcard dark bc6 sr d3" style="display:flex;align-items:center;justify-content:center;">
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.4rem,3vw,2rem);line-height:1.4;text-align:center;color:rgba(250,247,242,.7)">
+        "Your path.<br>Your karma.<br>Your dharma."
+      </p>
+    </div>
+    <!-- XP card -->
+    <div class="bcard darker bc7 sr d3">
+      <span class="bc-tag">Gamified</span>
+      <h3>Earn XP for Every<br>Intentional Act</h3>
+      <p>Journaling, breath, quiz, yoga — every practice earns karma XP toward your next tier.</p>
     </div>
   </div>
 </section>
 
-<!-- ─── ARYA ──────────────────────────────────────────────────── -->
-<section class="arya-section" id="mentor">
-  <div class="arya-inner">
-    <div class="arya-chat reveal">
-      <div class="chat-bubble user">
-        I've been feeling disconnected from my purpose lately. Like I'm just going through the motions.
-      </div>
-      <div class="chat-bubble arya">
-        <span class="arya-name">Arya · Your AI Mentor</span>
-        That feeling of disconnection is itself dharmic information. It's your inner compass telling you the current path doesn't align with your deepest values. Let's explore — when did you last feel fully present in your actions?
-      </div>
-      <div class="chat-bubble user">
-        When I was helping my team through a difficult project last month.
-      </div>
-      <div class="chat-bubble arya">
-        <span class="arya-name">Arya</span>
-        There it is — Seva. The karma of service. Your purpose isn't lost; it's waiting in acts of genuine contribution. Your karma score in Seva has been consistently rising. You're closer than you think.
-      </div>
-    </div>
-    <div class="arya-text-col">
-      <p class="section-label reveal">Mentor</p>
-      <h2 class="reveal reveal-delay-1">Meet Arya.<br>Wisdom, always on.</h2>
-      <p class="reveal reveal-delay-2">
-        Arya is your personal dharmic guide — an AI mentor trained to hold space for your deepest questions 
-        about purpose, karma, and the life you're building.
-      </p>
-      <p class="reveal reveal-delay-2">
-        Unlike a chatbot, Arya remembers your journey, tracks your karma patterns, and meets you 
-        exactly where you are — with compassion, not judgement.
-      </p>
-      <ul class="feature-list">
-        <li class="reveal reveal-delay-3">Deep Memory — Arya recalls your history, goals, and patterns</li>
-        <li class="reveal reveal-delay-3">Voice conversations for moments when typing isn't enough</li>
-        <li class="reveal reveal-delay-4">Dharmic insights grounded in ancient wisdom, AI precision</li>
-        <li class="reveal reveal-delay-4">Photo-sharing so Arya can see your world with you</li>
+<!-- ── MENTOR ─────────────────────────────────────────────── -->
+<section class="mentor" id="mentor">
+  <div class="mentor-inner">
+    <div class="mentor-text">
+      <span class="chip sr">Mentor</span>
+      <h2 class="sr d1">Meet Arya.<br>Wisdom,<br>always on.</h2>
+      <p class="sr d2">Arya is your personal dharmic guide — an AI mentor trained to hold space for your deepest questions about purpose, karma, and the life you're building.</p>
+      <p class="sr d2">Unlike a chatbot, Arya remembers your journey and meets you exactly where you are — with compassion, not judgement.</p>
+      <ul class="feat-list sr d3">
+        <li>Deep Memory — Arya recalls your full history and patterns</li>
+        <li>Voice conversations for when typing isn't enough</li>
+        <li>Dharmic insights grounded in ancient wisdom</li>
+        <li>Photo-sharing so Arya can see your world with you</li>
       </ul>
     </div>
+    <div class="chat-col" id="chat-col">
+      <div class="cbubble user">I've been feeling disconnected from my purpose. Like I'm just going through the motions.</div>
+      <div class="cbubble arya">
+        <span class="arya-lbl">Arya · Your AI Mentor</span>
+        That disconnection is dharmic information. Your inner compass is telling you the current path doesn't align with your values. When did you last feel truly present?
+      </div>
+      <div class="cbubble user">When I helped my team through a difficult project last month.</div>
+      <div class="cbubble arya">
+        <span class="arya-lbl">Arya</span>
+        There it is — Seva. The karma of service. Your purpose isn't lost; it's waiting in acts of genuine contribution. Your Seva score has been steadily rising. You're closer than you think.
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ─── ALIGN ──────────────────────────────────────────────────── -->
-<section class="align-section" id="align">
-  <div class="align-header">
-    <p class="section-label reveal">Align</p>
-    <h2 class="reveal reveal-delay-1">Practices for the<br>whole path.</h2>
-    <p class="reveal reveal-delay-2">
-      KarmicCompass isn't just reflection — it's action. 
-      Build your practice with tools that train body, breath, and mind.
-    </p>
+<!-- ── ALIGN ─────────────────────────────────────────────── -->
+<section class="align" id="align">
+  <div class="align-head">
+    <span class="chip sr">Align</span>
+    <h2 class="sr d1">Practices for<br>the whole path.</h2>
+    <p class="sr d2">KarmicCompass isn't just reflection — it's action. Build your practice with tools that train body, breath, and mind.</p>
   </div>
   <div class="align-grid">
-    <div class="align-card reveal">
-      <span class="card-tag">Daily</span>
-      <svg class="align-card-icon" viewBox="0 0 40 40" fill="none">
-        <circle cx="20" cy="20" r="18" stroke="#C9824A" stroke-width="1"/>
-        <circle cx="20" cy="20" r="10" stroke="#C9824A" stroke-width="1" opacity="0.5"/>
-        <circle cx="20" cy="20" r="3"  fill="#C9824A"/>
+    <div class="acard sr">
+      <span class="acard-tag">Daily</span>
+      <svg class="acard-icon" viewBox="0 0 36 36" fill="none">
+        <circle cx="18" cy="18" r="16" stroke="#C9824A" stroke-width=".9"/>
+        <circle cx="18" cy="18" r="9"  stroke="#C9824A" stroke-width=".9" opacity=".5"/>
+        <circle cx="18" cy="18" r="3"  fill="#C9824A"/>
       </svg>
       <h3>Breath</h3>
-      <p>Guided pranayama sessions that sync with your current karma and stress state. From box breathing to nadi shodhana.</p>
+      <p>Guided pranayama synced to your current karma state. Box breathing to nadi shodhana.</p>
     </div>
-    <div class="align-card reveal reveal-delay-1">
-      <span class="card-tag">Weekly</span>
-      <svg class="align-card-icon" viewBox="0 0 40 40" fill="none">
-        <rect x="4" y="10" width="32" height="20" rx="2" stroke="#C9824A" stroke-width="1"/>
-        <path d="M12 20h16M20 14v12" stroke="#C9824A" stroke-width="1.2"/>
+    <div class="acard sr d1">
+      <span class="acard-tag">Weekly</span>
+      <svg class="acard-icon" viewBox="0 0 36 36" fill="none">
+        <rect x="4" y="9" width="28" height="18" rx="2" stroke="#C9824A" stroke-width=".9"/>
+        <path d="M11 18h14M18 13v10" stroke="#C9824A" stroke-width="1.1"/>
       </svg>
       <h3>Karma Quiz</h3>
-      <p>A reflective quiz that scores your recent actions across virtue dimensions. Earn XP as your understanding deepens.</p>
+      <p>Score your recent actions across virtue dimensions. Earn XP as your understanding deepens.</p>
     </div>
-    <div class="align-card reveal reveal-delay-2">
-      <span class="card-tag">Mindful</span>
-      <svg class="align-card-icon" viewBox="0 0 40 40" fill="none">
-        <path d="M20 4 L36 14 L36 26 L20 36 L4 26 L4 14 Z" stroke="#C9824A" stroke-width="1" fill="none"/>
-        <path d="M20 12 L28 17 L28 23 L20 28 L12 23 L12 17 Z" stroke="#C9824A" stroke-width="1" fill="none" opacity="0.5"/>
+    <div class="acard sr d2">
+      <span class="acard-tag">Mindful</span>
+      <svg class="acard-icon" viewBox="0 0 36 36" fill="none">
+        <path d="M18 3 L33 12 L33 24 L18 33 L3 24 L3 12 Z" stroke="#C9824A" stroke-width=".9" fill="none"/>
+        <path d="M18 10 L26 15 L26 21 L18 26 L10 21 L10 15 Z" stroke="#C9824A" stroke-width=".9" fill="none" opacity=".5"/>
       </svg>
       <h3>Memory</h3>
-      <p>A sacred memory game that trains present-moment awareness. Each match is a small act of mindful attention.</p>
+      <p>A sacred memory game that trains present-moment awareness. Each match is a small act of attention.</p>
     </div>
-    <div class="align-card reveal reveal-delay-1">
-      <span class="card-tag">Practice</span>
-      <svg class="align-card-icon" viewBox="0 0 40 40" fill="none">
-        <path d="M20 8 C14 8 8 14 8 20 C8 26 14 32 20 32" stroke="#C9824A" stroke-width="1" stroke-linecap="round"/>
-        <path d="M20 8 C26 8 32 14 32 20 C32 26 26 32 20 32" stroke="#C9824A" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
-        <line x1="20" y1="4" x2="20" y2="10" stroke="#C9824A" stroke-width="1"/>
+    <div class="acard sr d1">
+      <span class="acard-tag">Practice</span>
+      <svg class="acard-icon" viewBox="0 0 36 36" fill="none">
+        <path d="M18 7 C13 7 7 13 7 18 C7 23 13 29 18 29" stroke="#C9824A" stroke-width=".9" stroke-linecap="round"/>
+        <path d="M18 7 C23 7 29 13 29 18 C29 23 23 29 18 29" stroke="#C9824A" stroke-width=".9" stroke-linecap="round" opacity=".5"/>
+        <line x1="18" y1="3" x2="18" y2="9" stroke="#C9824A" stroke-width=".9"/>
       </svg>
       <h3>Yoga</h3>
-      <p>Sequenced asana flows tailored to your energy and karmic focus for the week. From five-minute resets to deep sessions.</p>
+      <p>Sequenced asana flows tailored to your energy and karmic focus for the week.</p>
     </div>
-    <div class="align-card reveal reveal-delay-2">
-      <span class="card-tag">Core</span>
-      <svg class="align-card-icon" viewBox="0 0 40 40" fill="none">
-        <path d="M8 32 L20 8 L32 32" stroke="#C9824A" stroke-width="1" fill="none"/>
-        <path d="M12 24 L28 24" stroke="#C9824A" stroke-width="1"/>
+    <div class="acard sr d2">
+      <span class="acard-tag">Space</span>
+      <svg class="acard-icon" viewBox="0 0 36 36" fill="none">
+        <path d="M7 29 L18 7 L29 29" stroke="#C9824A" stroke-width=".9" fill="none"/>
+        <path d="M11 22 L25 22" stroke="#C9824A" stroke-width=".9"/>
       </svg>
       <h3>Realm</h3>
-      <p>Your personal sacred space within the app — visualise your karmic journey, set intentions, and track your evolution.</p>
+      <p>Your personal sacred space. Visualise your karmic journey and set intentions.</p>
     </div>
-    <div class="align-card reveal reveal-delay-3">
-      <span class="card-tag">AI</span>
-      <svg class="align-card-icon" viewBox="0 0 40 40" fill="none">
-        <circle cx="20" cy="16" r="8"  stroke="#C9824A" stroke-width="1"/>
-        <path d="M8 34 C8 26 32 26 32 34" stroke="#C9824A" stroke-width="1" stroke-linecap="round"/>
+    <div class="acard sr d3">
+      <span class="acard-tag">AI</span>
+      <svg class="acard-icon" viewBox="0 0 36 36" fill="none">
+        <circle cx="18" cy="14" r="7" stroke="#C9824A" stroke-width=".9"/>
+        <path d="M7 31 C7 24 29 24 29 31" stroke="#C9824A" stroke-width=".9" stroke-linecap="round"/>
       </svg>
       <h3>AI Insights</h3>
-      <p>Monthly AI-generated summaries of your karma arc, patterns, and opportunities for growth — your dharmic report card.</p>
+      <p>Monthly AI summaries of your karma arc, patterns, and opportunities for growth.</p>
     </div>
   </div>
 </section>
 
-<!-- ─── JOURNAL ────────────────────────────────────────────────── -->
-<section class="journal-section" id="journal">
+<!-- ── JOURNAL ─────────────────────────────────────────────── -->
+<section class="journal" id="journal">
   <div class="journal-inner">
-    <div class="journal-text-col">
-      <p class="section-label reveal">Journal</p>
-      <h2 class="reveal reveal-delay-1">Write your path.<br>Understand your karma.</h2>
-
-      <p class="reveal reveal-delay-2">
-        The KarmicCompass journal isn't a diary — it's a karmic mirror. 
-        Every entry is analysed by the Karma Engine, surfacing patterns 
-        and insights you'd never see from the inside.
-      </p>
-      <p class="reveal reveal-delay-2">
-        Your words become data. Your data becomes wisdom.
-      </p>
-      <ul class="feature-list" style="color: rgba(26,39,68,0.6)">
-        <li class="reveal reveal-delay-3">AI karma analysis on every entry</li>
-        <li class="reveal reveal-delay-3">Mood × virtue cross-mapping</li>
-        <li class="reveal reveal-delay-4">XP earned for consistent journaling</li>
-        <li class="reveal reveal-delay-4">Export and share your journey</li>
+    <div class="jtxt">
+      <span class="chip sr">Journal</span>
+      <h2 class="sr d1">Write your path.<br>Understand<br>your karma.</h2>
+      <p class="sr d2">The KarmicCompass journal isn't a diary — it's a karmic mirror. Every entry is analysed by the Karma Engine, surfacing patterns and insights you'd never see from the inside.</p>
+      <p class="sr d2">Your words become data. Your data becomes wisdom.</p>
+      <ul class="feat-list sr d3" style="color:rgba(26,39,68,.6)">
+        <li>AI karma analysis on every entry</li>
+        <li>Mood × virtue cross-mapping</li>
+        <li>XP earned for consistent journaling</li>
+        <li>Export and share your journey</li>
       </ul>
     </div>
-    <div class="journal-visual">
-      <div class="journal-entry reveal">
-        <div class="je-date">Apr 28, 2026 · Morning</div>
-        <div class="je-text">
-          "I turned down the shortcut today. It would have saved me an hour but something felt wrong about it. Chose the honest path instead."
-        </div>
-        <div class="je-insight">Strong Satya (Truth) expression. This choice reflects integrity under pressure — a rare and high-karma action.</div>
-        <div><span class="karma-chip">12 Karma XP</span></div>
+    <div class="jcards">
+      <div class="jcard sr">
+        <div class="jdate">Apr 28, 2026 · Morning</div>
+        <div class="jtext">"I turned down the shortcut today. Chose the honest path instead."</div>
+        <div class="jinsight">Strong Satya (Truth) expression. Integrity under pressure — a rare, high-karma act.</div>
+        <span class="kchip">+12 Karma XP</span>
       </div>
-      <div class="journal-entry reveal reveal-delay-1">
-        <div class="je-date">Apr 27, 2026 · Evening</div>
-        <div class="je-text">
-          "Spent the afternoon helping a colleague understand a system I'd built. Didn't feel like work."
-        </div>
-        <div class="je-insight">Seva (Service) in action. Teaching freely amplifies collective karma. Your Seva score is rising this week.</div>
-        <div><span class="karma-chip">8 Karma XP</span></div>
+      <div class="jcard sr d1">
+        <div class="jdate">Apr 27, 2026 · Evening</div>
+        <div class="jtext">"Spent the afternoon helping a colleague understand a system I'd built. Didn't feel like work."</div>
+        <div class="jinsight">Seva in action. Teaching freely amplifies collective karma. Your Seva score rises.</div>
+        <span class="kchip">+8 Karma XP</span>
       </div>
-      <div class="journal-entry reveal reveal-delay-2">
-        <div class="je-date">Apr 26, 2026 · Night</div>
-        <div class="je-text">
-          "Meditated for the first time in two weeks. The silence was uncomfortable at first. Then it wasn't."
-        </div>
-        <div class="je-insight">Returning to practice after a gap is itself a dharmic act. Shanti (Peace) virtue activation detected.</div>
-        <div><span class="karma-chip">6 Karma XP</span></div>
+      <div class="jcard sr d2">
+        <div class="jdate">Apr 26, 2026 · Night</div>
+        <div class="jtext">"Meditated for the first time in two weeks. The silence was uncomfortable. Then it wasn't."</div>
+        <div class="jinsight">Returning to practice after a gap is itself a dharmic act. Shanti activation detected.</div>
+        <span class="kchip">+6 Karma XP</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── STARS ──────────────────────────────────────────────────── -->
-<section class="stars-section" id="stars">
-  <p class="section-label reveal">Stars</p>
-  <h2 class="reveal reveal-delay-1">Your cosmic context,<br>every day.</h2>
-  <p class="reveal reveal-delay-2">
-    The celestial map isn't just astrology — it's another lens for understanding 
-    the forces at work in your life, aligned with your karma journey.
-  </p>
-  <div class="zodiac-row reveal reveal-delay-3">
-    <div class="zodiac-item"><div class="zodiac-glyph">♈</div><div class="zodiac-name">Aries</div></div>
-    <div class="zodiac-item"><div class="zodiac-glyph">♉</div><div class="zodiac-name">Taurus</div></div>
-    <div class="zodiac-item"><div class="zodiac-glyph">♊</div><div class="zodiac-name">Gemini</div></div>
-    <div class="zodiac-item"><div class="zodiac-glyph">♋</div><div class="zodiac-name">Cancer</div></div>
-    <div class="zodiac-item"><div class="zodiac-glyph">♌</div><div class="zodiac-name">Leo</div></div>
-    <div class="zodiac-item"><div class="zodiac-glyph">♍</div><div class="zodiac-name">Virgo</div></div>
-    <div class="zodiac-item"><div class="zodiac-glyph">♎</div><div class="zodiac-name">Libra</div></div>
-    <div class="zodiac-item"><div class="zodiac-glyph">♏</div><div class="zodiac-name">Scorpio</div></div>
-    <div class="zodiac-item"><div class="zodiac-glyph">♐</div><div class="zodiac-name">Sagittarius</div></div>
-    <div class="zodiac-item"><div class="zodiac-glyph">♑</div><div class="zodiac-name">Capricorn</div></div>
-    <div class="zodiac-item"><div class="zodiac-glyph">♒</div><div class="zodiac-name">Aquarius</div></div>
-    <div class="zodiac-item"><div class="zodiac-glyph">♓</div><div class="zodiac-name">Pisces</div></div>
+<!-- ── STARS ─────────────────────────────────────────────── -->
+<section class="stars-sec" id="stars">
+  <div class="stars-bg" id="stars-sec-bg"></div>
+  <span class="chip sr">Stars</span>
+  <h2 class="sr d1">Your cosmic context,<br>every day.</h2>
+  <p class="sr d2">The celestial map is another lens for understanding the forces at work in your life, aligned with your karma journey.</p>
+  <div class="zodiac-grid" id="zodiac">
+    <div class="zi"><div class="zg">♈</div><div class="zn">Aries</div></div>
+    <div class="zi"><div class="zg">♉</div><div class="zn">Taurus</div></div>
+    <div class="zi"><div class="zg">♊</div><div class="zn">Gemini</div></div>
+    <div class="zi"><div class="zg">♋</div><div class="zn">Cancer</div></div>
+    <div class="zi"><div class="zg">♌</div><div class="zn">Leo</div></div>
+    <div class="zi"><div class="zg">♍</div><div class="zn">Virgo</div></div>
+    <div class="zi"><div class="zg">♎</div><div class="zn">Libra</div></div>
+    <div class="zi"><div class="zg">♏</div><div class="zn">Scorpio</div></div>
+    <div class="zi"><div class="zg">♐</div><div class="zn">Sagittarius</div></div>
+    <div class="zi"><div class="zg">♑</div><div class="zn">Capricorn</div></div>
+    <div class="zi"><div class="zg">♒</div><div class="zn">Aquarius</div></div>
+    <div class="zi"><div class="zg">♓</div><div class="zn">Pisces</div></div>
   </div>
 </section>
 
-<!-- ─── REALM ────────────────────────────────────────────────── -->
-<section class="realm-section" id="realm">
+<!-- ── REALM ─────────────────────────────────────────────── -->
+<section class="realm" id="realm">
   <div class="realm-inner">
-    <div class="realm-text reveal">
-      <p class="section-label">Realm</p>
-      <h2 class="reveal reveal-delay-1">Your sacred space.<br>Visualise your arc.</h2>
-      <p class="reveal reveal-delay-2">
-        Realm is your personal karmic universe within KarmicCompass — a full-screen, 
-        immersive view of your evolution. Track your tier progression from 
-        <em>Seeker</em> to <em>Karma Architect</em>, set sacred intentions, 
-        and witness your dharmic journey unfold in real time.
-      </p>
-      <ul class="feature-list realm-list reveal reveal-delay-3">
+    <div class="rtxt">
+      <span class="chip sr">Realm</span>
+      <h2 class="sr d1">Your sacred space.<br>Visualise your arc.</h2>
+      <p class="sr d2">Realm is your personal karmic universe — a full-screen, immersive view of your evolution. Track your tier progression from <em>Seeker</em> to <em>Karma Architect</em>.</p>
+      <ul class="feat-list sr d3">
         <li>Karma tier progression — Seeker → Karma Architect</li>
         <li>Sacred intention-setting and tracking</li>
         <li>XP milestones and badges for consistent practice</li>
         <li>Monthly karma arc visualisation</li>
       </ul>
     </div>
-    <div class="realm-visual reveal reveal-delay-2">
-      <div class="realm-tiers">
-        <div class="tier-item active">
-          <div class="tier-dot"></div>
-          <div class="tier-info">
-            <div class="tier-name">Karma Architect</div>
-            <div class="tier-sub">Mastery of dharmic action</div>
-          </div>
-          <div class="tier-xp">2500+ XP</div>
+    <div class="sr d2">
+      <div class="tiers" id="tiers">
+        <div class="tier">
+          <div class="tdot"></div>
+          <div class="tinfo"><div class="tname">Karma Architect</div><div class="tsub">Mastery of dharmic action</div></div>
+          <div class="txp">2500+ XP</div>
         </div>
-        <div class="tier-connector"></div>
-        <div class="tier-item">
-          <div class="tier-dot"></div>
-          <div class="tier-info">
-            <div class="tier-name">Dharma Walker</div>
-            <div class="tier-sub">Consistent on the path</div>
-          </div>
-          <div class="tier-xp">1200 XP</div>
+        <div class="tconn"></div>
+        <div class="tier">
+          <div class="tdot"></div>
+          <div class="tinfo"><div class="tname">Dharma Walker</div><div class="tsub">Consistent on the path</div></div>
+          <div class="txp">1200 XP</div>
         </div>
-        <div class="tier-connector"></div>
-        <div class="tier-item">
-          <div class="tier-dot"></div>
-          <div class="tier-info">
-            <div class="tier-name">Virtue Keeper</div>
-            <div class="tier-sub">Living with intention</div>
-          </div>
-          <div class="tier-xp">500 XP</div>
+        <div class="tconn"></div>
+        <div class="tier">
+          <div class="tdot"></div>
+          <div class="tinfo"><div class="tname">Virtue Keeper</div><div class="tsub">Living with intention</div></div>
+          <div class="txp">500 XP</div>
         </div>
-        <div class="tier-connector"></div>
-        <div class="tier-item current">
-          <div class="tier-dot current-dot"></div>
-          <div class="tier-info">
-            <div class="tier-name">Seeker</div>
-            <div class="tier-sub">The journey begins here</div>
-          </div>
-          <div class="tier-xp">0 XP</div>
+        <div class="tconn"></div>
+        <div class="tier">
+          <div class="tdot active"></div>
+          <div class="tinfo"><div class="tname curr">Seeker</div><div class="tsub">The journey begins here</div></div>
+          <div class="txp curr">0 XP · Current</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── PRICING ───────────────────────────────────────────────── -->
-<section class="pricing-section" id="pricing">
-  <p class="section-label reveal">Pricing</p>
-  <h2 class="reveal reveal-delay-1">Begin free.<br>Walk further.</h2>
-  <p class="reveal reveal-delay-2">
-    Eleven days to experience the full depth of KarmicCompass. 
-    Then choose to continue the path.
-  </p>
-  <div class="pricing-cards">
-    <div class="pricing-card reveal">
-      <div class="price-name">Trial</div>
-      <div class="price-amount">Free</div>
-      <div class="price-period" style="color: rgba(26,39,68,0.45)">11 calendar days</div>
-      <ul class="perk-list">
-        <li class="perk-item">Full Karma Engine access</li>
-        <li class="perk-item">Arya AI Mentor (limited history)</li>
-        <li class="perk-item">Unlimited journaling</li>
-        <li class="perk-item">Align practices</li>
-        <li class="perk-item">Stars horoscope</li>
+<!-- ── PRICING ─────────────────────────────────────────────── -->
+<section class="pricing" id="pricing">
+  <span class="chip sr">Pricing</span>
+  <h2 class="sr d1">Begin free.<br>Walk further.</h2>
+  <p class="sr d2" style="margin-bottom:3.5rem">Eleven days to experience the full depth of KarmicCompass. Then choose to continue the path.</p>
+  <div class="pcards">
+    <div class="pcard sr">
+      <div class="pname">Trial</div>
+      <div class="pamount">Free</div>
+      <div class="pperiod">11 calendar days</div>
+      <ul class="plist">
+        <li class="pli">Full Karma Engine access</li>
+        <li class="pli">Arya AI Mentor (limited history)</li>
+        <li class="pli">Unlimited journaling</li>
+        <li class="pli">All Align practices</li>
+        <li class="pli">Stars horoscope</li>
       </ul>
-      <a href="#" class="btn-primary" style="background: var(--navy); text-align:center;">Start Free Trial</a>
+      <a href="#" class="btn-p">Start Free Trial</a>
     </div>
-    <div class="pricing-card featured reveal reveal-delay-1">
-      <div class="badge-featured">Most Popular</div>
-      <div class="price-name">Basic</div>
-      <div class="price-amount">$11</div>
-      <div class="price-period">per month</div>
-      <ul class="perk-list">
-        <li class="perk-item">Everything in Trial</li>
-        <li class="perk-item">Arya Deep Memory (full history)</li>
-        <li class="perk-item">Incognito journaling mode</li>
-        <li class="perk-item">Full chat history with Arya</li>
-        <li class="perk-item">Monthly AI karma summaries</li>
-        <li class="perk-item">Priority insights &amp; analysis</li>
+    <div class="pcard feat sr d1">
+      <div class="pbadge">Most Popular</div>
+      <div class="pname">Basic</div>
+      <div class="pamount">$11</div>
+      <div class="pperiod">per month</div>
+      <ul class="plist">
+        <li class="pli">Everything in Trial</li>
+        <li class="pli">Arya Deep Memory (full history)</li>
+        <li class="pli">Incognito journaling mode</li>
+        <li class="pli">Full chat history with Arya</li>
+        <li class="pli">Monthly AI karma summaries</li>
+        <li class="pli">Priority insights &amp; analysis</li>
       </ul>
-      <a href="#" class="btn-primary">Begin Your Path</a>
+      <a href="#" class="btn-p">Begin Your Path</a>
     </div>
   </div>
-  <p class="pricing-note reveal">
-    Subscriptions managed via App Store &amp; Google Play. Cancel anytime.<br>
-    Restore purchases available on all platforms.
-  </p>
+  <p class="pnote sr d2">Subscriptions managed via App Store &amp; Google Play. Cancel anytime.<br>Restore purchases available on all platforms.</p>
 </section>
 
-<!-- ─── FINAL CTA ──────────────────────────────────────────────── -->
-<section class="final-cta">
-  <p class="section-label reveal">The Path Begins</p>
-  <h2 class="reveal reveal-delay-1">
-    Your path.<br>Your karma.<br><span>Your dharma.</span>
-  </h2>
-  <p class="reveal reveal-delay-2">
-    Every journey begins with one intentional step. 
-    Yours begins here, with eleven free days to discover who you're becoming.
-  </p>
-  <a href="#pricing" class="btn-primary reveal reveal-delay-3">Begin Free — No Card Required</a>
-  <p class="final-path reveal reveal-delay-4">
-    "Your actions create your Destiny. Your duty defines your Character."
-  </p>
+<!-- ── FINAL CTA ───────────────────────────────────────────── -->
+<section class="fcta">
+  <svg class="fcta-mandala" viewBox="0 0 600 600" fill="none">
+    <circle cx="300" cy="300" r="290" stroke="white" stroke-width=".5"/>
+    <circle cx="300" cy="300" r="220" stroke="white" stroke-width=".5"/>
+    <circle cx="300" cy="300" r="150" stroke="white" stroke-width=".5"/>
+    <circle cx="300" cy="300" r="80"  stroke="white" stroke-width=".5"/>
+    <line x1="300" y1="10" x2="300" y2="590" stroke="white" stroke-width=".4"/>
+    <line x1="10" y1="300" x2="590" y2="300" stroke="white" stroke-width=".4"/>
+    <line x1="95" y1="95" x2="505" y2="505" stroke="white" stroke-width=".4"/>
+    <line x1="505" y1="95" x2="95" y2="505" stroke="white" stroke-width=".4"/>
+    <polygon points="300,10 367,215 580,215 413,348 474,560 300,430 126,560 187,348 20,215 233,215" stroke="white" stroke-width=".4" fill="none"/>
+  </svg>
+  <div class="fcta-glow"></div>
+  <span class="chip sr">The Path Begins</span>
+  <h2 class="sr d1">Your path.<br>Your karma.<br><span>Your dharma.</span></h2>
+  <p class="sr d2">Every journey begins with one intentional step. Yours begins here, with eleven free days to discover who you're becoming.</p>
+  <a href="#pricing" class="btn-p sr d3">Begin Free — No Card Required</a>
+  <p class="fcta-quote sr d4">"Your actions create your Destiny. Your duty defines your Character."</p>
 </section>
 
-<!-- ─── FOOTER ────────────────────────────────────────────────── -->
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
 <footer>
-  <div class="footer-brand">Karmic<span>Compass</span></div>
-  <ul class="footer-links">
+  <div class="flogo">Karmic<span>Compass</span></div>
+  <ul class="flinks">
     <li><a href="#">Privacy</a></li>
     <li><a href="#">Terms</a></li>
     <li><a href="#">Legal</a></li>
     <li><a href="mailto:app.karmiccompass@gmail.com">Support</a></li>
     <li><a href="https://twitter.com/CompassKarmic" target="_blank">X / Twitter</a></li>
   </ul>
-  <div class="footer-copy">© 2026 KarmicCompass Private Limited</div>
+  <div class="fcopy">© 2026 KarmicCompass Private Limited</div>
 </footer>
 
 <script>
-  /* ── Scroll progress bar ──────────────────────────────────── */
-  const progressBar = document.getElementById('scroll-progress');
-  
-  /* ── Nav scroll effect ───────────────────────────────────── */
-  const nav = document.getElementById('main-nav');
+/* ── STARFIELD ──────────────────────────────────────────── */
+(function(){
+  const c = document.getElementById('stars-bg');
+  for(let i=0;i<160;i++){
+    const s=document.createElement('div');s.className='star';
+    const sz=Math.random()*2.2+.5;
+    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${3+Math.random()*6}s;--dl:${Math.random()*6}s`;
+    c.appendChild(s);
+  }
+  // stars section bg
+  const sc=document.getElementById('stars-sec-bg');
+  for(let i=0;i<80;i++){
+    const s=document.createElement('div');s.className='star';
+    const sz=Math.random()*2+.5;
+    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${4+Math.random()*8}s;--dl:${Math.random()*8}s;position:absolute`;
+    sc.appendChild(s);
+  }
+})();
 
-  window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    const maxScroll = document.body.scrollHeight - window.innerHeight;
-    const pct = Math.min((scrolled / maxScroll) * 100, 100);
-    progressBar.style.width = pct + '%';
-    nav.classList.toggle('scrolled', scrolled > 40);
-
-    // Parallax hero mandala
-    const m1 = document.querySelector('.hero-mandala');
-    const m2 = document.querySelector('.hero-mandala-2');
-    if (m1) m1.style.transform = `translate(-50%, calc(-50% + ${scrolled * 0.18}px))`;
-    if (m2) m2.style.transform = `translate(-50%, calc(-50% + ${scrolled * 0.28}px))`;
-  }, { passive: true });
-
-  /* ── Reveal on scroll (clip-path + opacity) ──────────────── */
-  const revealEls = document.querySelectorAll('.reveal');
-  const revealObs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-  revealEls.forEach(el => revealObs.observe(el));
-
-  // Hero reveals immediately on load
-  window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-      document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
-    }, 100);
+/* ── VIRTUE TICKER ──────────────────────────────────────── */
+(function(){
+  const virtues=['Satya · Truth','·','Dharma · Duty','·','Karma · Action','·','Ahimsa · Compassion','·','Shanti · Peace','·','Seva · Service','·','Viveka · Wisdom','·','Tapas · Discipline','·'];
+  const t=document.getElementById('ticker');
+  // duplicate for seamless loop
+  [...virtues,...virtues].forEach(v=>{
+    const s=document.createElement('span');
+    s.textContent=v;
+    if(v==='·')s.className='dot';
+    t.appendChild(s);
   });
-  document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
+})();
 
-  /* ── Animated stat counters ──────────────────────────────── */
-  function animateCounter(el, target, duration = 1600, isSymbol = false) {
-    if (isSymbol) return;
-    let start = null;
-    const step = (ts) => {
-      if (!start) start = ts;
-      const progress = Math.min((ts - start) / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.floor(ease * target);
-      if (progress < 1) requestAnimationFrame(step);
-      else el.textContent = target;
+/* ── SCROLL PROGRESS + NAV ──────────────────────────────── */
+const prog=document.getElementById('prog');
+const nav=document.getElementById('nav');
+const mw=document.getElementById('mandala-wrap');
+window.addEventListener('scroll',()=>{
+  const sy=window.scrollY, mh=document.body.scrollHeight-window.innerHeight;
+  prog.style.width=(sy/mh*100)+'%';
+  nav.classList.toggle('sc',sy>50);
+  if(mw) mw.style.transform=`translate(-50%, calc(-50% + ${sy*.15}px))`;
+},{passive:true});
+
+/* ── INTERSECTION REVEAL ────────────────────────────────── */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);} });
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.sr').forEach(el=>io.observe(el));
+
+/* ── KARMA GAUGE ANIMATION ──────────────────────────────── */
+const arc=document.getElementById('gauge-arc');
+const num=document.getElementById('gauge-num');
+const gaugeObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    // animate arc
+    const target=440*.75; // 78% score
+    let s=null;
+    const draw=ts=>{
+      if(!s)s=ts;
+      const p=Math.min((ts-s)/2000,1);
+      const ease=1-Math.pow(1-p,4);
+      arc.style.strokeDashoffset=440-(target*ease);
+      num.textContent=Math.round(78*ease);
+      if(p<1)requestAnimationFrame(draw);
+      else num.textContent=78;
     };
-    requestAnimationFrame(step);
-  }
-
-  const counterObs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const el = entry.target;
-      const val = el.dataset.count;
-      if (!val) return;
-      animateCounter(el, parseInt(val));
-      counterObs.unobserve(el);
-    });
-  }, { threshold: 0.5 });
-
-  document.querySelectorAll('.stat-item .val[data-count]').forEach(el => counterObs.observe(el));
-
-  /* ── Karma gauge draw animation ──────────────────────────── */
-  const gaugeArc = document.querySelector('.gauge-arc');
-  const gaugeObs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      if (!gaugeArc) return;
-      const total = 740;
-      const fill = total * 0.75; // 78/100 score
-      let start = null;
-      const draw = (ts) => {
-        if (!start) start = ts;
-        const p = Math.min((ts - start) / 1800, 1);
-        const ease = 1 - Math.pow(1 - p, 4);
-        gaugeArc.style.strokeDashoffset = total - (fill * ease);
-        if (p < 1) requestAnimationFrame(draw);
-      };
-      requestAnimationFrame(draw);
-      gaugeObs.unobserve(entry.target);
-    });
-  }, { threshold: 0.4 });
-  if (gaugeArc) gaugeObs.observe(gaugeArc.closest('section') || gaugeArc);
-
-  /* ── Virtue pill staggered entrance ─────────────────────── */
-  const pillObs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const pills = entry.target.querySelectorAll('.v-pill');
-      pills.forEach((p, i) => {
-        setTimeout(() => p.classList.add('pill-in'), i * 80);
+    requestAnimationFrame(draw);
+    // animate virtue pills
+    setTimeout(()=>{
+      document.querySelectorAll('.vp').forEach((p,i)=>{
+        setTimeout(()=>p.classList.add('in'),i*90);
       });
-      pillObs.unobserve(entry.target);
-    });
-  }, { threshold: 0.3 });
-  const pillWrap = document.querySelector('.virtue-pills');
-  if (pillWrap) pillObs.observe(pillWrap);
-
-  /* ── Chat bubble sequential reveal ───────────────────────── */
-  const chatObs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const bubbles = entry.target.querySelectorAll('.chat-bubble');
-      bubbles.forEach((b, i) => {
-        setTimeout(() => b.classList.add('bubble-in'), i * 500);
-      });
-      chatObs.unobserve(entry.target);
-    });
-  }, { threshold: 0.2 });
-  const chatWrap = document.querySelector('.arya-chat');
-  if (chatWrap) chatObs.observe(chatWrap);
-
-  /* ── Zodiac staggered reveal ─────────────────────────────── */
-  const zodiacObs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const items = entry.target.querySelectorAll('.zodiac-item');
-      items.forEach((item, i) => {
-        setTimeout(() => item.classList.add('zodiac-in'), i * 60);
-      });
-      zodiacObs.unobserve(entry.target);
-    });
-  }, { threshold: 0.2 });
-  const zodiacRow = document.querySelector('.zodiac-row');
-  if (zodiacRow) zodiacObs.observe(zodiacRow);
-
-  /* ── Tier sequential fill ────────────────────────────────── */
-  const tierObs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const tiers = entry.target.querySelectorAll('.tier-item');
-      const connectors = entry.target.querySelectorAll('.tier-connector');
-      tiers.forEach((t, i) => setTimeout(() => t.classList.add('tier-in'), i * 200));
-      connectors.forEach((c, i) => setTimeout(() => c.classList.add('conn-in'), i * 200 + 100));
-      tierObs.unobserve(entry.target);
-    });
-  }, { threshold: 0.3 });
-  const tierWrap = document.querySelector('.realm-tiers');
-  if (tierWrap) tierObs.observe(tierWrap);
-
-  /* ── Magnetic buttons ────────────────────────────────────── */
-  document.querySelectorAll('.btn-primary, .btn-ghost, .nav-cta').forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
-      const r = btn.getBoundingClientRect();
-      const x = e.clientX - r.left - r.width / 2;
-      const y = e.clientY - r.top - r.height / 2;
-      btn.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px)`;
-    });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = '';
-    });
+    },600);
+    gaugeObs.unobserve(e.target);
   });
+},{threshold:.3});
+const bento=document.querySelector('.bento-wrap');
+if(bento)gaugeObs.observe(bento);
 
-  /* ── Align card tilt on hover ────────────────────────────── */
-  document.querySelectorAll('.align-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      card.style.transform = `perspective(600px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg) translateZ(8px)`;
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-    });
+/* ── COUNTER ANIMATIONS ─────────────────────────────────── */
+const cntObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target, target=parseInt(el.dataset.count);
+    let s=null;
+    const run=ts=>{
+      if(!s)s=ts;
+      const p=Math.min((ts-s)/1400,1);
+      const ease=1-Math.pow(1-p,3);
+      el.textContent=Math.floor(ease*target);
+      if(p<1)requestAnimationFrame(run);
+      else el.textContent=target;
+    };
+    requestAnimationFrame(run);
+    cntObs.unobserve(e.target);
   });
+},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>cntObs.observe(el));
 
-  /* ── Journal entry hover lift ────────────────────────────── */
-  document.querySelectorAll('.journal-entry').forEach(entry => {
-    entry.addEventListener('mouseenter', () => {
-      entry.style.transform = 'translateY(-4px)';
-      entry.style.borderColor = 'rgba(201,130,74,0.3)';
+/* ── CHAT BUBBLES ────────────────────────────────────────── */
+const chatObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.querySelectorAll('.cbubble').forEach((b,i)=>{
+      setTimeout(()=>b.classList.add('in'),i*480);
     });
-    entry.addEventListener('mouseleave', () => {
-      entry.style.transform = '';
-      entry.style.borderColor = '';
-    });
+    chatObs.unobserve(e.target);
   });
+},{threshold:.2});
+const chatCol=document.getElementById('chat-col');
+if(chatCol)chatObs.observe(chatCol);
 
-  /* ── Floating particles (hero) ───────────────────────────── */
-  const hero = document.querySelector('.hero');
-  for (let i = 0; i < 18; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'hero-particle';
-    dot.style.cssText = `
-      position: absolute;
-      width: ${Math.random() * 3 + 1}px;
-      height: ${Math.random() * 3 + 1}px;
-      border-radius: 50%;
-      background: rgba(201,130,74, ${Math.random() * 0.4 + 0.1});
-      left: ${Math.random() * 100}%;
-      top: ${Math.random() * 100}%;
-      animation: floatParticle ${6 + Math.random() * 10}s ease-in-out infinite;
-      animation-delay: ${Math.random() * 6}s;
-      pointer-events: none;
-    `;
-    hero.appendChild(dot);
-  }
-
-  /* ── Active nav link highlighting ────────────────────────── */
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  const activeObs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(a => a.classList.remove('nav-active'));
-        const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
-        if (active) active.classList.add('nav-active');
-      }
+/* ── ZODIAC STAGGER ─────────────────────────────────────── */
+const zodObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.querySelectorAll('.zi').forEach((z,i)=>{
+      setTimeout(()=>z.classList.add('in'),i*55);
     });
-  }, { threshold: 0.4 });
-  sections.forEach(s => activeObs.observe(s));
+    zodObs.unobserve(e.target);
+  });
+},{threshold:.2});
+const zodiac=document.getElementById('zodiac');
+if(zodiac)zodObs.observe(zodiac);
+
+/* ── TIER SEQUENCE ──────────────────────────────────────── */
+const tierObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.querySelectorAll('.tier').forEach((t,i)=>setTimeout(()=>t.classList.add('in'),i*180));
+    e.target.querySelectorAll('.tconn').forEach((c,i)=>setTimeout(()=>c.classList.add('in'),i*180+90));
+    tierObs.unobserve(e.target);
+  });
+},{threshold:.3});
+const tiers=document.getElementById('tiers');
+if(tiers)tierObs.observe(tiers);
+
+/* ── MAGNETIC BUTTONS ────────────────────────────────────── */
+document.querySelectorAll('.btn-p,.btn-g,.nav-btn').forEach(b=>{
+  b.addEventListener('mousemove',e=>{
+    const r=b.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*.2;
+    const y=(e.clientY-r.top-r.height/2)*.2;
+    b.style.transform=`translate(${x}px,${y}px) scale(1.04)`;
+  });
+  b.addEventListener('mouseleave',()=>b.style.transform='');
+});
+
+/* ── CARD 3D TILT ────────────────────────────────────────── */
+document.querySelectorAll('.bcard,.acard').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform=`perspective(700px) rotateX(${-y*6}deg) rotateY(${x*6}deg) translateY(-4px) scale(1.01)`;
+  });
+  card.addEventListener('mouseleave',()=>card.style.transform='');
+});
+
+/* ── ACTIVE NAV ──────────────────────────────────────────── */
+const secs=document.querySelectorAll('section[id]');
+const navAs=document.querySelectorAll('.nav-links a');
+new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    navAs.forEach(a=>a.classList.remove('on'));
+    const a=document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+    if(a)a.classList.add('on');
+  });
+},{threshold:.4}).observe;
+secs.forEach(s=>{
+  new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting)return;
+      navAs.forEach(a=>a.classList.remove('on'));
+      const a=document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if(a)a.classList.add('on');
+    });
+  },{threshold:.4}).observe(s);
+});
 </script>
 </body>
 </html>
