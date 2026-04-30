@@ -1,31 +1,45 @@
-# KarmicCompass Landing Page
+# Karmic Compass — marketing site
 
-Premium marketing landing page for [KarmicCompass](https://karmiccompass.app) — a dharmic self-reflection and journaling app with AI mentor Arya.
+Next.js 15 (App Router) + Tailwind CSS v4 + Framer Motion. Premium, minimal landing page for the Karmic Compass app.
 
-## Stack
-
-Single-file HTML/CSS/JS — no build step required. Fonts loaded from Google Fonts.
-
-## Preview
-
-Open `index.html` in any browser, or serve locally:
+## Scripts
 
 ```bash
-python3 -m http.server 4321
+npm install
+npm run dev     # http://localhost:3000
+npm run build
+npm run lint
 ```
 
-Then visit [http://localhost:4321](http://localhost:4321).
+## Configuration
 
-## Sections
+Update URLs and contact in `src/lib/constants.ts`:
 
-- Hero with animated mandala and virtue ticker
-- Karma Engine (arc gauge)
-- Arya AI Mentor (chat mockup)
-- Align practices grid
-- Journal with karma insights
-- Stars / Horoscope
-- Pricing (11-day trial + $11/mo)
+| Constant | Purpose |
+|----------|--------|
+| `PRIVACY_URL` | Public privacy policy (empty = footer opens “link coming soon”) |
+| `TERMS_URL` | Public terms of service (empty = same) |
+| `APP_STORE_URL` | App Store product page (empty = CTA opens coming-soon flow) |
+| `TESTFLIGHT_URL` | TestFlight / public beta (empty = same) |
+| `CONTACT_EMAIL` / `MAILTO_CONTACT` | Support email (always set) |
+| `X_SOCIAL_URL` | Social / product updates link |
 
----
+**Replace empty strings** when your public pages and store links are live.
 
-© 2026 KarmicCompass Private Limited · [karmiccompass.app](https://karmiccompass.app)
+A static HTML version of the previous site (if present) is kept in `_legacy/` for reference.
+
+## Design notes
+
+- Section scroll + subtle Framer `whileInView` reveals; respects `prefers-reduced-motion`.
+- No background particle or looping gradient animations; hero uses static gradients and a static mandala-like graphic in the phone mock.
+- `SmartExternalLink` and `ComingSoonProvider` ensure external CTAs are never `href="#"` when URLs are missing.
+- FAQ uses accessible accordion (button + `aria-expanded` + animated panel).
+
+## Deploy
+
+- **Vercel**: connect repo, root = `kc-landing`, `npm run build`, output `.next` (default).
+- **Static export** (optional): add `output: "export"` to `next.config.ts` and configure `images` if you add `next/image` later.
+
+## Legal
+
+The copy avoids medical, crisis, and exaggerated spiritual claims. It positions the app as a wellness / reflection / journaling product. Replace placeholder FAQ data-processing sentences when your privacy policy is final.
