@@ -3,66 +3,35 @@
 import { SmartExternalLink } from "../SmartExternalLink";
 
 type Props = {
-  hasPrivacy: boolean;
-  hasTerms: boolean;
   privacyHref: string;
   termsHref: string;
   xHref: string;
 };
 
-export function FooterClientLinks({
-  hasPrivacy,
-  hasTerms,
-  privacyHref,
-  termsHref,
-  xHref,
-}: Props) {
+export function FooterClientLinks({ privacyHref, termsHref, xHref }: Props) {
   return (
-    <nav className="flex flex-wrap gap-x-6 gap-y-2" aria-label="Footer">
-      {hasPrivacy ? (
-        <a
-          className="text-xs uppercase tracking-[0.14em] text-white/35 transition hover:text-white/55"
-          href={privacyHref}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Privacy
-        </a>
-      ) : (
-        <SmartExternalLink
-          href=""
-          className="text-xs uppercase tracking-[0.14em] text-white/35 transition hover:text-white/55"
-          label="Privacy policy coming soon"
-        >
-          Privacy
-        </SmartExternalLink>
-      )}
-      {hasTerms ? (
-        <a
-          className="text-xs uppercase tracking-[0.14em] text-white/35 transition hover:text-white/55"
-          href={termsHref}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Terms
-        </a>
-      ) : (
-        <SmartExternalLink
-          href=""
-          className="text-xs uppercase tracking-[0.14em] text-white/35 transition hover:text-white/55"
-          label="Terms of service coming soon"
-        >
-          Terms
-        </SmartExternalLink>
-      )}
-      <a
-        className="text-xs uppercase tracking-[0.14em] text-white/35 transition hover:text-white/55"
-        href={xHref}
-        target="_blank"
-        rel="noopener noreferrer"
+    <div className="flex flex-wrap gap-x-6 gap-y-2">
+      <SmartExternalLink
+        href={privacyHref}
+        className="text-left text-xs text-white/28 transition hover:text-white/55"
+        label="Open Privacy Policy"
       >
-        Updates
-      </a>
-    </nav>
+        Privacy Policy
+      </SmartExternalLink>
+      <SmartExternalLink
+        href={termsHref}
+        className="text-left text-xs text-white/28 transition hover:text-white/55"
+        label="Open Terms of Service"
+      >
+        Terms of Service
+      </SmartExternalLink>
+      <SmartExternalLink
+        href={xHref}
+        className="text-left text-xs text-white/28 transition hover:text-white/55"
+        label="Follow Karmic Compass on X"
+      >
+        X / Twitter
+      </SmartExternalLink>
+    </div>
   );
 }

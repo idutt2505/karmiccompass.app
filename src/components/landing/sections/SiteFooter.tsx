@@ -5,35 +5,107 @@ import {
   PRIVACY_URL,
   TERMS_URL,
   X_SOCIAL_URL,
-  isExternalUrlReady,
+  SECTION_IDS,
 } from "@/lib/constants";
-import { SectionReveal } from "../SectionReveal";
 import { FooterClientLinks } from "./SiteFooterClient";
+
+const productLinks = [
+  { label: "Features", id: SECTION_IDS.features },
+  { label: "How it works", id: SECTION_IDS.how },
+  { label: "Trust & safety", id: SECTION_IDS.trust },
+  { label: "Pricing", id: SECTION_IDS.pricing },
+  { label: "FAQ", id: SECTION_IDS.faq },
+] as const;
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/[0.06] bg-[#06060a] py-12">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 sm:px-6 sm:flex-row sm:items-end sm:justify-between">
-        <SectionReveal>
-          <p className="font-serif text-lg text-white/50">
-            {APP_NAME.split(" ")[0]}{" "}
-            <span className="text-[#C9824A]">{APP_NAME.split(" ")[1]}</span>
+    <footer className="border-t border-white/[0.05] bg-[#06060a]">
+      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+        {/* Top: brand + nav columns */}
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+
+          {/* Brand */}
+          <div className="sm:col-span-2 lg:col-span-1">
+            <div className="flex items-center gap-2">
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#C9824A]/15 border border-[#C9824A]/25">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <circle cx="12" cy="12" r="9" stroke="#C9824A" strokeWidth="1.5"/>
+                  <path d="M12 3c0 4.97-4.03 9-9 9" stroke="#C9824A" strokeWidth="1.5"/>
+                  <path d="M12 21c0-4.97 4.03-9 9-9" stroke="#C9824A" strokeWidth="1.5"/>
+                  <circle cx="7.5" cy="12" r="1.5" fill="#C9824A"/>
+                  <circle cx="16.5" cy="12" r="1.5" fill="#C9824A"/>
+                </svg>
+              </span>
+              <span className="font-serif text-base text-white/60">
+                {APP_NAME.split(" ")[0]}{" "}
+                <span className="text-[#C9824A]">{APP_NAME.split(" ")[1]}</span>
+              </span>
+            </div>
+            <p className="mt-3 max-w-[220px] text-sm leading-relaxed text-white/28">
+              Built for people who want fewer tabs and more room to think.
+            </p>
+          </div>
+
+          {/* Product */}
+          <div>
+            <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/28">
+              Product
+            </p>
+            <ul className="mt-4 space-y-2.5">
+              {productLinks.map((item) => (
+                <li key={item.id}>
+                  <a
+                    href={`#${item.id}`}
+                    className="text-sm text-white/38 transition hover:text-white/65"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/28">
+              Legal & privacy
+            </p>
+            <div className="mt-4">
+              <FooterClientLinks
+                privacyHref={PRIVACY_URL}
+                termsHref={TERMS_URL}
+                xHref={X_SOCIAL_URL}
+              />
+            </div>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/28">
+              Contact
+            </p>
+            <div className="mt-4 space-y-2">
+              <a
+                href={MAILTO_CONTACT}
+                className="block text-sm text-white/38 transition hover:text-[#C9824A]"
+              >
+                {CONTACT_EMAIL}
+              </a>
+              <p className="text-xs leading-relaxed text-white/20">
+                Questions, feedback, or data requests — we read every email.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/[0.04] pt-7 sm:flex-row sm:items-center">
+          <p className="text-xs text-white/18">
+            © {new Date().getFullYear()} Karmic Compass. All rights reserved.
           </p>
-          <p className="mt-1 max-w-sm text-sm text-white/30">
-            Built for people who want fewer tabs and more room to think.
+          <p className="max-w-sm text-right text-xs leading-relaxed text-white/15">
+            A journaling and reflection tool — not a medical, therapeutic, or crisis service.
           </p>
-        </SectionReveal>
-        <FooterClientLinks
-          hasPrivacy={isExternalUrlReady(PRIVACY_URL)}
-          hasTerms={isExternalUrlReady(TERMS_URL)}
-          privacyHref={PRIVACY_URL}
-          termsHref={TERMS_URL}
-          xHref={X_SOCIAL_URL}
-        />
-        <div className="text-right text-xs text-white/20">
-          <a className="hover:text-white/35" href={MAILTO_CONTACT}>
-            {CONTACT_EMAIL}
-          </a>
         </div>
       </div>
     </footer>

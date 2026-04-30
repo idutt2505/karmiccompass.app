@@ -24,12 +24,14 @@ export function SmartExternalLink({
 }: SmartLinkProps) {
   const { openComingSoon } = useComingSoon();
   if (isExternalUrlReady(href)) {
+    const openInNewTab = /^https?:\/\//i.test(href);
     return (
       <a
         href={href}
         className={className}
-        target="_blank"
-        rel="noopener noreferrer"
+        {...(openInNewTab
+          ? { target: "_blank" as const, rel: "noopener noreferrer" }
+          : {})}
         {...rest}
       >
         {children}
@@ -39,7 +41,7 @@ export function SmartExternalLink({
   return (
     <button
       type="button"
-      className={className}
+      className={[className, "cursor-pointer"].filter(Boolean).join(" ")}
       onClick={openComingSoon}
       aria-label={label}
     >

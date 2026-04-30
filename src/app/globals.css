@@ -2,10 +2,33 @@
 
 @theme inline {
   --color-background: #0a0a0f;
+  --color-surface: #0e0e18;
   --color-foreground: #f5f2ed;
-  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --color-accent: #C9824A;
+  --color-accent-light: #E8A97A;
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
   --font-serif: var(--font-display), ui-serif, Georgia, serif;
-  --font-mono: var(--font-mono), ui-monospace, monospace;
+  --font-mono: var(--font-dm-mono), ui-monospace, monospace;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-14px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-8px) rotate(1deg); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
 }
 
 @layer base {
@@ -21,11 +44,41 @@
     background: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  h1, h2, h3, .font-serif {
+  h1, h2, h3, h4 {
     font-family: var(--font-serif);
   }
-  .font-mono, code {
+  code, pre {
     font-family: var(--font-mono);
+  }
+  ::selection {
+    background: rgba(201, 130, 74, 0.25);
+    color: #f5f2ed;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 7s ease-in-out infinite;
+  }
+  .animate-float-slow {
+    animation: float-slow 9s ease-in-out infinite;
+  }
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+  .text-gradient-amber {
+    background: linear-gradient(120deg, #E8A97A 0%, #C9824A 50%, #B8703E 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .glow-amber-sm {
+    box-shadow: 0 0 40px -12px rgba(201, 130, 74, 0.4);
+  }
+  .glow-amber {
+    box-shadow: 0 0 80px -20px rgba(201, 130, 74, 0.35);
   }
 }

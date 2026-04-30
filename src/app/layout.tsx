@@ -13,14 +13,14 @@ const display = Cormorant_Garamond({
 
 const sans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-dm-sans",
   display: "swap",
   weight: ["300", "400", "500"],
 });
 
 const mono = DM_Mono({
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-dm-mono",
   display: "swap",
   weight: ["300", "400"],
 });

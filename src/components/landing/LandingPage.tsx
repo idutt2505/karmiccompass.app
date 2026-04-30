@@ -14,7 +14,7 @@ import { ScrollProgress } from "./ScrollProgress";
 export function LandingPage() {
   return (
     <ComingSoonProvider>
-      <div className="min-h-screen bg-[#0a0a0f] text-[#f5f2ed]">
+      <div className="min-h-screen bg-[#0a0a0f] text-[#f5f2ed] selection:bg-[#C9824A]/20">
         <ScrollProgress />
         <Header />
         <main>

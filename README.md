@@ -1,6 +1,6 @@
 # Karmic Compass — marketing site
 
-Next.js 15 (App Router) + Tailwind CSS v4 + Framer Motion. Premium, minimal landing page for the Karmic Compass app.
+Next.js 15 (App Router) + Tailwind CSS v4 + Framer Motion. Polished, minimal marketing site for the Karmic Compass app.
 
 ## Scripts
 
@@ -24,7 +24,7 @@ Update URLs and contact in `src/lib/constants.ts`:
 | `CONTACT_EMAIL` / `MAILTO_CONTACT` | Support email (always set) |
 | `X_SOCIAL_URL` | Social / product updates link |
 
-**Replace empty strings** when your public pages and store links are live.
+Set the URL constants when your public pages and store links are live.
 
 A static HTML version of the previous site (if present) is kept in `_legacy/` for reference.
 
@@ -42,4 +42,4 @@ A static HTML version of the previous site (if present) is kept in `_legacy/` fo
 
 ## Legal
 
-The copy avoids medical, crisis, and exaggerated spiritual claims. It positions the app as a wellness / reflection / journaling product. Replace placeholder FAQ data-processing sentences when your privacy policy is final.
+The copy avoids medical, crisis, and exaggerated spiritual claims. It positions the app as a wellness / reflection / journaling product. Have legal counsel review published copy before launch.
