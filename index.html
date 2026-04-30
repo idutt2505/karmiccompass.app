@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KarmicCompass — From Chaos to Clarity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:     #FAF7F2;
+      --parchment: #F0EBE0;
+      --navy:      #1A2744;
+      --navy-mid:  #2D3F66;
+      --copper:    #C9824A;
+      --copper-lt: #E8A97A;
+      --sage:      #7A9E7E;
+      --gold:      #C9A84A;
+      --dark-bg:   #0F0F16;
+      --dark-surf: #14141E;
+      --dark-card: #1A1A28;
+      --text-light:#FAF7F2;
+      --muted:     rgba(250,247,242,0.55);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      background: var(--dark-bg);
+      color: var(--text-light);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ───────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 64px;
+      background: rgba(15,15,22,0); 
+      border-bottom: 1px solid transparent;
+      transition: background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(15,15,22,0.82);
+      border-color: rgba(250,247,242,0.08);
+      backdrop-filter: blur(20px);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      letter-spacing: 0.01em;
+      color: var(--text-light);
+      text-decoration: none;
+      display: flex; gap: 0;
+    }
+    .nav-logo .k { color: var(--text-light); }
+    .nav-logo .c { color: var(--copper); }
+    .nav-links {
+      display: flex; gap: 2.5rem; list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-light); }
+    .nav-cta {
+      background: var(--copper);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      border: none; border-radius: 2px; cursor: pointer;
+      padding: 10px 22px;
+      transition: background 0.2s, opacity 0.2s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { background: var(--copper-lt); }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 5vw 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Mandala SVG background */
+    .hero-mandala {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(90vw, 700px); height: min(90vw, 700px);
+      opacity: 0.045;
+      animation: slowSpin 80s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes slowSpin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+    .hero-mandala-2 {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(60vw, 460px); height: min(60vw, 460px);
+      opacity: 0.035;
+      animation: slowSpin 50s linear infinite reverse;
+      pointer-events: none;
+    }
+
+    .hero-virtue-bar {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 2.5rem;
+      height: 1.1em; overflow: hidden; position: relative;
+    }
+    .virtue-list {
+      display: flex; flex-direction: column;
+      animation: virtueScroll 9s steps(1) infinite;
+    }
+    .virtue-list span { line-height: 1.1em; }
+    @keyframes virtueScroll {
+      0%   { transform: translateY(0); }
+      14%  { transform: translateY(-1.1em); }
+      28%  { transform: translateY(-2.2em); }
+      42%  { transform: translateY(-3.3em); }
+      57%  { transform: translateY(-4.4em); }
+      71%  { transform: translateY(-5.5em); }
+      85%  { transform: translateY(-6.6em); }
+      100% { transform: translateY(0); }
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.8rem, 10vw, 9rem);
+      font-weight: 300;
+      line-height: 0.92;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.15em;
+    }
+    .hero-title .brand-k { color: var(--text-light); }
+    .hero-title .brand-c { color: var(--copper); }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      color: var(--muted);
+      margin-top: 1.5rem;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .hero-sub em {
+      color: var(--copper-lt);
+      font-style: normal;
+    }
+
+    .hero-actions {
+      margin-top: 3rem;
+      display: flex; gap: 1rem; align-items: center;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .btn-primary {
+      background: var(--copper);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      border: none; border-radius: 2px; cursor: pointer;
+      padding: 16px 40px;
+      transition: background 0.2s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--copper-lt); }
+    .btn-ghost {
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase;
+      border: 1px solid rgba(250,247,242,0.18); border-radius: 2px; cursor: pointer;
+      padding: 16px 36px; background: transparent;
+      transition: color 0.2s, border-color 0.2s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-ghost:hover { color: var(--text-light); border-color: rgba(250,247,242,0.4); }
+
+    .hero-note {
+      margin-top: 1.2rem;
+      font-size: 0.75rem; letter-spacing: 0.04em;
+      color: rgba(250,247,242,0.3);
+    }
+
+    .hero-scroll-cue {
+      position: absolute; bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      animation: breathe 3s ease-in-out infinite;
+    }
+    .scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, transparent, var(--copper));
+    }
+    .scroll-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--copper);
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+      50%       { opacity: 1;   transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ─── SECTION UTILITIES ──────────────────────────────────── */
+    section { position: relative; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(.22,1,.36,1), transform 0.9s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.35s; }
+    .reveal-delay-4 { transition-delay: 0.5s; }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 1.2rem;
+    }
+
+    /* ─── INTRO STRIP ────────────────────────────────────────── */
+    .intro-strip {
+      background: var(--cream);
+      color: var(--navy);
+      padding: 7rem 5vw;
+      text-align: center;
+    }
+    .intro-strip .big-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.6rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.35;
+      max-width: 900px;
+      margin: 0 auto;
+      color: var(--navy);
+    }
+    .intro-strip .big-quote span { color: var(--copper); }
+    .intro-strip .sub-note {
+      margin-top: 1.8rem;
+      font-size: 0.85rem; letter-spacing: 0.05em;
+      color: rgba(26,39,68,0.5);
+    }
+
+    /* ─── FEATURE: KARMA ENGINE ──────────────────────────────── */
+    .feature-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+      align-items: stretch;
+    }
+    .feature-split.reverse { direction: rtl; }
+    .feature-split.reverse > * { direction: ltr; }
+
+    .feature-text {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6rem 5vw 6rem 8vw;
+    }
+    .feature-split.reverse .feature-text { padding: 6rem 8vw 6rem 5vw; }
+
+    .feature-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.4rem;
+    }
+    .feature-text p {
+      font-size: 1rem; line-height: 1.75;
+      color: var(--muted);
+      max-width: 440px;
+      margin-bottom: 2rem;
+    }
+    .feature-text .stat-row {
+      display: flex; gap: 2.5rem; flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .stat-item { }
+    .stat-item .val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem; font-weight: 300;
+      color: var(--copper);
+      line-height: 1;
+    }
+    .stat-item .lbl {
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-top: 0.3rem;
+    }
+
+    /* Feature visual panels */
+    .feature-visual {
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* Karma Gauge visual */
+    .karma-gauge-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 2rem;
+    }
+    .gauge-ring {
+      position: relative;
+      width: 260px; height: 260px;
+    }
+    .gauge-ring svg { width: 100%; height: 100%; }
+    .gauge-center {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      text-align: center;
+    }
+    .gauge-score {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.8rem; font-weight: 300; color: var(--text-light);
+      line-height: 1;
+    }
+    .gauge-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); margin-top: 0.3rem;
+    }
+    .virtue-pills {
+      display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;
+      max-width: 320px;
+    }
+    .v-pill {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid rgba(201,130,74,0.35);
+      border-radius: 1px;
+      color: var(--copper-lt);
+    }
+
+    /* ─── ARYA SECTION ───────────────────────────────────────── */
+    .arya-section {
+      background: var(--cream);
+      color: var(--navy);
+      padding: 10rem 5vw;
+    }
+    .arya-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .arya-chat {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .chat-bubble {
+      padding: 1rem 1.3rem;
+      border-radius: 4px;
+      max-width: 85%;
+      font-size: 0.92rem; line-height: 1.65;
+    }
+    .chat-bubble.user {
+      background: var(--parchment);
+      color: var(--navy);
+      border: 1px solid rgba(26,39,68,0.1);
+      align-self: flex-end;
+      font-style: italic;
+    }
+    .chat-bubble.arya {
+      background: var(--navy);
+      color: var(--text-light);
+      align-self: flex-start;
+    }
+    .chat-bubble.arya .arya-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--copper-lt);
+      display: block; margin-bottom: 0.4rem;
+    }
+    .arya-text-col .section-label { color: var(--copper); }
+    .arya-text-col h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      font-weight: 300; line-height: 1.15;
+      color: var(--navy);
+      margin-bottom: 1.4rem;
+    }
+    .arya-text-col p {
+      font-size: 0.95rem; line-height: 1.8;
+      color: rgba(26,39,68,0.65);
+      margin-bottom: 1.2rem;
+    }
+    .feature-list {
+      list-style: none; margin-top: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.8rem;
+    }
+    .feature-list li {
+      display: flex; align-items: flex-start; gap: 0.8rem;
+      font-size: 0.88rem; color: rgba(26,39,68,0.7);
+    }
+    .feature-list li::before {
+      content: '—';
+      color: var(--copper);
+      flex-shrink: 0;
+      margin-top: 0.05em;
+    }
+
+    /* ─── ALIGN SECTION ──────────────────────────────────────── */
+    .align-section {
+      background: var(--dark-bg);
+      padding: 10rem 5vw;
+    }
+    .align-header {
+      max-width: 700px;
+      margin: 0 auto 5rem;
+      text-align: center;
+    }
+    .align-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 300; line-height: 1.12;
+      margin-bottom: 1rem;
+    }
+    .align-header p {
+      font-size: 0.95rem; color: var(--muted); line-height: 1.75;
+    }
+    .align-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      max-width: 1100px; margin: 0 auto;
+      border: 1px solid rgba(250,247,242,0.07);
+    }
+    .align-card {
+      padding: 2.8rem 2.2rem;
+      border: 1px solid rgba(250,247,242,0.07);
+      position: relative;
+      transition: background 0.3s;
+    }
+    .align-card:hover { background: var(--dark-card); }
+    .align-card-icon {
+      width: 40px; height: 40px; margin-bottom: 1.5rem;
+      opacity: 0.7;
+    }
+    .align-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 400;
+      margin-bottom: 0.7rem;
+      color: var(--text-light);
+    }
+    .align-card p {
+      font-size: 0.85rem; line-height: 1.7; color: var(--muted);
+    }
+    .align-card .card-tag {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--copper);
+    }
+
+    /* ─── JOURNAL SECTION ────────────────────────────────────── */
+    .journal-section {
+      background: var(--parchment);
+      color: var(--navy);
+      padding: 10rem 5vw;
+    }
+    .journal-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6rem; align-items: center;
+    }
+    .journal-text-col .section-label { color: var(--copper); }
+    .journal-text-col h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      font-weight: 300; line-height: 1.15;
+      color: var(--navy); margin-bottom: 1.4rem;
+    }
+    .journal-text-col p {
+      font-size: 0.95rem; line-height: 1.8; color: rgba(26,39,68,0.65);
+      margin-bottom: 1rem;
+    }
+    .journal-visual {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .journal-entry {
+      background: #fff;
+      border: 1px solid rgba(26,39,68,0.09);
+      border-radius: 4px;
+      padding: 1.4rem 1.6rem;
+    }
+    .journal-entry .je-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(26,39,68,0.35); margin-bottom: 0.5rem;
+    }
+    .journal-entry .je-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 1rem; line-height: 1.65;
+      color: var(--navy-mid);
+    }
+    .journal-entry .je-insight {
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(26,39,68,0.08);
+      font-size: 0.8rem; line-height: 1.6; color: rgba(26,39,68,0.55);
+    }
+    .journal-entry .je-insight::before {
+      content: 'Karma Insight · ';
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--copper);
+    }
+    .karma-chip {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin-top: 0.6rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--sage);
+      border: 1px solid rgba(122,158,126,0.3);
+      padding: 4px 10px; border-radius: 2px;
+    }
+    .karma-chip::before { content: '+'; }
+
+    /* ─── STARS SECTION ──────────────────────────────────────── */
+    .stars-section {
+      background: var(--dark-surf);
+      padding: 10rem 5vw;
+      text-align: center;
+    }
+    .stars-section .section-label { margin-bottom: 1.5rem; }
+    .stars-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 300; line-height: 1.1;
+      max-width: 700px; margin: 0 auto 1.5rem;
+    }
+    .stars-section p {
+      font-size: 0.95rem; line-height: 1.8; color: var(--muted);
+      max-width: 560px; margin: 0 auto 4rem;
+    }
+    .zodiac-row {
+      display: flex; gap: 0; justify-content: center;
+      flex-wrap: wrap; max-width: 1000px; margin: 0 auto;
+    }
+    .zodiac-item {
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      padding: 1.5rem 1.2rem;
+      transition: background 0.25s;
+      border: 1px solid transparent;
+      cursor: default; flex: 1; min-width: 80px;
+    }
+    .zodiac-item:hover { background: var(--dark-card); border-color: rgba(250,247,242,0.07); }
+    .zodiac-glyph {
+      font-size: 1.8rem; line-height: 1; opacity: 0.6;
+    }
+    .zodiac-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.56rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── PRICING ────────────────────────────────────────────── */
+    .pricing-section {
+      background: var(--cream);
+      color: var(--navy);
+      padding: 10rem 5vw;
+      text-align: center;
+    }
+    .pricing-section .section-label { color: var(--copper); margin-bottom: 1.5rem; }
+    .pricing-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 300; line-height: 1.1;
+      color: var(--navy); margin-bottom: 1.2rem;
+    }
+    .pricing-section > p {
+      font-size: 0.95rem; color: rgba(26,39,68,0.55); margin-bottom: 4rem; line-height: 1.7;
+    }
+    .pricing-cards {
+      display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+      max-width: 900px; margin: 0 auto;
+    }
+    .pricing-card {
+      flex: 1; min-width: 260px; max-width: 360px;
+      border: 1px solid rgba(26,39,68,0.12);
+      border-radius: 4px;
+      padding: 2.5rem 2rem;
+      text-align: left;
+      background: #fff;
+      position: relative;
+    }
+    .pricing-card.featured {
+      background: var(--navy);
+      color: var(--text-light);
+      border-color: transparent;
+    }
+    .pricing-card.featured .price-amount { color: var(--copper-lt); }
+    .pricing-card.featured .price-period { color: var(--muted); }
+    .pricing-card.featured .perk-item { color: var(--muted); }
+    .pricing-card.featured .perk-item::before { color: var(--copper-lt); }
+    .badge-featured {
+      position: absolute; top: -1px; right: 2rem;
+      background: var(--copper);
+      color: #fff;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 4px 10px;
+    }
+    .price-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--copper); margin-bottom: 1.2rem;
+    }
+    .price-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem; font-weight: 300; line-height: 1; color: var(--navy);
+    }
+    .price-period {
+      font-size: 0.78rem; color: rgba(26,39,68,0.45); margin-bottom: 1.8rem; margin-top: 0.3rem;
+    }
+    .perk-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+    .perk-item {
+      font-size: 0.86rem; color: rgba(26,39,68,0.7); line-height: 1.5;
+      display: flex; gap: 0.6rem; align-items: flex-start;
+    }
+    .perk-item::before { content: '✓'; color: var(--sage); flex-shrink: 0; margin-top: 0.05em; font-weight: 400; }
+    .pricing-card .btn-primary { width: 100%; text-align: center; margin-top: 2rem; display: block; }
+    .pricing-card.featured .btn-primary { background: var(--copper); }
+    .pricing-note {
+      margin-top: 2.5rem; font-size: 0.78rem; color: rgba(26,39,68,0.38); line-height: 1.6;
+    }
+
+    /* ─── FINAL CTA ──────────────────────────────────────────── */
+    .final-cta {
+      background: var(--dark-bg);
+      padding: 12rem 5vw;
+      text-align: center;
+    }
+    .final-cta .section-label { margin-bottom: 1.5rem; }
+    .final-cta h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 300; line-height: 1.08;
+      max-width: 800px; margin: 0 auto 1.5rem;
+    }
+    .final-cta h2 span { color: var(--copper); }
+    .final-cta p {
+      font-size: 0.95rem; color: var(--muted); max-width: 500px;
+      margin: 0 auto 3rem; line-height: 1.75;
+    }
+    .final-path {
+      margin-top: 3rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem; color: rgba(250,247,242,0.25);
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      background: var(--dark-surf);
+      padding: 3.5rem 5vw;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1.5rem;
+      border-top: 1px solid rgba(250,247,242,0.07);
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+    }
+    .footer-brand span { color: var(--copper); }
+    .footer-links {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(250,247,242,0.35); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text-light); }
+    .footer-copy {
+      font-size: 0.72rem; color: rgba(250,247,242,0.2); letter-spacing: 0.04em;
+    }
+
+    /* ─── DARK FEATURE SECTION (karma engine) ──────────────── */
+    .karma-section {
+      background: var(--dark-bg);
+    }
+    .karma-section .feature-visual {
+      background: var(--dark-surf);
+      min-height: 70vh;
+      padding: 4rem;
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .feature-split, .feature-split.reverse { grid-template-columns: 1fr; direction: ltr; }
+      .feature-visual { min-height: 60vw; }
+      .feature-text { padding: 4rem 6vw; }
+      .feature-split.reverse .feature-text { padding: 4rem 6vw; }
+      .arya-inner { grid-template-columns: 1fr; gap: 3.5rem; }
+      .journal-inner { grid-template-columns: 1fr; gap: 3.5rem; }
+      .align-grid { grid-template-columns: 1fr; }
+      .zodiac-row { gap: 0; }
+    }
+    @media (max-width: 600px) {
+      .hero-title { font-size: 3.2rem; }
+      .pricing-cards { flex-direction: column; align-items: center; }
+      .pricing-card { max-width: 100%; }
+      footer { flex-direction: column; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─────────────────────────────────────────────────── -->
+<nav id="main-nav">
+  <a class="nav-logo" href="#">
+    <span class="k">Karmic</span><span class="c">Compass</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#karma">Karma Engine</a></li>
+    <li><a href="#arya">Arya</a></li>
+    <li><a href="#align">Align</a></li>
+    <li><a href="#stars">Stars</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+  <a class="nav-cta" href="#pricing">Begin Free Trial</a>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────────────────── -->
+<section class="hero">
+  <!-- Mandala SVGs -->
+  <svg class="hero-mandala" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="250" cy="250" r="240" stroke="white" stroke-width="0.5"/>
+    <circle cx="250" cy="250" r="200" stroke="white" stroke-width="0.5"/>
+    <circle cx="250" cy="250" r="160" stroke="white" stroke-width="0.5"/>
+    <circle cx="250" cy="250" r="120" stroke="white" stroke-width="0.5"/>
+    <circle cx="250" cy="250" r="80"  stroke="white" stroke-width="0.5"/>
+    <circle cx="250" cy="250" r="40"  stroke="white" stroke-width="0.5"/>
+    <line x1="250" y1="10"  x2="250" y2="490" stroke="white" stroke-width="0.4"/>
+    <line x1="10"  y1="250" x2="490" y2="250" stroke="white" stroke-width="0.4"/>
+    <line x1="80"  y1="80"  x2="420" y2="420" stroke="white" stroke-width="0.4"/>
+    <line x1="420" y1="80"  x2="80"  y2="420" stroke="white" stroke-width="0.4"/>
+    <line x1="42"  y1="170" x2="458" y2="330" stroke="white" stroke-width="0.3"/>
+    <line x1="42"  y1="330" x2="458" y2="170" stroke="white" stroke-width="0.3"/>
+    <line x1="170" y1="42"  x2="330" y2="458" stroke="white" stroke-width="0.3"/>
+    <line x1="330" y1="42"  x2="170" y2="458" stroke="white" stroke-width="0.3"/>
+    <polygon points="250,10 309,191 490,191 347,309 402,490 250,382 98,490 153,309 10,191 191,191" stroke="white" stroke-width="0.4" fill="none"/>
+    <polygon points="250,70 294,160 395,175 323,248 341,350 250,302 159,350 177,248 105,175 206,160" stroke="white" stroke-width="0.4" fill="none"/>
+  </svg>
+  <svg class="hero-mandala-2" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="150" cy="150" r="140" stroke="white" stroke-width="0.6"/>
+    <circle cx="150" cy="150" r="100" stroke="white" stroke-width="0.6"/>
+    <circle cx="150" cy="150" r="60"  stroke="white" stroke-width="0.6"/>
+    <circle cx="150" cy="150" r="20"  stroke="white" stroke-width="0.6"/>
+    <line x1="150" y1="10"  x2="150" y2="290" stroke="white" stroke-width="0.5"/>
+    <line x1="10"  y1="150" x2="290" y2="150" stroke="white" stroke-width="0.5"/>
+    <line x1="51"  y1="51"  x2="249" y2="249" stroke="white" stroke-width="0.5"/>
+    <line x1="249" y1="51"  x2="51"  y2="249" stroke="white" stroke-width="0.5"/>
+  </svg>
+
+  <div class="hero-virtue-bar reveal">
+    <div class="virtue-list">
+      <span>Satya · Truth</span>
+      <span>Dharma · Duty</span>
+      <span>Karma · Action</span>
+      <span>Ahimsa · Compassion</span>
+      <span>Shanti · Peace</span>
+      <span>Seva · Service</span>
+      <span>Viveka · Wisdom</span>
+      <span>Satya · Truth</span>
+    </div>
+  </div>
+
+  <h1 class="hero-title reveal reveal-delay-1">
+    <span class="brand-k">Karmic</span><br>
+    <span class="brand-c">Compass</span>
+  </h1>
+
+  <p class="hero-sub reveal reveal-delay-2">
+    Your actions create your <em>Destiny</em>.<br>
+    Your duty defines your <em>Character</em>.
+  </p>
+
+  <div class="hero-actions reveal reveal-delay-3">
+    <a href="#pricing" class="btn-primary">Begin Your 11-Day Journey</a>
+    <a href="#arya" class="btn-ghost">Meet Arya</a>
+  </div>
+  <p class="hero-note reveal reveal-delay-4">No credit card required · 11 days free · iOS &amp; Android</p>
+
+  <div class="hero-scroll-cue">
+    <div class="scroll-line"></div>
+    <div class="scroll-dot"></div>
+  </div>
+</section>
+
+<!-- ─── INTRO STRIP ────────────────────────────────────────────── -->
+<div class="intro-strip">
+  <p class="big-quote reveal">
+    "We built KarmicCompass for one reason — to help you move<br>
+    from <span>chaos to clarity</span>, one intentional action at a time."
+  </p>
+  <p class="sub-note reveal reveal-delay-1">KarmicCompass Private Limited · karmiccompass.app</p>
+</div>
+
+<!-- ─── KARMA ENGINE ──────────────────────────────────────────── -->
+<section class="feature-split karma-section" id="karma">
+  <div class="feature-text">
+    <p class="section-label reveal">Karma Engine</p>
+    <h2 class="reveal reveal-delay-1">Your karma,<br>measured daily.</h2>
+    <p class="reveal reveal-delay-2">
+      Every action, every intention — scored and reflected back to you. 
+      KarmicCompass tracks your karma across seven sacred virtues, 
+      building a living portrait of who you're becoming.
+    </p>
+    <div class="stat-row">
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="val">7</div>
+        <div class="lbl">Core Virtues</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="val">11</div>
+        <div class="lbl">Day Free Trial</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-4">
+        <div class="val">∞</div>
+        <div class="lbl">Growth Path</div>
+      </div>
+    </div>
+  </div>
+  <div class="feature-visual">
+    <div class="karma-gauge-wrap">
+      <div class="gauge-ring">
+        <svg viewBox="0 0 260 260">
+          <circle cx="130" cy="130" r="118" stroke="rgba(250,247,242,0.05)" stroke-width="12" fill="none"/>
+          <circle cx="130" cy="130" r="118"
+            stroke="url(#copperArc)"
+            stroke-width="12" fill="none"
+            stroke-dasharray="630"
+            stroke-dashoffset="157"
+            stroke-linecap="round"
+            transform="rotate(-90 130 130)"/>
+          <circle cx="130" cy="130" r="88" stroke="rgba(250,247,242,0.04)" stroke-width="1" fill="none"/>
+          <circle cx="130" cy="130" r="60" stroke="rgba(201,130,74,0.15)" stroke-width="1" fill="none"/>
+          <defs>
+            <linearGradient id="copperArc" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#C9824A"/>
+              <stop offset="100%" stop-color="#E8A97A"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="gauge-center">
+          <div class="gauge-score">78</div>
+          <div class="gauge-label">Karma Score</div>
+        </div>
+      </div>
+      <div class="virtue-pills">
+        <div class="v-pill">Satya</div>
+        <div class="v-pill">Dharma</div>
+        <div class="v-pill">Ahimsa</div>
+        <div class="v-pill">Seva</div>
+        <div class="v-pill">Shanti</div>
+        <div class="v-pill">Viveka</div>
+        <div class="v-pill">Tapas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ARYA ──────────────────────────────────────────────────── -->
+<section class="arya-section" id="arya">
+  <div class="arya-inner">
+    <div class="arya-chat reveal">
+      <div class="chat-bubble user">
+        I've been feeling disconnected from my purpose lately. Like I'm just going through the motions.
+      </div>
+      <div class="chat-bubble arya">
+        <span class="arya-name">Arya · Your AI Mentor</span>
+        That feeling of disconnection is itself dharmic information. It's your inner compass telling you the current path doesn't align with your deepest values. Let's explore — when did you last feel fully present in your actions?
+      </div>
+      <div class="chat-bubble user">
+        When I was helping my team through a difficult project last month.
+      </div>
+      <div class="chat-bubble arya">
+        <span class="arya-name">Arya</span>
+        There it is — Seva. The karma of service. Your purpose isn't lost; it's waiting in acts of genuine contribution. Your karma score in Seva has been consistently rising. You're closer than you think.
+      </div>
+    </div>
+    <div class="arya-text-col">
+      <p class="section-label reveal">Your AI Mentor</p>
+      <h2 class="reveal reveal-delay-1">Meet Arya.<br>Wisdom, always on.</h2>
+      <p class="reveal reveal-delay-2">
+        Arya is your personal dharmic guide — an AI mentor trained to hold space for your deepest questions 
+        about purpose, karma, and the life you're building.
+      </p>
+      <p class="reveal reveal-delay-2">
+        Unlike a chatbot, Arya remembers your journey, tracks your karma patterns, and meets you 
+        exactly where you are — with compassion, not judgement.
+      </p>
+      <ul class="feature-list">
+        <li class="reveal reveal-delay-3">Deep Memory — Arya recalls your history, goals, and patterns</li>
+        <li class="reveal reveal-delay-3">Voice conversations for moments when typing isn't enough</li>
+        <li class="reveal reveal-delay-4">Dharmic insights grounded in ancient wisdom, AI precision</li>
+        <li class="reveal reveal-delay-4">Photo-sharing so Arya can see your world with you</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ALIGN ──────────────────────────────────────────────────── -->
+<section class="align-section" id="align">
+  <div class="align-header">
+    <p class="section-label reveal">Align</p>
+    <h2 class="reveal reveal-delay-1">Practices for the<br>whole path.</h2>
+    <p class="reveal reveal-delay-2">
+      KarmicCompass isn't just reflection — it's action. 
+      Build your practice with tools that train body, breath, and mind.
+    </p>
+  </div>
+  <div class="align-grid">
+    <div class="align-card reveal">
+      <span class="card-tag">Daily</span>
+      <svg class="align-card-icon" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="18" stroke="#C9824A" stroke-width="1"/>
+        <circle cx="20" cy="20" r="10" stroke="#C9824A" stroke-width="1" opacity="0.5"/>
+        <circle cx="20" cy="20" r="3"  fill="#C9824A"/>
+      </svg>
+      <h3>Breath</h3>
+      <p>Guided pranayama sessions that sync with your current karma and stress state. From box breathing to nadi shodhana.</p>
+    </div>
+    <div class="align-card reveal reveal-delay-1">
+      <span class="card-tag">Weekly</span>
+      <svg class="align-card-icon" viewBox="0 0 40 40" fill="none">
+        <rect x="4" y="10" width="32" height="20" rx="2" stroke="#C9824A" stroke-width="1"/>
+        <path d="M12 20h16M20 14v12" stroke="#C9824A" stroke-width="1.2"/>
+      </svg>
+      <h3>Karma Quiz</h3>
+      <p>A reflective quiz that scores your recent actions across virtue dimensions. Earn XP as your understanding deepens.</p>
+    </div>
+    <div class="align-card reveal reveal-delay-2">
+      <span class="card-tag">Mindful</span>
+      <svg class="align-card-icon" viewBox="0 0 40 40" fill="none">
+        <path d="M20 4 L36 14 L36 26 L20 36 L4 26 L4 14 Z" stroke="#C9824A" stroke-width="1" fill="none"/>
+        <path d="M20 12 L28 17 L28 23 L20 28 L12 23 L12 17 Z" stroke="#C9824A" stroke-width="1" fill="none" opacity="0.5"/>
+      </svg>
+      <h3>Memory</h3>
+      <p>A sacred memory game that trains present-moment awareness. Each match is a small act of mindful attention.</p>
+    </div>
+    <div class="align-card reveal reveal-delay-1">
+      <span class="card-tag">Practice</span>
+      <svg class="align-card-icon" viewBox="0 0 40 40" fill="none">
+        <path d="M20 8 C14 8 8 14 8 20 C8 26 14 32 20 32" stroke="#C9824A" stroke-width="1" stroke-linecap="round"/>
+        <path d="M20 8 C26 8 32 14 32 20 C32 26 26 32 20 32" stroke="#C9824A" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+        <line x1="20" y1="4" x2="20" y2="10" stroke="#C9824A" stroke-width="1"/>
+      </svg>
+      <h3>Yoga</h3>
+      <p>Sequenced asana flows tailored to your energy and karmic focus for the week. From five-minute resets to deep sessions.</p>
+    </div>
+    <div class="align-card reveal reveal-delay-2">
+      <span class="card-tag">Core</span>
+      <svg class="align-card-icon" viewBox="0 0 40 40" fill="none">
+        <path d="M8 32 L20 8 L32 32" stroke="#C9824A" stroke-width="1" fill="none"/>
+        <path d="M12 24 L28 24" stroke="#C9824A" stroke-width="1"/>
+      </svg>
+      <h3>Realm</h3>
+      <p>Your personal sacred space within the app — visualise your karmic journey, set intentions, and track your evolution.</p>
+    </div>
+    <div class="align-card reveal reveal-delay-3">
+      <span class="card-tag">AI</span>
+      <svg class="align-card-icon" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="16" r="8"  stroke="#C9824A" stroke-width="1"/>
+        <path d="M8 34 C8 26 32 26 32 34" stroke="#C9824A" stroke-width="1" stroke-linecap="round"/>
+      </svg>
+      <h3>AI Insights</h3>
+      <p>Monthly AI-generated summaries of your karma arc, patterns, and opportunities for growth — your dharmic report card.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── JOURNAL ────────────────────────────────────────────────── -->
+<section class="journal-section">
+  <div class="journal-inner">
+    <div class="journal-text-col">
+      <p class="section-label reveal">Journal</p>
+      <h2 class="reveal reveal-delay-1">Write your path.<br>Understand your karma.</h2>
+      <p class="reveal reveal-delay-2">
+        The KarmicCompass journal isn't a diary — it's a karmic mirror. 
+        Every entry is analysed by the Karma Engine, surfacing patterns 
+        and insights you'd never see from the inside.
+      </p>
+      <p class="reveal reveal-delay-2">
+        Your words become data. Your data becomes wisdom.
+      </p>
+      <ul class="feature-list" style="color: rgba(26,39,68,0.6)">
+        <li class="reveal reveal-delay-3">AI karma analysis on every entry</li>
+        <li class="reveal reveal-delay-3">Mood × virtue cross-mapping</li>
+        <li class="reveal reveal-delay-4">XP earned for consistent journaling</li>
+        <li class="reveal reveal-delay-4">Export and share your journey</li>
+      </ul>
+    </div>
+    <div class="journal-visual">
+      <div class="journal-entry reveal">
+        <div class="je-date">Apr 28, 2026 · Morning</div>
+        <div class="je-text">
+          "I turned down the shortcut today. It would have saved me an hour but something felt wrong about it. Chose the honest path instead."
+        </div>
+        <div class="je-insight">Strong Satya (Truth) expression. This choice reflects integrity under pressure — a rare and high-karma action.</div>
+        <div><span class="karma-chip">12 Karma XP</span></div>
+      </div>
+      <div class="journal-entry reveal reveal-delay-1">
+        <div class="je-date">Apr 27, 2026 · Evening</div>
+        <div class="je-text">
+          "Spent the afternoon helping a colleague understand a system I'd built. Didn't feel like work."
+        </div>
+        <div class="je-insight">Seva (Service) in action. Teaching freely amplifies collective karma. Your Seva score is rising this week.</div>
+        <div><span class="karma-chip">8 Karma XP</span></div>
+      </div>
+      <div class="journal-entry reveal reveal-delay-2">
+        <div class="je-date">Apr 26, 2026 · Night</div>
+        <div class="je-text">
+          "Meditated for the first time in two weeks. The silence was uncomfortable at first. Then it wasn't."
+        </div>
+        <div class="je-insight">Returning to practice after a gap is itself a dharmic act. Shanti (Peace) virtue activation detected.</div>
+        <div><span class="karma-chip">6 Karma XP</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STARS ──────────────────────────────────────────────────── -->
+<section class="stars-section" id="stars">
+  <p class="section-label reveal">Stars</p>
+  <h2 class="reveal reveal-delay-1">Your cosmic context,<br>every day.</h2>
+  <p class="reveal reveal-delay-2">
+    The celestial map isn't just astrology — it's another lens for understanding 
+    the forces at work in your life, aligned with your karma journey.
+  </p>
+  <div class="zodiac-row reveal reveal-delay-3">
+    <div class="zodiac-item"><div class="zodiac-glyph">♈</div><div class="zodiac-name">Aries</div></div>
+    <div class="zodiac-item"><div class="zodiac-glyph">♉</div><div class="zodiac-name">Taurus</div></div>
+    <div class="zodiac-item"><div class="zodiac-glyph">♊</div><div class="zodiac-name">Gemini</div></div>
+    <div class="zodiac-item"><div class="zodiac-glyph">♋</div><div class="zodiac-name">Cancer</div></div>
+    <div class="zodiac-item"><div class="zodiac-glyph">♌</div><div class="zodiac-name">Leo</div></div>
+    <div class="zodiac-item"><div class="zodiac-glyph">♍</div><div class="zodiac-name">Virgo</div></div>
+    <div class="zodiac-item"><div class="zodiac-glyph">♎</div><div class="zodiac-name">Libra</div></div>
+    <div class="zodiac-item"><div class="zodiac-glyph">♏</div><div class="zodiac-name">Scorpio</div></div>
+    <div class="zodiac-item"><div class="zodiac-glyph">♐</div><div class="zodiac-name">Sagittarius</div></div>
+    <div class="zodiac-item"><div class="zodiac-glyph">♑</div><div class="zodiac-name">Capricorn</div></div>
+    <div class="zodiac-item"><div class="zodiac-glyph">♒</div><div class="zodiac-name">Aquarius</div></div>
+    <div class="zodiac-item"><div class="zodiac-glyph">♓</div><div class="zodiac-name">Pisces</div></div>
+  </div>
+</section>
+
+<!-- ─── PRICING ───────────────────────────────────────────────── -->
+<section class="pricing-section" id="pricing">
+  <p class="section-label reveal">Pricing</p>
+  <h2 class="reveal reveal-delay-1">Begin free.<br>Walk further.</h2>
+  <p class="reveal reveal-delay-2">
+    Eleven days to experience the full depth of KarmicCompass. 
+    Then choose to continue the path.
+  </p>
+  <div class="pricing-cards">
+    <div class="pricing-card reveal">
+      <div class="price-name">Trial</div>
+      <div class="price-amount">Free</div>
+      <div class="price-period" style="color: rgba(26,39,68,0.45)">11 calendar days</div>
+      <ul class="perk-list">
+        <li class="perk-item">Full Karma Engine access</li>
+        <li class="perk-item">Arya AI Mentor (limited history)</li>
+        <li class="perk-item">Unlimited journaling</li>
+        <li class="perk-item">Align practices</li>
+        <li class="perk-item">Stars horoscope</li>
+      </ul>
+      <a href="#" class="btn-primary" style="background: var(--navy); text-align:center;">Start Free Trial</a>
+    </div>
+    <div class="pricing-card featured reveal reveal-delay-1">
+      <div class="badge-featured">Most Popular</div>
+      <div class="price-name">Basic</div>
+      <div class="price-amount">$11</div>
+      <div class="price-period">per month</div>
+      <ul class="perk-list">
+        <li class="perk-item">Everything in Trial</li>
+        <li class="perk-item">Arya Deep Memory (full history)</li>
+        <li class="perk-item">Incognito journaling mode</li>
+        <li class="perk-item">Full chat history with Arya</li>
+        <li class="perk-item">Monthly AI karma summaries</li>
+        <li class="perk-item">Priority insights &amp; analysis</li>
+      </ul>
+      <a href="#" class="btn-primary">Begin Your Path</a>
+    </div>
+  </div>
+  <p class="pricing-note reveal">
+    Subscriptions managed via App Store &amp; Google Play. Cancel anytime.<br>
+    Restore purchases available on all platforms.
+  </p>
+</section>
+
+<!-- ─── FINAL CTA ──────────────────────────────────────────────── -->
+<section class="final-cta">
+  <p class="section-label reveal">The Path Begins</p>
+  <h2 class="reveal reveal-delay-1">
+    Your path.<br>Your karma.<br><span>Your dharma.</span>
+  </h2>
+  <p class="reveal reveal-delay-2">
+    Every journey begins with one intentional step. 
+    Yours begins here, with eleven free days to discover who you're becoming.
+  </p>
+  <a href="#pricing" class="btn-primary reveal reveal-delay-3">Begin Free — No Card Required</a>
+  <p class="final-path reveal reveal-delay-4">
+    "Your actions create your Destiny. Your duty defines your Character."
+  </p>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-brand">Karmic<span>Compass</span></div>
+  <ul class="footer-links">
+    <li><a href="#">Privacy</a></li>
+    <li><a href="#">Terms</a></li>
+    <li><a href="#">Legal</a></li>
+    <li><a href="mailto:app.karmiccompass@gmail.com">Support</a></li>
+    <li><a href="https://twitter.com/CompassKarmic" target="_blank">X / Twitter</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 KarmicCompass Private Limited</div>
+</footer>
+
+<script>
+  // ── Nav scroll effect ──────────────────────────────────────────
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // ── Reveal on scroll ──────────────────────────────────────────
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  // Hero elements reveal immediately
+  document.querySelectorAll('.hero .reveal').forEach(el => {
+    el.classList.add('visible');
+  });
+</script>
+</body>
+</html>
