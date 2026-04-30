@@ -225,16 +225,10 @@
     /* ─── SECTION UTILITIES ──────────────────────────────────── */
     section { position: relative; }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.9s cubic-bezier(.22,1,.36,1), transform 0.9s cubic-bezier(.22,1,.36,1);
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.35s; }
-    .reveal-delay-4 { transition-delay: 0.5s; }
+    .reveal-delay-1 { transition-delay: 0.12s; }
+    .reveal-delay-2 { transition-delay: 0.24s; }
+    .reveal-delay-3 { transition-delay: 0.38s; }
+    .reveal-delay-4 { transition-delay: 0.54s; }
 
     .section-label {
       font-family: 'DM Mono', monospace;
@@ -806,9 +800,229 @@
       footer { flex-direction: column; text-align: center; }
       .footer-links { flex-wrap: wrap; justify-content: center; }
     }
+
+    /* ─── ENHANCED REVEAL (clip-path) ──────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      clip-path: inset(0 0 12% 0);
+      transition:
+        opacity 0.85s cubic-bezier(.22,1,.36,1),
+        transform 0.85s cubic-bezier(.22,1,.36,1),
+        clip-path 0.85s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+      clip-path: inset(0 0 0% 0);
+    }
+    .reveal-left {
+      transform: translateX(-40px) translateY(0);
+      clip-path: inset(0 12% 0 0);
+    }
+    .reveal-left.visible {
+      transform: translateX(0);
+      clip-path: inset(0 0% 0 0);
+    }
+    .reveal-right {
+      transform: translateX(40px) translateY(0);
+      clip-path: inset(0 0 0 12%);
+    }
+    .reveal-right.visible {
+      transform: translateX(0);
+      clip-path: inset(0 0 0 0%);
+    }
+
+    /* ─── SECTION LABEL UNDERLINE ANIMATION ────────────────── */
+    .section-label {
+      position: relative;
+      display: inline-block;
+    }
+    .section-label::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--copper);
+      transition: width 0.6s cubic-bezier(.22,1,.36,1) 0.3s;
+    }
+    .reveal.visible .section-label::after,
+    .visible .section-label::after,
+    .section-label.visible::after { width: 100%; }
+
+    /* ─── FLOATING PARTICLES ────────────────────────────────── */
+    @keyframes floatParticle {
+      0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+      33%       { transform: translateY(-28px) translateX(12px); opacity: 0.8; }
+      66%       { transform: translateY(16px) translateX(-10px); opacity: 0.4; }
+    }
+
+    /* ─── HERO TITLE SHIMMER ────────────────────────────────── */
+    .hero-title .brand-c {
+      position: relative;
+      display: inline-block;
+      animation: copperPulse 4s ease-in-out infinite;
+    }
+    @keyframes copperPulse {
+      0%, 100% { color: var(--copper); }
+      50%       { color: var(--copper-lt); }
+    }
+
+    /* ─── VIRTUE TICKER FADE ────────────────────────────────── */
+    .hero-virtue-bar {
+      animation: none;
+    }
+    .virtue-list {
+      animation: virtueScroll 10.5s steps(1) infinite;
+    }
+    .virtue-list span {
+      opacity: 0;
+      animation: virtueFade 10.5s ease-in-out infinite;
+    }
+    .virtue-list span:nth-child(1) { animation-delay: 0s; }
+    .virtue-list span:nth-child(2) { animation-delay: 1.5s; }
+    .virtue-list span:nth-child(3) { animation-delay: 3s; }
+    .virtue-list span:nth-child(4) { animation-delay: 4.5s; }
+    .virtue-list span:nth-child(5) { animation-delay: 6s; }
+    .virtue-list span:nth-child(6) { animation-delay: 7.5s; }
+    .virtue-list span:nth-child(7) { animation-delay: 9s; }
+    @keyframes virtueFade {
+      0%, 12%, 100% { opacity: 0; }
+      2%, 10%        { opacity: 1; }
+    }
+
+    /* ─── GAUGE ARC TRANSITION ──────────────────────────────── */
+    .gauge-arc {
+      transition: stroke-dashoffset 1.8s cubic-bezier(.22,1,.36,1);
+    }
+
+    /* ─── VIRTUE PILLS ──────────────────────────────────────── */
+    .v-pill {
+      opacity: 0;
+      transform: translateY(10px) scale(0.9);
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(.22,1,.36,1), background 0.2s, color 0.2s;
+    }
+    .v-pill.pill-in { opacity: 1; transform: none; }
+    .v-pill:hover {
+      background: rgba(201,130,74,0.12);
+      color: var(--copper-lt);
+    }
+
+    /* ─── CHAT BUBBLES ──────────────────────────────────────── */
+    .chat-bubble {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s ease, transform 0.55s cubic-bezier(.22,1,.36,1);
+    }
+    .chat-bubble.bubble-in { opacity: 1; transform: none; }
+
+    /* ─── ZODIAC ────────────────────────────────────────────── */
+    .zodiac-item {
+      opacity: 0;
+      transform: translateY(20px) scale(0.85);
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(.22,1,.36,1),
+                  background 0.25s, border-color 0.25s;
+    }
+    .zodiac-item.zodiac-in { opacity: 1; transform: none; }
+    .zodiac-glyph { transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), opacity 0.3s; }
+    .zodiac-item:hover .zodiac-glyph { transform: scale(1.35) translateY(-4px); opacity: 1; }
+
+    /* ─── TIER ITEMS ────────────────────────────────────────── */
+    .tier-item {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(.22,1,.36,1);
+    }
+    .tier-item.tier-in { opacity: 1; transform: none; }
+    .tier-connector {
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      transform-origin: top;
+    }
+    .tier-connector.conn-in { opacity: 1; }
+
+    /* ─── JOURNAL ENTRY HOVER ───────────────────────────────── */
+    .journal-entry {
+      transition: transform 0.35s cubic-bezier(.22,1,.36,1),
+                  border-color 0.35s ease;
+      cursor: default;
+    }
+
+    /* ─── ALIGN CARD TILT ───────────────────────────────────── */
+    .align-card {
+      transition: background 0.3s, transform 0.25s cubic-bezier(.22,1,.36,1);
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    /* ─── BUTTON TRANSITIONS ────────────────────────────────── */
+    .btn-primary, .btn-ghost, .nav-cta {
+      transition: background 0.25s ease, color 0.25s ease,
+                  border-color 0.25s ease, transform 0.2s cubic-bezier(.34,1.56,.64,1),
+                  opacity 0.2s ease;
+      will-change: transform;
+    }
+
+    /* ─── PRICING CARD HOVER ────────────────────────────────── */
+    .pricing-card {
+      transition: transform 0.35s cubic-bezier(.22,1,.36,1);
+    }
+    .pricing-card:hover { transform: translateY(-6px); }
+
+    /* ─── NAV ACTIVE LINK ───────────────────────────────────── */
+    .nav-links a {
+      position: relative;
+      transition: color 0.2s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--copper);
+      transition: width 0.3s ease;
+    }
+    .nav-links a.nav-active { color: var(--text-light); }
+    .nav-links a.nav-active::after { width: 100%; }
+
+    /* ─── SCROLL CUE ENHANCED ───────────────────────────────── */
+    .scroll-line {
+      animation: scrollLineDrop 2.5s ease-in-out infinite;
+    }
+    @keyframes scrollLineDrop {
+      0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
+      40%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      80%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+      100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+    }
+
+    /* ─── INTRO STRIP QUOTE UNDERLINE ───────────────────────── */
+    .big-quote span {
+      position: relative;
+    }
+    .big-quote span::after {
+      content: '';
+      position: absolute;
+      bottom: 2px; left: 0; right: 0;
+      height: 2px;
+      background: var(--copper);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.8s cubic-bezier(.22,1,.36,1) 0.5s;
+    }
+    .big-quote.visible span::after { transform: scaleX(1); }
+
+    /* ─── MANDALA PARALLAX RESET ────────────────────────────── */
+    .hero-mandala, .hero-mandala-2 {
+      transition: none;
+    }
+
   </style>
 </head>
 <body>
+
+<!-- ─── SCROLL PROGRESS ──────────────────────────────────────── -->
+<div id="scroll-progress" style="position:fixed;top:0;left:0;height:2px;background:var(--copper);z-index:200;width:0;transition:width 0.1s linear;pointer-events:none;"></div>
 
 <!-- ─── NAV ─────────────────────────────────────────────────── -->
 <nav id="main-nav">
@@ -915,11 +1129,11 @@
     </p>
     <div class="stat-row">
       <div class="stat-item reveal reveal-delay-3">
-        <div class="val">7</div>
+        <div class="val" data-count="7">0</div>
         <div class="lbl">Core Virtues</div>
       </div>
       <div class="stat-item reveal reveal-delay-3">
-        <div class="val">11</div>
+        <div class="val" data-count="11">0</div>
         <div class="lbl">Day Free Trial</div>
       </div>
       <div class="stat-item reveal reveal-delay-4">
@@ -934,10 +1148,11 @@
         <svg viewBox="0 0 260 260">
           <circle cx="130" cy="130" r="118" stroke="rgba(250,247,242,0.05)" stroke-width="12" fill="none"/>
           <circle cx="130" cy="130" r="118"
+            class="gauge-arc"
             stroke="url(#copperArc)"
             stroke-width="12" fill="none"
-            stroke-dasharray="630"
-            stroke-dashoffset="157"
+            stroke-dasharray="740"
+            stroke-dashoffset="740"
             stroke-linecap="round"
             transform="rotate(-90 130 130)"/>
           <circle cx="130" cy="130" r="88" stroke="rgba(250,247,242,0.04)" stroke-width="1" fill="none"/>
@@ -1287,29 +1502,223 @@
 </footer>
 
 <script>
-  // ── Nav scroll effect ──────────────────────────────────────────
+  /* ── Scroll progress bar ──────────────────────────────────── */
+  const progressBar = document.getElementById('scroll-progress');
+  
+  /* ── Nav scroll effect ───────────────────────────────────── */
   const nav = document.getElementById('main-nav');
+
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
+    const scrolled = window.scrollY;
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    const pct = Math.min((scrolled / maxScroll) * 100, 100);
+    progressBar.style.width = pct + '%';
+    nav.classList.toggle('scrolled', scrolled > 40);
+
+    // Parallax hero mandala
+    const m1 = document.querySelector('.hero-mandala');
+    const m2 = document.querySelector('.hero-mandala-2');
+    if (m1) m1.style.transform = `translate(-50%, calc(-50% + ${scrolled * 0.18}px))`;
+    if (m2) m2.style.transform = `translate(-50%, calc(-50% + ${scrolled * 0.28}px))`;
   }, { passive: true });
 
-  // ── Reveal on scroll ──────────────────────────────────────────
+  /* ── Reveal on scroll (clip-path + opacity) ──────────────── */
   const revealEls = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
+  const revealObs = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+        revealObs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  revealEls.forEach(el => revealObs.observe(el));
 
-  revealEls.forEach(el => observer.observe(el));
-
-  // Hero elements reveal immediately
-  document.querySelectorAll('.hero .reveal').forEach(el => {
-    el.classList.add('visible');
+  // Hero reveals immediately on load
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
+    }, 100);
   });
+  document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
+
+  /* ── Animated stat counters ──────────────────────────────── */
+  function animateCounter(el, target, duration = 1600, isSymbol = false) {
+    if (isSymbol) return;
+    let start = null;
+    const step = (ts) => {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(ease * target);
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    };
+    requestAnimationFrame(step);
+  }
+
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const val = el.dataset.count;
+      if (!val) return;
+      animateCounter(el, parseInt(val));
+      counterObs.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.stat-item .val[data-count]').forEach(el => counterObs.observe(el));
+
+  /* ── Karma gauge draw animation ──────────────────────────── */
+  const gaugeArc = document.querySelector('.gauge-arc');
+  const gaugeObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      if (!gaugeArc) return;
+      const total = 740;
+      const fill = total * 0.75; // 78/100 score
+      let start = null;
+      const draw = (ts) => {
+        if (!start) start = ts;
+        const p = Math.min((ts - start) / 1800, 1);
+        const ease = 1 - Math.pow(1 - p, 4);
+        gaugeArc.style.strokeDashoffset = total - (fill * ease);
+        if (p < 1) requestAnimationFrame(draw);
+      };
+      requestAnimationFrame(draw);
+      gaugeObs.unobserve(entry.target);
+    });
+  }, { threshold: 0.4 });
+  if (gaugeArc) gaugeObs.observe(gaugeArc.closest('section') || gaugeArc);
+
+  /* ── Virtue pill staggered entrance ─────────────────────── */
+  const pillObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const pills = entry.target.querySelectorAll('.v-pill');
+      pills.forEach((p, i) => {
+        setTimeout(() => p.classList.add('pill-in'), i * 80);
+      });
+      pillObs.unobserve(entry.target);
+    });
+  }, { threshold: 0.3 });
+  const pillWrap = document.querySelector('.virtue-pills');
+  if (pillWrap) pillObs.observe(pillWrap);
+
+  /* ── Chat bubble sequential reveal ───────────────────────── */
+  const chatObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const bubbles = entry.target.querySelectorAll('.chat-bubble');
+      bubbles.forEach((b, i) => {
+        setTimeout(() => b.classList.add('bubble-in'), i * 500);
+      });
+      chatObs.unobserve(entry.target);
+    });
+  }, { threshold: 0.2 });
+  const chatWrap = document.querySelector('.arya-chat');
+  if (chatWrap) chatObs.observe(chatWrap);
+
+  /* ── Zodiac staggered reveal ─────────────────────────────── */
+  const zodiacObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const items = entry.target.querySelectorAll('.zodiac-item');
+      items.forEach((item, i) => {
+        setTimeout(() => item.classList.add('zodiac-in'), i * 60);
+      });
+      zodiacObs.unobserve(entry.target);
+    });
+  }, { threshold: 0.2 });
+  const zodiacRow = document.querySelector('.zodiac-row');
+  if (zodiacRow) zodiacObs.observe(zodiacRow);
+
+  /* ── Tier sequential fill ────────────────────────────────── */
+  const tierObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const tiers = entry.target.querySelectorAll('.tier-item');
+      const connectors = entry.target.querySelectorAll('.tier-connector');
+      tiers.forEach((t, i) => setTimeout(() => t.classList.add('tier-in'), i * 200));
+      connectors.forEach((c, i) => setTimeout(() => c.classList.add('conn-in'), i * 200 + 100));
+      tierObs.unobserve(entry.target);
+    });
+  }, { threshold: 0.3 });
+  const tierWrap = document.querySelector('.realm-tiers');
+  if (tierWrap) tierObs.observe(tierWrap);
+
+  /* ── Magnetic buttons ────────────────────────────────────── */
+  document.querySelectorAll('.btn-primary, .btn-ghost, .nav-cta').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width / 2;
+      const y = e.clientY - r.top - r.height / 2;
+      btn.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  });
+
+  /* ── Align card tilt on hover ────────────────────────────── */
+  document.querySelectorAll('.align-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(600px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg) translateZ(8px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+  /* ── Journal entry hover lift ────────────────────────────── */
+  document.querySelectorAll('.journal-entry').forEach(entry => {
+    entry.addEventListener('mouseenter', () => {
+      entry.style.transform = 'translateY(-4px)';
+      entry.style.borderColor = 'rgba(201,130,74,0.3)';
+    });
+    entry.addEventListener('mouseleave', () => {
+      entry.style.transform = '';
+      entry.style.borderColor = '';
+    });
+  });
+
+  /* ── Floating particles (hero) ───────────────────────────── */
+  const hero = document.querySelector('.hero');
+  for (let i = 0; i < 18; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'hero-particle';
+    dot.style.cssText = `
+      position: absolute;
+      width: ${Math.random() * 3 + 1}px;
+      height: ${Math.random() * 3 + 1}px;
+      border-radius: 50%;
+      background: rgba(201,130,74, ${Math.random() * 0.4 + 0.1});
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+      animation: floatParticle ${6 + Math.random() * 10}s ease-in-out infinite;
+      animation-delay: ${Math.random() * 6}s;
+      pointer-events: none;
+    `;
+    hero.appendChild(dot);
+  }
+
+  /* ── Active nav link highlighting ────────────────────────── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const activeObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('nav-active'));
+        const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('nav-active');
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => activeObs.observe(s));
 </script>
 </body>
 </html>
