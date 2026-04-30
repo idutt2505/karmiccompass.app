@@ -20,11 +20,11 @@ const FAQ_ITEMS = [
   },
   {
     q: "What does the Basic subscription include?",
-    a: "After your free trial, the paid tier is Basic — $11/month (App Store pricing may vary by region). It includes longer insight reports, deeper Arya context and conversation history, voice reflection, and expanded guidance modes. Exact entitlements are shown in the app and may evolve with updates.",
+    a: "After your free trial, the paid tier is Basic — $11/month (pricing may vary by platform and region). It includes longer insight reports, deeper Arya context and conversation history, voice reflection, and expanded guidance modes. Exact entitlements are shown in the app and may evolve with updates.",
   },
   {
     q: "Can I cancel anytime?",
-    a: "Yes. Subscriptions are managed through Apple In-App Purchases, so you can cancel at any time directly in your iPhone Settings under Subscriptions. No hidden steps.",
+    a: "Yes. Subscriptions are managed through your platform's native store (App Store on iOS, Google Play on Android) and can be cancelled at any time from your device's subscription settings. No hidden steps, no emails required.",
   },
   {
     q: "Who is Arya?",

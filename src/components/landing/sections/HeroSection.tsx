@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { PhoneFrame } from "../PhoneFrame";
 import { SmartExternalLink } from "../SmartExternalLink";
-import { SECTION_IDS, APP_STORE_URL } from "@/lib/constants";
+import { SECTION_IDS, APP_STORE_URL, PLAY_STORE_URL } from "@/lib/constants";
 
 function scrollToId(id: string) {
   if (typeof document === "undefined") return;
@@ -63,7 +63,7 @@ export function HeroSection() {
             <motion.div variants={reduce ? undefined : fadeUp}>
               <span className="inline-flex items-center gap-2 rounded-full border border-[#C9824A]/22 bg-[#C9824A]/[0.07] px-3.5 py-1.5 text-[0.63rem] font-medium uppercase tracking-[0.24em] text-[#C9824A]">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#C9824A]" style={{ animation: "pulse 2s ease-in-out infinite" }} />
-                iOS · Free 11-day trial
+                iOS &amp; Android · Free 11-day trial
               </span>
             </motion.div>
 
@@ -94,23 +94,36 @@ export function HeroSection() {
             {/* CTAs */}
             <motion.div
               variants={reduce ? undefined : fadeUp}
-              className="mt-9 flex flex-wrap items-center gap-3.5"
+              className="mt-9 flex flex-wrap items-center gap-3"
             >
+              {/* iOS */}
               <SmartExternalLink
                 href={APP_STORE_URL}
-                className="inline-flex items-center gap-2.5 rounded-xl bg-[#C9824A] px-7 py-3.5 text-sm font-medium text-white shadow-[0_12px_40px_-10px_rgba(201,130,74,0.55)] transition duration-200 hover:bg-[#D9925A] hover:shadow-[0_12px_40px_-10px_rgba(201,130,74,0.7)] active:scale-[0.98]"
+                className="inline-flex items-center gap-2.5 rounded-xl bg-[#C9824A] px-6 py-3.5 text-sm font-medium text-white shadow-[0_12px_40px_-10px_rgba(201,130,74,0.55)] transition duration-200 hover:bg-[#D9925A] hover:shadow-[0_12px_40px_-10px_rgba(201,130,74,0.7)] active:scale-[0.98]"
                 label="Download Karmic Compass on the App Store"
               >
                 <svg width="13" height="16" viewBox="0 0 13 16" fill="currentColor" aria-hidden>
                   <path d="M10.94 8.53c-.02-2.09 1.71-3.1 1.79-3.15-1-1.44-2.54-1.64-3.09-1.66-1.31-.13-2.58.76-3.25.76-.67 0-1.69-.74-2.79-.72C2.16 3.78 .8 4.57.06 5.82-1.43 8.39-.41 12.18.99 14.07c.69.99 1.51 2.09 2.59 2.05 1.04-.04 1.43-.66 2.69-.66 1.26 0 1.61.66 2.7.64 1.12-.02 1.83-1 2.51-1.99.8-1.14 1.12-2.26 1.14-2.32-.02-.01-2.19-.85-2.69-3.29zM8.83 2.17C9.4 1.48 9.8.52 9.7-.5c-.87.04-1.92.58-2.54 1.27-.56.62-1.05 1.61-.92 2.55.97.08 1.96-.48 2.59-1.15z"/>
                 </svg>
-                Download on iOS
+                App Store
+              </SmartExternalLink>
+
+              {/* Android */}
+              <SmartExternalLink
+                href={PLAY_STORE_URL}
+                className="inline-flex items-center gap-2.5 rounded-xl border border-white/[0.12] bg-white/[0.04] px-6 py-3.5 text-sm font-medium text-white/70 transition duration-200 hover:border-white/[0.2] hover:bg-white/[0.07] hover:text-white/90 active:scale-[0.98]"
+                label="Download Karmic Compass on Google Play"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <path d="M3.18 23.76c.37.2.8.2 1.2 0l11-6.35-2.84-2.84-9.36 9.19zM.5 1.58A1.5 1.5 0 000 2.75v18.5a1.5 1.5 0 00.5 1.17l.07.06 10.36-10.36v-.24L.57 1.52.5 1.58zM20.65 10.34l-2.96-1.71-3.18 3.18 3.18 3.18 2.99-1.73a1.51 1.51 0 000-2.92zM4.38.24L15.37 6.6l-2.84 2.84L3.18.24A1.35 1.35 0 014.38.24z"/>
+                </svg>
+                Google Play
               </SmartExternalLink>
 
               <button
                 type="button"
                 onClick={() => scrollToId(SECTION_IDS.features)}
-                className="inline-flex items-center gap-2 rounded-xl border border-white/[0.1] bg-white/[0.03] px-7 py-3.5 text-sm text-white/60 transition duration-200 hover:border-white/[0.18] hover:bg-white/[0.06] hover:text-white/85"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/[0.08] bg-transparent px-5 py-3.5 text-sm text-white/45 transition duration-200 hover:border-white/[0.15] hover:text-white/70"
               >
                 Explore features
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>

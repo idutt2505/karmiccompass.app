@@ -6,6 +6,7 @@ export const MAILTO_CONTACT = `mailto:${CONTACT_EMAIL}` as const;
 export const PRIVACY_URL = "" as const;
 export const TERMS_URL = "" as const;
 export const APP_STORE_URL = "" as const;
+export const PLAY_STORE_URL = "" as const;
 export const TESTFLIGHT_URL = "" as const;
 
 export const X_SOCIAL_URL = "https://twitter.com/CompassKarmic" as const;

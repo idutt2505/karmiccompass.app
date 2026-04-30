@@ -104,7 +104,7 @@ export function SiteFooter() {
             © {new Date().getFullYear()} Karmic Compass. All rights reserved.
           </p>
           <p className="max-w-sm text-right text-xs leading-relaxed text-white/15">
-            A journaling and reflection tool — not a medical, therapeutic, or crisis service.
+            Available on iOS and Android · Not a medical, therapeutic, or crisis service.
           </p>
         </div>
       </div>
