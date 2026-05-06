@@ -5,21 +5,16 @@ import {
   PRIVACY_URL,
   TERMS_URL,
   X_SOCIAL_URL,
-  SECTION_IDS,
 } from "@/lib/constants";
 import { FooterClientLinks } from "./SiteFooterClient";
 
-const productLinks = [
-  { label: "How it works", id: SECTION_IDS.how },
-  { label: "Pricing", id: SECTION_IDS.pricing },
-] as const;
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-white/[0.05] bg-[#06060a]">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
         {/* Top: brand + nav columns */}
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
 
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
@@ -41,25 +36,6 @@ export function SiteFooter() {
             <p className="mt-3 max-w-[220px] text-sm leading-relaxed text-white/28">
               Built for people who want fewer tabs and more room to think.
             </p>
-          </div>
-
-          {/* Product */}
-          <div>
-            <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/28">
-              Product
-            </p>
-            <ul className="mt-4 space-y-2.5">
-              {productLinks.map((item) => (
-                <li key={item.id}>
-                  <a
-                    href={`#${item.id}`}
-                    className="text-sm text-white/38 transition hover:text-white/65"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
           </div>
 
           {/* Legal */}

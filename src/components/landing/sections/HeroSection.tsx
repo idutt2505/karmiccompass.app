@@ -131,16 +131,6 @@ export function HeroSection() {
                 Google Play
               </SmartExternalLink>
 
-              <button
-                type="button"
-                onClick={() => scrollToId(SECTION_IDS.features)}
-                className="inline-flex items-center gap-2 rounded-xl border border-white/[0.08] bg-transparent px-5 py-3.5 text-sm text-white/45 transition duration-200 hover:border-white/[0.15] hover:text-white/70"
-              >
-                Explore features
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                  <path d="M6 9l6 6 6-6"/>
-                </svg>
-              </button>
             </motion.div>
 
           </motion.div>
@@ -148,18 +138,6 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/20"
-        initial={reduce ? false : { opacity: 0, y: -8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.4, duration: 0.6 }}
-      >
-        <span className="text-[0.6rem] uppercase tracking-[0.25em]">Scroll</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
-          <path d="M12 5v14M5 12l7 7 7-7"/>
-        </svg>
-      </motion.div>
     </section>
   );
 }

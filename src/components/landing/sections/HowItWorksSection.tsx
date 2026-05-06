@@ -56,10 +56,7 @@ export function HowItWorksSection() {
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionReveal className="text-center">
-          <p className="text-[0.65rem] uppercase tracking-[0.28em] text-[#C9824A]">
-            How it works
-          </p>
-          <h2 className="mt-3 font-serif text-[2.1rem] font-light leading-[1.1] tracking-[-0.02em] text-[#f5f2ed] sm:text-[2.6rem]">
+          <h2 className="font-serif text-[2.1rem] font-light leading-[1.1] tracking-[-0.02em] text-[#f5f2ed] sm:text-[2.6rem]">
             A daily loop that compounds.
             <br />
             <span className="italic text-[#C9824A]">Consistency over intensity.</span>
@@ -109,10 +106,6 @@ export function HowItWorksSection() {
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-white/38">
                     {s.p}
                   </p>
-                  <p className="mt-3 font-mono text-[0.58rem] tracking-[0.18em] text-[#C9824A]/38 group-hover:text-[#C9824A]/55 transition-colors duration-200">
-                    {s.sub}
-                  </p>
-
                   {/* Bottom accent line */}
                   <div className="mt-6 h-px w-full rounded-full bg-gradient-to-r from-[#C9824A]/0 via-[#C9824A]/0 to-transparent transition-all duration-500 group-hover:from-[#C9824A]/25 group-hover:via-[#C9824A]/15" />
                 </motion.div>

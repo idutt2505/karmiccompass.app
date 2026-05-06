@@ -4,10 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { APP_NAME, SECTION_IDS } from "@/lib/constants";
 
-const nav = [
-  { label: "How it works", id: SECTION_IDS.how },
-  { label: "Pricing", id: SECTION_IDS.pricing },
-] as const;
+const nav: { label: string; id: string }[] = [];
 
 function scrollToId(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });

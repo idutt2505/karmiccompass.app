@@ -44,10 +44,7 @@ export function PricingSection() {
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionReveal className="text-center">
-          <p className="text-[0.65rem] uppercase tracking-[0.28em] text-[#C9824A]">
-            Pricing
-          </p>
-          <h2 className="mt-3 font-serif text-[2.1rem] font-light leading-[1.1] tracking-[-0.02em] text-[#f5f2ed] sm:text-[2.6rem]">
+          <h2 className="font-serif text-[2.1rem] font-light leading-[1.1] tracking-[-0.02em] text-[#f5f2ed] sm:text-[2.6rem]">
             Start free. Go deeper<br />
             <span className="italic text-[#C9824A]">when you are ready.</span>
           </h2>
