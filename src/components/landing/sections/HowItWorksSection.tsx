@@ -29,7 +29,7 @@ const steps = [
   },
   {
     n: "Align",
-    p: "Face moral dilemmas, breathe, move through yoga, train your memory, or settle into mindful audio. Earns Karma XP and sharpens your score.",
+    p: "Face moral dilemmas, breathe, move through yoga, train your memory, or settle into mindful audio. Earn. Sharpen.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
         <circle cx="12" cy="12" r="9"/>
