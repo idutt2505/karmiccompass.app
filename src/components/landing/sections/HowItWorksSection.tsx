@@ -59,7 +59,7 @@ export function HowItWorksSection() {
           <h2 className="font-serif text-[2.1rem] font-light leading-[1.1] tracking-[-0.02em] text-[#f5f2ed] sm:text-[2.6rem]">
             A daily loop that compounds.
             <br />
-            <span className="italic text-[#C9824A]">Consistency over intensity.</span>
+            <span className="italic text-[#C9824A]">Reflect. Realign. Return.</span>
           </h2>
         </SectionReveal>
 
@@ -115,7 +115,7 @@ export function HowItWorksSection() {
         <SectionReveal delay={0.2} className="mt-14 text-center">
           <blockquote className="mx-auto max-w-lg">
             <p className="font-serif text-xl font-light italic leading-relaxed text-white/35 sm:text-2xl">
-              &ldquo;Small consistent steps compound into genuine change.&rdquo;
+              &ldquo;Small steps. Lasting change.&rdquo;
             </p>
           </blockquote>
         </SectionReveal>
