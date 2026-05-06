@@ -82,50 +82,50 @@ const features: {
   {
     icon: <HomeIcon />,
     tag: "Dashboard",
-    t: "Karma & Dharma tracker",
-    d: "Your living score. Worm gauges show karma and dharma in real time. Monthly trend charts reveal the arc of your inner life. AI-generated life reports give you the full picture.",
-    bullets: ["Real-time karma & dharma gauges", "Monthly trend charts", "AI-generated insight reports"],
+    t: "Your karma, made visible",
+    d: "See your inner life as data. Live karma and dharma gauges track every entry. Daily AI insights synthesise your journals, mood arc, and active challenges into a single honest read — and monthly, yearly, and lifetime reports reveal the deeper arc of who you are becoming.",
+    bullets: ["Live karma & dharma scores with trend charts", "AI daily insight — crisis, grief & growth aware", "Monthly · Yearly · Life reports unlocked over time"],
     accent: "#C9824A",
     featured: true,
   },
   {
     icon: <JournalIcon />,
     tag: "Journal",
-    t: "AI-scored journal",
-    d: "Write or speak your reflections. The Gemini-powered Karma Engine scores every entry across karma, dharma, emotion, and dimensions — with a clarification round for contradictions. Screen privacy on by default.",
-    bullets: ["Voice or text input", "Karma + dharma scoring per entry", "Streak tracking, screen capture blocked"],
+    t: "The journal that scores itself",
+    d: "Write or speak your day. The Karma Engine — powered by Gemini — reads your entry and scores it across karma, dharma, intent, impact, emotion, and virtue. Spot contradictions with your past? Arya asks one honest clarification question. Your truth stays private: screen capture is blocked by default.",
+    bullets: ["Voice or text · up to 3,000 characters", "Scores 4 dimensions per entry + detects contradictions", "Private by design — screen capture blocked"],
     accent: "#7a9e7e",
   },
   {
     icon: <MentorIcon />,
     tag: "Mentor",
-    t: "Arya, your AI mentor",
-    d: "A dharmic companion who remembers your commitments, tracks your mood arc, and adjusts the conversation to meet you where you are. Not a chatbot — a presence.",
-    bullets: ["Memory of commitments & moods", "Image attachments via Gemini Vision", "Weekly & monthly summaries"],
+    t: "Arya — a dharmic presence, not a chatbot",
+    d: "Arya remembers your commitments, tracks how your mood shifts week to week, and picks up unresolved threads so you never have to repeat yourself. Share a photo and she'll reflect on it via Gemini Vision. Ask for a weekly letter, a year-end arc, or tonight's reflection — she'll write it in your language.",
+    bullets: ["Persistent memory of commitments & mood arc", "Photo understanding via Gemini Vision", "Session · weekly · yearly summaries & letters"],
     accent: "#a8c5ac",
   },
   {
     icon: <AlignIcon />,
     tag: "Align",
-    t: "Five mindful practices",
-    d: "A full toolkit inside one app: daily Karma Quiz (moral dilemmas that shape your score), 4·7·8 Breathing, Memory Focus game, 86 Yoga poses across 6 categories, and guided Mindful Audio with a dharma wheel visualizer.",
-    bullets: ["Karma Quiz · 4·7·8 Breath · Memory Focus", "86 yoga poses across 6 categories", "Mindful audio + dharma wheel visualizer"],
+    t: "Practices that feed your score",
+    d: "Every practice here earns Karma XP and shapes your score. Face real moral dilemmas in the daily Karma Quiz — your choices are analysed and graded. Calm your nervous system with 4·7·8 breathing. Train your focus with Memory games. Move through 86 yoga poses across 6 styles. Settle into guided audio with a living dharma wheel that breathes with the sound.",
+    bullets: ["Daily Karma Quiz — moral dilemmas, AI-graded", "86 yoga poses · 4·7·8 breath · memory focus", "Guided mindful audio with animated dharma wheel"],
     accent: "#4adbc9",
   },
   {
     icon: <StarsIcon />,
     tag: "Stars",
-    t: "AI-personalized astrology",
-    d: "Zodiac traits, compatibility, and affirmations — all personalized to your birth profile by Gemini. The cosmos, mapped to your inner journey.",
-    bullets: ["Personalized to your DOB", "Compatibility insights", "AI-generated affirmations"],
+    t: "Your cosmos, personalised by AI",
+    d: "Gemini reads your birth chart and writes today's horoscope, affirmation, and 10 cosmic energy scores — all coherent, never generic. Your sign's elemental traits, compatibility arcs, strengths and shadow edges are always one tap away. Scores fall back to a deterministic daily fingerprint when AI is unavailable — you're never left empty-handed.",
+    bullets: ["AI horoscope + affirmation generated daily", "10 cosmic energy scores per day (love, career, wellness…)", "Compatibility, traits & elemental lore built in"],
     accent: "#c9a84a",
   },
   {
     icon: <RealmIcon />,
     tag: "Realm",
-    t: "Virtue progression",
-    d: "Every journal entry, quiz, and practice earns Karma XP. Rise through seven virtue levels — from Seeker to Karma Architect — each with its own cosmic milestone and description.",
-    bullets: ["7 levels: Seeker → Karma Architect", "XP from journals, quizzes & practices", "Badges and milestone unlocks"],
+    t: "Walk the virtue path",
+    d: "Karma XP flows from every journal entry, quiz, and honest reflection. Rise through seven named levels — Seeker, Wanderer, Apprentice, Guardian, Sage, Luminary, Karma Architect — each with its own threshold, aura, and cosmic description. Explore the Dharma Mandala: tap any of the 10 Sanskrit virtues to read its meaning, practice, and place in your path.",
+    bullets: ["7 virtue levels · Seeker → Karma Architect", "Interactive Dharma Mandala — 10 Sanskrit virtues", "Badges for streaks, breakthroughs & balance"],
     accent: "#e8a97a",
   },
 ];
@@ -143,16 +143,10 @@ export function FeatureShowcase() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         {/* Header */}
         <SectionReveal className="max-w-2xl mx-auto text-center">
-          <p className="text-[0.65rem] uppercase tracking-[0.28em] text-[#C9824A]">
-            Everything inside
-          </p>
-          <h2 className="mt-3 font-serif text-[2.25rem] font-light leading-[1.1] tracking-[-0.02em] text-[#f5f2ed] sm:text-[2.8rem]">
+          <h2 className="font-serif text-[2.25rem] font-light leading-[1.1] tracking-[-0.02em] text-[#f5f2ed] sm:text-[2.8rem]">
             Six tools. One daily practice.<br />
             <span className="italic text-[#C9824A]">Infinite self-knowledge.</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white/42">
-            KarmicCompass is a complete spiritual operating system — journal, mentor, practices, astrology, and progression, all in one place.
-          </p>
         </SectionReveal>
 
         {/* Cards grid */}
