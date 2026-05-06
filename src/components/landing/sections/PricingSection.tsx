@@ -161,9 +161,6 @@ export function PricingSection() {
           </motion.div>
         </div>
 
-        <p className="mt-6 text-center text-[0.65rem] text-white/22">
-          Pricing and entitlements may vary by platform and region
-        </p>
       </div>
     </section>
   );
