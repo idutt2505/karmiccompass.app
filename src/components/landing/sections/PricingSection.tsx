@@ -2,12 +2,9 @@
 
 import { SectionReveal } from "../SectionReveal";
 import { SmartExternalLink } from "../SmartExternalLink";
-import { SECTION_IDS, APP_STORE_URL, PLAY_STORE_URL, TESTFLIGHT_URL } from "@/lib/constants";
+import { SECTION_IDS, APP_STORE_URL, PLAY_STORE_URL } from "@/lib/constants";
 import { motion, useReducedMotion } from "framer-motion";
 
-function scrollToFaq() {
-  document.getElementById(SECTION_IDS.faq)?.scrollIntoView({ behavior: "smooth" });
-}
 
 function Check() {
   return (
@@ -20,19 +17,21 @@ function Check() {
 }
 
 const trialFeatures = [
-  "Journal and core reflection",
-  "Arya mentor in standard mode",
-  "Karma and dharma overview",
-  "Daily prompts and check-ins",
+  "Journal (text + voice) with Karma Engine scoring",
+  "Arya mentor \u2014 30 messages/day",
+  "Karma & dharma gauges + monthly chart",
+  "All 5 Align practices (quiz, breath, memory, yoga, audio)",
+  "Stars astrology tab",
+  "Realm virtue progression (all 7 levels)",
 ];
 
-const basicFeatures = [
+const compassFeatures = [
   "Everything in the free trial",
-  "Longer period insight reports",
-  "Deep Arya context & conversation history",
-  "Voice reflection and transcription",
-  "Advanced guidance flows",
-  "Priority support",
+  "Unlimited Arya messages",
+  "Deep Memory \u2014 Arya recalls commitments & mood history",
+  "Incognito mode for private sessions",
+  "Extended summaries: weekly, monthly, yearly",
+  "Full chat history access",
 ];
 
 export function PricingSection() {
@@ -52,9 +51,6 @@ export function PricingSection() {
             Start free. Go deeper<br />
             <span className="italic text-[#C9824A]">when you are ready.</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white/40">
-            An 11-day free trial gives you the full surface of the app. Upgrade to Basic when the depth is worth it.
-          </p>
         </SectionReveal>
 
         <div className="mt-12 grid gap-4 lg:grid-cols-2 max-w-4xl mx-auto">
@@ -72,7 +68,7 @@ export function PricingSection() {
               <p className="font-serif text-4xl font-light text-white/90">Free</p>
               <p className="mb-1 text-sm text-white/35">· 11 days</p>
             </div>
-            <p className="mt-1 text-sm text-white/35">Full app surface. No credit card. iOS &amp; Android.</p>
+            <p className="mt-1 text-sm text-white/35">Full app surface. No credit card.</p>
 
             <ul className="mt-6 flex-1 space-y-3">
               {trialFeatures.map((f) => (
@@ -87,7 +83,7 @@ export function PricingSection() {
               <div className="grid grid-cols-2 gap-2">
                 <SmartExternalLink
                   href={APP_STORE_URL}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-white/[0.12] py-2.5 text-center text-xs font-medium text-white/60 transition hover:border-white/[0.2] hover:bg-white/[0.04] hover:text-white/85"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-white/[0.12] py-3 text-center text-sm font-medium text-white/60 transition hover:border-white/[0.2] hover:bg-white/[0.04] hover:text-white/85"
                   label="Download Karmic Compass on the App Store"
                 >
                   <svg width="11" height="13" viewBox="0 0 13 16" fill="currentColor" aria-hidden>
@@ -97,7 +93,7 @@ export function PricingSection() {
                 </SmartExternalLink>
                 <SmartExternalLink
                   href={PLAY_STORE_URL}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-white/[0.12] py-2.5 text-center text-xs font-medium text-white/60 transition hover:border-white/[0.2] hover:bg-white/[0.04] hover:text-white/85"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-white/[0.12] py-3 text-center text-sm font-medium text-white/60 transition hover:border-white/[0.2] hover:bg-white/[0.04] hover:text-white/85"
                   label="Download Karmic Compass on Google Play"
                 >
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
@@ -106,17 +102,10 @@ export function PricingSection() {
                   Google Play
                 </SmartExternalLink>
               </div>
-              <button
-                type="button"
-                onClick={scrollToFaq}
-                className="w-full py-2 text-center text-sm text-white/28 transition hover:text-white/50"
-              >
-                Billing questions →
-              </button>
             </div>
           </motion.div>
 
-          {/* ── Basic ── */}
+          {/* ── Compass ── */}
           <motion.div
             initial={reduce ? false : { opacity: 0, y: 12 }}
             whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
@@ -132,15 +121,15 @@ export function PricingSection() {
               Recommended
             </div>
 
-            <p className="text-[0.65rem] font-medium uppercase tracking-[0.22em] text-[#E8A97A]">Basic</p>
+            <p className="text-[0.65rem] font-medium uppercase tracking-[0.22em] text-[#E8A97A]">Compass</p>
             <div className="mt-2 flex items-end gap-2">
-              <p className="font-serif text-4xl font-light text-white/95">$11</p>
+              <p className="font-mono text-4xl font-light text-white/95">$11</p>
               <p className="mb-1 text-sm text-white/45">/ month</p>
             </div>
             <p className="mt-1 text-sm text-white/40">After trial. Pricing by platform and region.</p>
 
             <ul className="mt-6 flex-1 space-y-3">
-              {basicFeatures.map((f) => (
+              {compassFeatures.map((f) => (
                 <li key={f} className="flex items-start gap-3">
                   <Check />
                   <span className="text-sm leading-snug text-white/58">{f}</span>
@@ -171,19 +160,12 @@ export function PricingSection() {
                   Google Play
                 </SmartExternalLink>
               </div>
-              <SmartExternalLink
-                href={TESTFLIGHT_URL}
-                className="block w-full rounded-xl border border-white/[0.12] py-3 text-center text-sm font-medium text-white/50 transition hover:border-white/[0.2] hover:bg-white/[0.03] hover:text-white/70"
-                label="Join the Karmic Compass TestFlight beta"
-              >
-                Join TestFlight (iOS beta)
-              </SmartExternalLink>
             </div>
           </motion.div>
         </div>
 
         <p className="mt-6 text-center text-[0.65rem] text-white/22">
-          Available on iOS and Android · Pricing and entitlements may vary by platform and region
+          Pricing and entitlements may vary by platform and region
         </p>
       </div>
     </section>

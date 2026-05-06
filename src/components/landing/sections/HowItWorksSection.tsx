@@ -7,33 +7,40 @@ import { SECTION_IDS } from "@/lib/constants";
 const steps = [
   {
     n: "01",
-    t: "Write freely",
-    p: "Capture what happened and how it felt — in a few lines or with your voice. No performance, no perfect sentences. Just you.",
+    t: "Journal daily — by voice or text",
+    p: "Write or speak your reflection. The Karma Engine scores every entry across karma, dharma, emotion, and multiple life dimensions. Your streak builds momentum.",
+    sub: "Journal tab · voice input · Karma Engine",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
-        <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        <rect x="4" y="2" width="16" height="20" rx="2"/>
+        <path d="M8 7h8M8 11h8M8 15h5"/>
       </svg>
     ),
   },
   {
     n: "02",
-    t: "See patterns",
-    p: "The app surfaces what you keep returning to, what you avoid, and how your actions map to the virtues you care about.",
+    t: "Train with Arya & Align practices",
+    p: "Talk to Arya, who cross-references your journal and holds your commitments. Complete the daily Karma Quiz, breathing exercises, memory games, yoga, or mindful audio — each earns Karma XP.",
+    sub: "Mentor tab · Align tab · 5 practices",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
-        <circle cx="12" cy="12" r="9"/>
-        <path d="M8.5 14.5s1.5-2 3.5-2 3.5 2 3.5 2M9 9h.01M15 9h.01"/>
+        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+        <circle cx="8.5" cy="10" r="1" fill="currentColor" stroke="none"/>
+        <circle cx="12" cy="10" r="1" fill="currentColor" stroke="none"/>
+        <circle cx="15.5" cy="10" r="1" fill="currentColor" stroke="none"/>
       </svg>
     ),
   },
   {
     n: "03",
-    t: "Grow, one day at a time",
-    p: "Arya gives you a small, concrete practice — not a transformation promise, just a direction you choose to move in.",
+    t: "Rise through the Realm",
+    p: "Your Karma XP accumulates across every practice. Watch your virtue level climb — from Seeker through to Karma Architect — as your Home dashboard reflects the arc of your inner life.",
+    sub: "Home dashboard · Realm tab · 7 virtue levels",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
-        <path d="M12 2C9 6 4 8 4 13a8 8 0 0016 0c0-5-5-7-8-11z"/>
-        <path d="M12 13c0 2.21-1.79 4-4 4"/>
+        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+        <path d="M2 17l10 5 10-5"/>
+        <path d="M2 12l10 5 10-5"/>
       </svg>
     ),
   },
@@ -50,10 +57,10 @@ export function HowItWorksSection() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionReveal className="text-center">
           <p className="text-[0.65rem] uppercase tracking-[0.28em] text-[#C9824A]">
-            The loop
+            How it works
           </p>
           <h2 className="mt-3 font-serif text-[2.1rem] font-light leading-[1.1] tracking-[-0.02em] text-[#f5f2ed] sm:text-[2.6rem]">
-            Three steps you repeat.
+            A daily loop that compounds.
             <br />
             <span className="italic text-[#C9824A]">Consistency over intensity.</span>
           </h2>
@@ -101,6 +108,9 @@ export function HowItWorksSection() {
                   </h3>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-white/38">
                     {s.p}
+                  </p>
+                  <p className="mt-3 font-mono text-[0.58rem] tracking-[0.18em] text-[#C9824A]/38 group-hover:text-[#C9824A]/55 transition-colors duration-200">
+                    {s.sub}
                   </p>
 
                   {/* Bottom accent line */}

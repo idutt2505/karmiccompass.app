@@ -7,19 +7,19 @@ import { SECTION_IDS } from "@/lib/constants";
 const conversation = [
   {
     role: "user" as const,
-    text: "I keep putting off the honest conversation with my team. I don't know why.",
+    text: "My karma score dropped this week. I\u2019ve been snapping at people.",
   },
   {
     role: "arya" as const,
-    text: "What do you imagine happening if you said exactly what's true?",
+    text: "Your journal shows you\u2019ve written \u201cchaos\u201d four times this week. What\u2019s underneath that word for you?",
   },
   {
     role: "user" as const,
-    text: "Probably awkwardness. Maybe pushback. It feels easier to wait.",
+    text: "I think I\u2019m just overwhelmed. There\u2019s too much happening at once.",
   },
   {
     role: "arya" as const,
-    text: "Easier until it isn't. What would 'kind and direct' look like in one sentence?",
+    text: "Two weeks ago you committed to one thing at a time. How has that held up?",
   },
 ];
 
@@ -49,9 +49,10 @@ export function AppPreviewSection() {
             {/* Feature list */}
             <ul className="mt-6 space-y-3">
               {[
-    "Remembers what matters across sessions",
-              "Asks questions, not just gives answers",
-              "Grounded in your journal \u2014 not generic advice",
+                "Remembers your commitments and mood history",
+                "Grounded in your journal \u2014 not generic advice",
+                "Supports images via Gemini Vision",
+                "Weekly, monthly & yearly session summaries",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[#C9824A]/30 bg-[#C9824A]/10">
@@ -94,7 +95,7 @@ export function AppPreviewSection() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-white/80">Arya</p>
-                    <p className="text-[0.6rem] text-white/30">Your AI mentor</p>
+                    <p className="text-[0.6rem] text-white/30">Your Navigator</p>
                   </div>
                   <div className="ml-auto flex items-center gap-1">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400/60" />
@@ -157,7 +158,7 @@ export function AppPreviewSection() {
                 </div>
 
                 <p className="mt-3 text-center text-[0.58rem] text-white/20">
-                  Sample conversation · Arya remembers context across sessions
+                  Sample conversation · Arya cross-references your journal entries
                 </p>
               </div>
             </div>
@@ -167,9 +168,9 @@ export function AppPreviewSection() {
         {/* Bottom stat strip */}
         <div className="mt-16 grid grid-cols-3 gap-px overflow-hidden rounded-2xl border border-white/[0.05] bg-white/[0.02]">
           {[
-            { label: "Journal entries", stat: "Daily" },
-            { label: "Karma tracking", stat: "Weekly" },
-            { label: "Arya sessions", stat: "Unlimited*" },
+            { label: "free trial duration", stat: "11 days" },
+            { label: "Arya messages · trial", stat: "30/day" },
+            { label: "Arya messages · Compass", stat: "Unlimited" },
           ].map((item) => (
             <div key={item.label} className="px-6 py-5 text-center">
               <p className="font-serif text-xl text-white/75">{item.stat}</p>
@@ -177,7 +178,7 @@ export function AppPreviewSection() {
             </div>
           ))}
         </div>
-        <p className="mt-2 text-center text-[0.6rem] text-white/18">* Subject to plan limits where applicable</p>
+        <p className="mt-2 text-center text-[0.6rem] text-white/18">Compass plan \u2014 $11/month after 11-day free trial</p>
       </div>
     </section>
   );

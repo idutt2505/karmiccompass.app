@@ -99,10 +99,7 @@ export function HeroSection() {
               variants={reduce ? undefined : fadeUp}
               className="mt-7 max-w-[440px] mx-auto lg:mx-0 text-[1.05rem] leading-[1.75] text-white/48 sm:text-lg"
             >
-              A private space to write, notice patterns, and get gentle guidance
-              from{" "}
-              <span className="text-white/65">Arya</span> — your AI mentor.
-              Not another feed. Not noise.
+              A private space to write, reflect, and understand the patterns shaping your life.
             </motion.p>
 
             {/* CTAs */}
@@ -146,24 +143,6 @@ export function HeroSection() {
               </button>
             </motion.div>
 
-            {/* Social proof row */}
-            <motion.div
-              variants={reduce ? undefined : fadeUp}
-              className="mt-8 flex items-center gap-4 border-t border-white/[0.05] pt-6"
-            >
-              <div className="flex -space-x-2">
-                {["#7b6f8a", "#5a7a6a", "#8a6a5a", "#6a7a8a"].map((c, i) => (
-                  <div
-                    key={i}
-                    className="h-7 w-7 rounded-full border-2 border-[#0a0a0f] ring-1 ring-white/10"
-                    style={{ background: `linear-gradient(135deg, ${c}, ${c}88)` }}
-                  />
-                ))}
-              </div>
-              <p className="text-xs text-white/30">
-                <span className="font-medium text-white/50">Thoughtful people</span> building better habits every day
-              </p>
-            </motion.div>
           </motion.div>
 
         </div>

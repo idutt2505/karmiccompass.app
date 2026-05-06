@@ -8,27 +8,31 @@ import { SECTION_IDS } from "@/lib/constants";
 const FAQ_ITEMS = [
   {
     q: "Is this therapy or medical advice?",
-    a: "No. Karmic Compass is a self-reflection and journaling product. It does not provide medical, psychological, or crisis care. If you are in danger or need professional support, please contact qualified providers or emergency services in your area.",
+    a: "No. Karmic Compass is a self-reflection and journaling app. It does not provide medical, psychological, or crisis care. If you are in danger or need professional support, please contact qualified providers or emergency services in your area.",
   },
   {
     q: "What does \u201ckarma\u201d mean in the app?",
-    a: "In the app, karma is a structured way to notice patterns in your actions and priorities over time — not a religious verdict. Think of it as feedback on how you are living relative to the virtues you care about, not a score to optimize.",
+    a: "Karma in the app is a structured score the AI assigns to each journal entry based on the intentions and patterns behind your actions \u2014 not a religious verdict. Dharma is scored separately as your sense of purpose and role. Both are averaged into a running score visible on your Home dashboard.",
   },
   {
-    q: "How is my journal used?",
-    a: "Journal entries are used to provide app features such as summaries, insights, and optional AI guidance. Full processing and retention details will be available in the published Privacy Policy.",
+    q: "How does the Karma Engine work?",
+    a: "When you submit a journal entry, the Gemini-powered Karma Engine analyzes it across karma, dharma, emotion, mood, and life dimensions. If it detects contradictions, it opens a one-round clarification before finalizing your scores. All of this runs via a secure Firebase Cloud Function.",
   },
   {
-    q: "What does the Basic subscription include?",
-    a: "After your free trial, the paid tier is Basic — $11/month (pricing may vary by platform and region). It includes longer insight reports, deeper Arya context and conversation history, voice reflection, and expanded guidance modes. Exact entitlements are shown in the app and may evolve with updates.",
+    q: "What is the Realm and how do I progress?",
+    a: "The Realm tracks your Karma XP \u2014 earned through journaling, the daily Karma Quiz, breathing exercises, memory games, yoga, and mindful audio sessions. You rise through seven named virtue levels: Seeker, Contemplator, Practitioner, Guide, Sage, Dharma Master, and Karma Architect.",
+  },
+  {
+    q: "What does the Compass subscription include?",
+    a: "After your 11-day free trial, Compass is $11/month (pricing may vary by platform and region). It unlocks unlimited Arya messages (trial: 30/day), Deep Memory, Incognito mode, extended summaries (weekly through yearly), full chat history, and all five Align practices without restriction.",
   },
   {
     q: "Can I cancel anytime?",
-    a: "Yes. Subscriptions are managed through your platform's native store (App Store on iOS, Google Play on Android) and can be cancelled at any time from your device's subscription settings. No hidden steps, no emails required.",
+    a: "Yes. Subscriptions are managed entirely through your device\u2019s native store \u2014 App Store on iOS or Google Play on Android. Cancel any time from your subscription settings with no emails or extra steps required.",
   },
   {
     q: "Who is Arya?",
-    a: "Arya is the AI mentor built into Karmic Compass. She draws from your journal entries and session history to ask useful questions and offer perspective — she doesn't give advice she isn't grounded in. Arya is not a replacement for human connection or professional care.",
+    a: "Arya is the AI mentor built into KarmicCompass. She is powered by Google Gemini and holds memory of your commitments, preferred topics, mood history, and journal digest. She cross-references your entries to give context-aware guidance \u2014 not generic advice. She also supports image attachments via Gemini Vision.",
   },
 ] as const;
 

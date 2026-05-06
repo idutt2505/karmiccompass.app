@@ -3,6 +3,7 @@ import { HeroSection } from "./sections/HeroSection";
 import { FeatureShowcase } from "./sections/FeatureShowcase";
 import { AppPreviewSection } from "./sections/AppPreviewSection";
 import { HowItWorksSection } from "./sections/HowItWorksSection";
+import { RealmSection } from "./sections/RealmSection";
 import { TrustSection } from "./sections/TrustSection";
 import { PricingSection } from "./sections/PricingSection";
 import { FAQSection } from "./sections/FAQSection";
@@ -22,6 +23,7 @@ export function LandingPage() {
           <FeatureShowcase />
           <AppPreviewSection />
           <HowItWorksSection />
+          <RealmSection />
           <TrustSection />
           <PricingSection />
           <FAQSection />

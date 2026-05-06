@@ -101,10 +101,10 @@ export function SiteFooter() {
         {/* Bottom bar */}
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/[0.04] pt-7 sm:flex-row sm:items-center">
           <p className="text-xs text-white/18">
-            © {new Date().getFullYear()} Karmic Compass. All rights reserved.
+            © {new Date().getFullYear()} KarmicCompass Private Limited. All rights reserved.
           </p>
           <p className="max-w-sm text-right text-xs leading-relaxed text-white/15">
-            Available on iOS and Android · Not a medical, therapeutic, or crisis service.
+            Not a medical, therapeutic, or crisis service.
           </p>
         </div>
       </div>
