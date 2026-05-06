@@ -1,8 +1,13 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { DharmaWheel } from "../DharmaWheel";
+import dynamic from "next/dynamic";
 import { SmartExternalLink } from "../SmartExternalLink";
+
+const DharmaWheel = dynamic(
+  () => import("../DharmaWheel").then((m) => m.DharmaWheel),
+  { ssr: false }
+);
 import { SECTION_IDS, APP_STORE_URL, PLAY_STORE_URL } from "@/lib/constants";
 
 function scrollToId(id: string) {
