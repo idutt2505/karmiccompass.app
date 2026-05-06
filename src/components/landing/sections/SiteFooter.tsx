@@ -4,6 +4,7 @@ import {
   PRIVACY_URL,
   TERMS_URL,
   X_SOCIAL_URL,
+  INSTAGRAM_URL,
 } from "@/lib/constants";
 import { FooterClientLinks } from "./SiteFooterClient";
 
@@ -20,6 +21,7 @@ export function SiteFooter() {
             privacyHref={PRIVACY_URL}
             termsHref={TERMS_URL}
             xHref={X_SOCIAL_URL}
+            instagramHref={INSTAGRAM_URL}
           />
 
           {/* Contact */}

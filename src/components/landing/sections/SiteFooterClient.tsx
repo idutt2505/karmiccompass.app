@@ -6,9 +6,10 @@ type Props = {
   privacyHref: string;
   termsHref: string;
   xHref: string;
+  instagramHref: string;
 };
 
-export function FooterClientLinks({ privacyHref, termsHref, xHref }: Props) {
+export function FooterClientLinks({ privacyHref, termsHref, xHref, instagramHref }: Props) {
   return (
     <div className="flex flex-wrap gap-x-6 gap-y-2">
       <SmartExternalLink
@@ -30,7 +31,14 @@ export function FooterClientLinks({ privacyHref, termsHref, xHref }: Props) {
         className="text-left text-xs text-white/28 transition hover:text-white/55"
         label="Follow Karmic Compass on X"
       >
-        X / Twitter
+        X
+      </SmartExternalLink>
+      <SmartExternalLink
+        href={instagramHref}
+        className="text-left text-xs text-white/28 transition hover:text-white/55"
+        label="Follow Karmic Compass on Instagram"
+      >
+        Instagram
       </SmartExternalLink>
     </div>
   );

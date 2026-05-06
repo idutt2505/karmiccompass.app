@@ -9,7 +9,8 @@ export const APP_STORE_URL = "" as const;
 export const PLAY_STORE_URL = "" as const;
 export const TESTFLIGHT_URL = "" as const;
 
-export const X_SOCIAL_URL = "https://twitter.com/CompassKarmic" as const;
+export const X_SOCIAL_URL = "https://x.com/CompassKarmic" as const;
+export const INSTAGRAM_URL = "https://instagram.com/karmiccompass" as const;
 
 export const SECTION_IDS = {
   hero: "section-hero",
