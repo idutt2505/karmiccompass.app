@@ -7,7 +7,7 @@ import { SECTION_IDS } from "@/lib/constants";
 const steps = [
   {
     n: "Journal",
-    p: "Speak or type what happened. The Karma Engine scores every entry across karma, dharma, intent, emotion, and virtue — turning your words into honest self-data.",
+    p: "Speak or type what happened. The Karma Engine scores every entry across karma, dharma, intent, emotion, and virtue — turning your words into honest self-reflection.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
         <rect x="4" y="2" width="16" height="20" rx="2"/>
