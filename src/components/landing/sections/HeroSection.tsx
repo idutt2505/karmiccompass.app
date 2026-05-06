@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import dynamic from "next/dynamic";
+import { SECTION_IDS } from "@/lib/constants";
 
 const DharmaWheel = dynamic(
   () => import("../DharmaWheel").then((m) => m.DharmaWheel),
