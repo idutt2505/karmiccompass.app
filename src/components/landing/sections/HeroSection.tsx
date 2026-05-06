@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { PhoneFrame } from "../PhoneFrame";
+import { DharmaWheel } from "../DharmaWheel";
 import { SmartExternalLink } from "../SmartExternalLink";
 import { SECTION_IDS, APP_STORE_URL, PLAY_STORE_URL } from "@/lib/constants";
 
@@ -51,21 +51,34 @@ export function HeroSection() {
 
       {/* ── Main grid ── */}
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="grid items-center gap-12 pb-20 lg:grid-cols-2 lg:gap-20 lg:pb-32 xl:gap-28">
+        <div className="grid items-center gap-8 pb-20 lg:grid-cols-2 lg:gap-20 lg:pb-32 xl:gap-28">
 
-          {/* ── Left: copy ── */}
+          {/* ── Left (desktop) / Below (mobile): dharma wheel ── */}
           <motion.div
+            className="flex justify-center items-center order-1 lg:order-1 lg:self-stretch"
+            initial={reduce ? false : { opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] lg:w-full lg:h-full lg:max-w-[560px] lg:max-h-[560px] lg:aspect-square">
+              <DharmaWheel />
+            </div>
+          </motion.div>
+
+          {/* ── Right (desktop) / Top (mobile): copy ── */}
+          <motion.div
+            className="order-2 lg:order-2"
             variants={reduce ? undefined : stagger}
             initial={reduce ? false : "hidden"}
             animate="show"
           >
-            {/* Badge */}
-            <motion.div variants={reduce ? undefined : fadeUp}>
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#C9824A]/22 bg-[#C9824A]/[0.07] px-3.5 py-1.5 text-[0.63rem] font-medium uppercase tracking-[0.24em] text-[#C9824A]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#C9824A]" style={{ animation: "pulse 2s ease-in-out infinite" }} />
-                iOS &amp; Android · Free 11-day trial
-              </span>
-            </motion.div>
+            {/* Tagline */}
+            <motion.p
+              variants={reduce ? undefined : fadeUp}
+              className="mt-5 font-mono text-[0.62rem] uppercase tracking-[0.38em] text-white/22"
+            >
+              Chaos to Clarity
+            </motion.p>
 
             {/* Headline */}
             <motion.h1
@@ -132,14 +145,6 @@ export function HeroSection() {
               </button>
             </motion.div>
 
-            {/* Disclaimer */}
-            <motion.p
-              variants={reduce ? undefined : fadeUp}
-              className="mt-5 text-[0.72rem] text-white/22 leading-relaxed"
-            >
-              No credit card required &nbsp;·&nbsp; Not medical or therapeutic advice
-            </motion.p>
-
             {/* Social proof row */}
             <motion.div
               variants={reduce ? undefined : fadeUp}
@@ -160,10 +165,6 @@ export function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* ── Right: phone ── */}
-          <div className="flex justify-center lg:justify-end">
-            <PhoneFrame />
-          </div>
         </div>
       </div>
 
