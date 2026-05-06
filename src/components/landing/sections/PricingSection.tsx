@@ -60,7 +60,7 @@ export function PricingSection() {
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col rounded-2xl border border-white/[0.08] bg-gradient-to-b from-white/[0.035] to-transparent p-7"
           >
-            <p className="text-[0.65rem] uppercase tracking-[0.22em] text-white/30">Free trial</p>
+            <p className="text-[0.65rem] uppercase tracking-[0.22em] text-white/30">Trial</p>
             <div className="mt-2 flex items-end gap-2">
               <p className="font-serif text-4xl font-light text-white/90">Free</p>
               <p className="mb-1 text-sm text-white/35">· 11 days</p>
