@@ -17,7 +17,7 @@ const steps = [
   },
   {
     n: "Mentor",
-    p: "Arya reads your journal, remembers your commitments, and responds to your moment. Share a photo, request a weekly letter, or just talk — she adapts to how you need to be heard. Wisdom without judgment.",
+    p: "Arya reads your journal, remembers your commitments, and responds to your moment. Share a photo, request a weekly letter, or just talk. Wisdom without judgment.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
         <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
@@ -29,7 +29,7 @@ const steps = [
   },
   {
     n: "Align",
-    p: "Face moral dilemmas, breathe through tension, move through yoga, train your memory, or settle into mindful audio. Five practices, one direction. Earn Karma XP and sharpen your score.",
+    p: "Face moral dilemmas, breathe, move through yoga, train your memory, or settle into mindful audio. Earn Karma XP and sharpen your score.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
         <circle cx="12" cy="12" r="9"/>
@@ -40,7 +40,7 @@ const steps = [
   },
   {
     n: "Realm",
-    p: "Every reflection adds up. Watch your virtue level rise — from Seeker to Karma Architect — as your Home dashboard tracks the arc of your inner life.",
+    p: "Every reflection adds up. Karma XP builds with each entry and practice, pushing your virtue level higher — from Seeker all the way to Karma Architect — as your Home dashboard charts the arc of your inner life.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
         <path d="M12 2L2 7l10 5 10-5-10-5z"/>
