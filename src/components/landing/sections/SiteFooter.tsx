@@ -33,9 +33,6 @@ export function SiteFooter() {
                 <span className="text-[#C9824A]">{APP_NAME.split(" ")[1]}</span>
               </span>
             </div>
-            <p className="mt-3 max-w-[220px] text-sm leading-relaxed text-white/28">
-              Built for people who want fewer tabs and more room to think.
-            </p>
           </div>
 
           {/* Legal */}
