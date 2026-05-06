@@ -123,7 +123,6 @@ export function PricingSection() {
               <p className="font-mono text-4xl font-light text-white/95">$11</p>
               <p className="mb-1 text-sm text-white/45">/ month</p>
             </div>
-            <p className="mt-1 text-sm text-white/40">After trial. Pricing by platform and region.</p>
 
             <ul className="mt-6 flex-1 space-y-3">
               {compassFeatures.map((f) => (
