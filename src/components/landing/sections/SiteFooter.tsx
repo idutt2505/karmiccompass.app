@@ -64,9 +64,6 @@ export function SiteFooter() {
               >
                 {CONTACT_EMAIL}
               </a>
-              <p className="text-xs leading-relaxed text-white/20">
-                Questions, feedback, or data requests — we read every email.
-              </p>
             </div>
           </div>
         </div>
