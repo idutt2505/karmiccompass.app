@@ -7,7 +7,6 @@ import { SECTION_IDS } from "@/lib/constants";
 const steps = [
   {
     n: "Journal",
-    t: "Reflect on your day.",
     p: "Speak or type what happened. The Karma Engine scores every entry across karma, dharma, intent, emotion, and virtue — turning your words into honest self-data.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
@@ -18,7 +17,6 @@ const steps = [
   },
   {
     n: "Mentor",
-    t: "Talk to Arya.",
     p: "Arya reads your journal, remembers your commitments, and meets you where you are. Share a photo, request a weekly letter, or just talk. Not a chatbot — a presence.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
@@ -31,7 +29,6 @@ const steps = [
   },
   {
     n: "Align",
-    t: "Practice. Earn. Grow.",
     p: "Face moral dilemmas, breathe, move through yoga, train your memory, or settle into mindful audio. Every practice earns Karma XP and sharpens your score.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
@@ -43,7 +40,6 @@ const steps = [
   },
   {
     n: "Realm",
-    t: "Watch yourself change.",
     p: "Karma XP accumulates across every entry and practice. Your virtue level rises — from Seeker to Karma Architect — as your Home dashboard charts the arc of your inner life.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>

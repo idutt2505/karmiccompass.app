@@ -34,7 +34,7 @@ export function Header() {
         <a
           href={`#${SECTION_IDS.hero}`}
           className="group flex items-center gap-2.5"
-          onClick={(e) => { e.preventDefault(); scrollToId(SECTION_IDS.hero); setOpen(false); }}
+          onClick={(e) => { e.preventDefault(); scrollToId(SECTION_IDS.hero); }}
         >
           <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#C9824A]/15 border border-[#C9824A]/25 transition group-hover:bg-[#C9824A]/25">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden>

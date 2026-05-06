@@ -26,7 +26,7 @@ const trialFeatures = [
 ];
 
 const compassFeatures = [
-  "Everything in the free trial",
+  "Everything in the trial",
   "Unlimited Arya messages — no daily cap",
   "Deep Memory — Arya remembers your full story",
   "Incognito Mode — reflect without saving",
