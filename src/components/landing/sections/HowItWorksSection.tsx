@@ -6,10 +6,9 @@ import { SECTION_IDS } from "@/lib/constants";
 
 const steps = [
   {
-    n: "01",
-    t: "Journal daily — by voice or text",
-    p: "Write or speak your reflection. The Karma Engine scores every entry across karma, dharma, emotion, and multiple life dimensions. Your streak builds momentum.",
-    sub: "Journal tab · voice input · Karma Engine",
+    n: "Journal",
+    t: "Reflect on your day.",
+    p: "Speak or type what happened. The Karma Engine scores every entry across karma, dharma, intent, emotion, and virtue — turning your words into honest self-data.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
         <rect x="4" y="2" width="16" height="20" rx="2"/>
@@ -18,10 +17,9 @@ const steps = [
     ),
   },
   {
-    n: "02",
-    t: "Train with Arya & Align practices",
-    p: "Talk to Arya, who cross-references your journal and holds your commitments. Complete the daily Karma Quiz, breathing exercises, memory games, yoga, or mindful audio — each earns Karma XP.",
-    sub: "Mentor tab · Align tab · 5 practices",
+    n: "Mentor",
+    t: "Talk to Arya.",
+    p: "Arya reads your journal, remembers your commitments, and meets you where you are. Share a photo, request a weekly letter, or just talk. Not a chatbot — a presence.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
         <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
@@ -32,10 +30,21 @@ const steps = [
     ),
   },
   {
-    n: "03",
-    t: "Rise through the Realm",
-    p: "Your Karma XP accumulates across every practice. Watch your virtue level climb — from Seeker through to Karma Architect — as your Home dashboard reflects the arc of your inner life.",
-    sub: "Home dashboard · Realm tab · 7 virtue levels",
+    n: "Align",
+    t: "Practice. Earn. Grow.",
+    p: "Face moral dilemmas, breathe, move through yoga, train your memory, or settle into mindful audio. Every practice earns Karma XP and sharpens your score.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
+        <circle cx="12" cy="12" r="9"/>
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M12 3v3M12 18v3M3 12h3M18 12h3"/>
+      </svg>
+    ),
+  },
+  {
+    n: "Realm",
+    t: "Watch yourself change.",
+    p: "Karma XP accumulates across every entry and practice. Your virtue level rises — from Seeker to Karma Architect — as your Home dashboard charts the arc of your inner life.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
         <path d="M12 2L2 7l10 5 10-5-10-5z"/>
@@ -65,14 +74,7 @@ export function HowItWorksSection() {
 
         {/* Steps */}
         <div className="relative mt-16">
-          {/* Connecting line (desktop) */}
-          <div className="pointer-events-none absolute top-[3.25rem] left-0 right-0 hidden lg:block" aria-hidden>
-            <div className="mx-auto flex max-w-4xl items-center px-5">
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-            </div>
-          </div>
-
-          <ol className="grid list-none gap-6 lg:grid-cols-3">
+          <ol className="grid list-none gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((s, i) => (
               <li key={s.t}>
                 <motion.div
@@ -82,29 +84,27 @@ export function HowItWorksSection() {
                   transition={{ duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
                   className="group relative flex h-full flex-col rounded-2xl border border-white/[0.06] bg-gradient-to-b from-white/[0.035] to-transparent p-7 transition-shadow duration-300 hover:border-white/[0.1] hover:shadow-[0_20px_60px_-20px_rgba(201,130,74,0.1)]"
                 >
-                  {/* Step number (large bg) */}
+                  {/* Background tab name */}
                   <div
-                    className="pointer-events-none absolute right-5 top-4 font-serif text-[5rem] font-light leading-none text-white/[0.025] select-none transition-colors duration-300 group-hover:text-[#C9824A]/[0.05]"
+                    className="pointer-events-none absolute right-4 top-3 font-serif text-[2.2rem] font-light leading-none text-white/[0.04] select-none transition-colors duration-300 group-hover:text-[#C9824A]/[0.07]"
                     aria-hidden
                   >
                     {s.n}
                   </div>
 
-                  {/* Icon */}
+                  {/* Icon + tab label */}
                   <div className="flex items-center gap-3">
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.04] text-white/45 transition-colors duration-200 group-hover:border-[#C9824A]/25 group-hover:text-[#C9824A]/80">
                       <div className="h-5 w-5">{s.icon}</div>
                     </div>
+                    <span className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-[#C9824A]">
+                      {s.n}
+                    </span>
                   </div>
 
-                  <h3 className="mt-5 font-serif text-[1.2rem] font-light leading-snug text-white/88 transition-colors group-hover:text-white">
-                    {s.t}
-                  </h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-white/38">
+                  <p className="mt-5 flex-1 text-sm leading-relaxed text-white/38">
                     {s.p}
                   </p>
-                  {/* Bottom accent line */}
-                  <div className="mt-6 h-px w-full rounded-full bg-gradient-to-r from-[#C9824A]/0 via-[#C9824A]/0 to-transparent transition-all duration-500 group-hover:from-[#C9824A]/25 group-hover:via-[#C9824A]/15" />
                 </motion.div>
               </li>
             ))}
