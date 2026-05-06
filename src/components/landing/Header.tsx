@@ -5,11 +5,8 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { APP_NAME, SECTION_IDS } from "@/lib/constants";
 
 const nav = [
-  { label: "Features", id: SECTION_IDS.features },
   { label: "How it works", id: SECTION_IDS.how },
-  { label: "Trust", id: SECTION_IDS.trust },
   { label: "Pricing", id: SECTION_IDS.pricing },
-  { label: "FAQ", id: SECTION_IDS.faq },
 ] as const;
 
 function scrollToId(id: string) {

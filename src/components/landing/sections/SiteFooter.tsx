@@ -10,11 +10,8 @@ import {
 import { FooterClientLinks } from "./SiteFooterClient";
 
 const productLinks = [
-  { label: "Features", id: SECTION_IDS.features },
   { label: "How it works", id: SECTION_IDS.how },
-  { label: "Trust & safety", id: SECTION_IDS.trust },
   { label: "Pricing", id: SECTION_IDS.pricing },
-  { label: "FAQ", id: SECTION_IDS.faq },
 ] as const;
 
 export function SiteFooter() {
