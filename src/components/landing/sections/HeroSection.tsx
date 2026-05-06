@@ -7,12 +7,6 @@ const DharmaWheel = dynamic(
   () => import("../DharmaWheel").then((m) => m.DharmaWheel),
   { ssr: false }
 );
-import { SECTION_IDS } from "@/lib/constants";
-
-function scrollToId(id: string) {
-  if (typeof document === "undefined") return;
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-}
 
 const stagger = {
   hidden: {},
@@ -105,22 +99,6 @@ export function HeroSection() {
             >
               A private space to write, reflect, and understand the patterns shaping your life.
             </motion.p>
-
-            {/* CTA */}
-            <motion.div
-              variants={reduce ? undefined : fadeUp}
-              className="mt-10 flex justify-center lg:justify-start"
-            >
-              <button
-                onClick={() => scrollToId(SECTION_IDS.pricing)}
-                className="group inline-flex items-center gap-2.5 rounded-full bg-[#C9824A] px-7 py-3.5 text-[0.88rem] font-semibold text-white shadow-[0_8px_32px_-8px_rgba(201,130,74,0.55)] transition hover:bg-[#D9925A] hover:shadow-[0_12px_40px_-8px_rgba(201,130,74,0.7)]"
-              >
-                Start free — 11 days
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
-            </motion.div>
 
           </motion.div>
 
