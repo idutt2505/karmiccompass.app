@@ -72,7 +72,7 @@ export function HowItWorksSection() {
         <div className="relative mt-16">
           <ol className="grid list-none gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((s, i) => (
-              <li key={s.t}>
+              <li key={s.n}>
                 <motion.div
                   initial={reduce ? false : { opacity: 0, y: 18 }}
                   whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
