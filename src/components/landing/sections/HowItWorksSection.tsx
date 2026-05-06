@@ -86,14 +86,14 @@ export function HowItWorksSection() {
                 >
                   {/* Background tab name */}
                   <div
-                    className="pointer-events-none absolute right-4 top-3 font-serif text-[2.2rem] font-light leading-none text-white/[0.04] select-none transition-colors duration-300 group-hover:text-[#C9824A]/[0.07]"
+                    className="pointer-events-none absolute right-4 top-3 font-serif text-[2.2rem] font-light leading-none text-[#C9824A]/[0.18] select-none transition-colors duration-300 group-hover:text-[#C9824A]/[0.32]"
                     aria-hidden
                   >
                     {s.n}
                   </div>
 
                   {/* Icon */}
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.04] text-white/45 transition-colors duration-200 group-hover:border-[#C9824A]/25 group-hover:text-[#C9824A]/80">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#C9824A]/20 bg-[#C9824A]/[0.07] text-[#C9824A]/60 transition-colors duration-200 group-hover:border-[#C9824A]/40 group-hover:text-[#C9824A]">
                     <div className="h-5 w-5">{s.icon}</div>
                   </div>
 
