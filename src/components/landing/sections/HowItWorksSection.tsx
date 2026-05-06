@@ -92,14 +92,9 @@ export function HowItWorksSection() {
                     {s.n}
                   </div>
 
-                  {/* Icon + tab label */}
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.04] text-white/45 transition-colors duration-200 group-hover:border-[#C9824A]/25 group-hover:text-[#C9824A]/80">
-                      <div className="h-5 w-5">{s.icon}</div>
-                    </div>
-                    <span className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-[#C9824A]">
-                      {s.n}
-                    </span>
+                  {/* Icon */}
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.04] text-white/45 transition-colors duration-200 group-hover:border-[#C9824A]/25 group-hover:text-[#C9824A]/80">
+                    <div className="h-5 w-5">{s.icon}</div>
                   </div>
 
                   <p className="mt-5 flex-1 text-sm leading-relaxed text-white/38">
