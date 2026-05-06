@@ -65,38 +65,39 @@ export function HeroSection() {
             </div>
           </motion.div>
 
-          {/* ── Right (desktop) / Top (mobile): copy ── */}
+          {/* ── Right (desktop) / Below (mobile): copy ── */}
           <motion.div
-            className="order-2 lg:order-2"
+            className="order-2 lg:order-2 text-center lg:text-left"
             variants={reduce ? undefined : stagger}
             initial={reduce ? false : "hidden"}
             animate="show"
           >
             {/* Tagline */}
-            <motion.p
+            <motion.div
               variants={reduce ? undefined : fadeUp}
-              className="mt-5 font-mono text-[0.62rem] uppercase tracking-[0.38em] text-white/22"
+              className="mt-5 flex items-center justify-center lg:justify-start gap-4"
             >
-              Chaos to Clarity
-            </motion.p>
+              <span className="h-px w-10 bg-gradient-to-r from-transparent to-[#C9824A]" />
+              <span className="font-mono text-[0.72rem] uppercase tracking-[0.5em] text-[#C9824A] drop-shadow-[0_0_12px_rgba(201,130,74,0.6)]">
+                Chaos to Clarity
+              </span>
+              <span className="h-px w-10 bg-gradient-to-l from-transparent to-[#C9824A]" />
+            </motion.div>
 
             {/* Headline */}
             <motion.h1
               variants={reduce ? undefined : fadeUp}
               className="mt-7 font-serif font-light leading-[1.03] tracking-[-0.03em] text-[#f5f2ed]"
-              style={{ fontSize: "clamp(2.8rem, 6vw, 6rem)" }}
+              style={{ fontSize: "clamp(2rem, 3.8vw, 4.2rem)" }}
             >
-              Where your day<br />
-              meets{" "}
-              <span className="italic text-[#C9824A]">karma</span>
-              <br />
-              <span className="italic text-[#C9824A]">and dharma.</span>
+              Where reflection becomes<br />
+              <span className="italic text-[#C9824A]">direction.</span>
             </motion.h1>
 
             {/* Sub */}
             <motion.p
               variants={reduce ? undefined : fadeUp}
-              className="mt-7 max-w-[440px] text-[1.05rem] leading-[1.75] text-white/48 sm:text-lg"
+              className="mt-7 max-w-[440px] mx-auto lg:mx-0 text-[1.05rem] leading-[1.75] text-white/48 sm:text-lg"
             >
               A private space to write, notice patterns, and get gentle guidance
               from{" "}
@@ -107,7 +108,7 @@ export function HeroSection() {
             {/* CTAs */}
             <motion.div
               variants={reduce ? undefined : fadeUp}
-              className="mt-9 flex flex-wrap items-center gap-3"
+              className="mt-9 flex flex-wrap items-center justify-center lg:justify-start gap-3"
             >
               {/* iOS */}
               <SmartExternalLink
