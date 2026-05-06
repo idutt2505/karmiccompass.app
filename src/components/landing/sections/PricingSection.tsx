@@ -27,11 +27,11 @@ const trialFeatures = [
 
 const compassFeatures = [
   "Everything in the free trial",
-  "Unlimited Arya messages",
-  "Deep Memory \u2014 Arya recalls commitments & mood history",
-  "Incognito mode for private sessions",
-  "Extended summaries: weekly, monthly, yearly",
-  "Full chat history access",
+  "Unlimited Arya messages — no daily cap",
+  "Deep Memory — Arya remembers your full story",
+  "Incognito Mode — reflect without saving",
+  "Extended Summaries — weekly through yearly",
+  "Full chat history & search",
 ];
 
 export function PricingSection() {
