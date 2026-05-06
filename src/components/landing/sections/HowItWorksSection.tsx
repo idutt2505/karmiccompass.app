@@ -40,7 +40,7 @@ const steps = [
   },
   {
     n: "Realm",
-    p: "Every reflection adds up pushing your virtue level higher — from Seeker all the way to Karma Architect — as your Home dashboard charts the arc of your inner life.",
+    p: "Every reflection moves you forward. Rise from Seeker to Karma Architect as your Home dashboard turns your inner growth into a clear, visible journey.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" aria-hidden>
         <path d="M12 2L2 7l10 5 10-5-10-5z"/>
