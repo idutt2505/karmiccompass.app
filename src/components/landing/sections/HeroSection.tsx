@@ -59,7 +59,7 @@ export function HeroSection() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] lg:w-full lg:h-full lg:max-w-[560px] lg:max-h-[560px] lg:aspect-square">
+            <div className="w-[340px] h-[340px] sm:w-[420px] sm:h-[420px] lg:w-full lg:h-full lg:max-w-[560px] lg:max-h-[560px] lg:aspect-square">
               <DharmaWheel />
             </div>
           </motion.div>
