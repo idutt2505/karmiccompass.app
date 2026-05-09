@@ -53,7 +53,7 @@ export function HeroSection() {
           {/* ── Left (desktop) / Below (mobile): dharma wheel ── */}
           <motion.div
             className="flex justify-center items-center order-1 lg:order-1 lg:self-stretch"
-            initial={reduce ? false : { opacity: 0, scale: 0.85 }}
+            initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           >
