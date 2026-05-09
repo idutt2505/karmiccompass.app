@@ -25,7 +25,7 @@ export function HeroSection() {
   return (
     <section
       id={SECTION_IDS.hero}
-      className="relative min-h-screen overflow-hidden scroll-mt-0 pt-20 sm:pt-24"
+      className="relative overflow-hidden scroll-mt-0 pt-20 sm:pt-24"
     >
       {/* ── Layered background ── */}
       <div className="pointer-events-none absolute inset-0" aria-hidden>
