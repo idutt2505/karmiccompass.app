@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useReducedMotion } from "framer-motion";
 import { APP_NAME, SECTION_IDS } from "@/lib/constants";
 
 const nav: { label: string; id: string }[] = [];
@@ -12,7 +11,6 @@ function scrollToId(id: string) {
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
-  const reduce = useReducedMotion();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
