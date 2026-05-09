@@ -65,7 +65,6 @@ export function PricingSection() {
               <p className="font-serif text-4xl font-light text-white/90">Free</p>
               <p className="mb-1 text-sm text-white/35">· 11 days</p>
             </div>
-            <p className="mt-1 text-sm text-white/35">Full app surface. No credit card.</p>
 
             <ul className="mt-6 flex-1 space-y-3">
               {trialFeatures.map((f) => (
