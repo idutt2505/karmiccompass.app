@@ -29,6 +29,11 @@ export const metadata: Metadata = {
   title: `${APP_NAME} — Journaling, reflection & gentle guidance`,
   description:
     "Karmic Compass helps you journal, notice patterns, and get calm AI mentor guidance. Built for privacy-conscious emotional wellness — not a substitute for care.",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
   openGraph: {
     title: `${APP_NAME}`,
     description:
