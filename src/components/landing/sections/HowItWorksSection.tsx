@@ -57,7 +57,7 @@ export function HowItWorksSection() {
   return (
     <section
       id={SECTION_IDS.how}
-      className="scroll-mt-20 border-b border-white/[0.04] py-24 sm:py-32"
+      className="scroll-mt-20 py-24 sm:py-32"
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionReveal className="text-center">
