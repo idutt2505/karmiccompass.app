@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { SECTION_IDS } from "@/lib/constants";
 
@@ -20,6 +20,7 @@ const fadeUp = {
 };
 
 export function HeroSection() {
+  const reduce = useReducedMotion();
   return (
     <section
       id={SECTION_IDS.hero}
