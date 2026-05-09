@@ -3,8 +3,8 @@ export const APP_NAME = "Karmic Compass" as const;
 export const CONTACT_EMAIL = "app.karmiccompass@gmail.com" as const;
 export const MAILTO_CONTACT = `mailto:${CONTACT_EMAIL}` as const;
 
-export const PRIVACY_URL = "" as const;
-export const TERMS_URL = "" as const;
+export const PRIVACY_URL = "https://karmiccompass.app/privacy" as const;
+export const TERMS_URL = "https://karmiccompass.app/terms" as const;
 export const APP_STORE_URL = "" as const;
 export const PLAY_STORE_URL = "" as const;
 export const TESTFLIGHT_URL = "" as const;
