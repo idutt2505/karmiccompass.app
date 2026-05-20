@@ -1,0 +1,208 @@
+/**
+ * DeleteAccountForm — interactive 2-step OTP flow.
+ *
+ * Step 1: enter email → POST /requestDeletionCode → emails 6-digit OTP.
+ * Step 2: enter OTP   → POST /confirmDeletion    → wipes Firestore + Auth.
+ *
+ * Mirrors kc-mobile/src/screens/DeletionRequestScreen.js. Server endpoints
+ * accept CORS from karmiccompass.app (per functions/index.js CORS allowlist).
+ */
+"use client";
+
+import { useState } from "react";
+
+const REQUEST_URL =
+    "https://us-central1-karmiccompass.cloudfunctions.net/requestDeletionCode";
+const CONFIRM_URL =
+    "https://us-central1-karmiccompass.cloudfunctions.net/confirmDeletion";
+
+type Step = "email" | "code" | "done";
+
+export default function DeleteAccountForm() {
+    const [step, setStep] = useState<Step>("email");
+    const [email, setEmail] = useState("");
+    const [code, setCode] = useState("");
+    const [busy, setBusy] = useState(false);
+    const [error, setError] = useState("");
+
+    async function handleRequestCode(e: React.FormEvent) {
+        e.preventDefault();
+        setError("");
+        const normalised = email.trim().toLowerCase();
+        if (!normalised || !normalised.includes("@")) {
+            setError("Please enter a valid email address.");
+            return;
+        }
+        setBusy(true);
+        try {
+            const r = await fetch(REQUEST_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: normalised }),
+            });
+            if (r.status === 429) {
+                const body = await r.json().catch(() => ({}));
+                setError(body.error || "Too many requests — please wait a minute.");
+                return;
+            }
+            if (!r.ok) {
+                setError("Could not send code. Please try again.");
+                return;
+            }
+            setStep("code");
+        } catch {
+            setError("Network error. Please check your connection and try again.");
+        } finally {
+            setBusy(false);
+        }
+    }
+
+    async function handleConfirm(e: React.FormEvent) {
+        e.preventDefault();
+        setError("");
+        const trimmedCode = code.trim();
+        if (!/^\d{6}$/.test(trimmedCode)) {
+            setError("The code is a 6-digit number.");
+            return;
+        }
+        setBusy(true);
+        try {
+            const r = await fetch(CONFIRM_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    email: email.trim().toLowerCase(),
+                    code: trimmedCode,
+                }),
+            });
+            if (r.status === 429) {
+                const body = await r.json().catch(() => ({}));
+                setError(body.error || "Too many attempts — please request a new code.");
+                return;
+            }
+            if (!r.ok) {
+                const body = await r.json().catch(() => ({}));
+                setError(body.error || "Invalid code. Please try again.");
+                return;
+            }
+            setStep("done");
+        } catch {
+            setError("Network error. Please check your connection and try again.");
+        } finally {
+            setBusy(false);
+        }
+    }
+
+    if (step === "done") {
+        return (
+            <div className="mt-10 space-y-4 rounded-md border border-[#7a9a7a] bg-white p-6">
+                <h2 className="font-serif text-2xl">
+                    Your account has been deleted.
+                </h2>
+                <p className="text-[#3a3a3a]">
+                    All of your data has been permanently erased from our
+                    servers. Residual data in encrypted Google Cloud backups
+                    may persist for up to 90 days. Subscription billing records
+                    held by Apple, Google, or RevenueCat are retained per their
+                    respective policies and applicable financial law.
+                </p>
+            </div>
+        );
+    }
+
+    if (step === "code") {
+        return (
+            <form onSubmit={handleConfirm} className="mt-10 space-y-4">
+                <label htmlFor="code" className="block">
+                    <span className="font-mono text-xs uppercase tracking-wider text-[#6f5b3e]">
+                        Step 2 of 2 — verification code sent to {email}
+                    </span>
+                    <input
+                        id="code"
+                        type="text"
+                        inputMode="numeric"
+                        pattern="\d{6}"
+                        maxLength={6}
+                        autoComplete="one-time-code"
+                        required
+                        value={code}
+                        onChange={(e) =>
+                            setCode(e.target.value.replace(/\D/g, "").slice(0, 6))
+                        }
+                        disabled={busy}
+                        className="mt-2 w-full rounded-md border border-[#cdb78d] bg-white px-4 py-3 text-center font-mono text-2xl tracking-widest focus:border-[#8b6f3a] focus:outline-none"
+                        placeholder="------"
+                    />
+                </label>
+
+                {error && (
+                    <p className="text-sm text-red-700" role="alert">
+                        {error}
+                    </p>
+                )}
+
+                <button
+                    type="submit"
+                    disabled={busy || code.length !== 6}
+                    className="w-full rounded-md bg-red-700 px-6 py-3 font-mono text-sm font-medium uppercase tracking-wider text-white transition hover:bg-red-800 disabled:opacity-50"
+                >
+                    {busy ? "Deleting…" : "Permanently delete my account"}
+                </button>
+
+                <button
+                    type="button"
+                    onClick={() => {
+                        setStep("email");
+                        setCode("");
+                        setError("");
+                    }}
+                    disabled={busy}
+                    className="w-full px-6 py-2 text-sm text-[#6f5b3e] underline disabled:opacity-50"
+                >
+                    Use a different email
+                </button>
+            </form>
+        );
+    }
+
+    return (
+        <form onSubmit={handleRequestCode} className="mt-10 space-y-4">
+            <label htmlFor="email" className="block">
+                <span className="font-mono text-xs uppercase tracking-wider text-[#6f5b3e]">
+                    Step 1 of 2 — your account email
+                </span>
+                <input
+                    id="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={busy}
+                    className="mt-2 w-full rounded-md border border-[#cdb78d] bg-white px-4 py-3 text-base focus:border-[#8b6f3a] focus:outline-none"
+                    placeholder="you@example.com"
+                />
+            </label>
+
+            {error && (
+                <p className="text-sm text-red-700" role="alert">
+                    {error}
+                </p>
+            )}
+
+            <button
+                type="submit"
+                disabled={busy}
+                className="w-full rounded-md bg-[#1a2f6b] px-6 py-3 font-mono text-sm font-medium uppercase tracking-wider text-white transition hover:bg-[#2d4a8a] disabled:opacity-50"
+            >
+                {busy ? "Sending code…" : "Send verification code"}
+            </button>
+
+            <p className="text-xs text-[#6f5b3e]">
+                We will email a 6-digit code to this address. The code is
+                valid for 15 minutes and can be used once. If you do not
+                receive an email, check spam and try again after a minute.
+            </p>
+        </form>
+    );
+}
