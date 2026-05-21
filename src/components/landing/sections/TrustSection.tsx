@@ -50,7 +50,7 @@ const pillars = [
       </svg>
     ),
     t: "Honest, not therapeutic",
-    d: "Karmic Compass is a journaling and self-reflection tool. It is not a substitute for medical, psychological, or crisis care. If you need professional support, please reach out to a qualified provider.",
+    d: "KarmicCompass is a journaling and self-reflection tool. It is not a substitute for medical, psychological, or crisis care. If you need professional support, please reach out to a qualified provider.",
   },
   {
     icon: (

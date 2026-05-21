@@ -8,7 +8,7 @@ import { SECTION_IDS } from "@/lib/constants";
 const FAQ_ITEMS = [
   {
     q: "Is this therapy or medical advice?",
-    a: "No. Karmic Compass is a self-reflection and journaling app. It does not provide medical, psychological, or crisis care. If you are in danger or need professional support, please contact qualified providers or emergency services in your area.",
+    a: "No. KarmicCompass is a self-reflection and journaling app. It does not provide medical, psychological, or crisis care. If you are in danger or need professional support, please contact qualified providers or emergency services in your area.",
   },
   {
     q: "What does \u201ckarma\u201d mean in the app?",

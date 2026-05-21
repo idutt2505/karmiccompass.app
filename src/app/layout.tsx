@@ -27,7 +27,7 @@ const mono = DM_Mono({
 
 const SITE_URL = "https://karmiccompass.app";
 const DESCRIPTION =
-  "Karmic Compass helps you journal, notice patterns, and get calm AI mentor guidance. Built for privacy-conscious emotional wellness — not a substitute for care.";
+  "KarmicCompass helps you journal, notice patterns, and get calm AI mentor guidance. Built for privacy-conscious emotional wellness — not a substitute for care.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

@@ -1,4 +1,4 @@
-export const APP_NAME = "Karmic Compass" as const;
+export const APP_NAME = "KarmicCompass" as const;
 
 export const CONTACT_EMAIL = "app.karmiccompass@gmail.com" as const;
 export const MAILTO_CONTACT = `mailto:${CONTACT_EMAIL}` as const;
