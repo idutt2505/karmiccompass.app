@@ -221,9 +221,8 @@ export default function DeleteAccountForm() {
             </button>
 
             <p className="text-xs leading-relaxed text-white/40">
-                We will email a 6-digit code to this address. The code is
-                valid for 15 minutes and can be used once. If you do not
-                receive an email, check spam and try again after a minute.
+                We&apos;ll email a 6-digit code, valid for 15 minutes. Check
+                spam if it doesn&apos;t arrive.
             </p>
         </form>
     );

@@ -37,52 +37,42 @@ export default function DeleteAccountPage() {
                 </h1>
 
                 <p className="mt-5 text-base leading-relaxed text-white/60">
-                    This page is for users who can no longer access {APP_NAME}{" "}
-                    on their device. If you can still sign in, the fastest way
-                    to delete your account is from the app: open{" "}
-                    <strong className="font-medium text-white/85">
-                        Settings → Account → Delete Account
-                    </strong>
-                    .
-                </p>
-
-                <p className="mt-4 text-base leading-relaxed text-white/60">
-                    Deletion is immediate and permanent. We erase all of your
-                    journal entries, chat history with Arya, profile, karma
-                    history, subscription record, push token, and Firebase
-                    authentication account.{" "}
+                    Deletion is immediate and permanent — your journal
+                    entries, chats with Arya, profile, and account are all
+                    erased.{" "}
                     <Link
                         href={PRIVACY_URL}
                         className="text-[#C9824A] underline underline-offset-2 transition hover:text-[#e0a06a]"
                     >
-                        See exactly what is deleted
+                        See what&apos;s deleted
                     </Link>
                     .
                 </p>
 
+                <p className="mt-3 text-sm text-white/40">
+                    Still able to sign in? It&apos;s faster in-app: Settings →
+                    Account → Delete Account.
+                </p>
+
                 <DeleteAccountForm />
 
-                <div className="mt-12 border-t border-white/10 pt-6 text-xs leading-relaxed text-white/40">
+                <div className="mt-10 border-t border-white/10 pt-6 text-xs leading-relaxed text-white/40">
                     <p>
-                        Trouble with the form? Email{" "}
+                        Form not working?{" "}
                         <a
                             href={`mailto:${CONTACT_EMAIL}`}
                             className="text-[#C9824A] underline underline-offset-2 transition hover:text-[#e0a06a]"
                         >
                             {CONTACT_EMAIL}
-                        </a>{" "}
-                        and we will process your deletion request manually
-                        within 30 days.
-                    </p>
-                    <p className="mt-3">
-                        By using this form you agree to our{" "}
+                        </a>
+                        . By continuing you agree to our{" "}
                         <Link
                             href={TERMS_URL}
                             className="text-[#C9824A] underline underline-offset-2 transition hover:text-[#e0a06a]"
                         >
                             Terms
                         </Link>{" "}
-                        and{" "}
+                        &{" "}
                         <Link
                             href={PRIVACY_URL}
                             className="text-[#C9824A] underline underline-offset-2 transition hover:text-[#e0a06a]"
