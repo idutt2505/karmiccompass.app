@@ -23,6 +23,13 @@ const SUBMIT_DEBOUNCE_MS = 2000;
 
 type Step = "email" | "code" | "done";
 
+const labelClass =
+    "font-mono text-xs uppercase tracking-wider text-[#C9824A]";
+const inputClass =
+    "mt-2 w-full rounded-md border border-white/12 bg-white/[0.04] px-4 py-3 text-base text-white placeholder-white/25 transition focus:border-[#C9824A] focus:outline-none disabled:opacity-50";
+const errorClass =
+    "min-h-[1.25rem] text-sm text-red-400";
+
 export default function DeleteAccountForm() {
     const [step, setStep] = useState<Step>("email");
     const [email, setEmail] = useState("");
@@ -114,11 +121,11 @@ export default function DeleteAccountForm() {
 
     if (step === "done") {
         return (
-            <div className="mt-10 space-y-4 rounded-md border border-[#7a9a7a] bg-white p-6">
-                <h2 className="font-serif text-2xl">
+            <div className="mt-10 space-y-3 rounded-lg border border-[#7a9a7a]/40 bg-[#7a9a7a]/[0.08] p-6">
+                <h2 className="font-serif text-2xl font-light text-white">
                     Your account has been deleted.
                 </h2>
-                <p className="text-[#3a3a3a]">
+                <p className="text-sm leading-relaxed text-white/55">
                     All of your data has been permanently erased from our
                     servers. Residual data in encrypted Google Cloud backups
                     may persist for up to 90 days. Subscription billing records
@@ -133,7 +140,7 @@ export default function DeleteAccountForm() {
         return (
             <form onSubmit={handleConfirm} className="mt-10 space-y-4">
                 <label htmlFor="code" className="block">
-                    <span className="font-mono text-xs uppercase tracking-wider text-[#6f5b3e]">
+                    <span className={labelClass}>
                         Step 2 of 2 — verification code sent to {email}
                     </span>
                     <input
@@ -149,23 +156,19 @@ export default function DeleteAccountForm() {
                             setCode(e.target.value.replace(/\D/g, "").slice(0, 6))
                         }
                         disabled={busy}
-                        className="mt-2 w-full rounded-md border border-[#cdb78d] bg-white px-4 py-3 text-center font-mono text-2xl tracking-widest focus:border-[#8b6f3a] focus:outline-none"
+                        className="mt-2 w-full rounded-md border border-white/12 bg-white/[0.04] px-4 py-3 text-center font-mono text-2xl tracking-[0.4em] text-white placeholder-white/20 transition focus:border-[#C9824A] focus:outline-none disabled:opacity-50"
                         placeholder="------"
                     />
                 </label>
 
-                <p
-                    className="min-h-[1.25rem] text-sm text-red-700"
-                    role="alert"
-                    aria-live="assertive"
-                >
+                <p className={errorClass} role="alert" aria-live="assertive">
                     {error}
                 </p>
 
                 <button
                     type="submit"
                     disabled={busy || code.length !== 6}
-                    className="w-full rounded-md bg-red-700 px-6 py-3 font-mono text-sm font-medium uppercase tracking-wider text-white transition hover:bg-red-800 disabled:opacity-50"
+                    className="w-full rounded-md bg-red-600 px-6 py-3 font-mono text-sm font-medium uppercase tracking-wider text-white transition hover:bg-red-500 disabled:cursor-not-allowed disabled:opacity-40"
                 >
                     {busy ? "Deleting…" : "Permanently delete my account"}
                 </button>
@@ -178,7 +181,7 @@ export default function DeleteAccountForm() {
                         setError("");
                     }}
                     disabled={busy}
-                    className="w-full px-6 py-2 text-sm text-[#6f5b3e] underline disabled:opacity-50"
+                    className="w-full px-6 py-2 text-sm text-white/45 underline underline-offset-2 transition hover:text-white/70 disabled:opacity-50"
                 >
                     Use a different email
                 </button>
@@ -189,7 +192,7 @@ export default function DeleteAccountForm() {
     return (
         <form onSubmit={handleRequestCode} className="mt-10 space-y-4">
             <label htmlFor="email" className="block">
-                <span className="font-mono text-xs uppercase tracking-wider text-[#6f5b3e]">
+                <span className={labelClass}>
                     Step 1 of 2 — your account email
                 </span>
                 <input
@@ -200,26 +203,24 @@ export default function DeleteAccountForm() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={busy}
-                    className="mt-2 w-full rounded-md border border-[#cdb78d] bg-white px-4 py-3 text-base focus:border-[#8b6f3a] focus:outline-none"
+                    className={inputClass}
                     placeholder="you@example.com"
                 />
             </label>
 
-            {error && (
-                <p className="text-sm text-red-700" role="alert">
-                    {error}
-                </p>
-            )}
+            <p className={errorClass} role="alert" aria-live="assertive">
+                {error}
+            </p>
 
             <button
                 type="submit"
                 disabled={busy}
-                className="w-full rounded-md bg-[#1a2f6b] px-6 py-3 font-mono text-sm font-medium uppercase tracking-wider text-white transition hover:bg-[#2d4a8a] disabled:opacity-50"
+                className="w-full rounded-md bg-[#C9824A] px-6 py-3 font-mono text-sm font-medium uppercase tracking-wider text-[#0b0a0f] transition hover:bg-[#d9935b] disabled:cursor-not-allowed disabled:opacity-40"
             >
                 {busy ? "Sending code…" : "Send verification code"}
             </button>
 
-            <p className="text-xs text-[#6f5b3e]">
+            <p className="text-xs leading-relaxed text-white/40">
                 We will email a 6-digit code to this address. The code is
                 valid for 15 minutes and can be used once. If you do not
                 receive an email, check spam and try again after a minute.
