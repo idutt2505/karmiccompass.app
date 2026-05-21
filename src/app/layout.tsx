@@ -45,14 +45,14 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE_URL,
     siteName: APP_NAME,
-    images: [{ url: "/app-icon.png", alt: APP_NAME }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: APP_NAME }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: APP_NAME,
     description:
       "Journaling, karma and dharma insight, AI mentor, and reflection — in one focused app.",
-    images: ["/app-icon.png"],
+    images: ["/og-image.png"],
   },
 };
 
