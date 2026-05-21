@@ -9,12 +9,17 @@
  */
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const REQUEST_URL =
+    process.env.NEXT_PUBLIC_DELETION_REQUEST_URL ||
     "https://us-central1-karmiccompass.cloudfunctions.net/requestDeletionCode";
 const CONFIRM_URL =
+    process.env.NEXT_PUBLIC_DELETION_CONFIRM_URL ||
     "https://us-central1-karmiccompass.cloudfunctions.net/confirmDeletion";
+
+/** Minimum interval between submit attempts (client-side debounce). */
+const SUBMIT_DEBOUNCE_MS = 2000;
 
 type Step = "email" | "code" | "done";
 
@@ -24,10 +29,23 @@ export default function DeleteAccountForm() {
     const [code, setCode] = useState("");
     const [busy, setBusy] = useState(false);
     const [error, setError] = useState("");
+    const lastSubmit = useRef(0);
+
+    /** Returns true if a submit is allowed; otherwise sets an error and returns false. */
+    function debounceOk() {
+        const now = Date.now();
+        if (now - lastSubmit.current < SUBMIT_DEBOUNCE_MS) {
+            setError("Please wait a moment before trying again.");
+            return false;
+        }
+        lastSubmit.current = now;
+        return true;
+    }
 
     async function handleRequestCode(e: React.FormEvent) {
         e.preventDefault();
         setError("");
+        if (busy || !debounceOk()) return;
         const normalised = email.trim().toLowerCase();
         if (!normalised || !normalised.includes("@")) {
             setError("Please enter a valid email address.");
@@ -60,6 +78,7 @@ export default function DeleteAccountForm() {
     async function handleConfirm(e: React.FormEvent) {
         e.preventDefault();
         setError("");
+        if (busy || !debounceOk()) return;
         const trimmedCode = code.trim();
         if (!/^\d{6}$/.test(trimmedCode)) {
             setError("The code is a 6-digit number.");
@@ -135,11 +154,13 @@ export default function DeleteAccountForm() {
                     />
                 </label>
 
-                {error && (
-                    <p className="text-sm text-red-700" role="alert">
-                        {error}
-                    </p>
-                )}
+                <p
+                    className="min-h-[1.25rem] text-sm text-red-700"
+                    role="alert"
+                    aria-live="assertive"
+                >
+                    {error}
+                </p>
 
                 <button
                     type="submit"

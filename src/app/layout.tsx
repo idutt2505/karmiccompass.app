@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
 import { APP_NAME } from "@/lib/constants";
@@ -25,20 +25,56 @@ const mono = DM_Mono({
   weight: ["300", "400"],
 });
 
+const SITE_URL = "https://karmiccompass.app";
+const DESCRIPTION =
+  "Karmic Compass helps you journal, notice patterns, and get calm AI mentor guidance. Built for privacy-conscious emotional wellness — not a substitute for care.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: `${APP_NAME} — Journaling, reflection & gentle guidance`,
-  description:
-    "Karmic Compass helps you journal, notice patterns, and get calm AI mentor guidance. Built for privacy-conscious emotional wellness — not a substitute for care.",
+  description: DESCRIPTION,
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
     apple: "/favicon.svg",
   },
   openGraph: {
-    title: `${APP_NAME}`,
+    title: APP_NAME,
     description:
       "Journaling, karma and dharma insight, AI mentor, and reflection — in one focused app.",
     type: "website",
+    url: SITE_URL,
+    siteName: APP_NAME,
+    images: [{ url: "/app-icon.png", alt: APP_NAME }],
+  },
+  twitter: {
+    card: "summary",
+    title: APP_NAME,
+    description:
+      "Journaling, karma and dharma insight, AI mentor, and reflection — in one focused app.",
+    images: ["/app-icon.png"],
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#0f0e17",
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: APP_NAME,
+  applicationCategory: "HealthApplication",
+  operatingSystem: "iOS, Android",
+  description: DESCRIPTION,
+  url: SITE_URL,
+  publisher: {
+    "@type": "Organization",
+    name: APP_NAME,
+    url: SITE_URL,
   },
 };
 
@@ -49,7 +85,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
-      <body className="font-sans font-light antialiased">{children}</body>
+      <body className="font-sans font-light antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
