@@ -3,6 +3,7 @@ import {
   MAILTO_CONTACT,
   PRIVACY_URL,
   TERMS_URL,
+  DELETE_ACCOUNT_URL,
   X_SOCIAL_URL,
   INSTAGRAM_URL,
 } from "@/lib/constants";
@@ -20,6 +21,7 @@ export function SiteFooter() {
           <FooterClientLinks
             privacyHref={PRIVACY_URL}
             termsHref={TERMS_URL}
+            deleteAccountHref={DELETE_ACCOUNT_URL}
             xHref={X_SOCIAL_URL}
             instagramHref={INSTAGRAM_URL}
           />

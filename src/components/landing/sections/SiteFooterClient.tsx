@@ -5,11 +5,18 @@ import { SmartExternalLink } from "../SmartExternalLink";
 type Props = {
   privacyHref: string;
   termsHref: string;
+  deleteAccountHref: string;
   xHref: string;
   instagramHref: string;
 };
 
-export function FooterClientLinks({ privacyHref, termsHref, xHref, instagramHref }: Props) {
+export function FooterClientLinks({
+  privacyHref,
+  termsHref,
+  deleteAccountHref,
+  xHref,
+  instagramHref,
+}: Props) {
   return (
     <div className="flex flex-wrap items-center gap-y-2">
       {/* Legal */}
@@ -27,6 +34,13 @@ export function FooterClientLinks({ privacyHref, termsHref, xHref, instagramHref
           label="Open Terms of Service"
         >
           Terms of Service
+        </SmartExternalLink>
+        <SmartExternalLink
+          href={deleteAccountHref}
+          className="text-left text-xs text-white/28 transition hover:text-white/55"
+          label="Delete your account"
+        >
+          Delete account
         </SmartExternalLink>
       </div>
 
