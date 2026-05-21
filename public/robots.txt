@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /delete-account
+
+Sitemap: https://karmiccompass.app/sitemap.xml
