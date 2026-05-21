@@ -37,21 +37,14 @@ export default function DeleteAccountPage() {
                 </h1>
 
                 <p className="mt-5 text-base leading-relaxed text-white/60">
-                    Deletion is immediate and permanent — your journal
-                    entries, chats with Arya, profile, and account are all
-                    erased.{" "}
-                    <Link
-                        href={PRIVACY_URL}
-                        className="text-[#C9824A] underline underline-offset-2 transition hover:text-[#e0a06a]"
-                    >
-                        See what&apos;s deleted
-                    </Link>
-                    .
+                    Deleting your account is permanent and cannot be undone.
+                    Your journal entries, chats with Arya, profile, and
+                    account data are all erased.
                 </p>
 
                 <p className="mt-3 text-sm text-white/40">
-                    Still able to sign in? It&apos;s faster in-app: Settings →
-                    Account → Delete Account.
+                    If you can still sign in, it&apos;s quicker to delete from
+                    inside the app: Settings → Account → Delete Account.
                 </p>
 
                 <DeleteAccountForm />
