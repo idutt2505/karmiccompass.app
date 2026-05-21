@@ -17,7 +17,7 @@ import DeleteAccountForm from "./DeleteAccountForm";
 export const metadata: Metadata = {
     title: `Delete account — ${APP_NAME}`,
     description:
-        "Request permanent deletion of your Karmic Compass account and personal data.",
+        "Request permanent deletion of your KarmicCompass account and personal data.",
     robots: { index: true, follow: false },
 };
 

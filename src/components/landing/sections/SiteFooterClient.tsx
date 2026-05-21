@@ -52,14 +52,14 @@ export function FooterClientLinks({
         <SmartExternalLink
           href={xHref}
           className="text-left text-xs text-white/28 transition hover:text-white/55"
-          label="Follow Karmic Compass on X"
+          label="Follow KarmicCompass on X"
         >
           X
         </SmartExternalLink>
         <SmartExternalLink
           href={instagramHref}
           className="text-left text-xs text-white/28 transition hover:text-white/55"
-          label="Follow Karmic Compass on Instagram"
+          label="Follow KarmicCompass on Instagram"
         >
           Instagram
         </SmartExternalLink>
