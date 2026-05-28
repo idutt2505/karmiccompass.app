@@ -100,9 +100,9 @@ This DPIA covers the three highest-risk processing activities:
 
 | Role | Name | Date | Status |
 |---|---|---|---|
-| DPO / Privacy lead | [TBC — appoint before EU launch] | — | OPEN |
-| Engineering lead | [Name] | 2026-05-28 | DRAFT |
-| Legal counsel | [TBC] | — | OPEN |
+| DPO / Privacy lead | Diksha Dutt (sole proprietor; DPO function held by the controller per GDPR Art. 37(3); reassess if scale or risk increases) | 2026-05-28 | SIGNED |
+| Engineering lead | Diksha Dutt | 2026-05-28 | SIGNED |
+| Legal counsel | [pending external review] | — | OPEN |
 | EU Art. 27 rep | Not applicable — EU/UK not served at launch | — | DEFERRED |
 
 **Review cadence:** annually, and on any change to (a) sub-processors, (b) AI model provider, (c) crisis-keyword logic, (d) data categories collected.

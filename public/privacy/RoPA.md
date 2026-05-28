@@ -35,7 +35,8 @@
 - **Legal name:** Diksha Dutt (operating as KarmicCompass, sole proprietor — Pvt Ltd registration pending)
 - **Address:** Panchkula, Haryana, India
 - **Privacy contact:** privacy@karmiccompass.app
-- **Grievance Officer (India):** app.karmiccompass@gmail.com (subject: GRIEVANCE)
+- **DPO / Privacy lead:** Diksha Dutt (function held by the controller; reassess if scale or risk increases)
+- **Grievance Officer (India — DPDPA / SPDI Rules):** Diksha Dutt, app.karmiccompass@gmail.com (subject: GRIEVANCE)
 - **EU Art. 27 representative:** Not applicable — KarmicCompass is not currently offered in the EU/EEA. To be appointed before any EU launch.
 - **UK Art. 27 representative:** Not applicable — KarmicCompass is not currently offered in the UK. To be appointed before any UK launch.
 
