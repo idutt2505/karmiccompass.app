@@ -20,7 +20,6 @@
   html { scroll-behavior: smooth; }
   body { background: var(--bg); color: var(--body); font-family: var(--font-sans); font-size: 15px; line-height: 1.7; min-height: 100vh; }
 
-  /* NAV */
   nav { position: sticky; top: 0; z-index: 100; background: rgba(13,15,26,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
   .nav-inner { max-width: 760px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
   .nav-brand { font-family: var(--font-serif); font-size: 18px; font-weight: 600; letter-spacing: 0.5px; text-decoration: none; }
@@ -30,20 +29,17 @@
   .nav-links a { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color 0.2s; }
   .nav-links a:hover, .nav-links a.active { color: var(--accent); }
 
-  /* HERO */
   .hero { max-width: 760px; margin: 0 auto; padding: 56px 24px 36px; border-bottom: 1px solid var(--border); }
   .hero-eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
   .hero-title { font-family: var(--font-serif); font-size: clamp(28px, 5vw, 40px); font-weight: 600; color: var(--heading); line-height: 1.2; margin-bottom: 16px; }
   .hero-meta { font-size: 12px; color: var(--muted); letter-spacing: 0.3px; }
 
-  /* CONTENT */
   main { max-width: 760px; margin: 0 auto; padding: 0 24px 80px; }
   .section { padding: 36px 0; border-bottom: 1px solid var(--border); }
   .section:last-child { border-bottom: none; }
   .section-heading { font-size: 13px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
   .section-body { color: var(--body); white-space: pre-wrap; line-height: 1.8; font-size: 14px; }
 
-  /* FOOTER */
   footer { border-top: 1px solid var(--border); background: var(--surface); }
   .footer-inner { max-width: 760px; margin: 0 auto; padding: 28px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
   .footer-copy { font-size: 11px; color: var(--muted); }
@@ -62,20 +58,24 @@
 <nav>
   <div class="nav-inner">
     <a href="/" class="nav-brand"><span>Karmic</span><span>Compass</span></a>
+    <div class="nav-links">
+      <a href="/terms">Terms</a>
+      <a href="/privacy" class="active">Privacy</a>
+    </div>
   </div>
 </nav>
 
 <div class="hero">
-  <p class="hero-eyebrow">Legal</p>
+  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v2.2</p>
   <h1 class="hero-title">Privacy Policy</h1>
-  <p class="hero-meta">KarmicCompass Private Limited &nbsp;·&nbsp; Last updated: May 2026</p>
+  <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-05-28</p>
 </div>
 
 <main>
 
   <div class="section">
-    <p class="section-heading">Plain-English Summary</p>
-    <p class="section-body">KarmicCompass is operated by KarmicCompass Private Limited. Here is what we collect, why, and how:
+    <p class="section-heading">How It Works</p>
+    <p class="section-body">Karmic Compass is operated by Diksha Dutt (operating as KarmicCompass). Here is what we collect, why, and how:
 
 • You give us: name, date of birth, gender, country, journal entries, chat messages, and optionally voice recordings and photos.
 • We generate: AI-powered insights, karma/dharma scores, astrological readings, quiz scores, and badges from your content.
@@ -84,7 +84,7 @@
 • A stable anonymous device ID is stored on your device (persists across reinstalls) solely to enforce the one-trial-per-device policy.
 • Your passcode (if set) is stored only in your device's secure enclave — never transmitted to us.
 • A background task runs every 12+ hours solely to reschedule local notifications — no data is sent to our servers during this.
-• We do not sell your data. We do not share it for advertising.
+• We do not sell your data. We do not share it for advertising. Your content is not used to train any AI model.
 • You can delete your account and all data at any time from Settings.</p>
   </div>
 
@@ -98,268 +98,503 @@ A. ACCOUNT &amp; IDENTITY
 • Firebase UID — your unique account identifier.
 • Google Sign-In ID token / Apple identity token — used for authentication only; not shared beyond Google/Apple auth infrastructure.
 
-B. JOURNAL &amp; CHAT CONTENT
+B. JOURNAL &amp; CHAT CONTENT (stored in Firestore: users/{uid})
 • Journal entries: text, date, mood rating (1–5), AI-generated karma score, dharma score, emotions, and qualitative analysis dimensions.
 • Chat messages with Arya: text, timestamp, role (user/ai), language code.
-• Archived chat messages, commitments, personal notes, starred messages, daily intention text.
+• Archived chat messages: older messages archived to a subcollection when active chat exceeds a threshold.
+• Commitments you make with Arya (text, date, followedUp flag).
+• Personal notes you ask Arya to remember (text, date).
+• Starred messages from your chat (text, timestamp).
+• Daily intention text.
+• Your chat session count and first chat date.
 
-C. AI-GENERATED INFERENCES
-• Life digest, AI insights, weekly narratives and life reports, session history summaries, unresolved emotional threads, karma and dharma scores.
+C. AI-GENERATED INFERENCES (stored in Firestore: users/{uid})
+• Life digest: AI-generated psychological and behavioural themes derived from your journal content.
+• AI insights: periodic AI-generated observations about your patterns.
+• Weekly narratives and life reports.
+• Session history: summaries of past chat sessions.
+• Unresolved emotional threads detected in conversations.
+• Karma and dharma scores.
+• Last karma/dharma snapshot (for delta commentary).
 
-D. WELLNESS &amp; BEHAVIOURAL DATA
-• Mood history, quiz history, active 30-day challenges and progress, earned badges, preferred discussion topics, milestones acknowledged.
+D. WELLNESS &amp; BEHAVIOURAL DATA (stored in Firestore: users/{uid})
+• Mood history: mood check-in entries.
+• Quiz history: quiz attempt records, scores, difficulty paths, and high scores.
+• Active 30-day challenges and progress.
+• Earned badges.
+• Preferred discussion topics (inferred from chat, not explicitly selected).
+• Milestones acknowledged.
 
-E. PREFERENCES &amp; SETTINGS
-• Arya reply language, tone preference, response length preference, blocked topics list, Incognito Mode state.
+E. PREFERENCES &amp; SETTINGS (stored in Firestore: users/{uid})
+• Arya reply language: label, locale code, Gemini language name (e.g. "Hindi / hi-IN").
+• Arya tone preference and response length preference.
+• Blocked topics list.
+• Incognito Mode state.
 
 F. VOICE TRANSCRIPTIONS
-• Audio is recorded on-device, encoded as base64, and transmitted to our secure proxy for transcription via Google's Gemini API. The audio file is deleted from your device immediately after the request is sent. Only the resulting text transcript is stored.
+• When you use the microphone button, your audio is recorded on-device, encoded as base64, and transmitted to our secure proxy server for transcription via Google's Gemini API. The audio data is never written to Firestore or Firebase Storage. The original audio file is deleted from your device immediately after the transcription request is sent. The resulting text transcript is stored as part of your journal entry or chat message.
 
 G. IMAGES
-• When you attach a photo in Arya's chat, it is resized on-device and sent as base64 to our proxy for Gemini Vision AI processing. Images are not stored permanently on our servers.
+• When you attach a photo in Arya's chat, it is resized on-device (max 1024×1024px, ~50% quality) and sent as base64 to our proxy for Gemini Vision AI processing. We do not store images as standalone files on our servers. EXIF metadata is not explicitly stripped before transmission.
 
-H. CRISIS SIGNAL RECORDS
-• If the App detects crisis-related language and you are not in Incognito Mode, the first 100 characters of your message and a timestamp are stored in your cloud profile solely for contextual safety follow-up. This data is never shared externally.
+H. CRISIS SIGNAL RECORDS (HEALTH-RELATED DATA — GDPR Art. 9)
+• If the App detects crisis-related language (using a keyword list in the app code) in your message, and you are not in Incognito Mode, the first 100 characters of your message and a timestamp are added to a crisisFlags array in your Firestore profile. This is used solely for contextual safety follow-up in future sessions and is never shared externally. See §3 for the lawful basis and your opt-out rights.
 
 I. DEVICE IDENTIFIER (TRIAL ENFORCEMENT)
-• A stable pseudonymous device identifier is stored in your device's Keychain (iOS) / Keystore (Android). It persists across reinstalls. It is used solely to enforce the one-trial-per-device policy. It is NOT an advertising ID and is never shared with advertising networks.
+• A stable pseudonymous device identifier is generated using a cryptographically random value and stored in your device's Keychain (iOS) / Keystore (Android). It persists across app reinstalls. It is linked to your Firebase UID in our Firestore deviceTrials collection solely to enforce the one-trial-per-device policy. It is NOT an advertising ID (not IDFA or GAID), is not used for tracking across apps or websites, and is never shared with advertising networks.
 
 J. PASSCODE &amp; BIOMETRICS
-• If you set a passcode, it is stored in your device's Keychain/Keystore and never transmitted to us. Face ID / Touch ID biometrics are used on-device only and never transmitted.
+• If you set a passcode, the 6-digit code is stored in your device's Keychain/Keystore. Passcode-related lockout state (kc_lockout_until, kc_failed_attempts) is also stored in Keychain/Keystore. These are never transmitted to us.
+• Face ID / Touch ID biometrics are used on-device only for Passcode unlock. Biometric data is never transmitted to us or any third party.
 
-K. ON-DEVICE AI CACHES
-• Daily insights, karma cards, horoscope readings, and a local profile snapshot are cached in encrypted on-device storage (MMKV) to reduce API calls. Cleared on logout and account deletion.
+K. ON-DEVICE AI CACHES (MMKV encrypted local storage)
+• Daily insights, karma cards, check-in context, horoscope readings, daily readings, cosmic scores, and a local profile snapshot are cached in encrypted on-device storage (MMKV, keyed by account ID) to reduce AI API calls and enable offline viewing. These are cleared on logout and account deletion.
 
 L. NOTIFICATION &amp; BACKGROUND DATA
-• Local notification IDs stored in AsyncStorage. Notification content is generic — no personal data is embedded. A background fetch task runs every 12+ hours to reschedule notifications; it makes NO network calls and sends NO data to our servers.
+• If you grant notification permission, the App schedules three types of local on-device reminders: journal reminder, mentor check-in, and daily check-in. Notification IDs are stored in AsyncStorage (key: @kc_owned_notifications_v1). Notification content is generic — no personal data is embedded.
+• Your preferred check-in time is stored in AsyncStorage (key: @kc_checkin_time).
+• A background fetch task (DAILY_CHECKIN_REFRESH) runs at most every 12 hours to reschedule check-in notifications. This task makes NO network calls and sends NO data to our servers.
+• Background audio capability allows the Mindful music player to continue when the screen is off.
 
-M. SUBSCRIPTION &amp; BILLING
-• Subscription status is set in your Firestore profile by our RevenueCat webhook. We do not receive full payment card details.
+M. PUSH NOTIFICATION TOKENS
+• Opaque Expo Push Token persisted to your Firestore profile (and an array of historical tokens for delivery resilience) so we can deliver Compass push notifications via APNs (iOS) / FCM (Android). The token is not a personal identifier and cannot be used to message you outside our app. You can opt out of "A letter from Arya" push notifications at any time from Settings.
 
-N. FEEDBACK
-• If you submit in-app feedback: message text (capped at 1,000 characters), star rating, Firebase UID, and submission timestamp.
+N. ABUSE-PREVENTION SIGNALS
+• For the locked-out account-deletion endpoint, your IP address is SHA-256 hashed (truncated to 32 hex characters) and stored briefly to rate-limit OTP requests. The raw IP is never persisted; only the irreversible hash.
 
-O. AI USAGE QUOTA
-• A daily call count is stored per account to enforce per-tier daily limits server-side.
+O. SUBSCRIPTION &amp; BILLING
+• Subscription status (isBasic, isPremium, subscriptionPlan, premiumExpiresAt) is set in your Firestore profile by our RevenueCat webhook when subscription events occur. RevenueCat uses your Firebase UID as the app user ID. We do not receive full payment card details.
 
-P. SUPPORT &amp; DELETION REQUEST DATA
-• Emails you send us. For email-based account deletion: a 6-digit OTP and email address are temporarily stored for up to 15 minutes.</p>
+P. FEEDBACK
+• If you submit in-app feedback, we store your message text (capped at 1,000 characters), star rating (1–5), your Firebase UID, and submission timestamp in a Firestore feedback collection.
+
+Q. AI USAGE QUOTA
+• A daily call count (date → count) is stored in Firestore (aiUsage/{uid}) to enforce per-tier daily limits server-side.
+
+R. SUPPORT &amp; DELETION REQUEST DATA
+• Emails you send us, retained to resolve enquiries.
+• For email-based account deletion: a 6-digit OTP, expiry timestamp, and email address are temporarily stored in Firestore (deletionRequests/{uid}) for up to 15 minutes. This document is deleted upon successful deletion.
+
+No-AI-training commitment: Your content is not used to train any AI model — ours or our sub-processors'. Vertex AI customer content is excluded from Google's model training per Google Cloud Terms (https://cloud.google.com/terms/data-processing-addendum).</p>
   </div>
 
   <div class="section">
     <p class="section-heading">2. How We Use Your Information</p>
     <p class="section-body">We use your data to:
 
-• Personalise AI responses and generate your wellness scores and insights.
+• Personalise Arya's AI responses and generate your wellness scores and insights.
+
 • Transcribe voice recordings into text for journal entries and chat messages.
+
 • Analyse images you attach in Arya's chat to provide contextually relevant responses.
+
 • Provide journal analysis, life digest, and wellness reports.
-• Remember your preferences, commitments, and conversation history across sessions.
+
+• Remember your preferences — including language — commitments, and conversation history across sessions.
+
 • Operate, maintain, secure, and improve the App.
+
 • Investigate reported errors and improve App stability via crash reporting (Sentry).
+
 • Manage your subscription and billing entitlements.
-• Send important service communications (e.g. account, billing, or policy updates).
+
+• Send important service communications (e.g. account, billing, or policy updates) and, where you have granted notification permission, Compass push notifications via Expo / APNs / FCM.
+
 • Comply with legal obligations and enforce our Terms.
 
-We do NOT sell your personal data to advertisers or third-party data brokers. We do not share your personal information for cross-context behavioural advertising.</p>
+We do NOT sell your personal data to advertisers or third-party data brokers. We do not share your personal information for cross-context behavioural advertising. We do not use your content to train any AI model.</p>
   </div>
 
   <div class="section">
     <p class="section-heading">3. Lawful Bases, Data Principles &amp; Special Category Data</p>
-    <p class="section-body">We process personal data on the following lawful bases:
+    <p class="section-body">We process personal data on the following lawful bases, which apply globally where equivalent frameworks exist:
 
-• Contract (GDPR Art. 6(1)(b)): processing necessary to provide the App and services you requested.
-• Legitimate Interests (GDPR Art. 6(1)(f)): improving the App, crash reporting, fraud prevention, and system security.
-• Consent (GDPR Art. 6(1)(a)): where we rely on your consent — such as for notification permissions — you may withdraw it at any time.
-• Legal Obligation (GDPR Art. 6(1)(c)): where processing is required by applicable law.
+• Contract (GDPR Art. 6(1)(b) / UK GDPR / LGPD Art. 7(V) / DPDPA): processing necessary to provide the App and services you requested, including AI responses, journal analysis, voice transcription, and image analysis.
 
-Special Category &amp; Sensitive Data (GDPR Art. 9): The App processes mental-health-adjacent content (journal entries, mood check-ins, emotional patterns, crisis signals). We process such data on the basis of your explicit consent (GDPR Art. 9(2)(a)) — given when you actively choose to use these features. You may withdraw this consent at any time by deleting your account.
+• Legitimate Interests (GDPR Art. 6(1)(f) / UK GDPR / LGPD Art. 7(IX)): improving the App, crash reporting (Sentry), fraud and trial-abuse prevention (including the truncated-IP-hash rate-limit on the deletion OTP endpoint), and system security — balanced against your rights and expectations. You may object to processing on this basis at any time.
 
-Data Protection Impact Assessment (DPIA): Because the App processes health-adjacent data and uses AI to generate inferences about your wellbeing, we have conducted a DPIA covering our key processing activities, AI inference risks, and mitigation measures. Available on request to supervisory authorities as required by law.
+• Consent (GDPR Art. 6(1)(a) / DPDPA / PDPA / APPI): where we rely on your consent — such as for notification permissions and the EU/UK 14-day withdrawal-waiver confirmation — you may withdraw it at any time without affecting prior processing.
 
-Data Processing Principles: Lawfulness, Fairness &amp; Transparency · Purpose Limitation · Data Minimisation · Accuracy · Storage Limitation · Integrity &amp; Confidentiality · Accountability.</p>
+• Vital Interests (GDPR Art. 9(2)(c)): see Crisis Flags below.
+
+• Legal Obligation (GDPR Art. 6(1)(c)): where processing is required by applicable law (e.g. financial record-keeping, regulatory demands).
+
+Special Category &amp; Sensitive Data (GDPR Art. 9 / UK GDPR / equivalent):
+The App processes mental-health-adjacent content (journal entries, mood check-ins, emotional patterns, crisis signals) and health-adjacent inferences (karma/dharma scores, psychological themes). Under GDPR Art. 9 and equivalent laws, this qualifies as health-related sensitive personal data. We process such data on the basis of your explicit consent (GDPR Art. 9(2)(a)) — given when you actively choose to use these features — except for crisis-flag storage, which is processed under Art. 9(2)(c) "vital interests" (see below). You may withdraw your Art. 9(2)(a) consent at any time by deleting your account.
+
+Crisis flags (health data under GDPR Art. 9): The crisisFlags record (up to 100 characters of your message + timestamp) is written to your profile when your message matches a safety keyword. We process this under Art. 9(2)(c) "vital interests" so we can surface immediate safety resources in future sessions. Crisis flags auto-expire after 90 days. You may delete them at any time via Settings → Privacy or by deleting your account. You may also opt out of crisisFlags storage entirely while keeping live in-session safety warnings — toggle "Safety follow-up memory" in Settings.
+
+Data Protection Impact Assessment (DPIA — GDPR Art. 35): Because the App processes health-adjacent data at scale and uses AI to generate inferences about your wellbeing, we have conducted a Data Protection Impact Assessment covering our key processing activities, AI inference risks, and mitigation measures. The DPIA is published at karmiccompass.app/privacy/DPIA and available on request to supervisory authorities as required by law.
+
+Data Processing Principles:
+In all our processing activities, we apply and commit to the following principles (consistent with GDPR Art. 5, LGPD Art. 6, and equivalent frameworks):
+
+• Lawfulness, Fairness &amp; Transparency.
+• Purpose Limitation.
+• Data Minimisation.
+• Accuracy.
+• Storage Limitation (see §9).
+• Integrity &amp; Confidentiality.
+• Accountability.</p>
+  </div>
+
+  <div class="section">
+    <p class="section-heading">3a. Automated Decision-Making (GDPR Art. 22)</p>
+    <p class="section-body">Arya's karma and dharma scoring, life-digest, mood-trajectory inferences, weekly narratives, life reports, and crisis-keyword detection are produced automatically by AI models. These automated outputs are intended for personal reflection only; they do not produce legal or similarly significant effects on you (we do not use them to deny service, change pricing, share them with insurers, employers, or any third party, or take any adverse action against you).
+
+Notwithstanding the above, you have the right at any time to:
+
+• request human review of any AI-generated inference about you;
+• obtain an explanation of how the inference was produced (in plain language);
+• contest the inference and request its correction or deletion;
+• withdraw consent for the automated processing prospectively (delete your account or, for crisisFlags, toggle "Safety follow-up memory" off in Settings).
+
+To exercise these rights, email privacy@karmiccompass.app (or app.karmiccompass@gmail.com).</p>
   </div>
 
   <div class="section">
     <p class="section-heading">4. AI Processing &amp; Gemini API — Exact Data Sent</p>
-    <p class="section-body">All AI requests are routed through our secure proxy server (Google Cloud Run, us-central1). The proxy applies a regex-based PII filter to scrub email addresses, phone numbers, card numbers, and SSN patterns before forwarding to Google's AI models. Safety filters (BLOCK_MEDIUM_AND_ABOVE) are applied to every request server-side.
+    <p class="section-body">All AI requests are routed through our secure proxy server (Google Cloud Run, us-central1). The proxy applies a regex-based PII filter to scrub email addresses, phone numbers, card numbers, and SSN patterns from text before forwarding to Google's AI models. Safety filters (BLOCK_MEDIUM_AND_ABOVE for harassment, hate speech, sexually explicit, and dangerous content) are applied to every request server-side. The proxy does not permanently store message content.
 
-(a) ARYA CHAT: System prompt includes name, date of birth, gender, country, intention, karma/dharma scores, mood history, life digest, topic preferences, unresolved emotional threads, commitments (up to 3), personal notes (up to 50), session history, recent journal entries (up to 30), AI insights, and selected reply language. Up to 40 recent chat messages are included as conversation history. Images are included as inline base64 data.
+Primary AI provider: Google Cloud Vertex AI (us-central1), accessed via Application Default Credentials. Fallback: Google Gemini Developer API (API-key based). Vertex AI customer content is excluded from Google's model training per Google Cloud Terms (https://cloud.google.com/terms/data-processing-addendum).
 
-(b) VOICE TRANSCRIPTION: Your audio recording as base64 data, with a transcription instruction. No profile data is included.
+Below is the exact data sent to Gemini for each feature:
 
-(c) JOURNAL ANALYSIS: Journal entry text, profile fields, quiz history, earned badges, karma points, and recent journal entries.
+(a) ARYA CHAT (mentor_chat): The system prompt includes — your name, date of birth, gender, country, stated intention, karma/dharma scores, recent mood history, AI-generated life digest, inferred topic preferences, unresolved emotional threads, recent challenge data, starred message count, feedback context, active commitments (up to 3), personal notes you asked Arya to remember (up to 50), session history summaries, chat memory summary, last karma snapshot, recent journal entries (up to 30, capped at 600 chars each), AI-generated insights, and your selected reply language. Up to 40 recent chat messages are included as conversation history. Your current message (with a language instruction prefix) is the user turn. If you attach an image, it is included as inline base64 data.
 
-(d) DAILY INSIGHT / WEEKLY NARRATIVE / LIFE REPORT: Journal excerpts, AI digest fields, chat memory, and session data.
+(b) VOICE TRANSCRIPTION (journal_transcribe): Your audio recording as inline base64 data, with a transcription instruction. No profile data is included.
 
-(e) ARYA MEMORY: Your psychological digest, recent journal excerpts, and existing memory summary.
+(c) JOURNAL ANALYSIS (journal_analysis): Your journal entry text, profile fields (name, dob, gender, country, intention), quiz history, earned badges, karma points, and recent journal entries.
 
-(f) HOROSCOPE: Your zodiac sign (derived from date of birth) and the current date. No journal or chat content.
+(d) DAILY INSIGHT / WEEKLY NARRATIVE / LIFE REPORT (daily_insight, report_generation): Journal excerpts, AI digest fields, chat memory, and session data.
 
-(g) QUIZ GENERATION: No personal data — general thematic context only.
+(e) ARYA MEMORY (memory_summary, memory_digest_update): Your psychological digest, recent journal excerpts, and existing memory summary.
 
-(h) EXPORT — OPTIONAL ARYA LETTER: A journey summary (scores, digest overview). Raw journal entries are not included.
+(f) HOROSCOPE (horoscope): Your zodiac sign (derived from date of birth) and the current date. No journal or chat content.
 
-All API calls use Firebase ID token authentication. Requests use TLS encryption in transit.</p>
+(g) QUIZ GENERATION (quiz_generation, quiz_generation_hard): No personal data included — general thematic context only.
+
+(h) EXPORT — OPTIONAL ARYA LETTER: A journey summary (scores, digest overview) is sent to Gemini. Raw journal entries are not included.
+
+All API calls use Firebase ID token authentication (Bearer token in Authorization header). App Check tokens are attached where available. Requests use TLS encryption in transit.</p>
   </div>
 
   <div class="section">
     <p class="section-heading">5. Data Export</p>
-    <p class="section-body">The "Export Data" feature generates a PDF report containing your journal entries, chat history, and wellness summary. The PDF is generated on-device. If you include an optional personalised letter from Arya, one additional AI call is made using a journey summary (not raw journal text). The exported file is unencrypted. We do not transmit or receive the exported file on our servers.</p>
+    <p class="section-body">The "Export Data" feature in Settings generates a PDF report containing your journal entries, chat history with Arya, and wellness summary.
+
+If you choose to include an optional personalised cover letter from Arya, generating that letter requires an additional AI processing call to Google's Gemini API, using a summary of your journey (not raw journal text). The rest of the PDF is generated entirely on-device from your locally cached data without any network requests.
+
+The exported file is unencrypted. We do not transmit or receive the exported file on our servers. Once shared, you are solely responsible for the security and further distribution of that file.</p>
   </div>
 
   <div class="section">
     <p class="section-heading">6. Data Storage &amp; Security</p>
-    <p class="section-body">Your data is stored using Google Firebase (Firestore and Firebase Storage), protected by Google's enterprise-grade security infrastructure. All data is encrypted in transit using TLS and encrypted at rest. We use Firestore security rules to restrict access to authorised users only.
+    <p class="section-body">Your data is stored by Diksha Dutt (operating as KarmicCompass) using Google Firebase (Firestore database and Firebase Storage), protected by Google's enterprise-grade security infrastructure. All data is encrypted in transit using TLS and encrypted at rest.
 
-No system is completely secure. In the event of a suspected breach, contact us immediately at app.karmiccompass@gmail.com.</p>
+We use authentication requirements and Firestore security rules to restrict access to personal data to authorised users only.
+
+Despite these measures, no system is completely secure. We encourage you to use a strong, unique password and protect your account credentials. In the event of a suspected breach, contact us immediately at app.karmiccompass@gmail.com. See our Breach Runbook at karmiccompass.app/privacy/BREACH_RUNBOOK for our 72-hour GDPR Art. 33 response process.</p>
   </div>
 
   <div class="section">
     <p class="section-heading">7. Incognito Mode</p>
     <p class="section-body">When Incognito Mode is active:
 
-• Your chat messages with Arya are NOT saved to our cloud servers.
-• Voice transcriptions and images from Incognito sessions are processed for the AI response only and not stored.
+• Your chat messages with Arya are NOT saved to our cloud servers or your Firestore profile.
+
+• Voice transcriptions and images generated or attached during Incognito sessions are processed for the AI response only and are not stored in your profile.
+
 • Conversation content exists only in your device's local session memory and is discarded when you exit the chat.
+
+• The App does not use product analytics SDKs (e.g. Mixpanel, Amplitude, Segment). No session content or behavioural event data from Incognito sessions is collected.
+
 • Crash and error reports (Sentry) are still collected if the App encounters an unexpected error, but these reports do not include conversation content.
+
+• Safety or abuse-prevention logging at the server proxy layer may still occur where legally required.
 
 Your journal entries and profile data are not affected by Incognito Mode.</p>
   </div>
 
   <div class="section">
-    <p class="section-heading">8. Third-Party Services</p>
-    <p class="section-body">• Google Firebase (Authentication, Firestore, Storage, Cloud Run, Cloud Functions, App Check, Vertex AI / Gemini API) — core infrastructure.
-• RevenueCat — subscription management. Uses your Firebase UID as app user ID.
-• Sentry — crash and error monitoring. Firebase UIDs are pseudonymised (SHA-256, 16 hex chars). PII is scrubbed before sending.
-• Apple App Store / Google Play — distribution and billing.
-• Google Sign-In and Apple Sign-In — optional authentication.
-• Google Fonts CDN — app fonts loaded at startup.
-• Gmail SMTP (server-side only) — used to send account deletion verification emails.
-• Expo (Expo Application Services) — mobile app builds and over-the-air updates. Processes device update metadata; no journal content.
-• Vercel — hosting for the karmiccompass.app marketing and account-deletion website. Processes standard web server request logs (IP address, user agent) for the website only.
+    <p class="section-heading">8. Third-Party Services (Sub-Processors)</p>
+    <p class="section-body">We engage the following sub-processors. The versioned register is published at karmiccompass.app/privacy/SUBPROCESSORS.
 
-These providers act as our sub-processors and may process your data in the United States and other countries.</p>
+• Firebase / Google Cloud (Google LLC) — Authentication, Firestore, Storage, Cloud Run, Cloud Functions, App Check. Purpose: core infrastructure. Data shared: all profile, journal, chat, and account data. Location: us-central1 (United States). Transfer mechanism: Google Cloud Standard Contractual Clauses (SCCs) per cloud.google.com/terms/data-processing-addendum.
+
+• Google Cloud Vertex AI (Google LLC) — primary AI model provider. Purpose: AI responses, voice transcription, image analysis, insights, horoscope, quiz generation. Data shared: prompt content as detailed in §4. Location: us-central1 (United States). Transfer mechanism: Google Cloud SCCs. Vertex AI customer content is excluded from Google's model training per Google Cloud Terms.
+
+• Google Gemini Developer API (Google LLC) — fallback AI model provider used when Vertex AI is unavailable. Purpose: same as Vertex AI. Data shared: same as Vertex AI. Location: United States. Transfer mechanism: Google API Services User Data Policy / Google's standard terms.
+
+• RevenueCat (RevenueCat, Inc.) — subscription management and entitlement verification. Purpose: subscription billing state, trial state, restore-purchases. Data shared: Firebase UID (used as app user ID), receipt data from Apple/Google. Location: United States. Transfer mechanism: RevenueCat DPA / SCCs.
+
+• Sentry (Functional Software, Inc., d/b/a Sentry) — crash and error monitoring. Purpose: triage stability and error reports. Data shared: SHA-256-pseudonymised Firebase UID (16 hex chars), error stack traces with sensitive-key redaction, truncated error messages (≤120 chars). Location: United States. Transfer mechanism: Sentry DPA with SCCs.
+
+• Expo Push Service (Expo, Inc.) — push notification relay. Purpose: deliver Compass push notifications to APNs / FCM. Data shared: Expo Push Token, notification title and body (generic copy, no personal content). Location: United States. Transfer mechanism: Expo Terms / SCCs.
+
+• Gmail / Google Workspace SMTP (Google LLC) — server-side only. Purpose: deliver account-deletion OTP emails. Data shared: your registered email address, the 6-digit OTP, message text. Location: United States. Transfer mechanism: Google Workspace DPA / SCCs.
+
+• Apple App Store In-App Purchase (Apple Inc.) — iOS distribution and billing. Purpose: subscription processing on iOS. Data shared: per Apple's terms (we do not see card details). Location: per Apple. Transfer mechanism: Apple's standard developer terms and Apple's privacy policy.
+
+• Google Play In-App Billing (Google LLC) — Android distribution and billing. Purpose: subscription processing on Android. Data shared: per Google Play terms (we do not see card details). Location: per Google. Transfer mechanism: Google Play Developer Distribution Agreement.
+
+Auxiliary providers:
+• Google Fonts CDN — app fonts loaded at startup (no personal data beyond device IP).
+• Google Sign-In / Apple Sign-In — optional OAuth authentication.
+
+These providers may process your data in the United States and other countries. We share data with them only to the extent necessary to operate the App. The current versioned sub-processor list (with effective dates) is maintained at karmiccompass.app/privacy/SUBPROCESSORS.</p>
   </div>
 
   <div class="section">
     <p class="section-heading">9. Data Retention</p>
-    <p class="section-body">• Account &amp; profile data, journal entries, chat messages, AI-generated data, wellness data: retained for active account lifetime → deleted immediately on account deletion.
+    <p class="section-body">Retention periods by data category:
+
+• Account &amp; profile data (name, dob, gender, country, intention, language preference, scores, settings): active account lifetime → deleted immediately on account deletion from active systems.
+
+• Journal entries and chat messages (including archived chat): active account lifetime → deleted immediately on account deletion.
+
+• AI-generated data (life digest, insights, session summaries, memory, reports): active account lifetime → deleted with account.
+
+• Wellness &amp; behavioural data (mood history, quiz history, badges, challenges, preferred topics): active account lifetime → deleted with account.
+
+• Crisis signal records (≤100 char excerpt + timestamp in crisisFlags): auto-expire after 90 days; also deleted with account; user-deletable at any time via Settings → Privacy.
+
 • Voice audio files: deleted from your device immediately after transcription — never stored on our servers.
-• Image data: not stored permanently — used transiently for AI processing only.
-• Crisis signal records: deleted with account.
+
+• Image data: not stored permanently on our servers — used transiently for AI processing only.
+
+• Push notification tokens (Expo Push Tokens): active account lifetime → deleted with account.
+
+• Abuse-prevention IP-hashes (deletion OTP rate-limit): retained for the rate-limit window only (typically minutes to a few hours), then purged.
+
+• AI usage quota (aiUsage/{uid}): deleted with account.
+
+• Device trial record (deviceTrials/{deviceId}): deleted with account.
+
 • Feedback submissions: retained up to 2 years.
+
+• Account deletion OTP (deletionRequests/{uid}): deleted within 15 minutes of use (or expiry).
+
+• On-device AI caches (MMKV): cleared on logout and account deletion.
+
+• Notification ID registry (AsyncStorage): cleared on logout.
+
+• Passcode and lockout data (Keychain/Keystore): cleared when passcode is removed or account is deleted.
+
+• Device identifier (Keychain/Keystore, linked in deviceTrials): deleted with account from Firestore; persists in Keychain/Keystore until manually cleared by device reset.
+
 • Subscription records (RevenueCat / financial): retained as required by financial and tax law (typically 7 years).
+
+• Support communications: retained up to 2 years after resolution.
+
 • Crash/error logs (Sentry): per Sentry's retention policy (typically up to 90 days).
-• Encrypted backup copies: may persist up to 90 days after account deletion before being purged from Google's backup infrastructure.</p>
+
+• Encrypted backup copies: may persist up to 90 days after account deletion before being purged from Google's backup infrastructure.
+
+Data may be retained beyond these periods where required by law, fraud prevention, security investigations, or dispute resolution.
+
+A full per-collection retention schedule is published at /docs/privacy/RETENTION.md.</p>
   </div>
 
   <div class="section">
     <p class="section-heading">10. Screen Capture Protection</p>
-    <p class="section-body">The App automatically blocks screenshots and screen recordings on the Journal, Arya Chat, Arya Memory, and Passcode screens while they are active. This protection is enforced at the operating system level.</p>
+    <p class="section-body">To protect the privacy of your personal content, the App automatically blocks screenshots and screen recordings on the following screens while they are active: Journal (write/view), Arya Chat, Arya Memory, and Passcode entry.
+
+This protection is enforced at the operating system level. It applies to all screen recording, screenshot, and screen-sharing mechanisms on your device while you are viewing these screens.</p>
   </div>
 
   <div class="section">
     <p class="section-heading">11. Account Deletion</p>
     <p class="section-body">You can delete your account via two routes:
 
-(a) In-app: Settings → Account → Delete Account (requires active login). Immediately deletes all data.
+(a) In-app: Settings → Account → Delete Account (requires active login). This calls our deleteAccount Cloud Function, which immediately deletes all data listed below.
 
-(b) Email-based: if you cannot log in, contact app.karmiccompass@gmail.com or use the "Request Account Deletion" option in the App. We send a 6-digit verification code to your registered email (valid 15 minutes).
+(b) Email-based: if you cannot log in, contact app.karmiccompass@gmail.com or use the "Request Account Deletion" option in the App. We send a 6-digit verification code to your registered email (valid 15 minutes). For abuse prevention, your IP address is SHA-256 hashed (truncated to 32 hex characters) and stored briefly to rate-limit OTP requests; the raw IP is never persisted. Upon confirmation, our confirmDeletion Cloud Function immediately deletes all data listed below.
 
 Data deleted by both routes:
-• All documents in chatArchive, insights, and reports subcollections
-• aiUsage document
-• All feedback documents
-• All deviceTrials records
-• The main users/{uid} profile document
+• All documents in users/{uid}/chatArchive subcollection
+• All documents in users/{uid}/insights subcollection
+• All documents in users/{uid}/reports subcollection
+• aiUsage/{uid} document
+• ttsUsage/{uid} document
+• All documents in feedback where uid matches
+• All documents in deviceTrials where uid matches
+• The users/{uid} main document (entire profile, including push tokens and crisisFlags)
 • Your Firebase Authentication account
 
-Residual data in encrypted Google Cloud backups may persist for up to 90 days. Subscription billing records are retained per applicable financial law.</p>
+Residual data in encrypted Google Cloud backups may persist for up to 90 days. Subscription billing records are retained per RevenueCat and applicable financial law.</p>
   </div>
 
   <div class="section">
     <p class="section-heading">12. International Data Transfers</p>
-    <p class="section-body">KarmicCompass uses cloud infrastructure primarily in the United States (Google Firebase, Cloud Run, Gemini API, Sentry, RevenueCat). Your data may be transferred to and processed in countries with different data protection standards.
+    <p class="section-body">Karmic Compass is operated from India and uses cloud infrastructure primarily in the United States (Google Firebase, Google Cloud Run, Vertex AI / Gemini API, Sentry, RevenueCat, Expo Push Service). Your data may be transferred to, stored in, and processed in countries with different data protection standards than your own.
 
-Transfer safeguards:
-• EU / EEA &amp; UK: Google's Standard Contractual Clauses (SCCs) and adequacy decisions.
-• India (DPDPA 2023): Google Cloud infrastructure subject to Google's data processing terms.
-• Brazil (LGPD): Google's DPA and SCCs.
-• Canada (PIPEDA): contractual obligations equivalent to PIPEDA standards.
-• UAE, Saudi Arabia, Turkey, Mexico, Thailand: appropriate contractual and technical safeguards consistent with applicable local requirements.
+Transfer safeguards by region:
+
+• EU / EEA &amp; UK: we rely on Google's Standard Contractual Clauses (SCCs) and, where applicable, adequacy decisions for transfers to Google's processing infrastructure. Google's applicable DPA and SCCs are available at cloud.google.com/terms/data-processing-addendum.
+
+• India (DPDPA 2023): cross-border data transfers are permitted to countries not blocked by the Government of India. We process your data on Google Cloud infrastructure subject to Google's data processing terms.
+
+• Brazil (LGPD): transfers are made under contract with adequate guarantees, including Google's DPA and SCCs.
+
+• Canada: transfers are made to service providers bound by contractual obligations equivalent to PIPEDA standards.
+
+• UAE (Federal Law No. 45/2021): transfers are made to jurisdictions with adequate protection or under appropriate contractual safeguards consistent with the UAE Data Office's requirements.
+
+• Saudi Arabia (Saudi PDPL): we take appropriate contractual and technical measures when transferring data outside the Kingdom, consistent with NDMO transfer rules.
+
+• Turkey (KVKK): data transfers outside Turkey are made only where the destination country offers adequate protection or, if not, with your explicit consent or through a written undertaking approved by the Turkish Personal Data Protection Authority.
+
+• Mexico (LFPDPPP): transfers to third parties outside Mexico are made under data transfer agreements ensuring equivalent protection or with your consent.
+
+• Thailand (PDPA): international transfers are made under adequate protection standards or appropriate safeguards as required by the PDPA.
+
+• All other jurisdictions: we rely on contractual safeguards with our sub-processors and, where required, seek your consent for cross-border transfers.
 
 By using the App, you acknowledge that your data is processed in the United States and other countries where our sub-processors operate.</p>
   </div>
 
   <div class="section">
     <p class="section-heading">13. Your Privacy Rights by Region</p>
-    <p class="section-body">To exercise any right, contact app.karmiccompass@gmail.com. We respond within 30 days.
+    <p class="section-body">The following rights apply depending on your jurisdiction. To exercise any right, contact app.karmiccompass@gmail.com or privacy@karmiccompass.app. We respond within 30 days (or sooner where law requires). Identity verification may be required.
 
-EU / EEA (GDPR): Access, correct, erase, restrict, port, object, withdraw consent, lodge a complaint (edpb.europa.eu).
-UK (UK GDPR): Same as EU GDPR above. Lodge complaints with the ICO (ico.org.uk).
-India (DPDPA 2023 / SPDI Rules 2011): Access, correct, erase personal data. Raise grievances with our Grievance Officer (see §17). Health-adjacent data is classified as Sensitive Personal Data with heightened protection.
-USA — California (CCPA / CPRA): Know, delete, correct, opt out of sale or sharing (we do not sell or share data for advertising), non-discrimination.
-Brazil (LGPD): Confirmation, access, correction, anonymisation, portability, deletion, revocation of consent. Lodge complaints with ANPD (gov.br/anpd).
-Canada (PIPEDA / Quebec Law 25): Access, correct, withdraw consent, portability (Quebec). Lodge complaints with the OPC (priv.gc.ca).
-Australia (Privacy Act 1988): Access, correct personal information. Lodge complaints with the OAIC (oaic.gov.au).
-South Africa (POPIA): Access, correct, delete, object. Lodge complaints with the Information Regulator (inforegulator.org.za).
-Singapore (PDPA 2021): Access, correct, withdraw consent, portability. Lodge complaints with the PDPC (pdpc.gov.sg).
-Japan (APPI 2022): Disclosure, correction, deletion, cessation of use. Lodge complaints with the PPC (ppc.go.jp).
-South Korea (PIPA): Access, correct, delete, suspend processing. Minimum age 14. Lodge complaints with the PIPC (pipc.go.kr).
-UAE (PDPL): Access, correct, delete, object, withdraw consent. Lodge complaints with the UAE Data Office (dataoffice.ae).
-Saudi Arabia (PDPL): Access, correct, delete, object, withdraw consent. Lodge complaints with the NDMO (ndmo.gov.sa).
-Turkey (KVKK): Know, access, rectify, delete, object, claim compensation. Lodge complaints with the KVKK (kvkk.gov.tr).
-Mexico (LFPDPPP): ARCO rights (Access, Rectification, Cancellation, Opposition). Lodge complaints with INAI (inai.org.mx).
-Thailand (PDPA): Access, correct, delete, restrict, port, object, withdraw consent. Lodge complaints with the PDPC (pdpc.or.th).</p>
+── EU / EEA (GDPR) ──
+Right to access, correct, erase ("right to be forgotten"), restrict, port, and object. Right to withdraw consent at any time. Right not to be subject to solely automated decisions producing legal or similarly significant effects (see §3a). Right to lodge a complaint with your local supervisory authority (list at edpb.europa.eu).
+
+── United Kingdom (UK GDPR + Data Protection Act 2018) ──
+Same rights as EU GDPR above. Lodge complaints with the Information Commissioner's Office (ico.org.uk).
+
+── India (DPDPA 2023 / IT Act / SPDI Rules 2011) ──
+Right to access, correct, and erase your personal data. Right to nominate a representative. Right to raise grievances with our Grievance Officer (see §17). Right to lodge a complaint with the Data Protection Board of India once operational. Health-adjacent data held by us is classified as Sensitive Personal Data under the SPDI Rules and is handled with heightened protection.
+
+── United States — California (CCPA / CPRA) ──
+Right to know, right to delete, right to correct, right to opt out of sale or sharing (we do not sell or share data for cross-context behavioural advertising), right to limit use of sensitive personal information, right to non-discrimination. Submit requests at app.karmiccompass@gmail.com.
+
+── Brazil (LGPD) ──
+Right to confirmation of processing, access, correction, anonymisation, portability, deletion, information about third parties, and to revoke consent. Lodge complaints with the Autoridade Nacional de Proteção de Dados (gov.br/anpd).
+
+── Canada (PIPEDA / Quebec Law 25) ──
+Right to access, correct, and withdraw consent. Quebec residents have additional rights under Law 25 including portability, right to be informed of automated decision-making, and the right to de-index. Lodge complaints with the Office of the Privacy Commissioner of Canada (priv.gc.ca).
+
+── Australia (Privacy Act 1988 + Australian Privacy Principles) ──
+Right to access and correct personal information held about you. Right to anonymity where practicable. Nothing in these Terms excludes applicable non-excludable consumer guarantees under Australian Consumer Law. Lodge complaints with the Office of the Australian Information Commissioner (oaic.gov.au).
+
+── South Africa (POPIA) ──
+Right to access, correct, delete, and object to processing. Lodge complaints with the Information Regulator (inforegulator.org.za).
+
+── Singapore (PDPA 2012, amended 2021) ──
+Right to access and correct personal data. Right to withdraw consent (with reasonable notice). Right to data portability (where applicable). Lodge complaints with the Personal Data Protection Commission (pdpc.gov.sg).
+
+── Japan (APPI, amended 2022) ──
+Right to disclosure, correction, addition, deletion, cessation of use, and removal. Right to have third-party provision stopped. Lodge complaints with the Personal Information Protection Commission (ppc.go.jp).
+
+── South Korea (PIPA) ──
+Right to access, correct, delete, and suspend processing. Minimum age for consent is 14; users under 14 require legal guardian consent. Lodge complaints with the Personal Information Protection Commission (pipc.go.kr).
+
+── United Arab Emirates (UAE PDPL — Federal Law No. 45 of 2021) ──
+Right to access, correct, and request deletion of personal data. Right to object to processing. Right to withdraw consent. Lodge complaints with the UAE Data Office (dataoffice.ae).
+
+── Kingdom of Saudi Arabia (Saudi PDPL — issued by Royal Decree M/19, in force 2023) ──
+Right to access, correct, and request deletion. Right to object to processing. Right to withdraw consent. Lodge complaints with the Saudi National Data Management Office (ndmo.gov.sa).
+
+── Turkey (KVKK — Law No. 6698) ──
+Right to know whether personal data is processed, to access, to rectify, to delete or destroy, to object to automated processing, and to claim compensation for damages. Lodge complaints with the Personal Data Protection Authority (kvkk.gov.tr).
+
+── Mexico (LFPDPPP — Federal Law on Protection of Personal Data Held by Private Parties) ──
+ARCO rights: right to Access, Rectification, Cancellation, and Opposition. Right to withdraw consent. Lodge complaints with the Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (inai.org.mx).
+
+── Thailand (PDPA — Personal Data Protection Act B.E. 2562, 2022) ──
+Right to access, correct, delete, restrict, port, and object to processing. Right to withdraw consent. Lodge complaints with the Personal Data Protection Committee (pdpc.or.th).
+
+── China (PIPL) ──
+Note: We do not actively market to or target users in mainland China. If you are accessing the App from mainland China, you acknowledge that your data is processed and stored outside mainland China and that cross-border data transfer restrictions under the PIPL may affect your use of the App.
+
+── All other jurisdictions ──
+We aim to apply the standards of the most protective applicable law as a baseline for all users. Contact us at app.karmiccompass@gmail.com to exercise any rights applicable in your country.</p>
   </div>
 
   <div class="section">
     <p class="section-heading">14. Children's Privacy</p>
-    <p class="section-body">We do not knowingly collect personal data from users below the applicable minimum age without verifiable parental or guardian consent.
+    <p class="section-body">The minimum age to use the App varies by jurisdiction (see Terms §2). We do not knowingly collect personal data — including voice recordings or images — from users below the applicable minimum age without verifiable parental or guardian consent.
 
-Minimum age requirements:
-• EU / EEA (GDPR Art. 8): 16 years (or lower member state minimum, not below 13).
+Guideline minimums (you confirm you meet your local minimum at onboarding; we do not perform proactive age verification beyond self-attestation):
+• EU / EEA (GDPR Art. 8): 16 years, or lower minimum set by member state (not below 13), requires verifiable parental consent below the applicable threshold.
 • South Korea (PIPA): 14 years.
-• Brazil (LGPD / ECA): 12 years with parental consent; enhanced protections for under-18.
-• All other jurisdictions: 13 years.
+• Brazil (LGPD / ECA): under 12 requires parental consent; 12–18 have enhanced protections.
+• All other jurisdictions: 13 years (consistent with COPPA and equivalent laws).
 
-If we become aware that we have collected data from a user below the applicable minimum age without parental consent, we will delete it promptly. Contact app.karmiccompass@gmail.com if you have concerns.</p>
+If we become aware that we have collected personal data from a user below the applicable minimum age without parental consent, we will delete it promptly. Contact app.karmiccompass@gmail.com if you have concerns.</p>
   </div>
 
   <div class="section">
     <p class="section-heading">15. Data Breach Response</p>
-    <p class="section-body">In the event of a personal data breach affecting your information, we will take immediate steps to contain and investigate the incident, notify affected users and relevant supervisory authorities as required by applicable law, and document the breach and our response. Notification will be sent to the email address associated with your account where required.</p>
+    <p class="section-body">In the event of a personal data breach affecting your information, we will:
+
+• Take immediate steps to contain and investigate the incident.
+
+• Notify relevant supervisory authorities within 72 hours where required by GDPR Art. 33 or equivalent law.
+
+• Notify affected users without undue delay where the breach is likely to result in a high risk to your rights and freedoms (GDPR Art. 34 or equivalent).
+
+• Document the breach and our response in accordance with our legal obligations.
+
+Our full breach decision tree, roles, and notification templates are published at karmiccompass.app/privacy/BREACH_RUNBOOK. Notification will be sent to the email address associated with your account where required.</p>
   </div>
 
   <div class="section">
     <p class="section-heading">16. Changes to This Policy</p>
-    <p class="section-body">We may update this Privacy Policy from time to time. We will notify you of significant changes via an in-app notice or email at least 7 days before the changes take effect. Your continued use of the App after the effective date constitutes your acceptance.</p>
+    <p class="section-body">We may update this Privacy Policy from time to time. We will notify you of significant changes via an in-app notice or email at least 7 days before the changes take effect.
+
+Your continued use of the App after the effective date constitutes your acceptance of the updated policy. If you do not agree, you should stop using the App and delete your account.</p>
   </div>
 
   <div class="section">
-    <p class="section-heading">17. Contact &amp; Grievance Officer</p>
+    <p class="section-heading">17. Contact, Grievance Officer &amp; Representatives</p>
     <p class="section-body">General enquiries, rights requests, and data concerns:
-KarmicCompass Private Limited
-app.karmiccompass@gmail.com
+Diksha Dutt (operating as KarmicCompass)
+Panchkula, Haryana, India
+app.karmiccompass@gmail.com  ·  privacy@karmiccompass.app
 karmiccompass.app
 We aim to respond within 30 days.
 
 Grievance Officer (India — DPDPA 2023 / IT Act 2000 / SPDI Rules 2011):
-In accordance with the Digital Personal Data Protection Act 2023 and the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011, we have designated a Grievance Officer for India.
+In accordance with the Digital Personal Data Protection Act 2023 and the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011 ("SPDI Rules"), we have designated a Grievance Officer for India. The SPDI Rules classify certain data we collect — including health-related and biometric data — as Sensitive Personal Data or Information requiring heightened protection and handling.
 Email: app.karmiccompass@gmail.com
-Please include "GRIEVANCE" in the subject line. We will acknowledge within 48 hours and resolve within 30 days.
+Please include "GRIEVANCE" in the subject line. We will acknowledge your grievance within 48 hours and resolve it within 30 days.
 
-EU / UK Representative: As a non-EU/UK entity, we are not yet required to appoint a formal EU Art. 27 / UK representative as our processing of EU/UK personal data is not large-scale or systematic at this stage. If this changes, we will update this policy with their details.
+India DPDPA contact: contact@karmiccompass.app (Data Protection Board of India correspondence).
 
-Last updated: May 2026</p>
+EU/EEA & United Kingdom availability:
+KarmicCompass is not currently offered in the European Union, European Economic Area, or the United Kingdom. The App is unavailable in those regions on the App Store and Google Play. We have therefore not appointed a representative under GDPR Art. 27 or UK GDPR Art. 27. If you are an EU/EEA/UK resident who has obtained the App through other means, please contact us at privacy@karmiccompass.app — we will respond to your data-subject request as if GDPR applied, and direct you to a representative once one is appointed.
+
+Last updated: 2026-05-28 (v2.2)</p>
+  </div>
+
+  <div class="section">
+    <p class="section-heading">Changelog</p>
+    <p class="section-body">## v2.2 — 2026-05-28
+• §1: added Push Notification Tokens (Expo) and Abuse-Prevention Signals (truncated-IP-hash) inventory categories.
+• §1 + §2: added explicit no-AI-training commitment with Vertex AI customer-content carve-out reference.
+• §3: added Art. 9(2)(c) "vital interests" lawful basis for crisisFlags; 90-day auto-expiry and opt-out (Safety follow-up memory toggle).
+• §3a (NEW): Automated Decision-Making disclosure (GDPR Art. 22) — right to human review, explanation, contestation.
+• §4: added Vertex AI primary / Gemini Developer API fallback distinction and no-training reference.
+• §8: full sub-processor register format — purpose, data shared, location, transfer mechanism for each provider; added Expo Push Service, Gmail/Workspace SMTP, Apple/Google IAP; pointer to versioned register at /privacy/SUBPROCESSORS.
+• §9: added retention rows for push tokens and abuse-prevention IP-hashes; added 90-day auto-expiry for crisisFlags.
+• §11: added IP-hash rate-limit note for email-based deletion.
+• §15: GDPR Art. 33 72-hour timeline; pointer to /privacy/BREACH_RUNBOOK.
+• §17: replaced "not yet required" EU/UK representative language with explicit Art. 27 placeholders flagged for production; added postal address placeholder; added privacy@karmiccompass.app.
+• Updated "Last updated" to 2026-05-28; tagged v2.2.
+• New regulatory artefacts published: /privacy/DPIA, /privacy/RoPA, /privacy/BREACH_RUNBOOK, /privacy/SUBPROCESSORS.
+
+## v2.1 — May 2026
+• Prior version (pre-r257 audit fixes).</p>
   </div>
 
 </main>
 
 <footer>
   <div class="footer-inner">
-    <span class="footer-copy">© 2026 KarmicCompass Private Limited</span>
+    <span class="footer-copy">© 2026 Diksha Dutt (operating as KarmicCompass)</span>
     <div class="footer-links">
       <a href="/terms">Terms of Service</a>
       <a href="/privacy">Privacy Policy</a>
