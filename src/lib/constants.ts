@@ -10,7 +10,7 @@ export const APP_STORE_URL = "" as const;
 export const PLAY_STORE_URL = "" as const;
 export const TESTFLIGHT_URL = "" as const;
 
-export const X_SOCIAL_URL = "https://x.com/CompassKarmic" as const;
+export const X_SOCIAL_URL = "https://x.com/appkarmic" as const;
 export const INSTAGRAM_URL = "https://instagram.com/app.karmiccompass" as const;
 
 export const SECTION_IDS = {
