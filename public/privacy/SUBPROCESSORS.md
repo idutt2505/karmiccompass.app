@@ -1,7 +1,7 @@
 # Sub-Processor Register
 
 **Controller:** Diksha Dutt (operating as KarmicCompass, sole proprietor, Panchkula, Haryana, India)
-**Version:** v2.2
+**Version:** v1.1
 **Effective from:** 2026-05-28
 **Maintainer:** privacy@karmiccompass.app
 **Update policy:** users will be notified of any new sub-processor at least 7 days before processing begins, via in-app notice or email (Privacy Policy §16).
@@ -50,7 +50,7 @@ This register is the authoritative version of Privacy Policy §8. Where the two 
 
 ## Change log
 
-### 2026-05-28 — v2.2
+### 2026-05-28 — v1.1
 - Formalised Expo Push Service entry (previously implicit in Privacy Policy §8).
 - Added Gmail/Google Workspace SMTP as explicit sub-processor (previously footnoted).
 - Separated Google Cloud Vertex AI (primary) from Google Gemini Developer API (fallback) — they have different terms.

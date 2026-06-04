@@ -2,7 +2,7 @@
 
 **Controller:** Diksha Dutt (operating as KarmicCompass, sole proprietor, Panchkula, Haryana, India)
 **Statutory basis:** GDPR Art. 33 (controller → supervisory authority, 72 hours), Art. 34 (controller → data subject, "without undue delay" where high risk). UK GDPR equivalents. India DPDPA 2023 §8(6). LGPD Art. 48. UAE PDPL Art. 9. Saudi PDPL Art. 20.
-**Version:** v2.2
+**Version:** v1.1
 **Date:** 2026-05-28
 **Owner:** privacy@karmiccompass.app
 
@@ -173,4 +173,4 @@ Run a tabletop exercise **at least every 6 months** with a synthetic incident dr
 
 ---
 
-*Generated: 2026-05-28 (v2.2). Linked from Privacy Policy §6 and §15.*
+*Generated: 2026-05-28 (v1.1). Linked from Privacy Policy §6 and §15.*

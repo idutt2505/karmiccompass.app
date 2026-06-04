@@ -2,7 +2,7 @@
 
 **Controller:** Diksha Dutt (operating as KarmicCompass, sole proprietor, Panchkula, Haryana, India)
 **App:** Karmic Compass (iOS / Android)
-**Version:** v2.2
+**Version:** v1.1
 **Date:** 2026-05-28
 **DPO contact:** privacy@karmiccompass.app
 **Template basis:** ICO DPIA template + GDPR Art. 35
@@ -109,4 +109,4 @@ This DPIA covers the three highest-risk processing activities:
 
 ---
 
-*Generated: 2026-05-28 (v2.2). Linked from Privacy Policy §3.*
+*Generated: 2026-05-28 (v1.1). Linked from Privacy Policy §3.*

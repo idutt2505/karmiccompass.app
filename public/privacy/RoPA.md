@@ -2,7 +2,7 @@
 
 **Controller:** Diksha Dutt (operating as KarmicCompass, sole proprietor, Panchkula, Haryana, India)
 **Article:** GDPR Art. 30 (and equivalent obligations under UK GDPR, LGPD Art. 37, India DPDPA, UAE PDPL).
-**Version:** v2.2
+**Version:** v1.1
 **Date:** 2026-05-28
 **Maintainer:** privacy@karmiccompass.app
 
@@ -60,4 +60,4 @@
 
 ---
 
-*Generated: 2026-05-28 (v2.2). Update on every new processing activity, sub-processor, or data category.*
+*Generated: 2026-05-28 (v1.1). Update on every new processing activity, sub-processor, or data category.*
