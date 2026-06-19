@@ -24,7 +24,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "What does the Compass subscription include?",
-    a: "After your 11-day free trial, Compass is $11/month (pricing may vary by platform and region). It unlocks unlimited Arya messages (trial: 30/day), Deep Memory, Incognito mode, extended summaries (weekly through yearly), full chat history, and all five Align practices without restriction.",
+    a: "After your 11-day free trial, Compass is $11/month (pricing may vary by platform and region). It unlocks up to 400 Arya messages per day (trial: 30/day), Deep Memory, Incognito mode, extended summaries (weekly through yearly), full chat history, and all five Align practices.",
   },
   {
     q: "Can I cancel anytime?",

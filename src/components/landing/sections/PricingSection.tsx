@@ -27,7 +27,7 @@ const trialFeatures = [
 
 const compassFeatures = [
   "Everything in the trial",
-  "Unlimited Arya messages — no daily cap",
+  "Up to 400 Arya messages per day",
   "Deep Memory — Arya remembers your full story",
   "Incognito Mode — reflect without saving",
   "Extended Summaries — weekly through yearly",

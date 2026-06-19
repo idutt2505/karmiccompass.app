@@ -170,7 +170,7 @@ export function AppPreviewSection() {
           {[
             { label: "free trial duration", stat: "11 days" },
             { label: "Arya messages · trial", stat: "30/day" },
-            { label: "Arya messages · Compass", stat: "Unlimited" },
+            { label: "Arya messages · Compass", stat: "Up to 400/day" },
           ].map((item) => (
             <div key={item.label} className="px-6 py-5 text-center">
               <p className="font-serif text-xl text-white/75">{item.stat}</p>
