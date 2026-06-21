@@ -44,7 +44,7 @@ This register is the authoritative version of Privacy Policy §8. Where the two 
 
 | Provider | Service | Notes |
 |---|---|---|
-| EU/UK Art. 27 representative | GDPR representative | **TODO:** appoint Prighter, VeraSafe, or equivalent before EU launch |
+| EU/UK Art. 27 representative | GDPR representative | **Pending — required before EU launch:** appoint Prighter, VeraSafe, or equivalent |
 
 ---
 

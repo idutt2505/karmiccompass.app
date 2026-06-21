@@ -20,10 +20,10 @@ ops step in the Firebase Console.
 | `users/{uid}/insights/*` | AI-derived insights | Same as user doc | Deleted by `deleteUserFootprint` | None. |
 | `users/{uid}/reports/*` | Generated reports | Same as user doc | Deleted by `deleteUserFootprint` | None. |
 | `users/{uid}.crisisFlags[]` | Crisis-keyword markers (GDPR Art. 9) | **90 days per entry** | Scheduled `pruneCrisisFlags` (functions/index.js) | None — runs daily. |
-| `feedback/{doc}` | User-submitted feedback | 365 days | **TTL policy required** on `expireAt` (auto-set by client to createdAt + 365d) | **TODO**: enable Firestore TTL on `feedback.expireAt` in Firebase Console. |
+| `feedback/{doc}` | User-submitted feedback | 365 days | **TTL policy required** on `expireAt` (auto-set by client to createdAt + 365d) | **Action required:** enable Firestore TTL on `feedback.expireAt` in Firebase Console. |
 | `deletionRequests/{uid}` | OTP hash, throttle counters | 7 days | TTL policy on `expireAt` | Verify Firestore TTL policy is active. |
 | `processedWebhookEvents/{eventId}` | RC webhook dedupe markers | 30 days | TTL policy on `expireAt` | Verify Firestore TTL policy is active. |
-| `chatReports/{doc}` | User reports of bad AI responses | 365 days | **TTL policy required** | **TODO**: enable Firestore TTL on `chatReports.expireAt`. |
+| `chatReports/{doc}` | User reports of bad AI responses | 365 days | **TTL policy required** | **Action required:** enable Firestore TTL on `chatReports.expireAt`. |
 | `aiUsage/{uid}` | Per-user daily AI call counters | 60 days rolling | In-doc field pruning (functions/index.js `checkAndIncrementUsage` prunes old day keys) | None. |
 | `aiUsageByDevice/{deviceHash}` | Per-device daily AI counters | 60 days rolling | Same as `aiUsage` | None. |
 | `ttsUsage/{uid}` | Per-user TTS counters | 60 days rolling | Same as `aiUsage` | None. |
