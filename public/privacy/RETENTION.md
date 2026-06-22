@@ -29,7 +29,7 @@ ops step in the Firebase Console.
 | `ttsUsage/{uid}` | Per-user TTS counters | 60 days rolling | Same as `aiUsage` | None. |
 | `rateLimits/{uid}` | Per-uid token bucket | 24 h | TTL via `expireAt` field | Verify TTL policy. |
 | `rateLimitsByIp/{ipHash}` | Per-IP-hash deletion OTP throttle | 2 h | TTL via `expireAt` field | Verify TTL policy. |
-| `deviceTrials/{deviceId}` | Trial-abuse "one trial per device" marker | Indefinite — security-relevant | None | Not subject to TTL — see DPIA §3. |
+| `deviceTrials/{deviceId}` | Trial-abuse "one trial per device" marker | Indefinite — security-relevant | On account deletion the `uid` is scrubbed; the pseudonymous marker is retained | Not subject to TTL — see DPIA §3. Retaining the marker (without the departed user's identity) is what makes the one-trial-per-device rule survive account deletion. |
 | `agent_runs/{doc}` `agent_alerts/{doc}` `supportInbox/{doc}` `sla_breaches/{doc}` `appReviews/{doc}` `agentRateLimits/*` | kc-admin operational data | Per kc-admin retention | kc-admin's responsibility | See kc-admin/docs/RETENTION.md. |
 
 ## Cloud-side / third-party
