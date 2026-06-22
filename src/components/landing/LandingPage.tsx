@@ -1,7 +1,12 @@
 import { Header } from "./Header";
 import { HeroSection } from "./sections/HeroSection";
+import { FeatureShowcase } from "./sections/FeatureShowcase";
+import { AppPreviewSection } from "./sections/AppPreviewSection";
 import { HowItWorksSection } from "./sections/HowItWorksSection";
+import { RealmSection } from "./sections/RealmSection";
+import { TrustSection } from "./sections/TrustSection";
 import { PricingSection } from "./sections/PricingSection";
+import { FAQSection } from "./sections/FAQSection";
 import { SiteFooter } from "./sections/SiteFooter";
 import { ComingSoonProvider } from "./ComingSoonContext";
 import { ComingSoonModal } from "./ComingSoonModal";
@@ -15,8 +20,13 @@ export function LandingPage() {
         <Header />
         <main>
           <HeroSection />
+          <FeatureShowcase />
+          <AppPreviewSection />
           <HowItWorksSection />
+          <RealmSection />
+          <TrustSection />
           <PricingSection />
+          <FAQSection />
         </main>
         <SiteFooter />
         <ComingSoonModal />
