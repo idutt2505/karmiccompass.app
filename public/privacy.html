@@ -141,7 +141,7 @@ H. CRISIS SIGNAL RECORDS (HEALTH-RELATED DATA — GDPR Art. 9)
 • If the App detects crisis-related language (using a keyword list in the app code) in your message, and you are not in Incognito Mode, the first 100 characters of your message and a timestamp are added to a crisisFlags array in your Firestore profile. This is used solely for contextual safety follow-up in future sessions and is never shared externally. See §3 for the lawful basis and your opt-out rights.
 
 I. DEVICE IDENTIFIER (TRIAL ENFORCEMENT)
-• A stable pseudonymous device identifier is generated using a cryptographically random value and stored in your device's Keychain (iOS) / Keystore (Android). It persists across app reinstalls. It is linked to your Firebase UID in our Firestore deviceTrials collection solely to enforce the one-trial-per-device policy. It is NOT an advertising ID (not IDFA or GAID), is not used for tracking across apps or websites, and is never shared with advertising networks.
+• A stable pseudonymous device identifier is generated using a cryptographically random value and stored in your device's Keychain (iOS) / Keystore (Android). It persists across app reinstalls. It is linked to your Firebase UID in our Firestore deviceTrials collection solely to enforce the one-trial-per-device policy. If you delete your account, this marker is retained but your account identity (UID) is removed from it — so the one-trial-per-device protection cannot be reset by deleting and recreating an account. It is NOT an advertising ID (not IDFA or GAID), is not used for tracking across apps or websites, and is never shared with advertising networks.
 
 J. PASSCODE &amp; BIOMETRICS
 • If you set a passcode, the 6-digit code is stored in your device's Keychain/Keystore. Passcode-related lockout state (kc_lockout_until, kc_failed_attempts) is also stored in Keychain/Keystore. These are never transmitted to us.
@@ -369,7 +369,7 @@ These providers may process your data in the United States and other countries. 
 
 • AI usage quota (aiUsage/{uid}): deleted with account.
 
-• Device trial record (deviceTrials/{deviceId}): deleted with account.
+• Device trial record (deviceTrials/{deviceId}): on account deletion your account identity (UID) is removed from it, but the pseudonymous one-trial-per-device marker is retained to prevent trial abuse (legitimate interest).
 
 • Feedback submissions: retained up to 2 years.
 
@@ -381,7 +381,7 @@ These providers may process your data in the United States and other countries. 
 
 • Passcode and lockout data (Keychain/Keystore): cleared when passcode is removed or account is deleted.
 
-• Device identifier (Keychain/Keystore, linked in deviceTrials): deleted with account from Firestore; persists in Keychain/Keystore until manually cleared by device reset.
+• Device identifier (Keychain/Keystore, linked in deviceTrials): its link to your account is removed from Firestore on account deletion (the pseudonymous trial marker itself is retained for trial-abuse prevention — see §9); persists in Keychain/Keystore until manually cleared by device reset.
 
 • Subscription records (RevenueCat / financial): retained as required by financial and tax law (typically 7 years).
 
@@ -418,7 +418,7 @@ Data deleted by both routes:
 • aiUsage/{uid} document
 • ttsUsage/{uid} document
 • All documents in feedback where uid matches
-• All documents in deviceTrials where uid matches
+• deviceTrials: your account identity (UID) is scrubbed from the device marker (the pseudonymous one-trial-per-device marker itself is retained for abuse prevention — see §9)
 • The users/{uid} main document (entire profile, including push tokens and crisisFlags)
 • Your Firebase Authentication account
 
