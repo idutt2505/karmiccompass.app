@@ -66,9 +66,9 @@
 </nav>
 
 <div class="hero">
-  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.1</p>
+  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.2</p>
   <h1 class="hero-title">Privacy Policy</h1>
-  <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-05-28</p>
+  <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-06-24</p>
 </div>
 
 <main>
@@ -135,7 +135,7 @@ F. VOICE TRANSCRIPTIONS
 • When you use the microphone button, your audio is recorded on-device, encoded as base64, and transmitted to our secure proxy server for transcription via Google's Gemini API. The audio data is never written to Firestore or Firebase Storage. The original audio file is deleted from your device immediately after the transcription request is sent. The resulting text transcript is stored as part of your journal entry or chat message.
 
 G. IMAGES
-• When you attach a photo in Arya's chat, it is resized on-device (max 1024×1024px, ~50% quality) and sent as base64 to our proxy for Gemini Vision AI processing. We do not store images as standalone files on our servers. EXIF metadata is not explicitly stripped before transmission.
+• When you attach a photo in Arya's chat, it is resized and re-encoded on-device (max 1024×1024px, ~50% quality) and sent as base64 to our proxy for Gemini Vision AI processing. We do not store images as standalone files on our servers. Because the image is re-encoded on your device before upload, EXIF metadata — including any GPS/location coordinates, device identifiers, and original timestamps — is stripped and is not transmitted.
 
 H. CRISIS SIGNAL RECORDS (HEALTH-RELATED DATA — GDPR Art. 9)
 • If the App detects crisis-related language (using a keyword list in the app code) in your message, and you are not in Incognito Mode, the first 100 characters of your message and a timestamp are added to a crisisFlags array in your Firestore profile. This is used solely for contextual safety follow-up in future sessions and is never shared externally. See §3 for the lawful basis and your opt-out rights.
@@ -175,7 +175,7 @@ R. SUPPORT &amp; DELETION REQUEST DATA
 • Emails you send us, retained to resolve enquiries.
 • For email-based account deletion: a 6-digit OTP, expiry timestamp, and email address are temporarily stored in Firestore (deletionRequests/{uid}) for up to 15 minutes. This document is deleted upon successful deletion.
 
-No-AI-training commitment: Your content is not used to train any AI model — ours or our sub-processors'. Vertex AI customer content is excluded from Google's model training per Google Cloud Terms (https://cloud.google.com/terms/data-processing-addendum).</p>
+No-AI-training commitment: We never use your content to train our own models. Our primary AI provider, Google Cloud Vertex AI, excludes customer content from Google's model training per the Google Cloud Terms (https://cloud.google.com/terms/data-processing-addendum). In the rare event our system temporarily falls back to the Google Gemini Developer API (only when Vertex AI is unavailable), that single request is governed by Google's standard API terms, which may not carry the same no-training guarantee as the Vertex path.</p>
   </div>
 
   <div class="section">
@@ -285,7 +285,9 @@ All API calls use Firebase ID token authentication (Bearer token in Authorizatio
 
 If you choose to include an optional personalised cover letter from Arya, generating that letter requires an additional AI processing call to Google's Gemini API, using a summary of your journey (not raw journal text). The rest of the PDF is generated entirely on-device from your locally cached data without any network requests.
 
-The exported file is unencrypted. We do not transmit or receive the exported file on our servers. Once shared, you are solely responsible for the security and further distribution of that file.</p>
+The exported file is unencrypted. We do not transmit or receive the exported file on our servers. Once shared, you are solely responsible for the security and further distribution of that file.
+
+This Export Data feature is how we fulfil data-portability requests (GDPR Art. 20, LGPD, Quebec Law 25, Singapore PDPA): it provides your data in a portable PDF. The PDF is human-readable rather than a structured machine-readable file; if you need a machine-readable copy to transfer to another service, email privacy@karmiccompass.app and we will provide one.</p>
   </div>
 
   <div class="section">
@@ -324,7 +326,7 @@ Your journal entries and profile data are not affected by Incognito Mode.</p>
 
 • Google Cloud Vertex AI (Google LLC) — primary AI model provider. Purpose: AI responses, voice transcription, image analysis, insights, horoscope, quiz generation. Data shared: prompt content as detailed in §4. Location: us-central1 (United States). Transfer mechanism: Google Cloud SCCs. Vertex AI customer content is excluded from Google's model training per Google Cloud Terms.
 
-• Google Gemini Developer API (Google LLC) — fallback AI model provider used when Vertex AI is unavailable. Purpose: same as Vertex AI. Data shared: same as Vertex AI. Location: United States. Transfer mechanism: Google API Services User Data Policy / Google's standard terms.
+• Google Gemini Developer API (Google LLC) — fallback AI model provider used only when Vertex AI is temporarily unavailable. Purpose: same as Vertex AI. Data shared: same as Vertex AI. Location: United States. Transfer mechanism: Google API Services User Data Policy / Google's standard terms — note this fallback path may not carry the Vertex AI no-training carve-out.
 
 • RevenueCat (RevenueCat, Inc.) — subscription management and entitlement verification. Purpose: subscription billing state, trial state, restore-purchases. Data shared: Firebase UID (used as app user ID), receipt data from Apple/Google. Location: United States. Transfer mechanism: RevenueCat DPA / SCCs.
 
@@ -369,7 +371,7 @@ These providers may process your data in the United States and other countries. 
 
 • AI usage quota (aiUsage/{uid}): deleted with account.
 
-• Device trial record (deviceTrials/{deviceId}): on account deletion your account identity (UID) is removed from it, but the pseudonymous one-trial-per-device marker is retained to prevent trial abuse (legitimate interest).
+• Device trial record (deviceTrials/{deviceId}): on account deletion your account identity (UID) is removed from it, but the pseudonymous one-trial-per-device marker is retained to prevent trial abuse (legitimate interest, GDPR Art. 6(1)(f)). Consistent with storage limitation (Art. 5(1)(e)), this marker contains no personal identifiers, is held no longer than necessary for that anti-abuse purpose, and is reviewed periodically.
 
 • Feedback submissions: retained up to 2 years.
 
@@ -517,7 +519,7 @@ We aim to apply the standards of the most protective applicable law as a baselin
     <p class="section-heading">14. Children's Privacy</p>
     <p class="section-body">The minimum age to use the App varies by jurisdiction (see Terms §2). We do not knowingly collect personal data — including voice recordings or images — from users below the applicable minimum age without verifiable parental or guardian consent.
 
-Guideline minimums (you confirm you meet your local minimum at onboarding; we do not perform proactive age verification beyond self-attestation):
+At onboarding we collect your date of birth and compute your age — a real age gate, not a self-declared checkbox. Users below the applicable minimum age are blocked, and where local law requires it (e.g., India's DPDP Act for under-18s) a parental/guardian-consent step is triggered before the account is activated. Guideline minimums:
 • EU / EEA (GDPR Art. 8): 16 years.
 • South Korea (PIPA): 14 years.
 • Canada (Quebec Law 25): 14 years.
@@ -548,7 +550,7 @@ Our full breach decision tree, roles, and notification templates are published a
     <p class="section-heading">16. Changes to This Policy</p>
     <p class="section-body">We may update this Privacy Policy from time to time. We will notify you of significant changes via an in-app notice or email at least 7 days before the changes take effect.
 
-Your continued use of the App after the effective date constitutes your acceptance of the updated policy. If you do not agree, you should stop using the App and delete your account.</p>
+For routine updates, your continued use of the App after the effective date constitutes acceptance of the updated policy. However, where a change materially alters how we process your data — in particular any new processing of health-related (GDPR Art. 9) data, or a new purpose that requires consent — we will obtain your fresh, explicit consent before that processing begins, rather than relying on continued use. If you do not agree to a change, you can stop using the App and delete your account.</p>
   </div>
 
   <div class="section">
@@ -572,14 +574,23 @@ Please include "GRIEVANCE" in the subject line. We will acknowledge your grievan
 India DPDPA contact: contact@karmiccompass.app (Data Protection Board of India correspondence).
 
 EU/EEA & United Kingdom availability:
-KarmicCompass is not currently offered in the European Union, European Economic Area, or the United Kingdom. The App is unavailable in those regions on the App Store and Google Play. We have therefore not appointed a representative under GDPR Art. 27 or UK GDPR Art. 27. If you are an EU/EEA/UK resident who has obtained the App through other means, please contact us at privacy@karmiccompass.app — we will respond to your data-subject request as if GDPR applied, and direct you to a representative once one is appointed.
+KarmicCompass is not offered or marketed in the European Union, European Economic Area, or the United Kingdom, and the App is not listed on the App Store or Google Play in those regions. We do not target, advertise to, or monitor the behaviour of users in those regions, and we collect no data intended to profile EU/EEA/UK residents. On that basis we have not appointed a representative under GDPR Art. 27 or UK GDPR Art. 27. If you are an EU/EEA/UK resident who has obtained the App through other means, please contact us at privacy@karmiccompass.app and we will honour your data-subject request as if GDPR applied. Should we identify material EU/EEA/UK usage, we will appoint an Art. 27 representative and update this section before continuing to process such data.
 
-Last updated: 2026-05-28 (v1.1)</p>
+Last updated: 2026-06-24 (v1.2)</p>
   </div>
 
   <div class="section">
     <p class="section-heading">Changelog</p>
-    <p class="section-body">## v1.1 — 2026-05-28
+    <p class="section-body">## v1.2 — 2026-06-24
+• §1(G): clarified that on-device re-encoding strips EXIF metadata (GPS/location, device, timestamps) before image upload — it is not transmitted.
+• §4 + §8: scoped the no-AI-training commitment — guaranteed on the primary Vertex AI path; noted the rare Gemini Developer API fallback is governed by Google's standard API terms.
+• §5: linked the Export Data feature to data-portability rights (Art. 20 et al.) and noted the PDF format + machine-readable copy on request.
+• §9: added a storage-limitation statement for the post-deletion device trial marker.
+• §14: replaced "self-attestation" language with the real DOB-based age gate + parental-consent flow.
+• §16: material changes affecting health (Art. 9) data or new consent-based purposes now require fresh explicit consent, not continued-use acceptance.
+• §17: tightened EU/EEA/UK wording — no targeting/monitoring; Art. 27 representative to be appointed if material EU usage is identified.
+
+## v1.1 — 2026-05-28
 • §1: added Push Notification Tokens (Expo) and Abuse-Prevention Signals (truncated-IP-hash) inventory categories.
 • §1 + §2: added explicit no-AI-training commitment with Vertex AI customer-content carve-out reference.
 • §3: added Art. 9(2)(c) "vital interests" lawful basis for crisisFlags; 90-day auto-expiry and opt-out (Safety follow-up memory toggle).
