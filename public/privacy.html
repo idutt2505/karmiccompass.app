@@ -66,7 +66,7 @@
 </nav>
 
 <div class="hero">
-  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.2</p>
+  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.3</p>
   <h1 class="hero-title">Privacy Policy</h1>
   <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-06-24</p>
 </div>
@@ -175,7 +175,7 @@ R. SUPPORT &amp; DELETION REQUEST DATA
 • Emails you send us, retained to resolve enquiries.
 • For email-based account deletion: a 6-digit OTP, expiry timestamp, and email address are temporarily stored in Firestore (deletionRequests/{uid}) for up to 15 minutes. This document is deleted upon successful deletion.
 
-No-AI-training commitment: We never use your content to train our own models, and neither does Google. Our primary AI provider, Google Cloud Vertex AI, excludes customer content from Google's model training per the Google Cloud Terms (https://cloud.google.com/terms/data-processing-addendum). On the rare occasions our system temporarily falls back to the Google Gemini Developer API (only when Vertex AI is unavailable), we use a paid (pay-as-you-go) tier, under which Google does not use your prompts or responses to train or improve its models either.</p>
+No-AI-training commitment: We never use your content to train our own models, and neither does Google. Our primary AI provider, Google Cloud Vertex AI, excludes customer content from Google's model training per the Google Cloud Terms (https://cloud.google.com/terms/data-processing-addendum). On the rare occasions our system temporarily falls back to the Google Gemini Developer API (only when Vertex AI is unavailable), we use a paid (pay-as-you-go) tier, under which Google does not use your prompts or responses to train or improve its models either (per Google's Gemini API Additional Terms, ai.google.dev/gemini-api/terms — we review this commitment annually and on any Google terms change).</p>
   </div>
 
   <div class="section">
@@ -211,7 +211,7 @@ We do NOT sell your personal data to advertisers or third-party data brokers. We
 
 • Contract (GDPR Art. 6(1)(b) / UK GDPR / LGPD Art. 7(V) / DPDPA): processing necessary to provide the App and services you requested, including AI responses, journal analysis, voice transcription, and image analysis.
 
-• Legitimate Interests (GDPR Art. 6(1)(f) / UK GDPR / LGPD Art. 7(IX)): improving the App, crash reporting (Sentry), fraud and trial-abuse prevention (including the truncated-IP-hash rate-limit on the deletion OTP endpoint), and system security — balanced against your rights and expectations. You may object to processing on this basis at any time.
+• Legitimate Interests (GDPR Art. 6(1)(f) / UK GDPR / LGPD Art. 7(IX)): improving the App, crash reporting (Sentry), fraud and trial-abuse prevention (including the truncated-IP-hash rate-limit on the deletion OTP endpoint), and system security — balanced against your rights and expectations through a documented Legitimate Interests Assessment (LIA), summarised in our DPIA at karmiccompass.app/privacy/DPIA. You may object to processing on this basis at any time.
 
 • Consent (GDPR Art. 6(1)(a) / DPDPA / PDPA / APPI): where we rely on your consent — such as for notification permissions and the EU/UK 14-day withdrawal-waiver confirmation — you may withdraw it at any time without affecting prior processing.
 
@@ -220,7 +220,7 @@ We do NOT sell your personal data to advertisers or third-party data brokers. We
 • Legal Obligation (GDPR Art. 6(1)(c)): where processing is required by applicable law (e.g. financial record-keeping, regulatory demands).
 
 Special Category &amp; Sensitive Data (GDPR Art. 9 / UK GDPR / equivalent):
-The App processes mental-health-adjacent content (journal entries, mood check-ins, emotional patterns, crisis signals) and health-adjacent inferences (karma/dharma scores, psychological themes). Under GDPR Art. 9 and equivalent laws, this qualifies as health-related sensitive personal data. We process such data on the basis of your explicit consent (GDPR Art. 9(2)(a)) — given when you actively choose to use these features — except for crisis-flag storage, which is processed under Art. 9(2)(c) "vital interests" (see below). You may withdraw your Art. 9(2)(a) consent at any time by deleting your account.
+The App processes mental-health-adjacent content (journal entries, mood check-ins, emotional patterns, crisis signals) and health-adjacent inferences (karma/dharma scores, psychological themes). Under GDPR Art. 9 and equivalent laws, this qualifies as health-related sensitive personal data. We process such data on the basis of your explicit consent (GDPR Art. 9(2)(a)). That consent is obtained through a dedicated consent screen shown during onboarding, before any journal, mood, or AI feature is used — it explains that your entries may contain health-related data and requires your affirmative agreement to proceed; it is a separate, specific act and is not bundled into general terms acceptance. The one exception is crisis-flag storage, which is processed under Art. 9(2)(c) "vital interests" (see below). You may withdraw your Art. 9(2)(a) consent at any time by deleting your account.
 
 Crisis flags (health data under GDPR Art. 9): The crisisFlags record (up to 100 characters of your message + timestamp) is written to your profile when your message matches a safety keyword. We process this under Art. 9(2)(c) "vital interests" so we can surface immediate safety resources in future sessions. Crisis flags auto-expire after 90 days. You may delete them at any time via Settings → Privacy or by deleting your account. You may also opt out of crisisFlags storage entirely while keeping live in-session safety warnings — toggle "Safety follow-up memory" in Settings.
 
@@ -326,11 +326,11 @@ Your journal entries and profile data are not affected by Incognito Mode.</p>
 
 • Google Cloud Vertex AI (Google LLC) — primary AI model provider. Purpose: AI responses, voice transcription, image analysis, insights, horoscope, quiz generation. Data shared: prompt content as detailed in §4. Location: us-central1 (United States). Transfer mechanism: Google Cloud SCCs. Vertex AI customer content is excluded from Google's model training per Google Cloud Terms.
 
-• Google Gemini Developer API (Google LLC) — fallback AI model provider used only when Vertex AI is temporarily unavailable. Purpose: same as Vertex AI. Data shared: same as Vertex AI. Location: United States. Transfer mechanism: Google API Services User Data Policy / Google's paid-tier API terms. We use the paid (pay-as-you-go) tier, under which Google does not use prompts or responses to train its models.
+• Google Gemini Developer API (Google LLC) — fallback AI model provider used only when Vertex AI is temporarily unavailable. Purpose: same as Vertex AI. Data shared: same as Vertex AI. Location: United States. Transfer mechanism: Google API Services User Data Policy / Google's paid-tier API terms (ai.google.dev/gemini-api/terms). We use the paid (pay-as-you-go) tier, under which Google does not use prompts or responses to train its models.
 
 • RevenueCat (RevenueCat, Inc.) — subscription management and entitlement verification. Purpose: subscription billing state, trial state, restore-purchases. Data shared: Firebase UID (used as app user ID), receipt data from Apple/Google. Location: United States. Transfer mechanism: RevenueCat DPA / SCCs.
 
-• Sentry (Functional Software, Inc., d/b/a Sentry) — crash and error monitoring. Purpose: triage stability and error reports. Data shared: SHA-256-pseudonymised Firebase UID (16 hex chars), error stack traces with sensitive-key redaction, truncated error messages (≤120 chars). Location: United States. Transfer mechanism: Sentry DPA with SCCs.
+• Sentry (Functional Software, Inc., d/b/a Sentry) — crash and error monitoring. Purpose: triage stability and error reports. Data shared: SHA-256-pseudonymised Firebase UID (16 hex chars), error stack traces with sensitive-key redaction, truncated error messages (≤120 chars). User-generated content (journal entries, chat messages) is never sent: a client-side Sentry beforeSend hook scrubs the event extra, contexts, and request fields before transmission. Location: United States. Transfer mechanism: Sentry DPA with SCCs.
 
 • Expo Push Service (Expo, Inc.) — push notification relay. Purpose: deliver Compass push notifications to APNs / FCM. Data shared: Expo Push Token, notification title and body (generic copy, no personal content). Location: United States. Transfer mechanism: Expo Terms / SCCs.
 
@@ -371,7 +371,7 @@ These providers may process your data in the United States and other countries. 
 
 • AI usage quota (aiUsage/{uid}): deleted with account.
 
-• Device trial record (deviceTrials/{deviceId}): on account deletion your account identity (UID) is removed from it, but the pseudonymous one-trial-per-device marker is retained to prevent trial abuse (legitimate interest, GDPR Art. 6(1)(f)). Consistent with storage limitation (Art. 5(1)(e)), this marker contains no personal identifiers, is held no longer than necessary for that anti-abuse purpose, and is reviewed periodically.
+• Device trial record (deviceTrials/{deviceId}): on account deletion your account identity (UID) is removed from it, but the pseudonymous one-trial-per-device marker is retained to prevent trial abuse (legitimate interest, GDPR Art. 6(1)(f)). Consistent with storage limitation (Art. 5(1)(e)): once the UID is removed, the remaining marker is an unlinkable random token that no longer constitutes personal data, so no fixed deletion date is required — it is retained only while the one-trial-per-device control remains operationally necessary.
 
 • Feedback submissions: retained up to 2 years.
 
@@ -509,7 +509,7 @@ ARCO rights: right to Access, Rectification, Cancellation, and Opposition. Right
 Right to access, correct, delete, restrict, port, and object to processing. Right to withdraw consent. Lodge complaints with the Personal Data Protection Committee (pdpc.or.th).
 
 ── China (PIPL) ──
-Note: We do not actively market to or target users in mainland China. If you are accessing the App from mainland China, you acknowledge that your data is processed and stored outside mainland China and that cross-border data transfer restrictions under the PIPL may affect your use of the App.
+Note: We do not market to, target, or monitor users in mainland China, and the App is not listed on mainland-China app stores. On that basis we do not currently undertake PIPL cross-border-transfer formalities. Should we identify material usage from mainland China, we will complete the required PIPL cross-border transfer assessment (or restrict access) before continuing to process such data.
 
 ── All other jurisdictions ──
 We aim to apply the standards of the most protective applicable law as a baseline for all users. Contact us at app.karmiccompass@gmail.com to exercise any rights applicable in your country.</p>
@@ -519,7 +519,7 @@ We aim to apply the standards of the most protective applicable law as a baselin
     <p class="section-heading">14. Children's Privacy</p>
     <p class="section-body">The minimum age to use the App varies by jurisdiction (see Terms §2). We do not knowingly collect personal data — including voice recordings or images — from users below the applicable minimum age without verifiable parental or guardian consent.
 
-At onboarding we collect your date of birth and compute your age — a real age gate, not a self-declared checkbox. Users below the applicable minimum age are blocked, and where local law requires it (e.g., India's DPDP Act for under-18s) a parental/guardian-consent step is triggered before the account is activated. Guideline minimums:
+Karmic Compass is a general-audience wellness app intended for adults; it is not directed to children, contains no child-oriented content, and we do not knowingly market to or collect data from children. At onboarding we collect your date of birth and compute your age — a real age gate, not a self-declared checkbox. Users below the applicable minimum age are blocked at onboarding, so no personal data is collected from them — satisfying COPPA's rule against collecting data from under-13s without verifiable parental consent (we do not collect it at all). Where local law additionally requires consent for older minors (e.g., India's DPDP Act for under-18s), a parental/guardian-consent step is triggered before the account is activated. Guideline minimums:
 • EU / EEA (GDPR Art. 8): 16 years.
 • South Korea (PIPA): 14 years.
 • Canada (Quebec Law 25): 14 years.
@@ -563,7 +563,7 @@ karmiccompass.app
 We aim to respond within 30 days.
 
 DPO / Privacy lead:
-Diksha Dutt — the DPO function is held by the controller (sole proprietor) per GDPR Art. 37(3). To be reassessed if scale or risk increases.
+We are not required to appoint a Data Protection Officer under GDPR Art. 37(1), given our current scale and the EU/EEA/UK non-targeting position described above. Privacy enquiries are handled directly by Diksha Dutt at privacy@karmiccompass.app. We will appoint a DPO if our scale or processing later meets the Art. 37(1) criteria.
 Email: privacy@karmiccompass.app
 
 Grievance Officer (India — DPDPA 2023 / IT Act 2000 / SPDI Rules 2011):
@@ -576,12 +576,21 @@ India DPDPA contact: contact@karmiccompass.app (Data Protection Board of India c
 EU/EEA & United Kingdom availability:
 KarmicCompass is not offered or marketed in the European Union, European Economic Area, or the United Kingdom, and the App is not listed on the App Store or Google Play in those regions. We do not target, advertise to, or monitor the behaviour of users in those regions, and we collect no data intended to profile EU/EEA/UK residents. On that basis we have not appointed a representative under GDPR Art. 27 or UK GDPR Art. 27. If you are an EU/EEA/UK resident who has obtained the App through other means, please contact us at privacy@karmiccompass.app and we will honour your data-subject request as if GDPR applied. Should we identify material EU/EEA/UK usage, we will appoint an Art. 27 representative and update this section before continuing to process such data.
 
-Last updated: 2026-06-24 (v1.2)</p>
+Last updated: 2026-06-24 (v1.3)</p>
   </div>
 
   <div class="section">
     <p class="section-heading">Changelog</p>
-    <p class="section-body">## v1.2 — 2026-06-24
+    <p class="section-body">## v1.3 — 2026-06-24
+• §3: described the dedicated onboarding consent screen behind the Art. 9(2)(a) explicit-consent basis; referenced the documented Legitimate Interests Assessment (LIA) in the DPIA.
+• §4 + §8: linked the Gemini paid-tier no-training commitment to Google's API terms (ai.google.dev/gemini-api/terms) + annual-review note.
+• §8: confirmed the Sentry beforeSend hook scrubs user-generated content (extra/contexts/request).
+• §9: clarified the post-deletion device marker is no longer personal data (unlinkable token), so storage limitation is met without a fixed deletion date.
+• §13: tightened the mainland-China (PIPL) position — no targeting/monitoring; assessment/restriction if material usage appears.
+• §14: stated the app is a general-audience adult app, not directed to children; under-min users are blocked at onboarding (no collection → COPPA satisfied).
+• §17: removed the incorrect DPO self-designation (Art. 37(3)); stated a DPO is not required under Art. 37(1) at current scale.
+
+## v1.2 — 2026-06-24
 • §1(G): clarified that on-device re-encoding strips EXIF metadata (GPS/location, device, timestamps) before image upload — it is not transmitted.
 • §4 + §8: no-AI-training commitment now holds on BOTH paths — Vertex AI (customer-content carve-out) and the rare Gemini Developer API fallback (paid pay-as-you-go tier, under which Google does not train on prompts/responses).
 • §5: linked the Export Data feature to data-portability rights (Art. 20 et al.) and noted the PDF format + machine-readable copy on request.
