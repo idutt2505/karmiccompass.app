@@ -100,7 +100,7 @@ This DPIA covers the three highest-risk processing activities:
 
 | Role | Name | Date | Status |
 |---|---|---|---|
-| DPO / Privacy lead | Diksha Dutt (sole proprietor; DPO function held by the controller per GDPR Art. 37(3); reassess if scale or risk increases) | 2026-05-28 | SIGNED |
+| Privacy lead | Diksha Dutt (sole proprietor; a DPO is not required under GDPR Art. 37(1) at current scale; reassess if scale or risk increases) | 2026-05-28 | SIGNED |
 | Engineering lead | Diksha Dutt | 2026-05-28 | SIGNED |
 | Legal counsel | [pending external review] | — | OPEN |
 | EU Art. 27 rep | Not applicable — EU/UK not served at launch | — | DEFERRED |
@@ -109,4 +109,27 @@ This DPIA covers the three highest-risk processing activities:
 
 ---
 
-*Generated: 2026-05-28 (v1.1). Linked from Privacy Policy §3.*
+## 7. Legitimate Interests Assessment (LIA)
+
+This LIA covers every processing activity the Privacy Policy (§3) relies on the **legitimate-interests** basis (GDPR Art. 6(1)(f)) for: crash/error reporting, fraud & free-trial-abuse prevention, and system security. It is the documented balancing test required by Art. 6(1)(f); summarised in Privacy Policy §3.
+
+### LIA-1 — Crash & error reporting (Sentry)
+- **Purpose test (legitimate?)** Yes — diagnosing and fixing crashes is necessary to provide a stable, safe service. A recognised legitimate interest (Recital 49 cites network/information security).
+- **Necessity test** Yes — there is no less-intrusive way to learn that a real-world crash occurred on a real device. Data minimised: only a salted SHA-256-pseudonymised UID (16 hex), redacted stack traces, and ≤120-char truncated messages are sent; a `beforeSend` hook scrubs `extra`/`contexts`/`request`; journal/chat content is never transmitted.
+- **Balancing test** Interest outweighs impact: data is pseudonymised, content-free, and short-lived; low risk to the data subject, who benefits directly from a more reliable app. Right to object honoured (§3).
+
+### LIA-2 — Fraud & free-trial-abuse prevention (device trial marker + deletion-OTP IP-hash)
+- **Purpose test** Yes — preventing a single device from repeatedly claiming the free trial, and rate-limiting the account-deletion OTP endpoint, protects revenue and account security (Recital 47 expressly recognises fraud prevention as a legitimate interest).
+- **Necessity test** Yes — a per-device marker is the minimal signal needed; it holds no personal identifiers once the UID is removed (an unlinkable random token). The OTP rate-limit uses only a truncated, irreversible IP hash, kept minutes-to-hours.
+- **Balancing test** Interest outweighs impact: the retained marker is not personal data, cannot be used to track or profile, and exists solely to enforce a fair one-trial-per-device rule the user agreed to. Minimal/no privacy intrusion.
+
+### LIA-3 — System security
+- **Purpose test** Yes — protecting the service and its users against abuse/attack is a legitimate interest (Recital 49).
+- **Necessity test** Yes — security signals (e.g., abuse-prevention IP hashes) are minimised and short-lived.
+- **Balancing test** Interest outweighs impact: pseudonymised/short-lived data, high benefit to all users' security, low individual impact. Right to object honoured.
+
+**Outcome:** for LIA-1 to LIA-3 the controller's legitimate interests are not overridden by the data subjects' interests, rights, or freedoms. Processing may proceed on Art. 6(1)(f). Reviewed on the cadence above.
+
+---
+
+*Generated: 2026-05-28 (v1.1); LIA + DPO correction added 2026-06-24 (v1.3). Linked from Privacy Policy §3.*
