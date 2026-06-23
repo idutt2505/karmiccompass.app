@@ -175,7 +175,7 @@ R. SUPPORT &amp; DELETION REQUEST DATA
 • Emails you send us, retained to resolve enquiries.
 • For email-based account deletion: a 6-digit OTP, expiry timestamp, and email address are temporarily stored in Firestore (deletionRequests/{uid}) for up to 15 minutes. This document is deleted upon successful deletion.
 
-No-AI-training commitment: We never use your content to train our own models. Our primary AI provider, Google Cloud Vertex AI, excludes customer content from Google's model training per the Google Cloud Terms (https://cloud.google.com/terms/data-processing-addendum). In the rare event our system temporarily falls back to the Google Gemini Developer API (only when Vertex AI is unavailable), that single request is governed by Google's standard API terms, which may not carry the same no-training guarantee as the Vertex path.</p>
+No-AI-training commitment: We never use your content to train our own models, and neither does Google. Our primary AI provider, Google Cloud Vertex AI, excludes customer content from Google's model training per the Google Cloud Terms (https://cloud.google.com/terms/data-processing-addendum). On the rare occasions our system temporarily falls back to the Google Gemini Developer API (only when Vertex AI is unavailable), we use a paid (pay-as-you-go) tier, under which Google does not use your prompts or responses to train or improve its models either.</p>
   </div>
 
   <div class="section">
@@ -326,7 +326,7 @@ Your journal entries and profile data are not affected by Incognito Mode.</p>
 
 • Google Cloud Vertex AI (Google LLC) — primary AI model provider. Purpose: AI responses, voice transcription, image analysis, insights, horoscope, quiz generation. Data shared: prompt content as detailed in §4. Location: us-central1 (United States). Transfer mechanism: Google Cloud SCCs. Vertex AI customer content is excluded from Google's model training per Google Cloud Terms.
 
-• Google Gemini Developer API (Google LLC) — fallback AI model provider used only when Vertex AI is temporarily unavailable. Purpose: same as Vertex AI. Data shared: same as Vertex AI. Location: United States. Transfer mechanism: Google API Services User Data Policy / Google's standard terms — note this fallback path may not carry the Vertex AI no-training carve-out.
+• Google Gemini Developer API (Google LLC) — fallback AI model provider used only when Vertex AI is temporarily unavailable. Purpose: same as Vertex AI. Data shared: same as Vertex AI. Location: United States. Transfer mechanism: Google API Services User Data Policy / Google's paid-tier API terms. We use the paid (pay-as-you-go) tier, under which Google does not use prompts or responses to train its models.
 
 • RevenueCat (RevenueCat, Inc.) — subscription management and entitlement verification. Purpose: subscription billing state, trial state, restore-purchases. Data shared: Firebase UID (used as app user ID), receipt data from Apple/Google. Location: United States. Transfer mechanism: RevenueCat DPA / SCCs.
 
@@ -583,7 +583,7 @@ Last updated: 2026-06-24 (v1.2)</p>
     <p class="section-heading">Changelog</p>
     <p class="section-body">## v1.2 — 2026-06-24
 • §1(G): clarified that on-device re-encoding strips EXIF metadata (GPS/location, device, timestamps) before image upload — it is not transmitted.
-• §4 + §8: scoped the no-AI-training commitment — guaranteed on the primary Vertex AI path; noted the rare Gemini Developer API fallback is governed by Google's standard API terms.
+• §4 + §8: no-AI-training commitment now holds on BOTH paths — Vertex AI (customer-content carve-out) and the rare Gemini Developer API fallback (paid pay-as-you-go tier, under which Google does not train on prompts/responses).
 • §5: linked the Export Data feature to data-portability rights (Art. 20 et al.) and noted the PDF format + machine-readable copy on request.
 • §9: added a storage-limitation statement for the post-deletion device trial marker.
 • §14: replaced "self-attestation" language with the real DOB-based age gate + parental-consent flow.
