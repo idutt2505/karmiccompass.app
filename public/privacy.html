@@ -66,7 +66,7 @@
 </nav>
 
 <div class="hero">
-  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.3</p>
+  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.4</p>
   <h1 class="hero-title">Privacy Policy</h1>
   <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-06-24</p>
 </div>
@@ -175,7 +175,7 @@ R. SUPPORT &amp; DELETION REQUEST DATA
 • Emails you send us, retained to resolve enquiries.
 • For email-based account deletion: a 6-digit OTP, expiry timestamp, and email address are temporarily stored in Firestore (deletionRequests/{uid}) for up to 15 minutes. This document is deleted upon successful deletion.
 
-No-AI-training commitment: We never use your content to train our own models, and neither does Google. Our primary AI provider, Google Cloud Vertex AI, excludes customer content from Google's model training per the Google Cloud Terms (https://cloud.google.com/terms/data-processing-addendum). On the rare occasions our system temporarily falls back to the Google Gemini Developer API (only when Vertex AI is unavailable), we use a paid (pay-as-you-go) tier, under which Google does not use your prompts or responses to train or improve its models either (per Google's Gemini API Additional Terms, ai.google.dev/gemini-api/terms — we review this commitment annually and on any Google terms change).</p>
+No-AI-training commitment: We never use your content to train our own models, and neither does Google. Our primary AI provider, Google Cloud Vertex AI, excludes customer content from Google's model training per the Google Cloud Terms (https://cloud.google.com/terms/data-processing-addendum). On the rare occasions our system temporarily falls back to the Google Gemini Developer API (only when Vertex AI is unavailable), we use a paid (pay-as-you-go) tier, under which Google does not use your prompts or responses to train or improve its models either (per Google's Gemini API Additional Terms, ai.google.dev/gemini-api/terms — we review this commitment annually and on any Google terms change). If that paid-tier no-training commitment is ever removed or materially weakened, we will either cease use of the Gemini Developer API fallback or obtain fresh consent before continuing to process health-related data through it.</p>
   </div>
 
   <div class="section">
@@ -215,14 +215,14 @@ We do NOT sell your personal data to advertisers or third-party data brokers. We
 
 • Consent (GDPR Art. 6(1)(a) / DPDPA / PDPA / APPI): where we rely on your consent — such as for notification permissions and the EU/UK 14-day withdrawal-waiver confirmation — you may withdraw it at any time without affecting prior processing.
 
-• Vital Interests (GDPR Art. 9(2)(c)): see Crisis Flags below.
+• Explicit consent + Vital Interests (GDPR Art. 9(2)(a) primary; 9(2)(c) emergency fallback): see Crisis Flags below.
 
 • Legal Obligation (GDPR Art. 6(1)(c)): where processing is required by applicable law (e.g. financial record-keeping, regulatory demands).
 
 Special Category &amp; Sensitive Data (GDPR Art. 9 / UK GDPR / equivalent):
-The App processes mental-health-adjacent content (journal entries, mood check-ins, emotional patterns, crisis signals) and health-adjacent inferences (karma/dharma scores, psychological themes). Under GDPR Art. 9 and equivalent laws, this qualifies as health-related sensitive personal data. We process such data on the basis of your explicit consent (GDPR Art. 9(2)(a)). That consent is obtained through a dedicated consent screen shown during onboarding, before any journal, mood, or AI feature is used — it explains that your entries may contain health-related data and requires your affirmative agreement to proceed; it is a separate, specific act and is not bundled into general terms acceptance. The one exception is crisis-flag storage, which is processed under Art. 9(2)(c) "vital interests" (see below). You may withdraw your Art. 9(2)(a) consent at any time by deleting your account.
+The App processes mental-health-adjacent content (journal entries, mood check-ins, emotional patterns, crisis signals) and health-adjacent inferences (karma/dharma scores, psychological themes). Under GDPR Art. 9 and equivalent laws, this qualifies as health-related sensitive personal data. We process such data on the basis of your explicit consent (GDPR Art. 9(2)(a)). That consent is obtained through a dedicated consent screen shown during onboarding, before any journal, mood, or AI feature is used — it explains that your entries may contain health-related data and requires your affirmative agreement to proceed; it is a separate, specific act and is not bundled into general terms acceptance. Crisis-flag storage is also covered by this Art. 9(2)(a) explicit consent (with a dedicated "Safety follow-up memory" opt-out); we rely on Art. 9(2)(c) "vital interests" only as a narrow fallback in a genuine emergency where consent cannot be obtained (see below). You may withdraw your Art. 9(2)(a) consent at any time by deleting your account.
 
-Crisis flags (health data under GDPR Art. 9): The crisisFlags record (up to 100 characters of your message + timestamp) is written to your profile when your message matches a safety keyword. We process this under Art. 9(2)(c) "vital interests" so we can surface immediate safety resources in future sessions. Crisis flags auto-expire after 90 days. You may delete them at any time via Settings → Privacy or by deleting your account. You may also opt out of crisisFlags storage entirely while keeping live in-session safety warnings — toggle "Safety follow-up memory" in Settings.
+Crisis flags (health data under GDPR Art. 9): The crisisFlags record (up to 100 characters of your message + timestamp) is written to your profile when your message matches a safety keyword. We process this primarily under your Art. 9(2)(a) explicit consent (with the "Safety follow-up memory" toggle as a granular opt-out), relying on Art. 9(2)(c) "vital interests" only where you are in a genuine emergency and cannot give consent, so we can surface immediate safety resources in future sessions. Crisis flags auto-expire after 90 days. You may delete them at any time via Settings → Privacy or by deleting your account. You may also opt out of crisisFlags storage entirely while keeping live in-session safety warnings — toggle "Safety follow-up memory" in Settings.
 
 Data Protection Impact Assessment (DPIA — GDPR Art. 35): Because the App processes health-adjacent data at scale and uses AI to generate inferences about your wellbeing, we have conducted a Data Protection Impact Assessment covering our key processing activities, AI inference risks, and mitigation measures. The DPIA is published at karmiccompass.app/privacy/DPIA and available on request to supervisory authorities as required by law.
 
@@ -240,7 +240,7 @@ In all our processing activities, we apply and commit to the following principle
 
   <div class="section">
     <p class="section-heading">3a. Automated Decision-Making (GDPR Art. 22)</p>
-    <p class="section-body">Arya's karma and dharma scoring, life-digest, mood-trajectory inferences, weekly narratives, life reports, and crisis-keyword detection are produced automatically by AI models. These automated outputs are intended for personal reflection only; they do not produce legal or similarly significant effects on you (we do not use them to deny service, change pricing, share them with insurers, employers, or any third party, or take any adverse action against you).
+    <p class="section-body">Arya's karma and dharma scoring, life-digest, mood-trajectory inferences, weekly narratives, life reports, and crisis-keyword detection are produced automatically by AI models. These automated outputs are intended for personal reflection only; they do not produce legal or similarly significant effects on you (we do not use them to deny service, change pricing, share them with insurers, employers, or any third party, or take any adverse action against you). This processing constitutes profiling within the meaning of GDPR Art. 4(4); its significance is limited to personal reflection within the App, and it produces no legal or similarly significant effects.
 
 Notwithstanding the above, you have the right at any time to:
 
@@ -296,7 +296,9 @@ This Export Data feature is how we fulfil data-portability requests (GDPR Art. 2
 
 We use authentication requirements and Firestore security rules to restrict access to personal data to authorised users only.
 
-Despite these measures, no system is completely secure. We encourage you to use a strong, unique password and protect your account credentials. In the event of a suspected breach, contact us immediately at app.karmiccompass@gmail.com. See our Breach Runbook at karmiccompass.app/privacy/BREACH_RUNBOOK for our 72-hour GDPR Art. 33 response process.</p>
+Despite these measures, no system is completely secure. We encourage you to use a strong, unique password and protect your account credentials. In the event of a suspected breach, contact us immediately at app.karmiccompass@gmail.com. See our Breach Runbook at karmiccompass.app/privacy/BREACH_RUNBOOK for our 72-hour GDPR Art. 33 response process.
+
+Website &amp; cookies: our marketing and legal website (karmiccompass.app) sets no cookies and uses no analytics, advertising, or tracking technologies. It collects no personal data beyond the standard server request logs (e.g. IP address, user agent) inherent to serving any web page, which are used only for security and basic operation. Because we set no non-essential cookies, no cookie-consent banner is required.</p>
   </div>
 
   <div class="section">
@@ -387,7 +389,7 @@ These providers may process your data in the United States and other countries. 
 
 • Subscription records (RevenueCat / financial): retained as required by financial and tax law (typically 7 years).
 
-• Support communications: retained up to 2 years after resolution.
+• Support communications: retained up to 2 years after resolution, to cover the limitation period for any related contract or service dispute. Where a support message contains health-related content (e.g. you describe a mental-health concern), that content is treated as GDPR Art. 9 special-category data — access-restricted, never used for AI training, and deletable on request.
 
 • Crash/error logs (Sentry): per Sentry's retention policy (typically up to 90 days).
 
@@ -470,7 +472,7 @@ Same rights as EU GDPR above. Lodge complaints with the Information Commissioner
 Right to access, correct, and erase your personal data. Right to nominate a representative. Right to raise grievances with our Grievance Officer (see §17). Right to lodge a complaint with the Data Protection Board of India once operational. Health-adjacent data held by us is classified as Sensitive Personal Data under the SPDI Rules and is handled with heightened protection.
 
 ── United States — California (CCPA / CPRA) ──
-Right to know, right to delete, right to correct, right to opt out of sale or sharing (we do not sell or share data for cross-context behavioural advertising), right to limit use of sensitive personal information, right to non-discrimination. Submit requests at app.karmiccompass@gmail.com.
+Right to know, right to delete, right to correct, right to opt out of sale or sharing (we do not sell or share data for cross-context behavioural advertising), right to limit use of sensitive personal information, right to non-discrimination. Because we do not sell or share personal information and do not use sensitive personal information for any purpose beyond providing the service you requested (no secondary use, no targeted advertising), the right to limit the use of sensitive personal information is satisfied by default under CPRA §1798.121, and no separate "Limit the Use of My Sensitive Personal Information" or "Do Not Sell or Share My Personal Information" link is required. Submit access, deletion, or correction requests at app.karmiccompass@gmail.com.
 
 ── Brazil (LGPD) ──
 Right to confirmation of processing, access, correction, anonymisation, portability, deletion, information about third parties, and to revoke consent. Lodge complaints with the Autoridade Nacional de Proteção de Dados (gov.br/anpd).
@@ -576,12 +578,20 @@ India DPDPA contact: contact@karmiccompass.app (Data Protection Board of India c
 EU/EEA & United Kingdom availability:
 KarmicCompass is not offered or marketed in the European Union, European Economic Area, or the United Kingdom, and the App is not listed on the App Store or Google Play in those regions. We do not target, advertise to, or monitor the behaviour of users in those regions, and we collect no data intended to profile EU/EEA/UK residents. On that basis we have not appointed a representative under GDPR Art. 27 or UK GDPR Art. 27. If you are an EU/EEA/UK resident who has obtained the App through other means, please contact us at privacy@karmiccompass.app and we will honour your data-subject request as if GDPR applied. Should we identify material EU/EEA/UK usage, we will appoint an Art. 27 representative and update this section before continuing to process such data.
 
-Last updated: 2026-06-24 (v1.3)</p>
+Last updated: 2026-06-24 (v1.4)</p>
   </div>
 
   <div class="section">
     <p class="section-heading">Changelog</p>
-    <p class="section-body">## v1.3 — 2026-06-24
+    <p class="section-body">## v1.4 — 2026-06-24
+• §3 / §3a: crisis-flag lawful basis reframed to Art. 9(2)(a) explicit consent (primary) with Art. 9(2)(c) vital interests only as a narrow emergency fallback.
+• §3a: stated that AI inferences constitute "profiling" under GDPR Art. 4(4), with limited significance (personal reflection only).
+• §4: added a contingency — if Google's paid-tier no-training commitment is weakened, we cease the Gemini fallback or obtain fresh consent before processing health data through it.
+• §6: added a "Website &amp; cookies" statement — the site sets no cookies/analytics/tracking; no consent banner required.
+• §9: added a justification for the 2-year support-email retention and noted health-related support content is handled as Art. 9 data.
+• §13: added the CPRA §1798.121 safe-harbour for the right to limit sensitive personal information (no sale/share → satisfied by default).
+
+## v1.3 — 2026-06-24
 • §3: described the dedicated onboarding consent screen behind the Art. 9(2)(a) explicit-consent basis; referenced the documented Legitimate Interests Assessment (LIA) in the DPIA.
 • §4 + §8: linked the Gemini paid-tier no-training commitment to Google's API terms (ai.google.dev/gemini-api/terms) + annual-review note.
 • §8: confirmed the Sentry beforeSend hook scrubs user-generated content (extra/contexts/request).
