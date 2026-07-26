@@ -2,7 +2,12 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { SectionReveal } from "../SectionReveal";
-import { SECTION_IDS } from "@/lib/constants";
+import {
+  SECTION_IDS,
+  JOURNAL_MAX_CHARS,
+  VIRTUE_LEVELS,
+  COSMIC_SCORE_COUNT,
+} from "@/lib/constants";
 import type { ReactNode } from "react";
 
 /* ── Icons ─────────────────────────────────────────────────── */
@@ -92,8 +97,14 @@ const features: {
     icon: <JournalIcon />,
     tag: "Journal",
     t: "The journal that scores itself",
-    d: "Write or speak your day. The Karma Engine — powered by Gemini — reads your entry and scores it across karma, dharma, intent, impact, emotion, and virtue. Spot contradictions with your past? Arya asks one honest clarification question. Your truth stays private: screen capture is blocked by default.",
-    bullets: ["Voice or text · up to 3,000 characters", "Scores 4 dimensions per entry + detects contradictions", "Private by design — screen capture blocked"],
+    // [truth] Removed "screen capture is blocked by default" / "Private by
+    // design — screen capture blocked". kc-mobile/src/utils/screenCapture.js
+    // exports ALLOW_SCREENSHOTS = true, and Privacy Policy §10 now states
+    // plainly that the app does NOT block screenshots or screen recording. The
+    // App Passcode is the real control, so that is what we name.
+    // Character cap: kc-mobile/src/screens/JournalScreen.js JOURNAL_MAX_CHARS = 5000.
+    d: "Write or speak your day. The Karma Engine — powered by Gemini — reads your entry and scores it across karma, dharma, intent, impact, emotion, and virtue. Spot contradictions with your past? Arya asks one honest clarification question.",
+    bullets: [`Voice or text · up to ${JOURNAL_MAX_CHARS.toLocaleString("en-US")} characters`, "Scores 4 dimensions per entry + detects contradictions", "App Passcode (Face ID / Touch ID) locks the app"],
     accent: "#7a9e7e",
   },
   {
@@ -116,16 +127,24 @@ const features: {
     icon: <StarsIcon />,
     tag: "Stars",
     t: "Your cosmos, personalised by AI",
-    d: "Gemini reads your birth chart and writes today's horoscope, affirmation, and 10 cosmic energy scores — all coherent, never generic. Your sign's elemental traits, compatibility arcs, strengths and shadow edges are always one tap away. Scores fall back to a deterministic daily fingerprint when AI is unavailable — you're never left empty-handed.",
-    bullets: ["AI horoscope + affirmation generated daily", "10 cosmic energy scores per day (love, career, wellness…)", "Compatibility, traits & elemental lore built in"],
+    // [truth] The count is real — HoroscopeScreen.js SCORE_ASPECTS has exactly
+    // 10 aspects — but "reads your birth chart" was not: the horoscope prompt
+    // (LegalScreen.js §4(f)) sends only the zodiac sign derived from your date
+    // of birth and today's date. No birth time, no place, no chart.
+    d: `Gemini takes the sign derived from your date of birth and writes today's horoscope, affirmation, and ${COSMIC_SCORE_COUNT} cosmic energy scores. Your sign's elemental traits, compatibility arcs, strengths and shadow edges are always one tap away. Scores fall back to a deterministic daily fingerprint when AI is unavailable — and the app labels them as estimated when it does.`,
+    bullets: ["AI horoscope + affirmation generated daily", `${COSMIC_SCORE_COUNT} cosmic energy scores per day (love, career, wellness…)`, "Compatibility, traits & elemental lore built in"],
     accent: "#c9a84a",
   },
   {
     icon: <RealmIcon />,
     tag: "Realm",
     t: "Walk the virtue path",
-    d: "Karma XP flows from every journal entry, quiz, and honest reflection. Rise through seven named levels — Seeker, Wanderer, Apprentice, Guardian, Sage, Luminary, Karma Architect — each with its own threshold, aura, and cosmic description. Explore the Dharma Mandala: tap any of the 10 Sanskrit virtues to read its meaning, practice, and place in your path.",
-    bullets: ["7 virtue levels · Seeker → Karma Architect", "Interactive Dharma Mandala — 10 Sanskrit virtues", "Badges for streaks, breakthroughs & balance"],
+    // [truth] Four of the seven level names were invented (Wanderer, Apprentice,
+    // Guardian, Luminary). Names now come from kc-mobile/src/constants.js
+    // VIRTUE_LEVELS via the shared constant. Badge bullet narrowed to categories
+    // that actually exist in kc-mobile/src/data/badges.js.
+    d: `Karma XP flows from every journal entry, quiz, and honest reflection. Rise through seven named levels — ${VIRTUE_LEVELS.join(", ")} — each with its own threshold, aura, and cosmic description. Explore the Dharma Mandala: tap any of the 10 Sanskrit virtues to read its meaning, practice, and place in your path.`,
+    bullets: [`${VIRTUE_LEVELS.length} virtue levels · ${VIRTUE_LEVELS[0]} → ${VIRTUE_LEVELS[VIRTUE_LEVELS.length - 1]}`, "Interactive Dharma Mandala — 10 Sanskrit virtues", "Badges for entries, streaks & milestones"],
     accent: "#e8a97a",
   },
 ];

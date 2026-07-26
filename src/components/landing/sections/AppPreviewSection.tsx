@@ -2,7 +2,17 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { SectionReveal } from "../SectionReveal";
-import { TRIAL_DAYS, COMPASS_AI_PER_DAY, SECTION_IDS } from "@/lib/constants";
+import {
+  TRIAL_DAYS,
+  TRIAL_AI_PER_DAY,
+  COMPASS_AI_PER_DAY,
+  COMPASS_PRICE_DISPLAY,
+  COMPASS_PERIOD_DISPLAY,
+  PRICE_CAVEAT,
+  RENEWAL_DISCLOSURE,
+  TERMS_URL,
+  SECTION_IDS,
+} from "@/lib/constants";
 
 const conversation = [
   {
@@ -169,7 +179,7 @@ export function AppPreviewSection() {
         <div className="mt-16 grid grid-cols-3 gap-px overflow-hidden rounded-2xl border border-white/[0.05] bg-white/[0.02]">
           {[
             { label: "free trial duration", stat: `${TRIAL_DAYS} days` },
-            { label: "Arya messages · trial", stat: "30/day" },
+            { label: "Arya messages · trial", stat: `${TRIAL_AI_PER_DAY}/day` },
             { label: "Arya messages · Compass", stat: `Up to ${COMPASS_AI_PER_DAY}/day` },
           ].map((item) => (
             <div key={item.label} className="px-6 py-5 text-center">
@@ -178,7 +188,21 @@ export function AppPreviewSection() {
             </div>
           ))}
         </div>
-        <p className="mt-2 text-center text-[0.6rem] text-white/18">Compass plan \u2014 $11/month after {TRIAL_DAYS}-day free trial</p>
+        {/* [truth] Was a bare "$11/month" with no recurring-billing statement,
+            no cancellation terms and no link to the Terms it is sold under. */}
+        <p className="mx-auto mt-3 max-w-2xl text-center text-[0.6rem] leading-relaxed text-white/25">
+          Compass plan \u2014 {COMPASS_PRICE_DISPLAY}/{COMPASS_PERIOD_DISPLAY} after the{" "}
+          {TRIAL_DAYS}-day free trial. {RENEWAL_DISCLOSURE} {PRICE_CAVEAT}{" "}
+          <a
+            href={TERMS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#C9824A] underline decoration-[#C9824A]/30 underline-offset-2 hover:decoration-[#C9824A]"
+          >
+            Terms of Service
+          </a>
+          .
+        </p>
       </div>
     </section>
   );

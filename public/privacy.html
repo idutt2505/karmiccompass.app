@@ -66,7 +66,7 @@
 </nav>
 
 <div class="hero">
-  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.5</p>
+  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.6</p>
   <h1 class="hero-title">Privacy Policy</h1>
   <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-07-26</p>
 </div>
@@ -81,8 +81,8 @@
 • We generate: AI-powered insights, karma/dharma scores, astrological readings, quiz scores, and badges from your content.
 • Your voice audio is transcribed by Google's Gemini AI and immediately deleted from your device — only the text transcript is stored.
 • Photos you attach in Arya's chat are sent to Gemini Vision for AI processing and are not kept as files on our servers. Photos you attach to a journal entry ARE stored in our cloud storage for the life of your account, so we can show them back to you in your journal.
-• A stable anonymous device ID is stored on your device (persists across reinstalls) solely to enforce the one-trial-per-device policy.
-• Your passcode (if set) is stored only in your device's secure enclave — never transmitted to us.
+• A stable anonymous device ID is stored on your device (persists across reinstalls). It enforces the one-trial-per-device policy, and a one-way hash of it travels with AI requests so a per-device anti-abuse cap can be applied — see §1(I).
+• Your passcode (if set) is stored only in your device's Keychain (iOS) / Keystore (Android) — never transmitted to us.
 • A background task runs every 12+ hours solely to reschedule local notifications — no data is sent to our servers during this.
 • We do not sell your data. We do not share it for advertising. Your content is not used to train any AI model.
 • You can delete your account and all data at any time from Settings.</p>
@@ -142,7 +142,7 @@ H. CRISIS SIGNAL RECORDS (HEALTH-RELATED DATA — GDPR Art. 9)
 • If the App detects crisis-related language (using a keyword list in the app code) in your message, and you are not in Incognito Mode, the first 100 characters of your message and a timestamp are added to a crisisFlags array in your Firestore profile. This is used solely for contextual safety follow-up in future sessions and is never shared externally. See §3 for the lawful basis and your opt-out rights.
 
 I. DEVICE IDENTIFIER (TRIAL ENFORCEMENT)
-• A stable pseudonymous device identifier is generated using a cryptographically random value and stored in your device's Keychain (iOS) / Keystore (Android). It persists across app reinstalls. It is linked to your Firebase UID in our Firestore deviceTrials collection solely to enforce the one-trial-per-device policy. If you delete your account, this marker is retained but your account identity (UID) is removed from it — so the one-trial-per-device protection cannot be reset by deleting and recreating an account. It is NOT an advertising ID (not IDFA or GAID), is not used for tracking across apps or websites, and is never shared with advertising networks.
+• A stable pseudonymous device identifier is generated using a cryptographically random value and stored in your device's Keychain (iOS) / Keystore (Android). If secure storage is unavailable on your device, the App falls back to keeping the same identifier in ordinary, unencrypted app storage — persistence matters more than secrecy here, because the identifier is a random token that says nothing about you. It persists across app reinstalls. It is used for two purposes, and no others: (1) it is linked to your Firebase UID in our Firestore deviceTrials collection to enforce the one-trial-per-device policy; and (2) a truncated one-way hash of it (SHA-256, first 32 hex characters) is sent as a request header with AI requests, so the server can apply a per-device daily anti-abuse cap (aiUsageByDevice) and a server-side trial ledger (deviceTrialLedger). We never receive the raw identifier on the server. If you delete your account, this marker is retained but your account identity (UID) is removed from it — so the one-trial-per-device protection cannot be reset by deleting and recreating an account. It is NOT an advertising ID (not IDFA or GAID), is not used for tracking across apps or websites, and is never shared with advertising networks.
 
 J. PASSCODE &amp; BIOMETRICS
 • If you set a passcode, the 6-digit code is stored in your device's Keychain/Keystore. Passcode-related lockout state (kc_lockout_until, kc_failed_attempts) is also stored in Keychain/Keystore. These are never transmitted to us.
@@ -161,18 +161,21 @@ M. PUSH NOTIFICATION TOKENS
 • Opaque Expo Push Token persisted to your Firestore profile (and an array of historical tokens for delivery resilience) so we can deliver Compass push notifications via APNs (iOS) / FCM (Android). The token is not a personal identifier and cannot be used to message you outside our app. You can opt out of "A letter from Arya" push notifications at any time from Settings.
 
 N. ABUSE-PREVENTION SIGNALS
-• For the locked-out account-deletion endpoint, your IP address is SHA-256 hashed (truncated to 32 hex characters) and stored briefly to rate-limit OTP requests. The raw IP is never persisted; only the irreversible hash.
+• For the locked-out account-deletion endpoint, your IP address is SHA-256 hashed (truncated to 32 hex characters) and stored briefly to rate-limit OTP requests (rateLimitsByIp). The raw IP is never persisted; only the irreversible hash.
+• A daily AI-action count keyed to the truncated device-ID hash described in (I) is stored in aiUsageByDevice, so one handset cannot cycle through throwaway trial accounts. A deviceTrialLedger record keyed to the same hash records that the device has consumed its trial.
+• RevenueCat webhook events are recorded briefly (processedWebhookEvents) so a retried billing event is not applied twice; these records carry the RevenueCat app user ID, which is your Firebase UID.
+• When you use the email-based deletion flow, the App also sends an Expo installation ID, which is stored on the pending deletion request and checked when you confirm the code, so a code intercepted elsewhere cannot be redeemed from another install.
 
 O. SUBSCRIPTION &amp; BILLING
-• Subscription status (isBasic, isPremium, subscriptionPlan, premiumExpiresAt) is set in your Firestore profile by our RevenueCat webhook when subscription events occur. RevenueCat uses your Firebase UID as the app user ID. We do not receive full payment card details.
+• Subscription status (isBasic, tier, subscriptionPlan, premiumExpiresAt, and grace-period fields) is set in your Firestore profile by our RevenueCat webhook when subscription events occur. RevenueCat uses your Firebase UID as the app user ID. We do not receive full payment card details.
 
 P. FEEDBACK &amp; AI-RESPONSE REPORTS
-• If you submit in-app feedback, we store your message text (capped at 1,000 characters), star rating (1–5), your Firebase UID, and submission timestamp in a Firestore feedback collection.
+• If you submit in-app feedback, we store your message text (capped at 1,000 characters), star rating (1–5), a severity label derived from that rating, the email address on your account, your Firebase UID, and the submission timestamp in a Firestore feedback collection.
 • If you report a message in your chat with Arya (the "Report" action on a message), we store a record in a Firestore chatReports collection containing: your Firebase UID, the message identifier, whether the message was yours or Arya's, the reason you selected, up to the first 500 characters of the reported message text, and the submission timestamp. Where the reported message is one you wrote, that excerpt is your own content. Before it leaves your device the excerpt is scrubbed for email addresses, phone numbers, and card-like number sequences. These reports are used only to review AI-safety and quality problems. They are not shared externally and are not used to train any AI model.
 
 Q. AI &amp; VOICE USAGE QUOTAS
-• A daily call count (date → count) is stored in Firestore (aiUsage/{uid}) to enforce per-tier daily limits server-side.
-• A comparable daily counter for text-to-speech (voice playback) usage is stored in Firestore (ttsUsage/{uid}) to enforce per-tier voice limits server-side.
+• A daily call count (date → count) is stored in Firestore (aiUsage/{uid}) to enforce per-tier daily limits server-side. Separate per-account counters record journal analyses (aiUsageJournal/{uid}), per-feature and overall daily totals (aiUsageMeter/{uid}), and short-lived request throttling (rateLimits/{uid}).
+• A ttsUsage/{uid} collection is reserved for a future text-to-speech quota. The App does not write to it today, so in practice it holds nothing about you; we list it because our deletion routine clears it and we would rather over-declare than leave a UID-keyed collection undisclosed.
 
 R. SUPPORT &amp; DELETION REQUEST DATA
 • Emails you send us, retained to resolve enquiries.
@@ -376,13 +379,21 @@ These providers may process your data in the United States and other countries. 
 
 • Abuse-prevention IP-hashes (deletion OTP rate-limit): retained for the rate-limit window only (typically minutes to a few hours), then purged.
 
-• AI usage quota (aiUsage/{uid}) and voice/TTS usage quota (ttsUsage/{uid}): deleted with account.
+• AI and rate-limit counters keyed to your account (aiUsage/{uid}, aiUsageJournal/{uid}, aiUsageMeter/{uid}, rateLimits/{uid}, ttsUsage/{uid}): deleted with account.
 
-• AI-response reports (chatReports): there is no automatic expiry — a report is retained until you delete your account, at which point every report carrying your UID is deleted.
+• Device-level anti-abuse counters (aiUsageByDevice, keyed to the truncated device-ID hash): self-purge on a 30-day expiry. Because the server never sees the raw device ID, these cannot be looked up by account and so are not deleted by name when you delete your account — they simply expire.
+
+• IP-keyed request throttles (rateLimitsByIp): self-purge within roughly two hours.
+
+• Billing webhook de-duplication records (processedWebhookEvents, carrying your Firebase UID as the RevenueCat app user ID): self-purge on a 30-day expiry; retained inside that window so a retried billing event is not applied twice.
+
+• Server-side device trial ledger (deviceTrialLedger): your UID is replaced with a deleted-account marker on account deletion; the pseudonymous device record itself is retained for trial-abuse prevention.
+
+• AI-response reports (chatReports): retained for 365 days from the date you submit the report, then deleted automatically by a scheduled server-side job. They are also deleted immediately if you delete your account.
 
 • Device trial record (deviceTrials/{deviceId}): on account deletion your account identity (UID) is removed from it, but the pseudonymous one-trial-per-device marker is retained to prevent trial abuse (legitimate interest, GDPR Art. 6(1)(f)). Consistent with storage limitation (Art. 5(1)(e)): once the UID is removed, the remaining marker is an unlinkable random token that no longer constitutes personal data, so no fixed deletion date is required — it is retained only while the one-trial-per-device control remains operationally necessary.
 
-• Feedback submissions: retained up to 2 years.
+• Feedback submissions: each record is written with a 365-day expiry stamp and is removed when that expiry lapses; also deleted immediately when you delete your account.
 
 • Account deletion OTP (deletionRequests/{uid}): deleted within 15 minutes of use (or expiry).
 
@@ -396,7 +407,7 @@ These providers may process your data in the United States and other countries. 
 
 • Subscription records (RevenueCat / financial): retained as required by financial and tax law (typically 7 years).
 
-• Support communications: retained up to 2 years after resolution, to cover the limitation period for any related contract or service dispute. Where a support message contains health-related content (e.g. you describe a mental-health concern), that content is treated as GDPR Art. 9 special-category data — access-restricted, never used for AI training, and deletable on request.
+• Support communications: retained for 365 days after resolution, to cover the limitation period for any related contract or service dispute. Where a support message contains health-related content (e.g. you describe a mental-health concern), that content is treated as GDPR Art. 9 special-category data — access-restricted, never used for AI training, and deletable on request.
 
 • Crash/error logs (Sentry): per Sentry's retention policy (typically up to 90 days).
 
@@ -404,16 +415,16 @@ These providers may process your data in the United States and other countries. 
 
 Data may be retained beyond these periods where required by law, fraud prevention, security investigations, or dispute resolution.
 
-A full per-collection retention schedule is published at karmiccompass.app/privacy/RETENTION.md.</p>
+A full per-collection retention schedule is published at karmiccompass.app/privacy/RETENTION.md. That schedule is an operational document and may run ahead of what is deployed; where it and this section differ, this section is the accurate statement of what the App actually does today.</p>
   </div>
 
   <div class="section">
     <p class="section-heading">10. Screenshots &amp; Screen Recording</p>
     <p class="section-body">The App does not block screenshots or screen recording. Your content is yours: you are free to capture, save, and share your journal entries, readings, and conversations with Arya however you choose.
 
-Please be aware of what that means on a shared device. Because capture is not blocked, your content can appear in your device&rsquo;s app-switcher preview, and any screen-recording or screen-sharing software installed on your device can record these screens. The App cannot prevent this.
+Please be aware of what that means on a shared device. Because capture is not blocked, your content can appear in your device’s app-switcher preview, and any screen-recording or screen-sharing software installed on your device can record these screens. The App cannot prevent this.
 
-If other people have access to your device, turn on the App Passcode (Settings &rarr; App Lock). That is the control that keeps your content private while the App is not in use.</p>
+If other people have access to your device, turn on the App Passcode (Settings → App Lock). That is the control that keeps your content private while the App is not in use.</p>
   </div>
 
   <div class="section">
@@ -431,17 +442,17 @@ Cancelling during the 7 days: we email you a one-click cancellation link when th
 Deleting immediately: the in-app Delete Account flow also offers a "Delete now" option, which skips the grace period entirely and erases everything listed below straight away, including your Firebase Authentication account. Choose this if you need the data gone today — it cannot be undone.
 
 Data deleted (in both cases, once erasure runs):
-• All documents in users/{uid}/chatArchive subcollection
-• All documents in users/{uid}/insights subcollection
-• All documents in users/{uid}/reports subcollection
-• aiUsage/{uid} document
-• ttsUsage/{uid} document
+• All documents in the users/{uid} subcollections: entries, entriesArchive, chatArchive, insights, reports
+• aiUsage/{uid}, aiUsageJournal/{uid}, aiUsageMeter/{uid}, ttsUsage/{uid} and rateLimits/{uid} documents
+• deletionRequests/{uid} document
 • All documents in feedback where uid matches
 • All documents in chatReports where uid matches (AI-response reports you submitted)
-• deviceTrials: your account identity (UID) is scrubbed from the device marker (the pseudonymous one-trial-per-device marker itself is retained for abuse prevention — see §9)
+• deviceTrials and deviceTrialLedger: your account identity (UID) is scrubbed from the device records (the pseudonymous one-trial-per-device markers themselves are retained for abuse prevention — see §9)
 • The users/{uid} main document (entire profile, including push tokens and crisisFlags)
 • Journal image files stored in our cloud storage (Firebase Storage, users/{uid}/journalImages/)
 • Your Firebase Authentication account
+
+What is not deleted by name: three device- or IP-keyed anti-abuse records (aiUsageByDevice, rateLimitsByIp, processedWebhookEvents) cannot be looked up by account, because the server holds only a one-way hash rather than your identifier. They are not searched for and erased; they expire on their own timers instead — see §9 for each period.
 
 Residual data in encrypted Google Cloud backups may persist for up to 90 days. Subscription billing records are retained per RevenueCat and applicable financial law.</p>
   </div>
@@ -592,20 +603,32 @@ Please include "GRIEVANCE" in the subject line. We will acknowledge your grievan
 
 India DPDPA contact: contact@karmiccompass.app (Data Protection Board of India correspondence).
 
-EU/EEA & United Kingdom availability:
+EU/EEA &amp; United Kingdom availability:
 KarmicCompass is not offered or marketed in the European Union, European Economic Area, or the United Kingdom, and the App is not listed on the App Store or Google Play in those regions. We do not target, advertise to, or monitor the behaviour of users in those regions, and we collect no data intended to profile EU/EEA/UK residents. On that basis we have not appointed a representative under GDPR Art. 27 or UK GDPR Art. 27. If you are an EU/EEA/UK resident who has obtained the App through other means, please contact us at privacy@karmiccompass.app and we will honour your data-subject request as if GDPR applied. Should we identify material EU/EEA/UK usage, we will appoint an Art. 27 representative and update this section before continuing to process such data.
 
-Last updated: 2026-07-26 (v1.5)</p>
+Last updated: 2026-07-26 (v1.6)</p>
   </div>
 
   <div class="section">
     <p class="section-heading">Changelog</p>
-    <p class="section-body">## v1.5 — 2026-07-26
+    <p class="section-body">## v1.6 — 2026-07-26
+• Source-of-truth break repaired. The in-app policy (LegalScreen.js) and the published policy carried the same v1.5 stamp but different bodies: the in-app copy was missing the entire v1.3 changelog block and most of v1.4's body, so users reading the policy inside the App were given weaker commitments than the published one — including the Gemini-fallback no-training basis, the corrected DPO position, the COPPA general-audience statement, the Sentry beforeSend scrub, the CPRA §1798.121 safe harbour, Art. 20 portability, the cookie-banner statement, and the fresh-consent rule for Art. 9 material changes. Both copies are now generated from one source.
+• §1(I) / Summary: corrected two claims about the device identifier. It is not stored only in the Keychain/Keystore — the App deliberately falls back to unencrypted app storage when secure storage fails (src/utils/deviceId.js), and that is now disclosed. It is also not used "solely" for the one-trial-per-device policy: a truncated one-way hash of it is sent with AI requests and used for a per-device daily anti-abuse cap (aiUsageByDevice) and a server-side trial ledger (deviceTrialLedger).
+• §1(N) / §9 / §11: newly disclosed the anti-abuse and billing records that were absent from the inventory — aiUsageByDevice, deviceTrialLedger, processedWebhookEvents (which carries your UID), and the Expo installation ID sent with the email-based deletion flow — together with their expiry periods and the fact that the hash-keyed ones expire on a timer rather than being deleted by name.
+• §1(O): removed isPremium, which the RevenueCat webhook does not write, and added the tier and grace-period fields it does write.
+• §1(P): the feedback record also carries the email address on your account and a severity label derived from your rating; both were undeclared.
+• §1(Q): corrected the claim that a text-to-speech quota "is stored in Firestore (ttsUsage/{uid}) to enforce per-tier voice limits server-side". No code writes that collection — it is reserved, holds nothing today, and is declared only because our deletion routine clears it.
+• §9: feedback retention corrected from "up to 2 years" to the 365-day expiry the code actually stamps on each record (src/components/FeedbackModal.js). Added retention rows for the counters and anti-abuse records above.
+• §9: noted that the published RETENTION.md schedule is operational and may run ahead of what is deployed, and that this policy governs where they differ.
+• §11: the deletion list was materially incomplete. It now names every collection the erasure routine actually clears (functions/userFootprint.js) — including the entries and entriesArchive subcollections, aiUsageJournal, aiUsageMeter, rateLimits, deletionRequests and deviceTrialLedger — and states plainly which records are not deleted by name.
+
+## v1.5 — 2026-07-26
 • § 10: the App no longer blocks screenshots or screen recording. Section rewritten from “Screen Capture Protection” to “Screenshots &amp; Screen Recording” to state plainly that capture is permitted, that content can therefore appear in the device app-switcher preview and be captured by screen-recording software, and that the App Passcode is the control that protects content on a shared device. Owner decision 2026-07-26: users keep full control of their own content.
 • Summary / §1(G) / §9: corrected an inaccurate claim that images are never stored on our servers. Photos attached in Arya's chat remain transient (base64 to the AI proxy, no server-side file), but photos attached to a JOURNAL ENTRY are stored in Firebase Storage (users/{uid}/journalImages/) for the life of the account. §1(G) and the §9 retention table now state both cases separately.
 • §11 / §9: corrected the claim that account deletion is immediate. Confirming deletion deactivates the account and revokes sessions straight away, but erasure runs after a 7-day grace period via a scheduled job. Added: the emailed one-click cancellation link, the in-app "Restore my account" screen shown when you sign in during the grace period (signing in alone does not cancel — deletion is the default), and the "Delete now" option that skips the grace period.
-• §1(P) / §9 / §11: newly disclosed the chatReports collection written when you report a message in your chat with Arya (UID, message id, role, reason, up to 500 locally PII-scrubbed characters of the reported message, timestamp). Retention stated honestly: no automatic expiry — retained until account deletion.
+• §1(P) / §9 / §11: newly disclosed the chatReports collection written when you report a message in your chat with Arya (UID, message id, role, reason, up to 500 locally PII-scrubbed characters of the reported message, timestamp). Retention: 365 days from submission, deleted automatically by a scheduled server-side job, and immediately if you delete your account.
 • §1(Q) / §9: added the ttsUsage/{uid} voice-playback quota counter, previously listed only in the §11 deletion list.
+• §1 / §9 / §11: removed internal editorial markers that had been left in the rendered policy text.
 • §3 / §9: corrected the in-app path for deleting crisis flags from the non-existent "Settings → Privacy" to Settings → Arya Settings ("Safety follow-up memory" toggle / "Clear chat &amp; memory").
 
 ## v1.4 — 2026-06-24

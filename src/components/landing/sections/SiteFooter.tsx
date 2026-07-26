@@ -6,6 +6,7 @@ import {
   DELETE_ACCOUNT_URL,
   X_SOCIAL_URL,
   INSTAGRAM_URL,
+  LEGAL_ENTITY,
 } from "@/lib/constants";
 import { FooterClientLinks } from "./SiteFooterClient";
 
@@ -35,8 +36,13 @@ export function SiteFooter() {
           </a>
 
           {/* Copyright */}
+          {/* [truth] Was "KarmicCompass Private Limited". No such company exists:
+              public/terms.html §1 and public/privacy.html §1 both state the app is
+              operated by Diksha Dutt (operating as KarmicCompass), and the Privacy
+              Policy §25 identifies the controller as a sole proprietor. The buyer
+              must be able to see who they are actually contracting with. */}
           <p className="text-xs text-white/18 sm:text-right">
-            © {new Date().getFullYear()} KarmicCompass Private Limited
+            © {new Date().getFullYear()} {LEGAL_ENTITY}
           </p>
         </div>
 

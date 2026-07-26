@@ -66,7 +66,7 @@
 </nav>
 
 <div class="hero">
-  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.3</p>
+  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.4</p>
   <h1 class="hero-title">Terms &amp; Conditions</h1>
   <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-07-26</p>
 </div>
@@ -109,12 +109,12 @@ Subscription auto-renews monthly at the displayed price unless cancelled at leas
     <p class="section-heading">5. Free Trial</p>
     <p class="section-body">New users receive a 7-day free trial of the Compass plan, beginning from the moment they complete their initial profile setup. No payment method is required and you will not be charged automatically at the end of the trial.
 
-During the trial, you have access to every Compass feature, including Arya AI chat, Incognito Mode, Deep Memory, personalised insights, and language preferences. The only limits during the trial are the daily allowances below:
+During the trial, you have access to every Compass feature — Arya AI chat, Incognito Mode, Deep Memory, all Summarise periods, full chat history scroll-back and search, personalised insights, and language preferences. Nothing is feature-locked during the trial. The only difference is the size of the daily allowance:
 
-• Arya conversations: up to 30 messages per day (Compass subscribers have up to 150 messages per day).
-• Journal reflections analysed by AI: up to 30 per day (Compass subscribers have up to 150 per day).
+• Arya conversations: up to 30 messages per day during the trial (Compass subscribers have up to 150 messages per day).
+• Journal entries analysed by Arya: up to 30 per day during the trial (Compass subscribers: up to 150 per day).
 
-No feature is locked during the trial. Summarise (all periods), chat-history scroll-back, full chat search, Deep Memory, Incognito Mode and language preferences are all available to you during the trial exactly as they are to Compass subscribers — the only difference is the daily allowance above.
+See section 7 for the full comparison.
 
 When the trial period ends, the App will present a subscription offer. You must actively choose to subscribe to continue accessing the App's features. If you do not subscribe, your access to the App's features will be suspended until a subscription is activated.
 
@@ -134,31 +134,32 @@ Australian Consumer Law: Nothing in these Terms excludes, restricts, or modifies
 
   <div class="section">
     <p class="section-heading">7. Compass vs Trial — Feature Comparison</p>
-    <p class="section-body">The App operates across two tiers:
+    <p class="section-body">The App operates across two tiers. The trial includes every feature Compass includes; the difference is the daily allowance.
 
 ── Trial (first 7 days after onboarding) ──
-• Arya chat: up to 30 messages per day (enforced server-side).
-• Incognito Mode: available.
-• Arya settings (language, tone, memory): available.
-• Summarise: all periods (today, 7 days, 30 days, quarterly, 6 months, 1 year).
-• Chat archive scroll-back: available.
-• Full chat history search: available.
-• Journal reflections analysed by AI: up to 30 per day.
-• AI context: up to 30 recent journal entries, full digest, 40-message conversation window.
+• Arya chat: up to 30 messages per day.
+• Journal entries analysed: up to 30 per day.
+• A separate anti-abuse cap of 150 AI actions per day applies to the device rather than to you, and is shared by every trial or unsubscribed account used on that device. If several such accounts share one phone they draw on the same 150, so it is possible to be stopped by this cap while your own daily allowance is untouched. Compass subscribers are exempt from it entirely. It is not a tier difference and subscribing is not the way it is lifted — it exists only to stop one device from cycling through throwaway trial accounts.
 
 ── Compass (paid subscription) ──
 • Arya chat: up to 150 messages per day.
-• Journal reflections analysed by AI: up to 150 per day.
-• All summarise periods: today, 7 days, 30 days, quarterly, 6 months, 1 year.
+• Journal entries analysed: up to 150 per day.
+
+── Identical on both tiers ──
+• Incognito Mode, Arya settings (language, tone, memory), Deep Memory.
+• All summarise periods: this session, today, weekly, fortnightly, monthly, quarterly, half-yearly and yearly (each period also requires enough entries to cover it).
 • Full chat archive scroll-back and search.
+• AI context: up to 30 recent journal entries, full digest, 40-message conversation window.
+• Karma quizzes: 5 per level per day (easy, moderate and hard are counted separately).
+• Reports, summaries, the daily reading and the memory letter have no separate daily cap of their own — they are bounded only by the overall daily ceiling below. Today’s Insight: no daily limit.
 
-These are the same features available during the trial; Compass raises the two daily allowances above. All AI actions also share a combined daily ceiling that is identical on both tiers.
+── Overall daily limit ──
+• A combined ceiling of 1,000 AI actions per day applies to both tiers as an anti-abuse measure. Every AI action counts towards it — Arya messages, journal analyses, quizzes, reports, summaries, readings and insights alike. A typical day is around 18 actions, so ordinary use does not approach it. This ceiling is identical on both tiers: subscribing does not raise it, and if you reach it the App will say so rather than blaming an individual feature.
 
-A separate anti-abuse limit of 150 AI actions per day applies per device rather than per account, and is shared by every trial or unsubscribed account signed in on that handset. Compass subscribers are exempt from it entirely. All AI actions on both tiers also share a combined ceiling of 1,000 actions per day.
+── When a request fails through no fault of yours ──
+• If a request fails because of a problem on our side — our AI provider being unavailable, timing out, or rate-limiting us — that message or entry is returned to your allowance and does not count against you. In that situation the App tells you the fault is ours; it does not tell you that you have reached your daily limit.
 
-If a request fails because of a problem on our side &mdash; our AI provider being unavailable, timing out, or rate-limiting us &mdash; that message or entry is returned to your allowance and does not count against you. In that situation the App tells you the fault is ours; it does not tell you that you have reached your daily limit.
-
-Server-side rate limits apply to both tiers and cannot be bypassed by the client. Trial status is verified server-side against the trialStart timestamp stored in your account.</p>
+All limits reset at 00:00 UTC and are enforced server-side; they cannot be bypassed by the client. Trial status is verified server-side against the trialStart timestamp stored in your account.</p>
   </div>
 
   <div class="section">
@@ -197,7 +198,7 @@ All AI requests pass through our secure proxy server. Safety filters (BLOCK_MEDI
 
 • Microphone (required for voice features): When you tap the microphone button in the Journal or Arya chat, your audio is recorded on-device, encoded as base64, and sent to Google's Gemini API via our secure proxy for transcription. The audio file is deleted from your device immediately after the transcription request completes. Only the resulting text transcript is stored.
 
-• Camera &amp; Photo Library (optional): Required only if you choose to attach a photo in Arya's chat. The image is resized on-device (max 1024×1024px, ~50% quality) and sent as base64 to Gemini Vision via our proxy. A photo attached in Arya&rsquo;s chat is transient &mdash; it is sent for processing and is not stored as a file on our servers. A photo attached to a JOURNAL ENTRY is different: it is uploaded to our cloud storage and kept for the life of your account, and is deleted when you delete the entry or your account.
+• Camera &amp; Photo Library (optional): Required only if you choose to attach a photo in Arya's chat or to a journal entry. The image is resized on-device (max 1024×1024px, ~50% quality). A photo attached in chat is sent as base64 to Gemini Vision via our proxy and is not kept as a file on our servers. A photo attached to a journal entry is uploaded to our cloud storage and kept for the life of your account so it can be shown in your journal — see Privacy Policy §1(G).
 
 • Face ID / Touch ID (optional): Used locally on your device only for Passcode unlock. Biometric data is never transmitted to us or any third party. The passcode itself is stored in your device's Keychain (iOS) or Keystore (Android).
 
@@ -244,11 +245,11 @@ We do not use your personal journal content for advertising and we do not sell i
     <p class="section-heading">15. Account Deletion &amp; Data After Termination</p>
     <p class="section-body">You may delete your account via two routes:
 
-(a) In-app: Settings → Account → Delete Account (requires active login). This calls our secure Cloud Function, which deactivates your account immediately and schedules permanent erasure after a 7-day grace period. You can cancel during that window by signing in and choosing Restore my account. A &ldquo;Delete now&rdquo; option erases without the grace period.
+(a) In-app: Settings → Account → Delete Account (requires active login). This calls our secure Cloud Function which immediately deactivates your account and schedules it for deletion.
 
 (b) Email-based (if you cannot log in): contact app.karmiccompass@gmail.com or use the "Request Account Deletion" option. We send a 6-digit verification code to your registered email (valid 15 minutes); once confirmed, your account is queued for deletion. For abuse prevention on this locked-out endpoint, your IP address is SHA-256 hashed (truncated to 32 hex characters) and stored briefly to rate-limit OTP requests; the raw IP is never persisted.
 
-Both paths delete the following data from our active systems: all journal entries and chat messages (including archived chat history), AI-generated insights, reports, your user profile document, AI usage records, feedback submissions, AI-response reports you submitted, device trial record, and your Firebase Authentication account. Your account is deactivated immediately on confirmation and this data is permanently erased after the 7-day grace period, unless you restore the account during that window.
+Both paths delete the following data from our active systems: all journal entries and chat messages (including archived chat history), AI-generated insights, reports, your user profile document, every AI and rate-limit usage record keyed to your account, feedback submissions, AI-response reports you submitted, your identity in the device trial records, your journal image files, and your Firebase Authentication account. Privacy Policy §11 lists each collection by name, together with the few device-level anti-abuse counters that are not reverse-linkable to you and therefore self-purge on a timer instead of being deleted by name. Upon confirmation, your account is immediately deactivated and signed out; the data listed above is then permanently erased from active systems after a 7-day grace period.
 
 Residual data may persist in encrypted backup systems for up to 90 days before being purged from backup cycles. Certain financial and legal records may be retained longer as required by law. After deletion, your right to use the App ceases immediately.</p>
   </div>
@@ -376,16 +377,24 @@ For questions, concerns, or disputes regarding these Terms, write to us at the a
 
 Grievance Officer (India): see Privacy Policy §17.
 
-Last updated: 2026-07-26 (v1.3)</p>
+Last updated: 2026-07-26 (v1.4)</p>
   </div>
 
   <div class="section">
     <p class="section-heading">Changelog</p>
-    <p class="section-body">## v1.3 — 2026-07-26
-• &sect;5 / &sect;7: corrected the Compass Arya allowance from 400 messages per day to the 150 the server actually enforces (DAILY_AI_LIMIT_COMPASS) — the old figure over-promised by 250 messages, and &sect;7 stated it a second time. Added the journal-analysis allowance, which was never disclosed.
-• &sect;5 / &sect;7: corrected the trial length from 11 days to the 7 the server enforces (TRIAL_DURATION_MS / TRIAL_DAYS). The 11-day figure appeared in both the &sect;5 prose and the &sect;7 tier heading and was wrong in every published copy.
-• &sect;5 / &sect;7: removed the trial restrictions on Summarise periods and chat-history scroll-back/search, in BOTH places they appeared — &sect;7's trial block still listed them after an earlier partial edit, so the document contradicted itself. Trial users have always had these. The code has never applied them — trial users have always had those features — so the Terms understated what a trial includes.
-• &sect;7: removed the per-feature daily caps (reports 3/kind, summaries 20, reading 3, letter 3). Those caps were deliberately removed server-side; only the quiz retains one. The shared daily ceiling is now described instead.
+    <p class="section-body">## v1.4 — 2026-07-26
+• Published Terms brought back into line with the in-app Terms. docs/terms.html and the website copy had drifted behind LegalScreen.js: they still described the trial as feature-limited in §7, omitted the quiz cap, the 1,000-action ceiling, the server-fault refund clause and the journal-photo storage disclosure in §11, and listed only six Summarise periods where the code has eight. Both copies are now generated from one source.
+• §7: replaced "Compass subscribers are simply not subject to it" — which read as a contradiction of the adjacent sentence saying subscribing is not how the cap is lifted — with a plain statement that Compass subscribers are exempt from it entirely.
+• §7: the Summarise list now names all eight periods the code ships (this session, today, weekly, fortnightly, monthly, quarterly, half-yearly, yearly — SUMMARISE_PERIODS in MentorScreen.js), and confirms trial users get all of them (the premium flag is satisfied by isTrial).
+• §15: the deletion list was materially incomplete — it named a handful of collections while the erasure routine (functions/userFootprint.js) clears several more. It now points at Privacy §11, which lists every collection by name, and discloses the device-level anti-abuse counters that expire on a timer rather than being deleted by name.
+
+## v1.3 — 2026-07-26
+• §5 / §7: corrected the Compass Arya allowance from 400 messages per day to the 150 the server actually enforces (DAILY_AI_LIMIT_COMPASS) — the old figure over-promised by 250 messages, and §7 stated it a second time. Added the journal-analysis allowance, which was never disclosed.
+• §5 / §7: corrected the trial length from 11 days to the 7 the server enforces (TRIAL_DURATION_MS / TRIAL_DAYS). The 11-day figure appeared in both the §5 prose and the §7 tier heading and was wrong in every published copy.
+• §5 / §7: removed the trial restrictions on Summarise periods and chat-history scroll-back/search, in BOTH places they appeared — §7's trial block still listed them after an earlier partial edit, so the document contradicted itself. The code has never applied them, so the Terms understated what a trial includes.
+• §7: removed the per-feature daily caps (reports 3/kind, summaries 20, reading 3, letter 3). Those caps were deliberately removed server-side; only the quiz retains one (5 per level per day). The shared 1,000-action daily ceiling is now described instead.
+• §7 (NEW): added the server-fault clause — if a request fails because our AI provider is unavailable, times out or rate-limits us, that message or entry is returned to your allowance and the App says the fault is ours rather than telling you that you have reached your limit.
+• §7 (NEW): disclosed the per-device daily cap that applies to trial and free accounts, which had never been stated anywhere in the Terms.
 
 ## v1.2 — 2026-06-24
 • §2: replaced the stale "self-attestation only" age language with the real DOB age gate + India under-18 parental-consent flow, to match the actual app and Privacy Policy §14 (App Store legal-consistency audit).

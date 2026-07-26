@@ -2,13 +2,16 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { SectionReveal } from "../SectionReveal";
+import { VIRTUE_LEVELS, LEVEL_THRESHOLDS } from "@/lib/constants";
 
-/* ── Virtue level data (exact from app) ────────────────────── */
+/* ── Virtue level data ──────────────────────────────────────
+   Names and XP thresholds are NOT stored here any more — they are read by index
+   from VIRTUE_LEVELS / LEVEL_THRESHOLDS in src/lib/constants.ts, which mirror
+   kc-mobile/src/constants.js. This array carries only presentation (colour,
+   icon) and the prose description. Keep it exactly VIRTUE_LEVELS.length long. */
 
 const LEVELS = [
   {
-    name: "Seeker",
-    xp: "0 XP",
     color: "#7a9e7e",
     desc: "Everyone begins here. You\u2019ve taken the first step by showing up \u2014 that alone is powerful.",
     icon: (
@@ -21,8 +24,6 @@ const LEVELS = [
     ),
   },
   {
-    name: "Contemplator",
-    xp: "500 XP",
     color: "#a8c5ac",
     desc: "You\u2019ve built the habit of looking inward. Reflection is becoming part of who you are.",
     icon: (
@@ -34,8 +35,6 @@ const LEVELS = [
     ),
   },
   {
-    name: "Practitioner",
-    xp: "1,500 XP",
     color: "#c9824a",
     desc: "You\u2019re actively doing the work \u2014 not just noticing patterns but consciously changing them.",
     icon: (
@@ -49,8 +48,6 @@ const LEVELS = [
     featured: true,
   },
   {
-    name: "Guide",
-    xp: "3,500 XP",
     color: "#e8a97a",
     desc: "Your inner work is starting to show on the outside. You lead by example, not by words.",
     icon: (
@@ -61,8 +58,6 @@ const LEVELS = [
     ),
   },
   {
-    name: "Sage",
-    xp: "7,000 XP",
     color: "#c9a84a",
     desc: "You\u2019ve logged hundreds of honest reflections. Your values and your actions are in sync.",
     icon: (
@@ -85,10 +80,12 @@ const LEVELS = [
     ),
   },
   {
-    name: "Dharma Master",
-    xp: "15,000 XP",
     color: "#7a9abf",
-    desc: "Fewer than 1 in 1,000 users ever reach this. Your presence itself has become a source of guidance.",
+    // [truth] Was "Fewer than 1 in 1,000 users ever reach this." — a fabricated
+    // statistic. The app has not launched (APP_STORE_URL / PLAY_STORE_URL in
+    // src/lib/constants.ts are empty strings), so there is no user population to
+    // measure and no measurement of it.
+    desc: "Your presence itself has become a source of guidance.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden width="20" height="20">
         <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="0.6" opacity="0.25"/>
@@ -103,8 +100,6 @@ const LEVELS = [
     ),
   },
   {
-    name: "Karma Architect",
-    xp: "20,000 XP",
     color: "#C9824A",
     desc: "The absolute pinnacle. You no longer chase good karma \u2014 you simply live it.",
     icon: (
@@ -146,7 +141,9 @@ export function RealmSection() {
             <span className="italic text-[#C9824A]">seven virtue levels.</span>
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white/42">
-            Every journal entry, quiz, and practice earns Karma XP. Rise from Seeker to Karma Architect — each level a genuine milestone in your inner life.
+            Every journal entry, quiz, and practice earns Karma XP. Rise from{" "}
+            {VIRTUE_LEVELS[0]} to {VIRTUE_LEVELS[VIRTUE_LEVELS.length - 1]} — each
+            level a genuine milestone in your inner life.
           </p>
         </SectionReveal>
 
@@ -161,7 +158,7 @@ export function RealmSection() {
           <div className="space-y-3">
             {LEVELS.map((level, i) => (
               <motion.div
-                key={level.name}
+                key={VIRTUE_LEVELS[i]}
                 initial={reduce ? false : { opacity: 0, x: -16 }}
                 whileInView={reduce ? undefined : { opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
@@ -197,7 +194,7 @@ export function RealmSection() {
                       className="font-serif text-base font-light"
                       style={{ color: level.color }}
                     >
-                      {level.name}
+                      {VIRTUE_LEVELS[i]}
                     </h3>
                     <span
                       className="font-mono text-[0.6rem] tracking-widest px-1.5 py-0.5 rounded border"
@@ -207,23 +204,17 @@ export function RealmSection() {
                         background: `${level.color}0a`,
                       }}
                     >
-                      {level.xp}
+                      {LEVEL_THRESHOLDS[i].toLocaleString("en-US")} XP
                     </span>
                     {i === 0 && (
                       <span className="text-[0.6rem] uppercase tracking-[0.18em] text-white/28 px-1.5 py-0.5 rounded border border-white/[0.06]">
                         Starting level
                       </span>
                     )}
-                    {level.featured && (
-                      <span className="text-[0.6rem] uppercase tracking-[0.18em] text-[#C9824A]/70 px-1.5 py-0.5 rounded border border-[#C9824A]/20 bg-[#C9824A]/[0.06]">
-                        Most reach here
-                      </span>
-                    )}
-                    {i >= 5 && (
-                      <span className="text-[0.6rem] uppercase tracking-[0.18em] text-white/28 px-1.5 py-0.5 rounded border border-white/[0.06]">
-                        Rare
-                      </span>
-                    )}
+                    {/* [truth] "Most reach here" and "Rare" were removed. Both
+                        assert a distribution of real users across levels. The app
+                        has not launched, nothing measures level distribution, and
+                        neither claim has any source. */}
                   </div>
                   <p className="mt-1 text-sm leading-relaxed text-white/35 group-hover:text-white/48 transition-colors duration-200">
                     {level.desc}

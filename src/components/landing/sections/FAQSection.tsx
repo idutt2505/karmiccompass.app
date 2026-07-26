@@ -3,7 +3,18 @@
 import { useId, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { SectionReveal } from "../SectionReveal";
-import {TRIAL_DAYS, TRIAL_AI_PER_DAY, COMPASS_AI_PER_DAY, COMPASS_JOURNAL_PER_DAY, SECTION_IDS } from "@/lib/constants";
+import {
+  TRIAL_DAYS,
+  TRIAL_AI_PER_DAY,
+  COMPASS_AI_PER_DAY,
+  COMPASS_JOURNAL_PER_DAY,
+  COMPASS_PRICE_DISPLAY,
+  COMPASS_PERIOD_DISPLAY,
+  PRICE_CAVEAT,
+  RENEWAL_DISCLOSURE,
+  TRIAL_END_DISCLOSURE,
+  SECTION_IDS,
+} from "@/lib/constants";
 
 const FAQ_ITEMS = [
   {
@@ -16,7 +27,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "How does the Karma Engine work?",
-    a: "When you submit a journal entry, the Gemini-powered Karma Engine analyzes it across karma, dharma, emotion, mood, and life dimensions. If it detects contradictions, it opens a one-round clarification before finalizing your scores. All of this runs via a secure Firebase Cloud Function.",
+    a: "When you submit a journal entry, the Gemini-powered Karma Engine analyzes it across karma, dharma, emotion, mood, and life dimensions. If it detects contradictions, it opens a one-round clarification before finalizing your scores. All of this runs through our authenticated server-side AI proxy (Google Cloud Run), which scrubs emails, phone numbers and card-like numbers from your text before it reaches the model.",
   },
   {
     q: "What is the Realm and how do I progress?",
@@ -24,11 +35,17 @@ const FAQ_ITEMS = [
   },
   {
     q: "What does the Compass subscription include?",
-    a: `After your ${TRIAL_DAYS}-day free trial, Compass is $11/month (pricing may vary by platform and region). It raises your daily allowances to ${COMPASS_AI_PER_DAY} Arya messages and ${COMPASS_JOURNAL_PER_DAY} AI-analysed journal reflections per day (trial: ${TRIAL_AI_PER_DAY} each). Every feature — Deep Memory, Incognito mode, summaries from weekly through yearly, full chat history and all five Align practices — is already included in the trial and stays available.`,
+    a: `After your ${TRIAL_DAYS}-day free trial, Compass is ${COMPASS_PRICE_DISPLAY}/${COMPASS_PERIOD_DISPLAY}. ${PRICE_CAVEAT} It raises your daily allowances to ${COMPASS_AI_PER_DAY} Arya messages and ${COMPASS_JOURNAL_PER_DAY} AI-analysed journal reflections per day (trial: ${TRIAL_AI_PER_DAY} each). Every feature — Deep Memory, Incognito mode, summaries from weekly through yearly, full chat history and all five Align practices — is already included in the trial and stays available. ${RENEWAL_DISCLOSURE}`,
+  },
+  {
+    q: "What happens when the free trial ends?",
+    // Authority: kc-mobile/src/screens/LegalScreen.js §5 and functions/index.js
+    // DAILY_AI_LIMIT_NONE = 0 — there is no free tier to drop back to.
+    a: `${TRIAL_END_DISCLOSURE} The trial takes no payment method and does not convert on its own, so nothing is charged unless you actively subscribe. Your entries and account remain, and become available again as soon as a subscription is active. Each device is eligible for one free trial.`,
   },
   {
     q: "Can I cancel anytime?",
-    a: "Yes. Subscriptions are managed entirely through your device\u2019s native store \u2014 App Store on iOS or Google Play on Android. Cancel any time from your subscription settings with no emails or extra steps required.",
+    a: "Yes. Subscriptions are managed entirely through your device\u2019s native store \u2014 App Store on iOS or Google Play on Android. Cancel any time from your subscription settings, at least 24 hours before the next renewal date, with no emails or extra steps required.",
   },
   {
     q: "Who is Arya?",

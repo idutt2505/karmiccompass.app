@@ -41,7 +41,13 @@ const pillars = [
       </svg>
     ),
     t: "Your words stay yours",
-    d: "Your journal is not a product. Data is processed to deliver the app's features — never resold, never used to train models outside the product.",
+    // [truth] Was "never used to train models outside the product", which reads
+    // as an admission that it IS used to train models inside the product. The
+    // Privacy Policy (§1, §2, §4) commits to the stronger, unqualified version:
+    // content is not used to train ANY AI model, ours or a sub-processor's.
+    // Screen capture is deliberately NOT claimed here — screenCapture.js has
+    // ALLOW_SCREENSHOTS = true and Privacy Policy §10 says capture is permitted.
+    d: "Your journal is not a product. Data is processed only to deliver the app's features — never sold, never used for advertising, and never used to train any AI model, ours or our providers'. On a shared device, the App Passcode is what keeps your entries private.",
   },
   {
     icon: (

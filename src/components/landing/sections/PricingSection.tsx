@@ -2,7 +2,22 @@
 
 import { SectionReveal } from "../SectionReveal";
 import { SmartExternalLink } from "../SmartExternalLink";
-import { TRIAL_DAYS, COMPASS_AI_PER_DAY, SECTION_IDS, APP_STORE_URL, PLAY_STORE_URL } from "@/lib/constants";
+import {
+  TRIAL_DAYS,
+  TRIAL_AI_PER_DAY,
+  COMPASS_AI_PER_DAY,
+  TRIAL_JOURNAL_PER_DAY,
+  COMPASS_JOURNAL_PER_DAY,
+  COMPASS_PRICE_DISPLAY,
+  COMPASS_PERIOD_DISPLAY,
+  PRICE_CAVEAT,
+  RENEWAL_DISCLOSURE,
+  TRIAL_END_DISCLOSURE,
+  TERMS_URL,
+  SECTION_IDS,
+  APP_STORE_URL,
+  PLAY_STORE_URL,
+} from "@/lib/constants";
 import { motion, useReducedMotion } from "framer-motion";
 
 
@@ -18,20 +33,24 @@ function Check() {
 
 const trialFeatures = [
   "Journal (text + voice) with Karma Engine scoring",
-  "Arya mentor \u2014 30 messages/day",
+  `Arya mentor \u2014 ${TRIAL_AI_PER_DAY} messages/day`,
   "Karma & dharma gauges + monthly chart",
   "All 5 Align practices (quiz, breath, memory, yoga, audio)",
   "Stars astrology tab",
   "Realm virtue progression (all 7 levels)",
 ];
 
+// [truth] These are the ONLY things that change when you pay. This list used to
+// sell Deep Memory, Incognito Mode, Extended Summaries and full chat history &
+// search as what the subscription buys — all four are already available during
+// the trial (MentorScreen.js gates them `(!p.premium || isBasic || isTrial)`),
+// which is an App Store 3.1.2 problem, not a copy nit. The real differences are
+// kc-mobile/src/constants.js COMPASS_PERKS: the two daily allowances.
 const compassFeatures = [
-  "Everything in the trial",
-  `Up to ${COMPASS_AI_PER_DAY} Arya messages per day`,
-  "Deep Memory — Arya remembers your full story",
-  "Incognito Mode — reflect without saving",
-  "Extended Summaries — weekly through yearly",
-  "Full chat history & search",
+  "Everything in the trial — nothing is feature-locked",
+  `Arya messages · ${TRIAL_AI_PER_DAY} → ${COMPASS_AI_PER_DAY} a day`,
+  `Journal reflections · ${TRIAL_JOURNAL_PER_DAY} → ${COMPASS_JOURNAL_PER_DAY} a day`,
+  "Keeps your access once the trial ends",
 ];
 
 export function PricingSection() {
@@ -44,10 +63,17 @@ export function PricingSection() {
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionReveal className="text-center">
+          {/* [truth] Was "Start free. Go deeper when you are ready." above a card
+              headed "Free · N days", which reads as a persistent free tier. There
+              isn't one — functions/index.js sets DAILY_AI_LIMIT_NONE = 0 and
+              LegalScreen.js §5 says access is suspended until you subscribe. */}
           <h2 className="font-serif text-[2.1rem] font-light leading-[1.1] tracking-[-0.02em] text-[#f5f2ed] sm:text-[2.6rem]">
-            Start free. Go deeper<br />
-            <span className="italic text-[#C9824A]">when you are ready.</span>
+            Everything free for {TRIAL_DAYS} days.<br />
+            <span className="italic text-[#C9824A]">Then decide.</span>
           </h2>
+          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-white/40">
+            {TRIAL_END_DISCLOSURE}
+          </p>
         </SectionReveal>
 
         <div className="mt-12 grid gap-4 lg:grid-cols-2 max-w-4xl mx-auto">
@@ -65,6 +91,11 @@ export function PricingSection() {
               <p className="font-serif text-4xl font-light text-white/90">Free</p>
               <p className="mb-1 text-sm text-white/35">· {TRIAL_DAYS} days</p>
             </div>
+            <p className="mt-2 text-xs leading-relaxed text-white/32">
+              No payment method required, and the trial does not convert on its
+              own. When the {TRIAL_DAYS} days are up, access is suspended until
+              you subscribe.
+            </p>
 
             <ul className="mt-6 flex-1 space-y-3">
               {trialFeatures.map((f) => (
@@ -119,9 +150,23 @@ export function PricingSection() {
 
             <p className="text-[0.65rem] font-medium uppercase tracking-[0.22em] text-[#E8A97A]">Compass</p>
             <div className="mt-2 flex items-end gap-2">
-              <p className="font-mono text-4xl font-light text-white/95">$11</p>
-              <p className="mb-1 text-sm text-white/45">/ month</p>
+              <p className="font-mono text-4xl font-light text-white/95">{COMPASS_PRICE_DISPLAY}</p>
+              <p className="mb-1 text-sm text-white/45">/ {COMPASS_PERIOD_DISPLAY}</p>
             </div>
+            {/* [truth] A recurring price must state that it recurs, how to stop
+                it, and link the terms it is sold under. */}
+            <p className="mt-2 text-xs leading-relaxed text-white/32">
+              {RENEWAL_DISCLOSURE} {PRICE_CAVEAT}{" "}
+              <a
+                href={TERMS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#C9824A] underline decoration-[#C9824A]/30 underline-offset-2 hover:decoration-[#C9824A]"
+              >
+                Terms of Service
+              </a>
+              .
+            </p>
 
             <ul className="mt-6 flex-1 space-y-3">
               {compassFeatures.map((f) => (
