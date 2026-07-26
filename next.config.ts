@@ -39,6 +39,14 @@ const nextConfig: NextConfig = {
       { source: "/privacy/:doc*", headers: [{ key: "Content-Type", value: "text/plain; charset=utf-8" }] },
     ];
   },
+  async redirects() {
+    return [
+      // Google Play "Account deletion URL" is declared as /delete
+      // (docs/privacy/PLAY_DATA_SAFETY.md §4). The page itself lives at
+      // /delete-account, so keep the declared URL resolving rather than 404ing.
+      { source: "/delete", destination: "/delete-account", permanent: false },
+    ];
+  },
   async rewrites() {
     return [
       { source: "/privacy", destination: "/privacy.html" },

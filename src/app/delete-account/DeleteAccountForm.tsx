@@ -2,7 +2,11 @@
  * DeleteAccountForm — interactive 2-step OTP flow.
  *
  * Step 1: enter email → POST /requestDeletionCode → emails 6-digit OTP.
- * Step 2: enter OTP   → POST /confirmDeletion    → wipes Firestore + Auth.
+ * Step 2: enter OTP   → POST /confirmDeletion    → soft-deletes the account
+ *          (revokes sessions, stamps pendingDeletionAt) and returns
+ *          { ok, pending: true, graceDays }. The nightly cleanupPendingDeletions
+ *          sweep does the real erasure once the grace window has elapsed — so
+ *          the success copy must NOT claim the data is already gone.
  *
  * Mirrors kc-mobile/src/screens/DeletionRequestScreen.js. Server endpoints
  * accept CORS from karmiccompass.app (per functions/index.js CORS allowlist).
@@ -36,6 +40,9 @@ export default function DeleteAccountForm() {
     const [code, setCode] = useState("");
     const [busy, setBusy] = useState(false);
     const [error, setError] = useState("");
+    // Read back from confirmDeletion's response so the success copy states the
+    // server's actual grace window rather than a hardcoded one.
+    const [graceDays, setGraceDays] = useState<number | null>(null);
     const lastSubmit = useRef(0);
 
     /** Returns true if a submit is allowed; otherwise sets an error and returns false. */
@@ -111,6 +118,9 @@ export default function DeleteAccountForm() {
                 setError(body.error || "Invalid code. Please try again.");
                 return;
             }
+            const body = await r.json().catch(() => ({}));
+            const g = Number(body?.graceDays);
+            setGraceDays(Number.isFinite(g) && g > 0 ? g : null);
             setStep("done");
         } catch {
             setError("Network error. Please check your connection and try again.");
@@ -123,14 +133,32 @@ export default function DeleteAccountForm() {
         return (
             <div className="mt-10 space-y-3 rounded-lg border border-[#7a9a7a]/40 bg-[#7a9a7a]/[0.08] p-6">
                 <h2 className="font-serif text-2xl font-light text-white">
-                    Your account has been deleted.
+                    Your account is scheduled for deletion.
                 </h2>
                 <p className="text-sm leading-relaxed text-white/55">
-                    All of your data has been permanently erased from our
-                    servers. Residual data in encrypted Google Cloud backups
-                    may persist for up to 90 days. Subscription billing records
-                    held by Apple, Google, or RevenueCat are retained per their
-                    respective policies and applicable financial law.
+                    Your account has been deactivated and you have been signed
+                    out of every device. Your data is{" "}
+                    <strong className="font-medium text-white/75">
+                        not erased yet
+                    </strong>
+                    : it is permanently erased from our active systems after a{" "}
+                    {graceDays ? `${graceDays}-day` : "short"} grace period. We
+                    have emailed you a link you can use to cancel the deletion
+                    during that window.
+                </p>
+                <p className="text-sm leading-relaxed text-white/55">
+                    Please note: if you sign back into the app before the grace
+                    period ends, you will be offered the option to restore your
+                    account — choosing to restore cancels the deletion. If you
+                    want the deletion to go ahead, simply do nothing.
+                </p>
+                <p className="text-sm leading-relaxed text-white/55">
+                    Once the grace period has passed, the erasure cannot be
+                    reversed. Residual data in encrypted Google Cloud backups
+                    may persist for up to 90 days after that. Subscription
+                    billing records held by Apple, Google, or RevenueCat are
+                    retained per their respective policies and applicable
+                    financial law.
                 </p>
             </div>
         );

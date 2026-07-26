@@ -37,9 +37,12 @@ export default function DeleteAccountPage() {
                 </h1>
 
                 <p className="mt-5 text-base leading-relaxed text-white/60">
-                    Deleting your account is permanent and cannot be undone.
-                    Your journal entries, chats with Arya, profile, and
-                    account data are all erased.
+                    Deleting your account erases your journal entries, chats
+                    with Arya, profile, and account data. Confirming below
+                    deactivates your account and signs you out everywhere
+                    immediately; the data itself is permanently erased after a
+                    7-day grace period, during which you can still cancel. Once
+                    that window closes, the deletion cannot be undone.
                 </p>
 
                 <p className="mt-3 text-sm text-white/40">

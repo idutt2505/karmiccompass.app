@@ -66,9 +66,9 @@
 </nav>
 
 <div class="hero">
-  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.4</p>
+  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.5</p>
   <h1 class="hero-title">Privacy Policy</h1>
-  <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-06-24</p>
+  <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-07-26</p>
 </div>
 
 <main>
@@ -80,7 +80,7 @@
 • You give us: name, date of birth, gender, country, journal entries, chat messages, and optionally voice recordings and photos.
 • We generate: AI-powered insights, karma/dharma scores, astrological readings, quiz scores, and badges from your content.
 • Your voice audio is transcribed by Google's Gemini AI and immediately deleted from your device — only the text transcript is stored.
-• Photos you attach in chat are sent to Gemini Vision for AI processing — not stored permanently on our servers.
+• Photos you attach in Arya's chat are sent to Gemini Vision for AI processing and are not kept as files on our servers. Photos you attach to a journal entry ARE stored in our cloud storage for the life of your account, so we can show them back to you in your journal.
 • A stable anonymous device ID is stored on your device (persists across reinstalls) solely to enforce the one-trial-per-device policy.
 • Your passcode (if set) is stored only in your device's secure enclave — never transmitted to us.
 • A background task runs every 12+ hours solely to reschedule local notifications — no data is sent to our servers during this.
@@ -135,7 +135,8 @@ F. VOICE TRANSCRIPTIONS
 • When you use the microphone button, your audio is recorded on-device, encoded as base64, and transmitted to our secure proxy server for transcription via Google's Gemini API. The audio data is never written to Firestore or Firebase Storage. The original audio file is deleted from your device immediately after the transcription request is sent. The resulting text transcript is stored as part of your journal entry or chat message.
 
 G. IMAGES
-• When you attach a photo in Arya's chat, it is resized and re-encoded on-device (max 1024×1024px, ~50% quality) and sent as base64 to our proxy for Gemini Vision AI processing. We do not store images as standalone files on our servers. Because the image is re-encoded on your device before upload, EXIF metadata — including any GPS/location coordinates, device identifiers, and original timestamps — is stripped and is not transmitted.
+• Chat images: When you attach a photo in Arya's chat, it is resized and re-encoded on-device (max 1024×1024px, ~50% quality) and sent as base64 to our proxy for Gemini Vision AI processing. Chat images are not stored as standalone files on our servers. Because the image is re-encoded on your device before upload, EXIF metadata — including any GPS/location coordinates, device identifiers, and original timestamps — is stripped and is not transmitted.
+• Journal images: If you attach a photo to a journal entry, the image file is stored in our cloud storage (Firebase Storage, path users/{uid}/journalImages/) so we can display it in your journal. It is kept for the life of your account and is deleted when you delete your account.
 
 H. CRISIS SIGNAL RECORDS (HEALTH-RELATED DATA — GDPR Art. 9)
 • If the App detects crisis-related language (using a keyword list in the app code) in your message, and you are not in Incognito Mode, the first 100 characters of your message and a timestamp are added to a crisisFlags array in your Firestore profile. This is used solely for contextual safety follow-up in future sessions and is never shared externally. See §3 for the lawful basis and your opt-out rights.
@@ -165,11 +166,13 @@ N. ABUSE-PREVENTION SIGNALS
 O. SUBSCRIPTION &amp; BILLING
 • Subscription status (isBasic, isPremium, subscriptionPlan, premiumExpiresAt) is set in your Firestore profile by our RevenueCat webhook when subscription events occur. RevenueCat uses your Firebase UID as the app user ID. We do not receive full payment card details.
 
-P. FEEDBACK
+P. FEEDBACK &amp; AI-RESPONSE REPORTS
 • If you submit in-app feedback, we store your message text (capped at 1,000 characters), star rating (1–5), your Firebase UID, and submission timestamp in a Firestore feedback collection.
+• If you report a message in your chat with Arya (the "Report" action on a message), we store a record in a Firestore chatReports collection containing: your Firebase UID, the message identifier, whether the message was yours or Arya's, the reason you selected, up to the first 500 characters of the reported message text, and the submission timestamp. Where the reported message is one you wrote, that excerpt is your own content. Before it leaves your device the excerpt is scrubbed for email addresses, phone numbers, and card-like number sequences. These reports are used only to review AI-safety and quality problems. They are not shared externally and are not used to train any AI model.
 
-Q. AI USAGE QUOTA
+Q. AI &amp; VOICE USAGE QUOTAS
 • A daily call count (date → count) is stored in Firestore (aiUsage/{uid}) to enforce per-tier daily limits server-side.
+• A comparable daily counter for text-to-speech (voice playback) usage is stored in Firestore (ttsUsage/{uid}) to enforce per-tier voice limits server-side.
 
 R. SUPPORT &amp; DELETION REQUEST DATA
 • Emails you send us, retained to resolve enquiries.
@@ -222,7 +225,7 @@ We do NOT sell your personal data to advertisers or third-party data brokers. We
 Special Category &amp; Sensitive Data (GDPR Art. 9 / UK GDPR / equivalent):
 The App processes mental-health-adjacent content (journal entries, mood check-ins, emotional patterns, crisis signals) and health-adjacent inferences (karma/dharma scores, psychological themes). Under GDPR Art. 9 and equivalent laws, this qualifies as health-related sensitive personal data. We process such data on the basis of your explicit consent (GDPR Art. 9(2)(a)). That consent is obtained through a dedicated consent screen shown during onboarding, before any journal, mood, or AI feature is used — it explains that your entries may contain health-related data and requires your affirmative agreement to proceed; it is a separate, specific act and is not bundled into general terms acceptance. Crisis-flag storage is also covered by this Art. 9(2)(a) explicit consent (with a dedicated "Safety follow-up memory" opt-out); we rely on Art. 9(2)(c) "vital interests" only as a narrow fallback in a genuine emergency where consent cannot be obtained (see below). You may withdraw your Art. 9(2)(a) consent at any time by deleting your account.
 
-Crisis flags (health data under GDPR Art. 9): The crisisFlags record (up to 100 characters of your message + timestamp) is written to your profile when your message matches a safety keyword. We process this primarily under your Art. 9(2)(a) explicit consent (with the "Safety follow-up memory" toggle as a granular opt-out), relying on Art. 9(2)(c) "vital interests" only where you are in a genuine emergency and cannot give consent, so we can surface immediate safety resources in future sessions. Crisis flags auto-expire after 90 days. You may delete them at any time via Settings → Privacy or by deleting your account. You may also opt out of crisisFlags storage entirely while keeping live in-session safety warnings — toggle "Safety follow-up memory" in Settings.
+Crisis flags (health data under GDPR Art. 9): The crisisFlags record (up to 100 characters of your message + timestamp) is written to your profile when your message matches a safety keyword. We process this primarily under your Art. 9(2)(a) explicit consent (with the "Safety follow-up memory" toggle as a granular opt-out), relying on Art. 9(2)(c) "vital interests" only where you are in a genuine emergency and cannot give consent, so we can surface immediate safety resources in future sessions. Crisis flags auto-expire after 90 days. You may delete them at any time via Settings → Arya Settings (either by turning off "Safety follow-up memory", which also erases any flags already stored, or by using "Clear chat &amp; memory") or by deleting your account. You may also opt out of crisisFlags storage entirely while keeping live in-session safety warnings — toggle "Safety follow-up memory" in Settings → Arya Settings.
 
 Data Protection Impact Assessment (DPIA — GDPR Art. 35): Because the App processes health-adjacent data at scale and uses AI to generate inferences about your wellbeing, we have conducted a Data Protection Impact Assessment covering our key processing activities, AI inference risks, and mitigation measures. The DPIA is published at karmiccompass.app/privacy/DPIA and available on request to supervisory authorities as required by law.
 
@@ -353,25 +356,29 @@ These providers may process your data in the United States and other countries. 
     <p class="section-heading">9. Data Retention</p>
     <p class="section-body">Retention periods by data category:
 
-• Account &amp; profile data (name, dob, gender, country, intention, language preference, scores, settings): active account lifetime → deleted immediately on account deletion from active systems.
+• Account &amp; profile data (name, dob, gender, country, intention, language preference, scores, settings): active account lifetime → erased from active systems after the 7-day deletion grace period (immediately if you choose "Delete now"). See §11.
 
-• Journal entries and chat messages (including archived chat): active account lifetime → deleted immediately on account deletion.
+• Journal entries and chat messages (including archived chat): active account lifetime → erased from active systems after the 7-day deletion grace period (immediately if you choose "Delete now").
 
 • AI-generated data (life digest, insights, session summaries, memory, reports): active account lifetime → deleted with account.
 
 • Wellness &amp; behavioural data (mood history, quiz history, badges, challenges, preferred topics): active account lifetime → deleted with account.
 
-• Crisis signal records (≤100 char excerpt + timestamp in crisisFlags): auto-expire after 90 days; also deleted with account; user-deletable at any time via Settings → Privacy.
+• Crisis signal records (≤100 char excerpt + timestamp in crisisFlags): auto-expire after 90 days; also deleted with account; user-deletable at any time via Settings → Arya Settings.
 
 • Voice audio files: deleted from your device immediately after transcription — never stored on our servers.
 
-• Image data: not stored permanently on our servers — used transiently for AI processing only.
+• Chat image data: not stored as standalone files on our servers — used transiently for AI processing only.
+
+• Journal image files (Firebase Storage, users/{uid}/journalImages/): active account lifetime → deleted when your account is deleted.
 
 • Push notification tokens (Expo Push Tokens): active account lifetime → deleted with account.
 
 • Abuse-prevention IP-hashes (deletion OTP rate-limit): retained for the rate-limit window only (typically minutes to a few hours), then purged.
 
-• AI usage quota (aiUsage/{uid}): deleted with account.
+• AI usage quota (aiUsage/{uid}) and voice/TTS usage quota (ttsUsage/{uid}): deleted with account.
+
+• AI-response reports (chatReports): there is no automatic expiry — a report is retained until you delete your account, at which point every report carrying your UID is deleted.
 
 • Device trial record (deviceTrials/{deviceId}): on account deletion your account identity (UID) is removed from it, but the pseudonymous one-trial-per-device marker is retained to prevent trial abuse (legitimate interest, GDPR Art. 6(1)(f)). Consistent with storage limitation (Art. 5(1)(e)): once the UID is removed, the remaining marker is an unlinkable random token that no longer constitutes personal data, so no fixed deletion date is required — it is retained only while the one-trial-per-device control remains operationally necessary.
 
@@ -401,29 +408,39 @@ A full per-collection retention schedule is published at karmiccompass.app/priva
   </div>
 
   <div class="section">
-    <p class="section-heading">10. Screen Capture Protection</p>
-    <p class="section-body">To protect the privacy of your personal content, the App automatically blocks screenshots and screen recordings on the following screens while they are active: Journal (write/view), Arya Chat, Arya Memory, and Passcode entry.
+    <p class="section-heading">10. Screenshots &amp; Screen Recording</p>
+    <p class="section-body">The App does not block screenshots or screen recording. Your content is yours: you are free to capture, save, and share your journal entries, readings, and conversations with Arya however you choose.
 
-This protection is enforced at the operating system level. It applies to all screen recording, screenshot, and screen-sharing mechanisms on your device while you are viewing these screens.</p>
+Please be aware of what that means on a shared device. Because capture is not blocked, your content can appear in your device&rsquo;s app-switcher preview, and any screen-recording or screen-sharing software installed on your device can record these screens. The App cannot prevent this.
+
+If other people have access to your device, turn on the App Passcode (Settings &rarr; App Lock). That is the control that keeps your content private while the App is not in use.</p>
   </div>
 
   <div class="section">
     <p class="section-heading">11. Account Deletion</p>
     <p class="section-body">You can delete your account via two routes:
 
-(a) In-app: Settings → Account → Delete Account (requires active login). This calls our deleteAccount Cloud Function, which immediately deletes all data listed below.
+(a) In-app: Settings → Account → Delete Account (requires active login). This calls our deleteAccount Cloud Function.
 
-(b) Email-based: if you cannot log in, contact app.karmiccompass@gmail.com or use the "Request Account Deletion" option in the App. We send a 6-digit verification code to your registered email (valid 15 minutes). For abuse prevention, your IP address is SHA-256 hashed (truncated to 32 hex characters) and stored briefly to rate-limit OTP requests; the raw IP is never persisted. Upon confirmation, our confirmDeletion Cloud Function immediately deletes all data listed below.
+(b) Email-based: if you cannot log in, contact app.karmiccompass@gmail.com or use the "Request Account Deletion" option in the App. We send a 6-digit verification code to your registered email (valid 15 minutes). For abuse prevention, your IP address is SHA-256 hashed (truncated to 32 hex characters) and stored briefly to rate-limit OTP requests; the raw IP is never persisted. Upon confirmation, our confirmDeletion Cloud Function processes the deletion.
 
-Data deleted by both routes:
+What happens when you confirm (both routes): your account is deactivated straight away — your sign-in sessions are revoked and your account is scheduled for erasure. Deletion is not instant by default: there is a 7-day grace period, and the data listed below is permanently erased from our active systems by a scheduled job once those 7 days have passed. The grace period exists so a deletion made by mistake, or by someone else with access to an unlocked phone, can still be undone.
+
+Cancelling during the 7 days: we email you a one-click cancellation link when the deletion starts. You can also sign back in during the grace period — the App will show you a screen offering "Restore my account". Deletion is the default: simply signing in does NOT cancel it, and if you do nothing (or choose "Continue with deletion") the erasure goes ahead on schedule. After the 7 days the deletion cannot be reversed.
+
+Deleting immediately: the in-app Delete Account flow also offers a "Delete now" option, which skips the grace period entirely and erases everything listed below straight away, including your Firebase Authentication account. Choose this if you need the data gone today — it cannot be undone.
+
+Data deleted (in both cases, once erasure runs):
 • All documents in users/{uid}/chatArchive subcollection
 • All documents in users/{uid}/insights subcollection
 • All documents in users/{uid}/reports subcollection
 • aiUsage/{uid} document
 • ttsUsage/{uid} document
 • All documents in feedback where uid matches
+• All documents in chatReports where uid matches (AI-response reports you submitted)
 • deviceTrials: your account identity (UID) is scrubbed from the device marker (the pseudonymous one-trial-per-device marker itself is retained for abuse prevention — see §9)
 • The users/{uid} main document (entire profile, including push tokens and crisisFlags)
+• Journal image files stored in our cloud storage (Firebase Storage, users/{uid}/journalImages/)
 • Your Firebase Authentication account
 
 Residual data in encrypted Google Cloud backups may persist for up to 90 days. Subscription billing records are retained per RevenueCat and applicable financial law.</p>
@@ -578,12 +595,20 @@ India DPDPA contact: contact@karmiccompass.app (Data Protection Board of India c
 EU/EEA & United Kingdom availability:
 KarmicCompass is not offered or marketed in the European Union, European Economic Area, or the United Kingdom, and the App is not listed on the App Store or Google Play in those regions. We do not target, advertise to, or monitor the behaviour of users in those regions, and we collect no data intended to profile EU/EEA/UK residents. On that basis we have not appointed a representative under GDPR Art. 27 or UK GDPR Art. 27. If you are an EU/EEA/UK resident who has obtained the App through other means, please contact us at privacy@karmiccompass.app and we will honour your data-subject request as if GDPR applied. Should we identify material EU/EEA/UK usage, we will appoint an Art. 27 representative and update this section before continuing to process such data.
 
-Last updated: 2026-06-24 (v1.4)</p>
+Last updated: 2026-07-26 (v1.5)</p>
   </div>
 
   <div class="section">
     <p class="section-heading">Changelog</p>
-    <p class="section-body">## v1.4 — 2026-06-24
+    <p class="section-body">## v1.5 — 2026-07-26
+• § 10: the App no longer blocks screenshots or screen recording. Section rewritten from “Screen Capture Protection” to “Screenshots &amp; Screen Recording” to state plainly that capture is permitted, that content can therefore appear in the device app-switcher preview and be captured by screen-recording software, and that the App Passcode is the control that protects content on a shared device. Owner decision 2026-07-26: users keep full control of their own content.
+• Summary / §1(G) / §9: corrected an inaccurate claim that images are never stored on our servers. Photos attached in Arya's chat remain transient (base64 to the AI proxy, no server-side file), but photos attached to a JOURNAL ENTRY are stored in Firebase Storage (users/{uid}/journalImages/) for the life of the account. §1(G) and the §9 retention table now state both cases separately.
+• §11 / §9: corrected the claim that account deletion is immediate. Confirming deletion deactivates the account and revokes sessions straight away, but erasure runs after a 7-day grace period via a scheduled job. Added: the emailed one-click cancellation link, the in-app "Restore my account" screen shown when you sign in during the grace period (signing in alone does not cancel — deletion is the default), and the "Delete now" option that skips the grace period.
+• §1(P) / §9 / §11: newly disclosed the chatReports collection written when you report a message in your chat with Arya (UID, message id, role, reason, up to 500 locally PII-scrubbed characters of the reported message, timestamp). Retention stated honestly: no automatic expiry — retained until account deletion.
+• §1(Q) / §9: added the ttsUsage/{uid} voice-playback quota counter, previously listed only in the §11 deletion list.
+• §3 / §9: corrected the in-app path for deleting crisis flags from the non-existent "Settings → Privacy" to Settings → Arya Settings ("Safety follow-up memory" toggle / "Clear chat &amp; memory").
+
+## v1.4 — 2026-06-24
 • §3 / §3a: crisis-flag lawful basis reframed to Art. 9(2)(a) explicit consent (primary) with Art. 9(2)(c) vital interests only as a narrow emergency fallback.
 • §3a: stated that AI inferences constitute "profiling" under GDPR Art. 4(4), with limited significance (personal reflection only).
 • §4: added a contingency — if Google's paid-tier no-training commitment is weakened, we cease the Gemini fallback or obtain fresh consent before processing health data through it.
