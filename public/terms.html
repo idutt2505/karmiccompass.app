@@ -107,9 +107,9 @@ Subscription auto-renews monthly at the displayed price unless cancelled at leas
 
   <div class="section">
     <p class="section-heading">5. Free Trial</p>
-    <p class="section-body">New users receive an 11-day free trial of the Compass plan, beginning from the moment they complete their initial profile setup. No payment method is required and you will not be charged automatically at the end of the trial.
+    <p class="section-body">New users receive a 7-day free trial of the Compass plan, beginning from the moment they complete their initial profile setup. No payment method is required and you will not be charged automatically at the end of the trial.
 
-During the trial, you have access to most Compass features, including Arya AI chat, Incognito Mode, Deep Memory, personalised insights, and language preferences. The following restrictions apply during the trial:
+During the trial, you have access to every Compass feature, including Arya AI chat, Incognito Mode, Deep Memory, personalised insights, and language preferences. The only limits during the trial are the daily allowances below:
 
 • Arya conversations: up to 30 messages per day (Compass subscribers have up to 150 messages per day).
 • Journal reflections analysed by AI: up to 30 per day (Compass subscribers have up to 150 per day).
@@ -136,13 +136,14 @@ Australian Consumer Law: Nothing in these Terms excludes, restricts, or modifies
     <p class="section-heading">7. Compass vs Trial — Feature Comparison</p>
     <p class="section-body">The App operates across two tiers:
 
-── Trial (first 11 days after onboarding) ──
+── Trial (first 7 days after onboarding) ──
 • Arya chat: up to 30 messages per day (enforced server-side).
 • Incognito Mode: available.
 • Arya settings (language, tone, memory): available.
-• Summarise: today only.
-• Chat archive scroll-back: not available.
-• Full chat history search: not available.
+• Summarise: all periods (today, 7 days, 30 days, quarterly, 6 months, 1 year).
+• Chat archive scroll-back: available.
+• Full chat history search: available.
+• Journal reflections analysed by AI: up to 30 per day.
 • AI context: up to 30 recent journal entries, full digest, 40-message conversation window.
 
 ── Compass (paid subscription) ──
@@ -378,7 +379,8 @@ Last updated: 2026-07-26 (v1.3)</p>
     <p class="section-heading">Changelog</p>
     <p class="section-body">## v1.3 — 2026-07-26
 • &sect;5 / &sect;7: corrected the Compass Arya allowance from 400 messages per day to the 150 the server actually enforces (DAILY_AI_LIMIT_COMPASS) — the old figure over-promised by 250 messages, and &sect;7 stated it a second time. Added the journal-analysis allowance, which was never disclosed.
-• &sect;5: removed the trial restrictions on Summarise periods and chat-history scroll-back/search. The code has never applied them — trial users have always had those features — so the Terms understated what a trial includes.
+• &sect;5 / &sect;7: corrected the trial length from 11 days to the 7 the server enforces (TRIAL_DURATION_MS / TRIAL_DAYS). The 11-day figure appeared in both the &sect;5 prose and the &sect;7 tier heading and was wrong in every published copy.
+• &sect;5 / &sect;7: removed the trial restrictions on Summarise periods and chat-history scroll-back/search, in BOTH places they appeared — &sect;7's trial block still listed them after an earlier partial edit, so the document contradicted itself. Trial users have always had these. The code has never applied them — trial users have always had those features — so the Terms understated what a trial includes.
 • &sect;7: removed the per-feature daily caps (reports 3/kind, summaries 20, reading 3, letter 3). Those caps were deliberately removed server-side; only the quiz retains one. The shared daily ceiling is now described instead.
 
 ## v1.2 — 2026-06-24

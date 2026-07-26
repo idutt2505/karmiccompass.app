@@ -168,9 +168,9 @@ export function AppPreviewSection() {
         {/* Bottom stat strip */}
         <div className="mt-16 grid grid-cols-3 gap-px overflow-hidden rounded-2xl border border-white/[0.05] bg-white/[0.02]">
           {[
-            { label: "free trial duration", stat: "11 days" },
+            { label: "free trial duration", stat: "7 days" },
             { label: "Arya messages · trial", stat: "30/day" },
-            { label: "Arya messages · Compass", stat: "Up to 400/day" },
+            { label: "Arya messages · Compass", stat: "Up to 150/day" },
           ].map((item) => (
             <div key={item.label} className="px-6 py-5 text-center">
               <p className="font-serif text-xl text-white/75">{item.stat}</p>
@@ -178,7 +178,7 @@ export function AppPreviewSection() {
             </div>
           ))}
         </div>
-        <p className="mt-2 text-center text-[0.6rem] text-white/18">Compass plan \u2014 $11/month after 11-day free trial</p>
+        <p className="mt-2 text-center text-[0.6rem] text-white/18">Compass plan \u2014 $11/month after 7-day free trial</p>
       </div>
     </section>
   );
