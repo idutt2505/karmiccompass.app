@@ -154,7 +154,7 @@ Australian Consumer Law: Nothing in these Terms excludes, restricts, or modifies
 
 These are the same features available during the trial; Compass raises the two daily allowances above. All AI actions also share a combined daily ceiling that is identical on both tiers.
 
-A separate anti-abuse limit applies per device rather than per account, and is shared by every account signed in on that handset. It is not a tier difference and subscribing does not lift it.
+A separate anti-abuse limit of 150 AI actions per day applies per device rather than per account, and is shared by every trial or unsubscribed account signed in on that handset. Compass subscribers are exempt from it entirely. All AI actions on both tiers also share a combined ceiling of 1,000 actions per day.
 
 If a request fails because of a problem on our side &mdash; our AI provider being unavailable, timing out, or rate-limiting us &mdash; that message or entry is returned to your allowance and does not count against you. In that situation the App tells you the fault is ours; it does not tell you that you have reached your daily limit.
 
@@ -197,7 +197,7 @@ All AI requests pass through our secure proxy server. Safety filters (BLOCK_MEDI
 
 • Microphone (required for voice features): When you tap the microphone button in the Journal or Arya chat, your audio is recorded on-device, encoded as base64, and sent to Google's Gemini API via our secure proxy for transcription. The audio file is deleted from your device immediately after the transcription request completes. Only the resulting text transcript is stored.
 
-• Camera &amp; Photo Library (optional): Required only if you choose to attach a photo in Arya's chat. The image is resized on-device (max 1024×1024px, ~50% quality) and sent as base64 to Gemini Vision via our proxy. Images are not stored permanently on our servers beyond the scope of the chat context.
+• Camera &amp; Photo Library (optional): Required only if you choose to attach a photo in Arya's chat. The image is resized on-device (max 1024×1024px, ~50% quality) and sent as base64 to Gemini Vision via our proxy. A photo attached in Arya&rsquo;s chat is transient &mdash; it is sent for processing and is not stored as a file on our servers. A photo attached to a JOURNAL ENTRY is different: it is uploaded to our cloud storage and kept for the life of your account, and is deleted when you delete the entry or your account.
 
 • Face ID / Touch ID (optional): Used locally on your device only for Passcode unlock. Biometric data is never transmitted to us or any third party. The passcode itself is stored in your device's Keychain (iOS) or Keystore (Android).
 
@@ -244,11 +244,11 @@ We do not use your personal journal content for advertising and we do not sell i
     <p class="section-heading">15. Account Deletion &amp; Data After Termination</p>
     <p class="section-body">You may delete your account via two routes:
 
-(a) In-app: Settings → Account → Delete Account (requires active login). This calls our secure Cloud Function which immediately deletes your account.
+(a) In-app: Settings → Account → Delete Account (requires active login). This calls our secure Cloud Function, which deactivates your account immediately and schedules permanent erasure after a 7-day grace period. You can cancel during that window by signing in and choosing Restore my account. A &ldquo;Delete now&rdquo; option erases without the grace period.
 
 (b) Email-based (if you cannot log in): contact app.karmiccompass@gmail.com or use the "Request Account Deletion" option. We send a 6-digit verification code to your registered email (valid 15 minutes); once confirmed, your account is queued for deletion. For abuse prevention on this locked-out endpoint, your IP address is SHA-256 hashed (truncated to 32 hex characters) and stored briefly to rate-limit OTP requests; the raw IP is never persisted.
 
-Both paths delete the following data from our active systems: all journal entries and chat messages (including archived chat history), AI-generated insights, reports, your user profile document, AI usage records, feedback submissions, AI-response reports you submitted, device trial record, and your Firebase Authentication account. Deletion is processed immediately upon confirmation.
+Both paths delete the following data from our active systems: all journal entries and chat messages (including archived chat history), AI-generated insights, reports, your user profile document, AI usage records, feedback submissions, AI-response reports you submitted, device trial record, and your Firebase Authentication account. Your account is deactivated immediately on confirmation and this data is permanently erased after the 7-day grace period, unless you restore the account during that window.
 
 Residual data may persist in encrypted backup systems for up to 90 days before being purged from backup cycles. Certain financial and legal records may be retained longer as required by law. After deletion, your right to use the App ceases immediately.</p>
   </div>
