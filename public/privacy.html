@@ -135,7 +135,7 @@ F. VOICE TRANSCRIPTIONS
 • When you use the microphone button, your audio is recorded on-device, encoded as base64, and transmitted to our secure proxy server for transcription via Google's Gemini API. The audio data is never written to Firestore or Firebase Storage. The original audio file is deleted from your device immediately after the transcription request is sent. The resulting text transcript is stored as part of your journal entry or chat message.
 
 G. IMAGES
-• Chat images: When you attach a photo in Arya's chat, it is resized and re-encoded on-device (max 1024×1024px, ~50% quality) and sent as base64 to our proxy for Gemini Vision AI processing. Chat images are not stored as standalone files on our servers. Because the image is re-encoded on your device before upload, EXIF metadata — including any GPS/location coordinates, device identifiers, and original timestamps — is stripped and is not transmitted.
+• Chat images: When you attach a photo in Arya's chat, it is resized and re-encoded on-device (longest edge reduced to at most 3072px, JPEG quality ~90%, and re-compressed further if still over 6 MB) and sent as base64 to our proxy for Gemini Vision AI processing. Chat images are not stored as standalone files on our servers. Because the image is re-encoded on your device before upload, EXIF metadata — including any GPS/location coordinates, device identifiers, and original timestamps — is stripped and is not transmitted.
 • Journal images: If you attach a photo to a journal entry, the image file is stored in our cloud storage (Firebase Storage, path users/{uid}/journalImages/) so we can display it in your journal. It is kept for the life of your account and is deleted when you delete your account.
 
 H. CRISIS SIGNAL RECORDS (HEALTH-RELATED DATA — GDPR Art. 9)
@@ -221,6 +221,8 @@ We do NOT sell your personal data to advertisers or third-party data brokers. We
 
 • Consent (GDPR Art. 6(1)(a) / DPDPA / PDPA / APPI): where we rely on your consent — such as for notification permissions and the EU/UK 14-day withdrawal-waiver confirmation — you may withdraw it at any time without affecting prior processing.
 
+How to withdraw, precisely: notification consent and crash-report consent are toggles in Settings. The Art. 9 health-data consent is different, and we would rather be plain about it than imply otherwise — journalling, mood and the conversations with Arya ARE the health-related processing, so it cannot be switched off while continuing to use those features. What you can do without deleting anything: turn off 'Safety follow-up memory' in Settings → Arya Settings, which stops crisis flags being stored AND deletes any already held; and use Incognito Mode, in which conversations are not saved at all. To withdraw the health-data consent entirely, delete your account (Settings → Delete Account), which erases the underlying data with it.
+
 • Explicit consent + Vital Interests (GDPR Art. 9(2)(a) primary; 9(2)(c) emergency fallback): see Crisis Flags below.
 
 • Legal Obligation (GDPR Art. 6(1)(c)): where processing is required by applicable law (e.g. financial record-keeping, regulatory demands).
@@ -287,7 +289,7 @@ All API calls use Firebase ID token authentication (Bearer token in Authorizatio
 
   <div class="section">
     <p class="section-heading">5. Data Export</p>
-    <p class="section-body">The "Export Data" feature in Settings generates a PDF report containing your journal entries, chat history with Arya, and wellness summary.
+    <p class="section-body">The "Export Data" feature in Settings generates a PDF report containing your journal entries, chat history with Arya, wellness summary, badges, and scores.
 
 If you choose to include an optional personalised cover letter from Arya, generating that letter requires an additional AI processing call to Google's Gemini API, using a summary of your journey (not raw journal text). The rest of the PDF is generated entirely on-device from your locally cached data without any network requests.
 
@@ -349,7 +351,7 @@ Your journal entries and profile data are not affected by Incognito Mode.</p>
 • Google Play In-App Billing (Google LLC) — Android distribution and billing. Purpose: subscription processing on Android. Data shared: per Google Play terms (we do not see card details). Location: per Google. Transfer mechanism: Google Play Developer Distribution Agreement.
 
 Auxiliary providers:
-• Google Fonts CDN — app fonts loaded at startup (no personal data beyond device IP).
+• Google Fonts — NOT a sub-processor. The typefaces are bundled into the app binary via the @expo-google-fonts packages and loaded from local storage; the App makes no request to any font CDN, so no IP address or other data reaches Google for fonts.
 • Google Sign-In / Apple Sign-In — optional OAuth authentication.
 
 These providers may process your data in the United States and other countries. We share data with them only to the extent necessary to operate the App. The current versioned sub-processor list (with effective dates) is maintained at karmiccompass.app/privacy/SUBPROCESSORS.</p>
@@ -549,7 +551,7 @@ We aim to apply the standards of the most protective applicable law as a baselin
     <p class="section-heading">14. Children's Privacy</p>
     <p class="section-body">The minimum age to use the App varies by jurisdiction (see Terms §2). We do not knowingly collect personal data — including voice recordings or images — from users below the applicable minimum age without verifiable parental or guardian consent.
 
-Karmic Compass is a general-audience wellness app intended for adults; it is not directed to children, contains no child-oriented content, and we do not knowingly market to or collect data from children. At onboarding we collect your date of birth and compute your age — a real age gate, not a self-declared checkbox. Users below the applicable minimum age are blocked at onboarding, so no personal data is collected from them — satisfying COPPA's rule against collecting data from under-13s without verifiable parental consent (we do not collect it at all). Where local law additionally requires consent for older minors (e.g., India's DPDP Act for under-18s), a parental/guardian-consent step is triggered before the account is activated. Guideline minimums:
+Karmic Compass is a general-audience wellness app intended for adults; it is not directed to children, contains no child-oriented content, and we do not knowingly market to or collect data from children. At onboarding we ask for your date of birth and compute your age from it. We do not independently verify age — this is a self-declaration, re-checked server-side against the date you gave us, not identity or document verification. Users whose declared age is below the applicable minimum are blocked at onboarding and cannot complete sign-up. Because an account is created before that point, a blocked sign-up can leave an account record (your email or sign-in identity, and your consent choices); we delete those records automatically, and you can ask us to delete them immediately at app.karmiccompass@gmail.com. We do not retain them to build a profile and we collect nothing further from a blocked user. Where local law additionally requires consent for older minors (e.g., India's DPDP Act for under-18s), a parental/guardian-consent step is triggered before the account is activated. Guideline minimums:
 • EU / EEA (GDPR Art. 8): 16 years.
 • South Korea (PIPA): 14 years.
 • Canada (Quebec Law 25): 14 years.
@@ -578,7 +580,9 @@ Our full breach decision tree, roles, and notification templates are published a
 
   <div class="section">
     <p class="section-heading">16. Changes to This Policy</p>
-    <p class="section-body">We may update this Privacy Policy from time to time. We will notify you of significant changes via an in-app notice or email at least 7 days before the changes take effect.
+    <p class="section-body">We may update this Privacy Policy from time to time.
+
+How you find out: the updated policy is shown in the App the first time you open it after the change. When a change is significant we also mark it in the Changelog section below. We do not currently send advance notice by email, and where a change requires fresh consent you will be asked for it at that first launch rather than 7 days beforehand — so please read the notice when it appears.
 
 For routine updates, your continued use of the App after the effective date constitutes acceptance of the updated policy. However, where a change materially alters how we process your data — in particular any new processing of health-related (GDPR Art. 9) data, or a new purpose that requires consent — we will obtain your fresh, explicit consent before that processing begins, rather than relying on continued use. If you do not agree to a change, you can stop using the App and delete your account.</p>
   </div>

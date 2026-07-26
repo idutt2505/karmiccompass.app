@@ -82,11 +82,11 @@ These Terms, together with our Privacy Policy, constitute the entire and legally
 
   <div class="section">
     <p class="section-heading">2. Eligibility &amp; Minimum Age</p>
-    <p class="section-body">You represent that you meet the minimum age required in your jurisdiction. We apply a global minimum of 13. Some jurisdictions require higher ages (16 in EU/EEA member states under GDPR Art. 8; 14 in South Korea under PIPA; 14 in Canada under Quebec Law 25; 13 in Brazil under LGPD Art. 14; 13 in the UK under the ICO Children's Code). In India, users under 18 require verifiable parental consent under the DPDP Act before the account is activated. By using the App you confirm you meet your local minimum.
+    <p class="section-body">You represent that you meet the minimum age required in your jurisdiction. We apply a global minimum of 13. Some jurisdictions require higher ages (16 in EU/EEA member states under GDPR Art. 8; 14 in South Korea under PIPA; 14 in Canada under Quebec Law 25; 13 in Brazil under LGPD Art. 14; 13 in the UK under the ICO Children's Code). In India, users under 18 require parental consent under the DPDP Act before the account is activated. To be precise about what that consent is: the child enters a parent or guardian's email address and we send a one-time signed link to it, which the parent opens to approve. We do not independently verify that the address belongs to a parent or guardian — the DPDP Act's 'verifiable' standard is met by the emailed confirmation step, not by identity checks. By using the App you confirm you meet your local minimum.
 
 If you are below the applicable minimum age in your jurisdiction, you must obtain verifiable parental or guardian consent before using the App. If you are between the applicable minimum age and the age of majority in your jurisdiction, you confirm that your parent or legal guardian has reviewed and agreed to these Terms on your behalf.
 
-At onboarding we collect your date of birth and compute your age — this is a real age gate, not self-attestation: users below the applicable minimum age are blocked at onboarding, and in jurisdictions that require it (e.g. India for under-18s) a parental/guardian-consent step is triggered before the account is activated. If we nonetheless learn that we have collected data from a user below the applicable minimum age without the required consent, we will delete that data promptly (see Privacy Policy §14).</p>
+At onboarding we ask for your date of birth and compute your age from it. We do not independently verify age — this is a self-declaration, re-checked server-side against the date you gave us, not identity or document verification. Users whose declared age is below the applicable minimum are blocked at onboarding, and in jurisdictions that require it (e.g. India for under-18s) a parental/guardian-consent step is triggered before the account is activated. If we nonetheless learn that we have collected data from a user below the applicable minimum age without the required consent, we will delete that data promptly (see Privacy Policy §14).</p>
   </div>
 
   <div class="section">
@@ -198,7 +198,7 @@ All AI requests pass through our secure proxy server. Safety filters (BLOCK_MEDI
 
 • Microphone (required for voice features): When you tap the microphone button in the Journal or Arya chat, your audio is recorded on-device, encoded as base64, and sent to Google's Gemini API via our secure proxy for transcription. The audio file is deleted from your device immediately after the transcription request completes. Only the resulting text transcript is stored.
 
-• Camera &amp; Photo Library (optional): Required only if you choose to attach a photo in Arya's chat or to a journal entry. The image is resized on-device (max 1024×1024px, ~50% quality). A photo attached in chat is sent as base64 to Gemini Vision via our proxy and is not kept as a file on our servers. A photo attached to a journal entry is uploaded to our cloud storage and kept for the life of your account so it can be shown in your journal — see Privacy Policy §1(G).
+• Camera &amp; Photo Library (optional): Required only if you choose to attach a photo in Arya's chat or to a journal entry. The image is resized on-device (longest edge reduced to at most 3072px, JPEG quality ~90%, and re-compressed further if still over 6 MB). A photo attached in chat is sent as base64 to Gemini Vision via our proxy and is not kept as a file on our servers. A photo attached to a journal entry is uploaded to our cloud storage and kept for the life of your account so it can be shown in your journal — see Privacy Policy §1(G).
 
 • Face ID / Touch ID (optional): Used locally on your device only for Passcode unlock. Biometric data is never transmitted to us or any third party. The passcode itself is stored in your device's Keychain (iOS) or Keystore (Android).
 
@@ -270,7 +270,7 @@ You may not copy, reproduce, modify, distribute, publicly display, or create der
 • Sentry (Functional Software, Inc.) — crash and error monitoring.
 • Apple App Store / Google Play — distribution and billing.
 • Google Sign-In and Apple Sign-In — optional authentication.
-• Google Fonts CDN — app fonts loaded at startup.
+• Google Fonts — NOT a sub-processor. Typefaces are bundled into the app binary and loaded locally; no font request leaves the device.
 • Expo Push Notification Service (operated by Expo, Inc.) — relays push notifications to Apple Push Notification service (APNs, iOS) and Firebase Cloud Messaging (FCM, Android).
 • Gmail / Google Workspace SMTP (server-side only) — used to send account deletion verification emails.
 
