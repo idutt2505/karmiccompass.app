@@ -2,7 +2,7 @@
 
 import { SectionReveal } from "../SectionReveal";
 import { SmartExternalLink } from "../SmartExternalLink";
-import { SECTION_IDS, APP_STORE_URL, PLAY_STORE_URL } from "@/lib/constants";
+import { TRIAL_DAYS, COMPASS_AI_PER_DAY, SECTION_IDS, APP_STORE_URL, PLAY_STORE_URL } from "@/lib/constants";
 import { motion, useReducedMotion } from "framer-motion";
 
 
@@ -27,7 +27,7 @@ const trialFeatures = [
 
 const compassFeatures = [
   "Everything in the trial",
-  "Up to 150 Arya messages per day",
+  `Up to ${COMPASS_AI_PER_DAY} Arya messages per day`,
   "Deep Memory — Arya remembers your full story",
   "Incognito Mode — reflect without saving",
   "Extended Summaries — weekly through yearly",
@@ -63,7 +63,7 @@ export function PricingSection() {
             <p className="text-[0.65rem] uppercase tracking-[0.22em] text-white/30">Trial</p>
             <div className="mt-2 flex items-end gap-2">
               <p className="font-serif text-4xl font-light text-white/90">Free</p>
-              <p className="mb-1 text-sm text-white/35">· 7 days</p>
+              <p className="mb-1 text-sm text-white/35">· {TRIAL_DAYS} days</p>
             </div>
 
             <ul className="mt-6 flex-1 space-y-3">
