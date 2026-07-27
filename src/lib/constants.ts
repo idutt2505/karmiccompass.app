@@ -13,14 +13,13 @@ export const TESTFLIGHT_URL = "" as const;
 export const X_SOCIAL_URL = "https://x.com/appkarmic" as const;
 export const INSTAGRAM_URL = "https://instagram.com/app.karmiccompass" as const;
 
+// Only the sections the page actually renders. `features`, `preview`, `trust`
+// and `faq` were removed along with the components behind them — they had been
+// anchors pointing at sections that were never mounted in LandingPage.tsx.
 export const SECTION_IDS = {
   hero: "section-hero",
-  features: "section-features",
-  preview: "section-preview",
   how: "section-how",
-  trust: "section-trust",
   pricing: "section-pricing",
-  faq: "section-faq",
 } as const;
 
 export type SectionId = (typeof SECTION_IDS)[keyof typeof SECTION_IDS];
@@ -52,28 +51,12 @@ export const COMPASS_AI_PER_DAY = 150 as const;
 export const TRIAL_JOURNAL_PER_DAY = 30 as const;
 export const COMPASS_JOURNAL_PER_DAY = 150 as const;
 
-// Journal entry length cap. Authority: kc-mobile/src/screens/JournalScreen.js
-// JOURNAL_MAX_CHARS.
-export const JOURNAL_MAX_CHARS = 5000 as const;
-
-// The 7-tier Realm progression, verbatim from kc-mobile/src/constants.js
-// VIRTUE_LEVELS / LEVEL_THRESHOLDS. Both arrays are index-aligned. The site
-// previously named four of the seven levels wrong and capped the top tier at
-// 20,000 XP instead of 30,000.
-export const VIRTUE_LEVELS = [
-  "Seeker",
-  "Contemplator",
-  "Practitioner",
-  "Guide",
-  "Sage",
-  "Dharma Master",
-  "Karma Architect",
-] as const;
-export const LEVEL_THRESHOLDS = [0, 500, 1500, 3500, 7000, 15000, 30000] as const;
-
-// Number of daily "Cosmic Energies" aspect scores. Authority:
-// kc-mobile/src/screens/HoroscopeScreen.js SCORE_ASPECTS (length 10).
-export const COSMIC_SCORE_COUNT = 10 as const;
+// JOURNAL_MAX_CHARS, VIRTUE_LEVELS, LEVEL_THRESHOLDS and COSMIC_SCORE_COUNT
+// lived here and were consumed only by FeatureShowcase and RealmSection, which
+// were never mounted. They were removed with those components rather than left
+// as unreferenced exports. Their reconciled values are preserved in the commit
+// that deleted them; re-derive from kc-mobile before reusing, since the point of
+// this block is that the numbers must match the app rather than be remembered.
 
 // Compass is a single monthly SKU. The store is authoritative for the actual
 // charged amount and currency — always defer to it in copy that quotes a price.
