@@ -87,7 +87,7 @@ export function ComingSoonModal() {
           />
           <motion.div
             ref={panelRef}
-            className="relative w-full max-w-sm rounded-2xl border border-white/10 bg-[#12121a] p-6 text-[#f5f2ed] shadow-2xl"
+            className="relative w-full max-w-sm rounded-2xl border border-white/10 bg-[#12121a] p-6 text-ink shadow-2xl"
             initial={reduce ? false : { opacity: 0, y: 16, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={reduce ? undefined : { opacity: 0, y: 8, scale: 0.98 }}
@@ -96,11 +96,11 @@ export function ComingSoonModal() {
             <h2 id={titleId} className="font-serif text-xl font-light tracking-tight">
               Link coming soon
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-white/55">
+            <p className="mt-3 text-sm leading-relaxed text-body">
               We&rsquo;re finalising this destination. In the meantime, you can
               reach us at{" "}
               <a
-                className="text-[#C9824A] underline decoration-[#C9824A]/40 underline-offset-2 transition hover:decoration-[#C9824A]"
+                className="text-accent-light underline decoration-accent/40 underline-offset-2 transition hover:decoration-accent-light"
                 href={MAILTO_CONTACT}
               >
                 {CONTACT_EMAIL}
@@ -110,7 +110,7 @@ export function ComingSoonModal() {
             <div className="mt-6 flex justify-end gap-2">
               <button
                 type="button"
-                className="rounded-lg border border-white/15 px-4 py-2 text-sm text-white/80 transition hover:bg-white/5"
+                className="rounded-lg border border-white/20 px-4 py-2 text-sm text-ink-soft transition hover:bg-white/5 hover:text-ink"
                 onClick={() => setOpen(false)}
               >
                 Close
@@ -118,7 +118,7 @@ export function ComingSoonModal() {
               <button
                 ref={okBtnRef}
                 type="button"
-                className="rounded-lg bg-[#C9824A] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#E8A97A]"
+                className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-on-accent transition hover:bg-accent-light"
                 onClick={() => setOpen(false)}
               >
                 OK

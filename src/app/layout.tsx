@@ -60,7 +60,10 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#0f0e17",
+  // Must match --color-background in globals.css. This was #0f0e17 while the
+  // page renders #0a0a0f, so mobile browser chrome sat a visible shade off the
+  // page it framed.
+  themeColor: "#0a0a0f",
 };
 
 const jsonLd = {
@@ -85,6 +88,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
+      <head>
+        {/*
+          Framer's `initial` state is serialised into the SSR markup, so 13
+          elements — the hero headline, every How-it-works card and both
+          pricing cards — ship as inline `opacity:0` and only become visible
+          once hydration runs the entrance animation. The copy is in the DOM
+          (crawlers read it fine), but with JS blocked or hydration failed the
+          page body renders blank above the footer.
+
+          A reveal must enhance an already-visible default, never gate it. This
+          is the safety net for the no-JS case; the animations are untouched for
+          everyone else.
+        */}
+        <noscript>
+          <style>{`[style*="opacity:0"]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+      </head>
       <body className="font-sans font-light antialiased">
         <script
           type="application/ld+json"

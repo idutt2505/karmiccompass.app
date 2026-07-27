@@ -57,14 +57,14 @@ export function HowItWorksSection() {
   return (
     <section
       id={SECTION_IDS.how}
-      className="scroll-mt-20 py-24 sm:py-32"
+      className="section-y scroll-mt-20"
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionReveal className="text-center">
-          <h2 className="font-serif text-[2.1rem] font-light leading-[1.1] tracking-[-0.02em] text-[#f5f2ed] sm:text-[2.6rem]">
+          <h2 className="font-serif text-[2.1rem] font-light leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.6rem]">
             A daily loop that compounds.
             <br />
-            <span className="italic text-[#C9824A]">Reflect. Realign. Return.</span>
+            <span className="italic text-accent">Reflect. Realign. Return.</span>
           </h2>
         </SectionReveal>
 
@@ -80,20 +80,25 @@ export function HowItWorksSection() {
                   transition={{ duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
                   className="group relative flex h-full flex-col rounded-2xl border border-white/[0.06] bg-gradient-to-b from-white/[0.035] to-transparent p-7 transition-shadow duration-300 hover:border-white/[0.1] hover:shadow-[0_20px_60px_-20px_rgba(201,130,74,0.1)]"
                 >
-                  {/* Background tab name */}
-                  <div
-                    className="pointer-events-none absolute right-4 top-3 font-serif text-[2.2rem] font-light leading-none text-[#C9824A]/[0.18] select-none transition-colors duration-300 group-hover:text-[#C9824A]/[0.32]"
-                    aria-hidden
-                  >
-                    {s.n}
+                  {/* Icon left, step name right — the name fills the space beside
+                      the icon instead of leaving the top band empty.
+
+                      This was originally a 2.2rem watermark at accent/18: 1.28:1
+                      against the card, and aria-hidden, so it read as texture
+                      rather than a label and the card had no heading at all. Same
+                      placement, but it is now a real <h3> at a contrast that can
+                      actually be read (4.0:1 — large-text AA is 3:1). */}
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent/20 bg-accent/[0.07] text-accent/60 transition-colors duration-200 group-hover:border-accent/40 group-hover:text-accent">
+                      <div className="h-5 w-5">{s.icon}</div>
+                    </div>
+
+                    <h3 className="min-w-0 truncate font-serif text-[1.6rem] font-light leading-tight tracking-tight text-accent-light/60 transition-colors duration-300 group-hover:text-accent-light/90 sm:text-[1.9rem]">
+                      {s.n}
+                    </h3>
                   </div>
 
-                  {/* Icon */}
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#C9824A]/20 bg-[#C9824A]/[0.07] text-[#C9824A]/60 transition-colors duration-200 group-hover:border-[#C9824A]/40 group-hover:text-[#C9824A]">
-                    <div className="h-5 w-5">{s.icon}</div>
-                  </div>
-
-                  <p className="mt-5 flex-1 text-sm leading-relaxed text-white/38">
+                  <p className="mt-6 flex-1 text-sm leading-relaxed text-muted">
                     {s.p}
                   </p>
                 </motion.div>
@@ -105,7 +110,7 @@ export function HowItWorksSection() {
         {/* Bottom quote */}
         <SectionReveal delay={0.2} className="mt-14 text-center">
           <blockquote className="mx-auto max-w-lg">
-            <p className="font-serif text-xl font-light italic leading-relaxed text-white/35 sm:text-2xl">
+            <p className="font-serif text-xl font-light italic leading-relaxed text-muted sm:text-2xl">
               &ldquo;Small steps. Lasting change.&rdquo;
             </p>
           </blockquote>

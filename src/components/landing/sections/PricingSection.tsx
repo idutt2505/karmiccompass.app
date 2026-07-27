@@ -23,7 +23,7 @@ import { motion, useReducedMotion } from "framer-motion";
 
 function Check() {
   return (
-    <span className="mt-0.5 flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full bg-[#C9824A]/15 border border-[#C9824A]/25">
+    <span className="mt-0.5 flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full bg-accent/15 border border-accent/25">
       <svg width="8" height="8" viewBox="0 0 12 12" fill="none" aria-hidden>
         <path d="M2.5 6l2.5 2.5 4.5-5" stroke="#C9824A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
@@ -59,7 +59,7 @@ export function PricingSection() {
   return (
     <section
       id={SECTION_IDS.pricing}
-      className="scroll-mt-20 border-b border-white/[0.04] py-24 sm:py-32"
+      className="section-y section-y-tight-top scroll-mt-20 border-b border-white/[0.04]"
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionReveal className="text-center">
@@ -67,11 +67,11 @@ export function PricingSection() {
               headed "Free · N days", which reads as a persistent free tier. There
               isn't one — functions/index.js sets DAILY_AI_LIMIT_NONE = 0 and
               LegalScreen.js §5 says access is suspended until you subscribe. */}
-          <h2 className="font-serif text-[2.1rem] font-light leading-[1.1] tracking-[-0.02em] text-[#f5f2ed] sm:text-[2.6rem]">
+          <h2 className="font-serif text-[2.1rem] font-light leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.6rem]">
             Everything free for {TRIAL_DAYS} days.<br />
-            <span className="italic text-[#C9824A]">Then decide.</span>
+            <span className="italic text-accent">Then decide.</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-white/40">
+          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-muted">
             {TRIAL_END_DISCLOSURE}
           </p>
         </SectionReveal>
@@ -86,12 +86,12 @@ export function PricingSection() {
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col rounded-2xl border border-white/[0.08] bg-gradient-to-b from-white/[0.035] to-transparent p-7"
           >
-            <p className="text-[0.65rem] uppercase tracking-[0.22em] text-white/30">Trial</p>
+            <p className="text-[0.65rem] uppercase tracking-[0.22em] text-muted">Trial</p>
             <div className="mt-2 flex items-end gap-2">
-              <p className="font-serif text-4xl font-light text-white/90">Free</p>
-              <p className="mb-1 text-sm text-white/35">· {TRIAL_DAYS} days</p>
+              <p className="font-serif text-4xl font-light text-ink">Free</p>
+              <p className="mb-1 text-sm text-muted">· {TRIAL_DAYS} days</p>
             </div>
-            <p className="mt-2 text-xs leading-relaxed text-white/32">
+            <p className="mt-2 text-[0.8125rem] leading-relaxed text-muted">
               No payment method required, and the trial does not convert on its
               own. When the {TRIAL_DAYS} days are up, access is suspended until
               you subscribe.
@@ -101,7 +101,7 @@ export function PricingSection() {
               {trialFeatures.map((f) => (
                 <li key={f} className="flex items-start gap-3">
                   <Check />
-                  <span className="text-sm leading-snug text-white/50">{f}</span>
+                  <span className="text-sm leading-snug text-body">{f}</span>
                 </li>
               ))}
             </ul>
@@ -110,7 +110,7 @@ export function PricingSection() {
               <div className="grid grid-cols-2 gap-2">
                 <SmartExternalLink
                   href={APP_STORE_URL}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-white/[0.12] py-3 text-center text-sm font-medium text-white/60 transition hover:border-white/[0.2] hover:bg-white/[0.04] hover:text-white/85"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-white/[0.14] py-3 text-center text-sm font-medium text-body transition hover:border-white/[0.28] hover:bg-white/[0.05] hover:text-ink"
                   label="Download KarmicCompass on the App Store"
                 >
                   <svg width="11" height="13" viewBox="0 0 13 16" fill="currentColor" aria-hidden>
@@ -120,7 +120,7 @@ export function PricingSection() {
                 </SmartExternalLink>
                 <SmartExternalLink
                   href={PLAY_STORE_URL}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-white/[0.12] py-3 text-center text-sm font-medium text-white/60 transition hover:border-white/[0.2] hover:bg-white/[0.04] hover:text-white/85"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-white/[0.14] py-3 text-center text-sm font-medium text-body transition hover:border-white/[0.28] hover:bg-white/[0.05] hover:text-ink"
                   label="Download KarmicCompass on Google Play"
                 >
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
@@ -138,30 +138,30 @@ export function PricingSection() {
             whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
-            className="relative flex flex-col overflow-hidden rounded-2xl border border-[#C9824A]/28 bg-gradient-to-b from-[#C9824A]/[0.09] to-transparent p-7"
+            className="relative flex flex-col overflow-hidden rounded-2xl border border-accent/28 bg-gradient-to-b from-accent/[0.09] to-transparent p-7"
           >
             {/* Glow */}
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,130,74,0.1),transparent_60%)]" aria-hidden />
 
             {/* Recommended badge */}
-            <div className="absolute right-5 top-5 rounded-full border border-[#C9824A]/30 bg-[#C9824A]/12 px-2.5 py-0.5 text-[0.58rem] font-medium uppercase tracking-[0.18em] text-[#E8A97A]">
+            <div className="absolute right-5 top-5 rounded-full border border-accent/30 bg-accent/12 px-2.5 py-0.5 text-[0.6rem] font-medium uppercase tracking-[0.18em] text-accent-light">
               Recommended
             </div>
 
-            <p className="text-[0.65rem] font-medium uppercase tracking-[0.22em] text-[#E8A97A]">Compass</p>
+            <p className="text-[0.65rem] font-medium uppercase tracking-[0.22em] text-accent-light">Compass</p>
             <div className="mt-2 flex items-end gap-2">
-              <p className="font-mono text-4xl font-light text-white/95">{COMPASS_PRICE_DISPLAY}</p>
-              <p className="mb-1 text-sm text-white/45">/ {COMPASS_PERIOD_DISPLAY}</p>
+              <p className="font-mono text-4xl font-light text-ink">{COMPASS_PRICE_DISPLAY}</p>
+              <p className="mb-1 text-sm text-muted">/ {COMPASS_PERIOD_DISPLAY}</p>
             </div>
             {/* [truth] A recurring price must state that it recurs, how to stop
                 it, and link the terms it is sold under. */}
-            <p className="mt-2 text-xs leading-relaxed text-white/32">
+            <p className="mt-2 text-[0.8125rem] leading-relaxed text-muted">
               {RENEWAL_DISCLOSURE} {PRICE_CAVEAT}{" "}
               <a
                 href={TERMS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#C9824A] underline decoration-[#C9824A]/30 underline-offset-2 hover:decoration-[#C9824A]"
+                className="text-accent-light underline decoration-accent/40 underline-offset-2 transition hover:decoration-accent-light"
               >
                 Terms of Service
               </a>
@@ -172,7 +172,7 @@ export function PricingSection() {
               {compassFeatures.map((f) => (
                 <li key={f} className="flex items-start gap-3">
                   <Check />
-                  <span className="text-sm leading-snug text-white/58">{f}</span>
+                  <span className="text-sm leading-snug text-body">{f}</span>
                 </li>
               ))}
             </ul>
@@ -181,7 +181,7 @@ export function PricingSection() {
               <div className="grid grid-cols-2 gap-2">
                 <SmartExternalLink
                   href={APP_STORE_URL}
-                  className="flex items-center justify-center gap-2 rounded-xl bg-[#C9824A] py-3 text-center text-sm font-semibold text-white shadow-[0_8px_32px_-8px_rgba(201,130,74,0.5)] transition hover:bg-[#D9925A]"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-center text-sm font-semibold text-on-accent shadow-[0_8px_32px_-8px_rgba(201,130,74,0.5)] transition hover:bg-accent-light"
                   label="Download KarmicCompass on the App Store"
                 >
                   <svg width="11" height="13" viewBox="0 0 13 16" fill="currentColor" aria-hidden>
@@ -191,7 +191,7 @@ export function PricingSection() {
                 </SmartExternalLink>
                 <SmartExternalLink
                   href={PLAY_STORE_URL}
-                  className="flex items-center justify-center gap-2 rounded-xl bg-[#C9824A] py-3 text-center text-sm font-semibold text-white shadow-[0_8px_32px_-8px_rgba(201,130,74,0.5)] transition hover:bg-[#D9925A]"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-center text-sm font-semibold text-on-accent shadow-[0_8px_32px_-8px_rgba(201,130,74,0.5)] transition hover:bg-accent-light"
                   label="Download KarmicCompass on Google Play"
                 >
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
