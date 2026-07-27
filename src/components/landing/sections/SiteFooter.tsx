@@ -30,7 +30,7 @@ export function SiteFooter() {
           {/* Contact */}
           <a
             href={MAILTO_CONTACT}
-            className="text-sm text-white/38 transition hover:text-[#C9824A]"
+            className="tap-target text-sm text-body transition hover:text-accent-light"
           >
             {CONTACT_EMAIL}
           </a>
@@ -41,7 +41,10 @@ export function SiteFooter() {
               operated by Diksha Dutt (operating as KarmicCompass), and the Privacy
               Policy §25 identifies the controller as a sole proprietor. The buyer
               must be able to see who they are actually contracting with. */}
-          <p className="text-xs text-white/18 sm:text-right">
+          {/* Was text-white/18 — 1.61:1, the least readable text on the site.
+              This is the line telling a buyer who they are actually contracting
+              with, so it is the last thing that should be near-invisible. */}
+          <p className="text-xs text-muted sm:text-right">
             © {new Date().getFullYear()} {LEGAL_ENTITY}
           </p>
         </div>

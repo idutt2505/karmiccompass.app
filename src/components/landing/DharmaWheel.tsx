@@ -123,6 +123,17 @@ export function DharmaWheel({ className = "" }: DharmaWheelProps) {
         .dw-spin35  { transform-origin: ${cx}px ${cy}px; animation: dw-cw  35s linear infinite; }
         .dw-spin20  { transform-origin: ${cx}px ${cy}px; animation: dw-ccw 20s linear infinite; }
         .dw-hub     { transform-origin: ${cx}px ${cy}px; animation: dw-hub  4s ease-in-out infinite; }
+
+        /* Five continuously rotating rings is exactly the motion a vestibular
+           trigger warning is for. Every other component on this page gates its
+           motion behind framer's useReducedMotion(); this one injects raw CSS
+           and so was the single place that ignored the preference. The mandala
+           is composed to read correctly at rest, so stopping it loses nothing. */
+        @media (prefers-reduced-motion: reduce) {
+          .dw-spin80, .dw-spin55, .dw-spin35, .dw-spin20, .dw-hub {
+            animation: none;
+          }
+        }
       `}</style>
       <svg
         viewBox="0 0 420 420"

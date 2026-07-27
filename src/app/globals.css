@@ -3,32 +3,35 @@
 @theme inline {
   --color-background: #0a0a0f;
   --color-surface: #0e0e18;
+  --color-surface-deep: #06060a;
   --color-foreground: #f5f2ed;
-  --color-accent: #C9824A;
-  --color-accent-light: #E8A97A;
+
+  /* ── Text ramp ────────────────────────────────────────────────────────────
+     Solid values, not `text-white/NN` alphas. An alpha means a different
+     colour on every surface, which is how this page ended up with fifteen
+     ad-hoc opacities and eighteen WCAG AA failures. These five are measured
+     against all three surfaces the site actually uses — the page (#0a0a0f),
+     a card top (#131317) and the footer (#06060a) — and the WORST case of the
+     three is quoted below. Every step clears AA for body text (4.5:1).
+
+     Use `ink` for headings, `body` for running copy, `muted` for secondary
+     copy, `faint` only for genuine small print. Never go below `faint`. */
+  --color-ink: #f5f2ed;        /* 16.65:1 — headings, emphasis */
+  --color-ink-soft: #d4d2ce;   /* 12.42:1 — sub-headings, lead copy */
+  --color-body: #b3b1af;       /*  8.94:1 — running body copy */
+  --color-muted: #979594;      /*  6.52:1 — secondary / supporting copy */
+  --color-faint: #807e7e;      /*  4.87:1 — small print; AA floor, do not dim further */
+
+  /* ── Brand ──────────────────────────────────────────────────────────────── */
+  --color-accent: #C9824A;        /* 6.00:1 on card — safe as text */
+  --color-accent-light: #E8A97A;  /* 9.19:1 on card */
+  /* Ink for text sitting ON the solid amber CTA. White is 3.10:1 there and
+     fails AA; the page background is 6.37:1 and passes. */
+  --color-on-accent: #0a0a0f;
+
   --font-sans: var(--font-dm-sans), system-ui, sans-serif;
   --font-serif: var(--font-display), ui-serif, Georgia, serif;
   --font-mono: var(--font-dm-mono), ui-monospace, monospace;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-14px); }
-}
-
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50%       { transform: translateY(-8px) rotate(1deg); }
-}
-
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-@keyframes shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position:  200% center; }
 }
 
 @layer base {
@@ -42,43 +45,71 @@
   }
   body {
     background: var(--color-background);
-    color: var(--color-foreground);
+    color: var(--color-body);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   h1, h2, h3, h4 {
     font-family: var(--font-serif);
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
   }
   code, pre {
     font-family: var(--font-mono);
   }
   ::selection {
     background: rgba(201, 130, 74, 0.25);
-    color: #f5f2ed;
+    color: var(--color-ink);
+  }
+
+  /* ── Focus ────────────────────────────────────────────────────────────────
+     The UA default outline inherits `currentColor`, so a link set to
+     white/28 got a white/28 focus ring — effectively invisible. Pin the ring
+     to accent-light (9.77:1 on the page) and offset it so that on the solid
+     amber CTA the ring lands on the dark page behind the button rather than
+     on the amber itself, where it would only be 1.53:1. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent-light);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
   }
 }
 
 @layer utilities {
-  .animate-float {
-    animation: float 7s ease-in-out infinite;
+  /* Section rhythm. Every section previously used an identical `py-24 sm:py-32`,
+     which is padding, not rhythm — the page read as evenly-spaced blocks with a
+     ~300px void wherever two sections met. These two steps keep the generous,
+     unhurried feel the brand wants (this is a reflection app, not a conversion
+     funnel) while letting the space scale with the viewport and letting a
+     section deliberately sit closer to the one before it. */
+  .section-y {
+    padding-block: clamp(4.5rem, 9vw, 8rem);
   }
-  .animate-float-slow {
-    animation: float-slow 9s ease-in-out infinite;
+  /* For a section that continues the previous one's thought rather than
+     starting a new one — here, the offer that the closing quote leads into. */
+  .section-y-tight-top {
+    padding-block-start: clamp(2.5rem, 5vw, 4.5rem);
   }
-  .animate-spin-slow {
-    animation: spin-slow 20s linear infinite;
+
+  /* Expands a small inline link's hit area to the 44x44 touch minimum
+     without changing its layout box or the visual rhythm around it. */
+  .tap-target {
+    position: relative;
   }
-  .text-gradient-amber {
-    background: linear-gradient(120deg, #E8A97A 0%, #C9824A 50%, #B8703E 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .glow-amber-sm {
-    box-shadow: 0 0 40px -12px rgba(201, 130, 74, 0.4);
-  }
-  .glow-amber {
-    box-shadow: 0 0 80px -20px rgba(201, 130, 74, 0.35);
+  .tap-target::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
   }
 }
