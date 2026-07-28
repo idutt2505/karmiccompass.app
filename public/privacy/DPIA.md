@@ -65,7 +65,7 @@ This DPIA covers the three highest-risk processing activities:
 | Specified, explicit, legitimate purpose? | Yes — personal wellness and self-reflection are the contracted service. |
 | Lawful basis identified? | Yes — Art. 6(1)(b) + Art. 9(2)(a) for P1/P3, Art. 9(2)(c) for P2. |
 | Data minimisation? | Journal context capped: 30 entries × 600 chars in chat prompts, 40-message conversation window, 50 personal-note cap, 3 active commitments. Crisis flag capped at 100 chars. |
-| Retention limited? | crisisFlags 90-day auto-expiry. AI usage quota cleared with account. Audio never persisted. Images never persisted. Incognito sessions never persisted. |
+| Retention limited? | crisisFlags 90-day auto-expiry. AI usage quota cleared with account. Audio never persisted. Images: a photo attached in Arya chat is transient (base64 to the AI proxy, no server-side file), but a photo attached to a JOURNAL ENTRY is stored in Firebase Storage at users/{uid}/journalImages/{entryId}.jpg for the life of the account and deleted with it. Privacy v1.5 corrected the same claim in the policy; this record had not followed. Incognito sessions never persisted. |
 | Quality / accuracy? | Users can edit any journal entry, delete commitments, delete personal notes, delete crisis flags, request human review of AI inferences. |
 | Information & rights? | Privacy Policy §§1, 3, 3a, 8, 9, 13, 14, 15, 17 (in-app + karmiccompass.app/privacy). |
 | International transfers? | Google SCCs in place for all sub-processors. See `/privacy/SUBPROCESSORS`. |

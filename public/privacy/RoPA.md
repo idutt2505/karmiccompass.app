@@ -52,11 +52,19 @@
 - TLS in transit; AES at rest (Google-managed).
 - Firebase Authentication with email/password, Google Sign-In, Apple Sign-In.
 - Firestore Security Rules restrict reads/writes to authenticated owner.
-- App Check on callable Cloud Functions (ENFORCE_APP_CHECK = true on 3 callables).
+- App Check tokens are verified on Cloud Functions, but ENFORCE_APP_CHECK defaults to
+  `false` (functions/index.js) and is OFF in production, so a request without a valid
+  attestation token is still served. Enforcement is deliberately deferred until a
+  shipped build can mint tokens — the native attestation library landed after the
+  last released build, so enforcing now would deny service to every existing user
+  rather than protect them. Treat this as a planned control, not an operating one.
 - Secret rotation runbook at `docs/secret-rotation-runbook.md`.
 - Sentry redacts ~25 sensitive key patterns before send; UIDs pseudonymised.
 - Proxy-layer regex PII scrub before any Gemini call.
-- Screen-capture blocked on Journal, Arya Chat, Arya Memory, Passcode.
+- Screen capture is NOT blocked. `ALLOW_SCREENSHOTS = true` is the shipped default
+  (src/utils/screenCapture.js) following an explicit owner decision on 2026-07-26 that
+  users keep full control of their own content; Privacy §10 discloses this. The App
+  Passcode is the control that protects content on a shared device.
 
 ---
 
