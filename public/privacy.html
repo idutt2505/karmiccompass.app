@@ -383,7 +383,9 @@ These providers may process your data in the United States and other countries. 
 
 • AI and rate-limit counters keyed to your account (aiUsage/{uid}, aiUsageJournal/{uid}, aiUsageMeter/{uid}, rateLimits/{uid}, ttsUsage/{uid}): deleted with account.
 
-• Device-level anti-abuse counters (aiUsageByDevice, keyed to the truncated device-ID hash): each record carries a 60-day expiry stamp, refreshed while the device stays active. Because the server never sees the raw device ID, these cannot be looked up by account and so are not deleted by name when you delete your account — they expire on that timer instead.
+• Device-rotation ceiling records (deviceIdsByUid): the distinct device-ID hashes your account presented on a given day, used to stop one account cycling through devices to lift limits. Keyed to your UID, self-expire after 3 days, and deleted immediately when you delete your account.</p>
+<p class="section-body">• Deletion-residue breadcrumbs (deletionResidue): written ONLY if part of an account deletion fails, so we can find and finish it. It records your UID and which collections survived — no journal, chat or profile content — and expires after 30 days. If your deletion completes normally, which is the expected case, no such record is created.</p>
+<p class="section-body">• Device-level anti-abuse counters (aiUsageByDevice, keyed to the truncated device-ID hash): each record carries a 60-day expiry stamp, refreshed while the device stays active. Because the server never sees the raw device ID, these cannot be looked up by account and so are not deleted by name when you delete your account — they expire on that timer instead.
 
 • IP-keyed request throttles (rateLimitsByIp): self-purge within roughly two hours.
 
