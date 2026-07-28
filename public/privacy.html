@@ -371,7 +371,7 @@ These providers may process your data in the United States and other countries. 
 
 • Crisis signal records (≤100 char excerpt + timestamp in crisisFlags): auto-expire after 90 days; also deleted with account; user-deletable at any time via Settings → Arya Settings.
 
-• Voice audio files: deleted from your device immediately after transcription — never stored on our servers.
+• Voice audio files: deleted from your device as soon as transcription succeeds — never stored on our servers. If transcription fails (you are offline, or the request errors) the recording is queued on your device so it can be retried and your words are not lost. Queued recordings are capped at 10, are deleted automatically once transcribed or after 7 days at the latest, and are removed immediately if you delete your account. While queued they sit in the app&#x27;s private storage, which on iOS is included in device backups.
 
 • Chat image data: not stored as standalone files on our servers — used transiently for AI processing only.
 
