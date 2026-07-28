@@ -25,7 +25,7 @@ ops step in the Firebase Console.
 | `processedWebhookEvents/{eventId}` | RC webhook dedupe markers | 30 days | TTL policy on `expireAt` | Verify Firestore TTL policy is active. |
 | `chatReports/{doc}` | User reports of bad AI responses | 365 days | **TTL policy required** | **Action required:** enable Firestore TTL on `chatReports.expireAt`. |
 | `aiUsage/{uid}` | Per-user daily AI call counters | 60 days rolling | In-doc field pruning (functions/index.js `checkAndIncrementUsage` prunes old day keys) | None. |
-| `aiUsageByDevice/{deviceHash}` | Per-device daily AI counters | 60 days rolling | Same as `aiUsage` | None. |
+| `aiUsageByDevice/{deviceHash}` | Per-device daily AI counters | 60 days rolling | **TTL policy required** on `expireAt` (stamped server-side, refreshed on each write) | **Action required:** enable Firestore TTL on `aiUsageByDevice.expireAt`. [audit-H14] This said "None." — but stamping the field deletes nothing on its own, and this is the ONE collection account deletion can never reach (the server cannot map a device hash back to a uid). Without the TTL policy enabled, these records are retained indefinitely. |
 | `ttsUsage/{uid}` | Per-user TTS counters | 60 days rolling | Same as `aiUsage` | None. |
 | `rateLimits/{uid}` | Per-uid token bucket | 24 h | TTL via `expireAt` field | Verify TTL policy. |
 | `rateLimitsByIp/{ipHash}` | Per-IP-hash deletion OTP throttle | 2 h | TTL via `expireAt` field | Verify TTL policy. |

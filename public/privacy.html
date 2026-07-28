@@ -383,7 +383,7 @@ These providers may process your data in the United States and other countries. 
 
 • AI and rate-limit counters keyed to your account (aiUsage/{uid}, aiUsageJournal/{uid}, aiUsageMeter/{uid}, rateLimits/{uid}, ttsUsage/{uid}): deleted with account.
 
-• Device-level anti-abuse counters (aiUsageByDevice, keyed to the truncated device-ID hash): self-purge on a 30-day expiry. Because the server never sees the raw device ID, these cannot be looked up by account and so are not deleted by name when you delete your account — they simply expire.
+• Device-level anti-abuse counters (aiUsageByDevice, keyed to the truncated device-ID hash): each record carries a 60-day expiry stamp, refreshed while the device stays active. Because the server never sees the raw device ID, these cannot be looked up by account and so are not deleted by name when you delete your account — they expire on that timer instead.
 
 • IP-keyed request throttles (rateLimitsByIp): self-purge within roughly two hours.
 

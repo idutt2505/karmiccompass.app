@@ -6,7 +6,9 @@
 **Maintainer:** privacy@karmiccompass.app
 **Update policy:** users will be notified of any new sub-processor at least 7 days before processing begins, via in-app notice or email (Privacy Policy §16).
 
-This register is the authoritative version of Privacy Policy §8. Where the two diverge, this register controls (and §8 will be updated).
+**Precedence:** the Privacy Policy governs. This register is a detailed view of §8 and is kept in step with it; where the two diverge, §8 controls and this file is corrected.
+
+> [audit-H11] This previously claimed the opposite — that the register overrode §8 — > while `RETENTION.md` §9 asserted the policy's precedence for itself. There was no > consistent answer to which document governed, and the register was ALSO the one > that was wrong: it listed a Google Fonts CDN that the app does not contact. A > precedence rule that hands control to whichever document is stale is worse than > having none.
 
 ---
 
@@ -28,7 +30,10 @@ This register is the authoritative version of Privacy Policy §8. Where the two 
 
 | Provider | Entity | Service | Purpose | Location |
 |---|---|---|---|---|
-| Google Fonts CDN | Google LLC | Web font CDN | Deliver app fonts at startup | United States |
+<!-- [audit-H11] Google Fonts CDN row REMOVED: the typefaces are bundled into the
+     app binary as static imports and no request is made to any font CDN, which is
+     what Privacy §8 states and what the code does. Listing a sub-processor we do
+     not use overstates data sharing in the document a regulator reads first. -->
 | Google Sign-In | Google LLC | OAuth | Optional sign-in | United States |
 | Apple Sign-In | Apple Inc. | OAuth | Optional sign-in (iOS) | per Apple |
 
@@ -58,7 +63,7 @@ This register is the authoritative version of Privacy Policy §8. Where the two 
 - Aligned column structure to GDPR Art. 30(2) processor requirements.
 
 ### 2025 — initial register
-- Firebase, Vertex AI, Gemini Developer API, RevenueCat, Sentry, Apple App Store, Google Play, Google Fonts, Google Sign-In, Apple Sign-In.
+- Firebase, Vertex AI, Gemini Developer API, RevenueCat, Sentry, Apple App Store, Google Play, Google Sign-In, Apple Sign-In.
 
 ---
 
