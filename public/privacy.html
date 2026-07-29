@@ -66,9 +66,9 @@
 </nav>
 
 <div class="hero">
-  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.7</p>
+  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.8</p>
   <h1 class="hero-title">Privacy Policy</h1>
-  <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-07-26</p>
+  <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-07-29</p>
 </div>
 
 <main>
@@ -268,7 +268,7 @@ Primary AI provider: Google Cloud Vertex AI (us-central1), accessed via Applicat
 
 Below is the exact data sent to Gemini for each feature:
 
-(a) ARYA CHAT (mentor_chat): The system prompt includes — your name, date of birth, gender, country, stated intention, karma/dharma scores, recent mood history, AI-generated life digest, inferred topic preferences, unresolved emotional threads, recent challenge data, starred message count, feedback context, active commitments (up to 3), personal notes you asked Arya to remember (up to 50), session history summaries, chat memory summary, last karma snapshot, recent journal entries (up to 30, capped at 600 chars each), AI-generated insights, and your selected reply language. Up to 40 recent chat messages are included as conversation history. Your current message (with a language instruction prefix) is the user turn. If you attach an image, it is included as inline base64 data.
+(a) ARYA CHAT (mentor_chat): The system prompt includes — your name, date of birth, gender, country, stated intention, karma/dharma scores, recent mood history, AI-generated life digest, inferred topic preferences, unresolved emotional threads, recent challenge data, starred message count, feedback context, active commitments (up to 3), personal notes you asked Arya to remember (up to 15, each truncated to 300 characters, within a 1,500-character total budget), session history summaries, chat memory summary, last karma snapshot, recent journal entries (up to 30, capped at 600 chars each), AI-generated insights, and your selected reply language. Up to 40 recent chat messages are included as conversation history. Your current message (with a language instruction prefix) is the user turn. If you attach an image, it is included as inline base64 data.
 
 (b) VOICE TRANSCRIPTION (journal_transcribe): Your audio recording as inline base64 data, with a transcription instruction. No profile data is included.
 
@@ -426,7 +426,9 @@ A full per-collection retention schedule is published at karmiccompass.app/priva
     <p class="section-heading">10. Screenshots &amp; Screen Recording</p>
     <p class="section-body">The App does not block screenshots or screen recording. Your content is yours: you are free to capture, save, and share your journal entries, readings, and conversations with Arya however you choose.
 
-Please be aware of what that means on a shared device. Because capture is not blocked, your content can appear in your device’s app-switcher preview, and any screen-recording or screen-sharing software installed on your device can record these screens. The App cannot prevent this.
+Please be aware of what that means on a shared device. Because capture is not blocked, any screen-recording or screen-sharing software installed on your device can record these screens while you are using the App. The App cannot prevent this.
+
+The app-switcher preview is different, and better protected than earlier versions of this policy stated: the screens that show your journal, your conversations with Arya, your Arya memory, your account details and the sign-in and onboarding screens are covered by a blank overlay whenever the App is not in the foreground, on both iOS and Android — so their content does not appear in the app-switcher card or its stored snapshot. Screens without personal content, such as your realm, yoga and horoscope, are not covered.
 
 If other people have access to your device, turn on the App Passcode (Settings → App Lock). That is the control that keeps your content private while the App is not in use.</p>
   </div>
@@ -612,12 +614,16 @@ India DPDPA contact: contact@karmiccompass.app (Data Protection Board of India c
 EU/EEA &amp; United Kingdom availability:
 KarmicCompass is not offered or marketed in the European Union, European Economic Area, or the United Kingdom, and the App is not listed on the App Store or Google Play in those regions. We do not target, advertise to, or monitor the behaviour of users in those regions, and we collect no data intended to profile EU/EEA/UK residents. On that basis we have not appointed a representative under GDPR Art. 27 or UK GDPR Art. 27. If you are an EU/EEA/UK resident who has obtained the App through other means, please contact us at privacy@karmiccompass.app and we will honour your data-subject request as if GDPR applied. Should we identify material EU/EEA/UK usage, we will appoint an Art. 27 representative and update this section before continuing to process such data.
 
-Last updated: 2026-07-26 (v1.7)</p>
+Last updated: 2026-07-29 (v1.8)</p>
   </div>
 
   <div class="section">
     <p class="section-heading">Changelog</p>
-    <p class="section-body">## v1.7 — 2026-07-26
+    <p class="section-body">## v1.8 — 2026-07-29
+• §4: corrected an over-declaration. The section presents itself as "the exact data sent to Gemini", and stated that up to 50 personal notes are included in the Arya chat prompt; the App sends at most 15. Two further limits that were never disclosed are now stated: each note is truncated to 300 characters, and the notes block as a whole is capped at 1,500 characters. The error was in your favour — less was sent than declared — but a section that claims exactness has to be exact.
+• §10: corrected a claim that understated the App's own protection. The section said content "can appear in your device's app-switcher preview". That is no longer true of the screens that carry personal content: the journal, Arya conversations, Arya memory, account details, sign-in and onboarding are covered by a blank overlay whenever the App is not in the foreground, on BOTH iOS and Android, so they do not appear in the app-switcher card or its stored snapshot. Screens without personal content are not covered, and screen recording during use is still possible — both are stated. Screenshots remain unblocked; that has not changed.
+
+## v1.7 — 2026-07-26
 • §14 (Children&#x27;s Privacy): removed two claims the code does not support. The policy described the age check as &quot;a real age gate, not a self-declared checkbox&quot;; it is a date-of-birth field, re-checked server-side against the same self-declared date, with no identity or document verification. It also stated that because under-age users are blocked &quot;no personal data is collected from them&quot; — but the account and the consent receipt are created BEFORE date of birth is asked for, so a blocked sign-up did leave records behind. §14 now describes both accurately, and those records are deleted automatically (see below) as well as on request.
 • Under-age sign-ups blocked at onboarding are now erased automatically rather than retained indefinitely: the App requests immediate deletion of the account at the moment of the block, and retries on the next launch if that request could not be delivered.
 • PRIVACY_POLICY_VERSION no longer reuses a bare date, so a corrected policy always requires a fresh consent receipt.
