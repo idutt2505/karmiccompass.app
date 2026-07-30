@@ -66,7 +66,7 @@
 </nav>
 
 <div class="hero">
-  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.4</p>
+  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.5</p>
   <h1 class="hero-title">Terms &amp; Conditions</h1>
   <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-07-26</p>
 </div>
@@ -262,6 +262,15 @@ You may not copy, reproduce, modify, distribute, publicly display, or create der
   </div>
 
   <div class="section">
+    <p class="section-heading">16a. Open-Source &amp; Font Licences</p>
+    <p class="section-body">Fonts in this application are licensed under the SIL Open Font License 1.1. Copyright of each typeface remains with its respective authors. The full licence text is available at https://scripts.sil.org/OFL
+
+Typefaces used: Caveat, Cormorant Garamond, DM Sans, DM Mono — all under SIL OFL 1.1.
+
+This app is built with React Native and Expo, and uses open-source libraries under their respective licences (predominantly MIT and Apache 2.0). A full component-level attribution list is maintained in the project&#x27;s ATTRIBUTIONS.md and is available on request at privacy@karmiccompass.app.</p>
+  </div>
+
+  <div class="section">
     <p class="section-heading">17. Third-Party Services &amp; Apple Schedule 2 EULA</p>
     <p class="section-body">The App uses the following third-party services:
 
@@ -377,12 +386,16 @@ For questions, concerns, or disputes regarding these Terms, write to us at the a
 
 Grievance Officer (India): see Privacy Policy §17.
 
-Last updated: 2026-07-26 (v1.4)</p>
+Last updated: 2026-07-26 (v1.5)</p>
   </div>
 
   <div class="section">
     <p class="section-heading">Changelog</p>
-    <p class="section-body">## v1.4 — 2026-07-26
+    <p class="section-body">## v1.5 — 2026-07-26
+• §2 (Eligibility): corrected &quot;this is a real age gate, not self-attestation&quot;. The App asks for your date of birth and computes your age from it; it does not verify age against any document or identity source. The section now says so plainly. The block itself, and the India under-18 parental-consent step, are unchanged.
+• §16a (NEW): Open-Source &amp; Font Licences section published — it existed in the in-app Terms and had not been carried across to this copy.
+
+## v1.4 — 2026-07-26
 • Published Terms brought back into line with the in-app Terms. docs/terms.html and the website copy had drifted behind LegalScreen.js: they still described the trial as feature-limited in §7, omitted the quiz cap, the 1,000-action ceiling, the server-fault refund clause and the journal-photo storage disclosure in §11, and listed only six Summarise periods where the code has eight. Both copies are now generated from one source.
 • §7: replaced "Compass subscribers are simply not subject to it" — which read as a contradiction of the adjacent sentence saying subscribing is not how the cap is lifted — with a plain statement that Compass subscribers are exempt from it entirely.
 • §7: the Summarise list now names all eight periods the code ships (this session, today, weekly, fortnightly, monthly, quarterly, half-yearly, yearly — SUMMARISE_PERIODS in MentorScreen.js), and confirms trial users get all of them (the premium flag is satisfied by isTrial).
