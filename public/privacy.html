@@ -66,9 +66,9 @@
 </nav>
 
 <div class="hero">
-  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.8</p>
+  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.9</p>
   <h1 class="hero-title">Privacy Policy</h1>
-  <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-07-29</p>
+  <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-07-30</p>
 </div>
 
 <main>
@@ -132,7 +132,7 @@ E. PREFERENCES &amp; SETTINGS (stored in Firestore: users/{uid})
 • Incognito Mode state.
 
 F. VOICE TRANSCRIPTIONS
-• When you use the microphone button, your audio is recorded on-device, encoded as base64, and transmitted to our secure proxy server for transcription via Google's Gemini API. The audio data is never written to Firestore or Firebase Storage. The original audio file is deleted from your device immediately after the transcription request is sent. The resulting text transcript is stored as part of your journal entry or chat message.
+• When you use the microphone button, your audio is recorded on-device, encoded as base64, and transmitted to our secure proxy server for transcription via Google's Gemini API. The audio data is never written to Firestore or Firebase Storage. The original audio file is deleted from your device as soon as transcription succeeds. If transcription fails — you are offline, or the request errors — the recording is queued on your device so it can be retried and your words are not lost; queued recordings are capped at 10, are deleted once transcribed or after 7 days at the latest, and are removed immediately if you delete your account. While queued they sit in the app&#x27;s private storage, which on iOS is included in device backups. See §9. The resulting text transcript is stored as part of your journal entry or chat message.
 
 G. IMAGES
 • Chat images: When you attach a photo in Arya's chat, it is resized and re-encoded on-device (longest edge reduced to at most 3072px, JPEG quality ~90%, and re-compressed further if still over 6 MB) and sent as base64 to our proxy for Gemini Vision AI processing. Chat images are not stored as standalone files on our servers. Because the image is re-encoded on your device before upload, EXIF metadata — including any GPS/location coordinates, device identifiers, and original timestamps — is stripped and is not transmitted.
@@ -614,12 +614,15 @@ India DPDPA contact: contact@karmiccompass.app (Data Protection Board of India c
 EU/EEA &amp; United Kingdom availability:
 KarmicCompass is not offered or marketed in the European Union, European Economic Area, or the United Kingdom, and the App is not listed on the App Store or Google Play in those regions. We do not target, advertise to, or monitor the behaviour of users in those regions, and we collect no data intended to profile EU/EEA/UK residents. On that basis we have not appointed a representative under GDPR Art. 27 or UK GDPR Art. 27. If you are an EU/EEA/UK resident who has obtained the App through other means, please contact us at privacy@karmiccompass.app and we will honour your data-subject request as if GDPR applied. Should we identify material EU/EEA/UK usage, we will appoint an Art. 27 representative and update this section before continuing to process such data.
 
-Last updated: 2026-07-29 (v1.8)</p>
+Last updated: 2026-07-30 (v1.9)</p>
   </div>
 
   <div class="section">
     <p class="section-heading">Changelog</p>
-    <p class="section-body">## v1.8 — 2026-07-29
+    <p class="section-body">## v1.9 — 2026-07-30
+• §1(F): corrected a statement that contradicted §9. The inventory section — the one a reader reaches first — said the recording is &quot;deleted from your device immediately after the transcription request is sent&quot;. That is only true when transcription SUCCEEDS. On failure the recording is queued on the device for up to 7 days so your words are not lost, and while queued it sits in app storage that iOS includes in device backups. §9 has described this correctly throughout; §1(F) did not, so the document disagreed with itself about how long audio of your voice is kept. No new data and no new purpose — the fuller §9 statement was always the binding one — but a retention claim a user reads first has to be true.
+
+## v1.8 — 2026-07-29
 • §4: corrected an over-declaration. The section presents itself as "the exact data sent to Gemini", and stated that up to 50 personal notes are included in the Arya chat prompt; the App sends at most 15. Two further limits that were never disclosed are now stated: each note is truncated to 300 characters, and the notes block as a whole is capped at 1,500 characters. The error was in your favour — less was sent than declared — but a section that claims exactness has to be exact.
 • §10: corrected a claim that understated the App's own protection. The section said content "can appear in your device's app-switcher preview". That is no longer true of the screens that carry personal content: the journal, Arya conversations, Arya memory, account details, sign-in and onboarding are covered by a blank overlay whenever the App is not in the foreground, on BOTH iOS and Android, so they do not appear in the app-switcher card or its stored snapshot. Screens without personal content are not covered, and screen recording during use is still possible — both are stated. Screenshots remain unblocked; that has not changed.
 
