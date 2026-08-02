@@ -66,9 +66,9 @@
 </nav>
 
 <div class="hero">
-  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.9</p>
+  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v2.0</p>
   <h1 class="hero-title">Privacy Policy</h1>
-  <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-07-30</p>
+  <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-08-02</p>
 </div>
 
 <main>
@@ -625,21 +625,29 @@ India DPDPA contact: contact@karmiccompass.app (Data Protection Board of India c
 EU/EEA &amp; United Kingdom availability:
 KarmicCompass is not offered or marketed in the European Union, European Economic Area, or the United Kingdom, and the App is not listed on the App Store or Google Play in those regions. We do not target, advertise to, or monitor the behaviour of users in those regions, and we collect no data intended to profile EU/EEA/UK residents. On that basis we have not appointed a representative under GDPR Art. 27 or UK GDPR Art. 27. If you are an EU/EEA/UK resident who has obtained the App through other means, please contact us at privacy@karmiccompass.app and we will honour your data-subject request as if GDPR applied. Should we identify material EU/EEA/UK usage, we will appoint an Art. 27 representative and update this section before continuing to process such data.
 
-Last updated: 2026-07-30 (v1.9)</p>
+Last updated: 2026-08-02 (v2.0)</p>
   </div>
 
   <div class="section">
     <p class="section-heading">Changelog</p>
-    <p class="section-body">## v1.9 — 2026-07-30
-• §1(F): corrected a statement that contradicted §9. The inventory section — the one a reader reaches first — said the recording is &quot;deleted from your device immediately after the transcription request is sent&quot;. That is only true when transcription SUCCEEDS. On failure the recording is queued on the device for up to 7 days so your words are not lost, and while queued it sits in app storage that iOS includes in device backups. §9 has described this correctly throughout; §1(F) did not, so the document disagreed with itself about how long audio of your voice is kept. No new data and no new purpose — the fuller §9 statement was always the binding one — but a retention claim a user reads first has to be true.
-• §1(N): newly disclosed the device attestation the App performs at start-up (Firebase App Check via Apple App Attest / Google Play Integrity), together with its lawful basis. It was named only in the Terms&#x27; third-party list and never described. It carries no account data and no content; it is a security control under legitimate interests, which is why it runs before the consent screen — analytics and crash reporting are consent-based and still do not.
+    <p class="section-body">## v2.0 — 2026-08-02
+Corrections only. Nothing new is collected, no new purpose, and no new recipient — every change below makes a statement match what the code already did. The version is bumped because these went out AFTER the last consent prompt, so no existing receipt covers them, and a policy corrected silently is the thing a version number exists to prevent.
+• §3: crash and performance diagnostics (Sentry) moved from legitimate interests to CONSENT, and the legitimate-interests entry re-scoped to what actually relies on it (fraud and trial-abuse prevention, including the truncated-IP-hash rate limit on the deletion OTP endpoint, and system security). Sentry is opt-in and off by default, and consent is the honest basis for something you switch on; the governance documents (DPIA, RoPA) now say the same.
+• §5: corrected the claim that an export makes no network requests. The PDF is built on-device, but one request per attached journal photo is made to download it, because photos live in Firebase Storage rather than on the device. No other data leaves the device during an export.
+• §9: separated the OTP CODE from the DOCUMENT that carries it. The code stops working after 15 minutes; the document — which also holds your email address and an install identifier — is kept for up to 7 days so a request cannot be silently replayed. It is now deleted server-side on that schedule rather than relying on a console setting.
+• §11: corrected the retention stated for aiUsageInflight, the short-lived markers written while an AI request is in flight. It said they expire 'within minutes'; the actual figure is seven days for a request abandoned mid-flight, and nothing was performing any figure. Seven days is now both what the policy says and what a server-side sweep does.
+• The published copies at karmiccompass.app/privacy and in the App Store / Play listings were regenerated from this document. Five sections there — §1, §3, §5, §9 and §11 — were still the pre-correction text, so a reader of the published policy was reading an older document than the one in the App.
+
+## v1.9 — 2026-07-30
+• §1(F): corrected a statement that contradicted §9. The inventory section — the one a reader reaches first — said the recording is "deleted from your device immediately after the transcription request is sent". That is only true when transcription SUCCEEDS. On failure the recording is queued on the device for up to 7 days so your words are not lost, and while queued it sits in app storage that iOS includes in device backups. §9 has described this correctly throughout; §1(F) did not, so the document disagreed with itself about how long audio of your voice is kept. No new data and no new purpose — the fuller §9 statement was always the binding one — but a retention claim a user reads first has to be true.
+• §1(N): newly disclosed the device attestation the App performs at start-up (Firebase App Check via Apple App Attest / Google Play Integrity), together with its lawful basis. It was named only in the Terms' third-party list and never described. It carries no account data and no content; it is a security control under legitimate interests, which is why it runs before the consent screen — analytics and crash reporting are consent-based and still do not.
 
 ## v1.8 — 2026-07-29
 • §4: corrected an over-declaration. The section presents itself as "the exact data sent to Gemini", and stated that up to 50 personal notes are included in the Arya chat prompt; the App sends at most 15. Two further limits that were never disclosed are now stated: each note is truncated to 300 characters, and the notes block as a whole is capped at 1,500 characters. The error was in your favour — less was sent than declared — but a section that claims exactness has to be exact.
 • §10: corrected a claim that understated the App's own protection. The section said content "can appear in your device's app-switcher preview". That is no longer true of the screens that carry personal content: the journal, Arya conversations, Arya memory, account details, sign-in and onboarding are covered by a blank overlay whenever the App is not in the foreground, on BOTH iOS and Android, so they do not appear in the app-switcher card or its stored snapshot. Screens without personal content are not covered, and screen recording during use is still possible — both are stated. Screenshots remain unblocked; that has not changed.
 
 ## v1.7 — 2026-07-26
-• §14 (Children&#x27;s Privacy): removed two claims the code does not support. The policy described the age check as &quot;a real age gate, not a self-declared checkbox&quot;; it is a date-of-birth field, re-checked server-side against the same self-declared date, with no identity or document verification. It also stated that because under-age users are blocked &quot;no personal data is collected from them&quot; — but the account and the consent receipt are created BEFORE date of birth is asked for, so a blocked sign-up did leave records behind. §14 now describes both accurately, and those records are deleted automatically (see below) as well as on request.
+• §14 (Children's Privacy): removed two claims the code does not support. The policy described the age check as "a real age gate, not a self-declared checkbox"; it is a date-of-birth field, re-checked server-side against the same self-declared date, with no identity or document verification. It also stated that because under-age users are blocked "no personal data is collected from them" — but the account and the consent receipt are created BEFORE date of birth is asked for, so a blocked sign-up did leave records behind. §14 now describes both accurately, and those records are deleted automatically (see below) as well as on request.
 • Under-age sign-ups blocked at onboarding are now erased automatically rather than retained indefinitely: the App requests immediate deletion of the account at the moment of the block, and retries on the next launch if that request could not be delivered.
 • PRIVACY_POLICY_VERSION no longer reuses a bare date, so a corrected policy always requires a fresh consent receipt.
 
