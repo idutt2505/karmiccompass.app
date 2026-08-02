@@ -66,9 +66,9 @@
 </nav>
 
 <div class="hero">
-  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.5</p>
+  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.6</p>
   <h1 class="hero-title">Terms &amp; Conditions</h1>
-  <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-07-26</p>
+  <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-08-02</p>
 </div>
 
 <main>
@@ -139,6 +139,7 @@ Australian Consumer Law: Nothing in these Terms excludes, restricts, or modifies
 ── Trial (first 7 days after onboarding) ──
 • Arya chat: up to 30 messages per day.
 • Journal entries analysed: up to 30 per day.
+• Voice notes transcribed: up to 40 per day. This one is identical on both tiers — subscribing does not raise it.
 • A separate anti-abuse cap of 150 AI actions per day applies to the device rather than to you, and is shared by every trial or unsubscribed account used on that device. If several such accounts share one phone they draw on the same 150, so it is possible to be stopped by this cap while your own daily allowance is untouched. Compass subscribers are exempt from it entirely. It is not a tier difference and subscribing is not the way it is lifted — it exists only to stop one device from cycling through throwaway trial accounts.
 
 ── Compass (paid subscription) ──
@@ -196,7 +197,7 @@ All AI requests pass through our secure proxy server. Safety filters (BLOCK_MEDI
     <p class="section-heading">11. Device Permissions</p>
     <p class="section-body">The App requests the following device permissions:
 
-• Microphone (required for voice features): When you tap the microphone button in the Journal or Arya chat, your audio is recorded on-device, encoded as base64, and sent to Google's Gemini API via our secure proxy for transcription. The audio file is deleted from your device immediately after the transcription request completes. Only the resulting text transcript is stored.
+• Microphone (required for voice features): When you tap the microphone button in the Journal or Arya chat, your audio is recorded on-device, encoded as base64, and sent to Google's Gemini API via our secure proxy for transcription. The audio file is deleted from your device as soon as transcription succeeds. If transcription fails, the recording is queued on your device for retry and is deleted once transcribed or after 7 days at the latest (see Privacy Policy §1(F)). Only the resulting text transcript is stored.
 
 • Camera &amp; Photo Library (optional): Required only if you choose to attach a photo in Arya's chat or to a journal entry. The image is resized on-device (longest edge reduced to at most 3072px, JPEG quality ~90%, and re-compressed further if still over 6 MB). A photo attached in chat is sent as base64 to Gemini Vision via our proxy and is not kept as a file on our servers. A photo attached to a journal entry is uploaded to our cloud storage and kept for the life of your account so it can be shown in your journal — see Privacy Policy §1(G).
 
@@ -211,7 +212,7 @@ All permissions are requested at the point of use and can be revoked at any time
     <p class="section-heading">12. Data Export</p>
     <p class="section-body">The App provides an "Export Data" feature in Settings that generates a PDF report containing your journal entries, chat history with Arya, wellness summary, badges, and scores.
 
-The PDF is generated on-device from your locally cached data. If you choose to include an optional personalised letter from Arya, one additional AI call is made to Google's Gemini API using a journey summary (not raw journal text). The rest of the PDF requires no network calls.
+The PDF is generated on-device from your locally cached data, except that each attached journal photo is downloaded from Firebase Storage so it can be included. If you choose to include an optional personalised letter from Arya, one additional AI call is made to Google's Gemini API using a journey summary (not raw journal text). The rest of the PDF requires no network calls.
 
 The exported file is unencrypted. We do not transmit or receive the exported file on our servers. You are solely responsible for the security and distribution of any exported file once it leaves the App.</p>
   </div>
@@ -370,9 +371,13 @@ For all users: nothing in this clause limits your rights under mandatory consume
 
   <div class="section">
     <p class="section-heading">24. Changes to These Terms</p>
-    <p class="section-body">We may update these Terms from time to time. We will notify you of material changes via an in-app notice or email at least 7 days before the changes take effect.
+    <p class="section-body">We may update these Terms from time to time.
 
-Your continued use of the App after the effective date constitutes your acceptance. If you do not agree to the revised Terms, you must stop using the App before the changes take effect.</p>
+How you find out: the updated Terms are shown in the App the first time you open it after the change, and material changes are listed in the Changelog below. We do not currently send advance notice by email, and we do not give 7 days' warning before a change takes effect — an earlier version of this section promised that and the App has never done it, which is why the wording changed rather than the practice.
+
+For routine updates, your continued use of the App after the effective date constitutes your acceptance. If you do not agree to the revised Terms, stop using the App and you may delete your account at any time from Settings.
+
+Where a change materially alters how we process your personal data — in particular any new processing that requires your consent — we ask for fresh, explicit consent at first launch BEFORE that processing begins, rather than relying on continued use. That is the same commitment Privacy Policy §16 makes, and it is enforced by a version check on the consent receipt.</p>
   </div>
 
   <div class="section">
@@ -386,14 +391,17 @@ For questions, concerns, or disputes regarding these Terms, write to us at the a
 
 Grievance Officer (India): see Privacy Policy §17.
 
-Last updated: 2026-07-26 (v1.5)</p>
+Last updated: 2026-08-02 (v1.6)</p>
   </div>
 
   <div class="section">
     <p class="section-heading">Changelog</p>
-    <p class="section-body">## v1.5 — 2026-07-26
-• §2 (Eligibility): corrected &quot;this is a real age gate, not self-attestation&quot;. The App asks for your date of birth and computes your age from it; it does not verify age against any document or identity source. The section now says so plainly. The block itself, and the India under-18 parental-consent step, are unchanged.
-• §16a (NEW): Open-Source &amp; Font Licences section published — it existed in the in-app Terms and had not been carried across to this copy.
+    <p class="section-body">## v1.6 — 2026-08-02
+• §24 (Changes to These Terms): corrected a promise the App has never kept. It said we would notify you of material changes 'via an in-app notice or email at least 7 days before the changes take effect'. There is no advance-notice mechanism — no scheduled email, no in-app pre-announcement — and Privacy Policy §16 has always described the real behaviour: you see the change at first launch after it happens. Two documents in one agreement said opposite things about the same question. §24 now matches §16.
+• No practice changed. What was already true and remains true is the stronger half: a change that materially alters how your data is processed asks for fresh explicit consent at first launch, before the new processing starts, which the policy-version check on the consent receipt enforces.
+
+## v1.5 — 2026-07-26
+• §2 (Eligibility): corrected "this is a real age gate, not self-attestation". The App asks for your date of birth and computes your age from it; it does not verify age against any document or identity source. The section now says so plainly. The block itself, and the India under-18 parental-consent step, are unchanged.
 
 ## v1.4 — 2026-07-26
 • Published Terms brought back into line with the in-app Terms. docs/terms.html and the website copy had drifted behind LegalScreen.js: they still described the trial as feature-limited in §7, omitted the quiz cap, the 1,000-action ceiling, the server-fault refund clause and the journal-photo storage disclosure in §11, and listed only six Summarise periods where the code has eight. Both copies are now generated from one source.
