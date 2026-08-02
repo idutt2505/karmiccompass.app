@@ -132,7 +132,7 @@ E. PREFERENCES &amp; SETTINGS (stored in Firestore: users/{uid})
 • Incognito Mode state.
 
 F. VOICE TRANSCRIPTIONS
-• When you use the microphone button, your audio is recorded on-device, encoded as base64, and transmitted to our secure proxy server for transcription via Google's Gemini API. The audio data is never written to Firestore or Firebase Storage. The original audio file is deleted from your device as soon as transcription succeeds. If transcription fails — you are offline, or the request errors — the recording is queued on your device so it can be retried and your words are not lost; queued recordings are capped at 10, are deleted once transcribed or after 7 days at the latest, and are removed immediately if you delete your account. While queued they sit in the app&#x27;s private storage, which on iOS is included in device backups. See §9. The resulting text transcript is stored as part of your journal entry or chat message.
+• When you use the microphone button, your audio is recorded on-device, encoded as base64, and transmitted to our secure proxy server for transcription via Google's Gemini API. The audio data is never written to Firestore or Firebase Storage. The original audio file is deleted from your device as soon as transcription succeeds. If transcription fails — you are offline, or the request errors — the recording is queued on your device so it can be retried and your words are not lost; queued recordings are capped at 10, are deleted once transcribed or after 7 days at the latest, and are removed immediately if you delete your account. While queued they sit in the app's private storage, which on iOS is included in device backups. See §9. The resulting text transcript is stored as part of your journal entry or chat message.
 
 G. IMAGES
 • Chat images: When you attach a photo in Arya's chat, it is resized and re-encoded on-device (longest edge reduced to at most 3072px, JPEG quality ~90%, and re-compressed further if still over 6 MB) and sent as base64 to our proxy for Gemini Vision AI processing. Chat images are not stored as standalone files on our servers. Because the image is re-encoded on your device before upload, EXIF metadata — including any GPS/location coordinates, device identifiers, and original timestamps — is stripped and is not transmitted.
@@ -165,8 +165,8 @@ N. ABUSE-PREVENTION SIGNALS
 • A daily AI-action count keyed to the truncated device-ID hash described in (I) is stored in aiUsageByDevice, so one handset cannot cycle through throwaway trial accounts. A deviceTrialLedger record keyed to the same hash records that the device has consumed its trial.
 • RevenueCat webhook events are recorded briefly (processedWebhookEvents) so a retried billing event is not applied twice; these records carry the RevenueCat app user ID, which is your Firebase UID.
 • When you use the email-based deletion flow, the App also sends an Expo installation ID, which is stored on the pending deletion request and checked when you confirm the code, so a code intercepted elsewhere cannot be redeemed from another install.
+• Device attestation (Firebase App Check). At app start the App asks Apple's App Attest (iOS) or Google Play Integrity (Android) to vouch that it is a genuine, unmodified copy of KarmicCompass running on a real device, and sends that attestation to Firebase. It contains no account data and no content — it says nothing about you, only about the app and the device. We rely on legitimate interests (GDPR Art. 6(1)(f)) for it: it is a security and anti-fraud control, not a consent-based purpose, which is why it runs before the consent screen rather than after it. Analytics and crash reporting are consent-based and do NOT run before you choose (see §8).
 
-• Device attestation (Firebase App Check). At app start the App asks Apple&#x27;s App Attest (iOS) or Google Play Integrity (Android) to vouch that it is a genuine, unmodified copy of KarmicCompass running on a real device, and sends that attestation to Firebase. It contains no account data and no content — it says nothing about you, only about the app and the device. We rely on legitimate interests (GDPR Art. 6(1)(f)) for it: it is a security and anti-fraud control, not a consent-based purpose, which is why it runs before the consent screen rather than after it. Analytics and crash reporting are consent-based and do NOT run before you choose (see §8).
 O. SUBSCRIPTION &amp; BILLING
 • Subscription status (isBasic, tier, subscriptionPlan, premiumExpiresAt, and grace-period fields) is set in your Firestore profile by our RevenueCat webhook when subscription events occur. RevenueCat uses your Firebase UID as the app user ID. We do not receive full payment card details.
 
@@ -180,7 +180,12 @@ Q. AI &amp; VOICE USAGE QUOTAS
 
 R. SUPPORT &amp; DELETION REQUEST DATA
 • Emails you send us, retained to resolve enquiries.
-• For email-based account deletion: a 6-digit OTP, expiry timestamp, and email address are temporarily stored in Firestore (deletionRequests/{uid}) for up to 15 minutes. This document is deleted upon successful deletion.
+• For email-based account deletion: a 6-digit OTP, expiry timestamp, email address and an install identifier are stored in Firestore (deletionRequests/{uid}). The CODE stops working after 15 minutes. The DOCUMENT itself is kept for up to 7 days so a request can be retried, and is deleted as soon as the deletion completes. We would rather state the longer figure than the flattering one: this is the only route available to someone who cannot log in, so it is the route that holds an email address longest.
+
+S. CRASH &amp; PERFORMANCE DIAGNOSTICS
+• If you turn on crash reporting in Settings (opt-in, OFF by default), we collect crash reports, error diagnostics and basic performance data through Sentry. This is declared as linked, analytics-purpose data in our iOS privacy manifest. It is processed on the basis of your consent and you can withdraw it at any time with the same toggle — see §3.
+• Operational records that carry your UID but none of your content: aiUsageInflight (a marker written while an AI request is in progress, cleared when it settles), deviceIdsByUid (which device your account has used), and deletionResidue (written only if part of an account erasure failed — see §11).
+• If you are in the EU or UK and waive the 14-day withdrawal right to start using a subscription immediately, we record that waiver on your profile (withdrawalWaiver) and, if the network write fails, temporarily on your device until it can be sent. It is the record that shows the waiver was given knowingly.
 
 No-AI-training commitment: We never use your content to train our own models, and neither does Google. Our primary AI provider, Google Cloud Vertex AI, excludes customer content from Google's model training per the Google Cloud Terms (https://cloud.google.com/terms/data-processing-addendum). On the rare occasions our system temporarily falls back to the Google Gemini Developer API (only when Vertex AI is unavailable), we use a paid (pay-as-you-go) tier, under which Google does not use your prompts or responses to train or improve its models either (per Google's Gemini API Additional Terms, ai.google.dev/gemini-api/terms — we review this commitment annually and on any Google terms change). If that paid-tier no-training commitment is ever removed or materially weakened, we will either cease use of the Gemini Developer API fallback or obtain fresh consent before continuing to process health-related data through it.</p>
   </div>
@@ -218,9 +223,9 @@ We do NOT sell your personal data to advertisers or third-party data brokers. We
 
 • Contract (GDPR Art. 6(1)(b) / UK GDPR / LGPD Art. 7(V) / DPDPA): processing necessary to provide the App and services you requested, including AI responses, journal analysis, voice transcription, and image analysis.
 
-• Legitimate Interests (GDPR Art. 6(1)(f) / UK GDPR / LGPD Art. 7(IX)): improving the App, crash reporting (Sentry), fraud and trial-abuse prevention (including the truncated-IP-hash rate-limit on the deletion OTP endpoint), and system security — balanced against your rights and expectations through a documented Legitimate Interests Assessment (LIA), summarised in our DPIA at karmiccompass.app/privacy/DPIA. You may object to processing on this basis at any time.
+• Legitimate Interests (GDPR Art. 6(1)(f) / UK GDPR / LGPD Art. 7(IX)): improving the App, fraud and trial-abuse prevention (including the truncated-IP-hash rate-limit on the deletion OTP endpoint), and system security — balanced against your rights and expectations through a documented Legitimate Interests Assessment (LIA), summarised in our DPIA at karmiccompass.app/privacy/DPIA. You may object to processing on this basis at any time.
 
-• Consent (GDPR Art. 6(1)(a) / DPDPA / PDPA / APPI): where we rely on your consent — such as for notification permissions and the EU/UK 14-day withdrawal-waiver confirmation — you may withdraw it at any time without affecting prior processing.
+• Consent (GDPR Art. 6(1)(a) / DPDPA / PDPA / APPI): where we rely on your consent — such as for notification permissions, crash and performance diagnostics (Sentry — opt-in, off by default), and the EU/UK 14-day withdrawal-waiver confirmation — you may withdraw it at any time without affecting prior processing.
 
 How to withdraw, precisely: notification consent and crash-report consent are toggles in Settings. The Art. 9 health-data consent is different, and we would rather be plain about it than imply otherwise — journalling, mood and the conversations with Arya ARE the health-related processing, so it cannot be switched off while continuing to use those features. What you can do without deleting anything: turn off 'Safety follow-up memory' in Settings → Arya Settings, which stops crisis flags being stored AND deletes any already held; and use Incognito Mode, in which conversations are not saved at all. To withdraw the health-data consent entirely, delete your account (Settings → Delete Account), which erases the underlying data with it.
 
@@ -292,7 +297,7 @@ All API calls use Firebase ID token authentication (Bearer token in Authorizatio
     <p class="section-heading">5. Data Export</p>
     <p class="section-body">The "Export Data" feature in Settings generates a PDF report containing your journal entries, chat history with Arya, wellness summary, badges, and scores.
 
-If you choose to include an optional personalised cover letter from Arya, generating that letter requires an additional AI processing call to Google's Gemini API, using a summary of your journey (not raw journal text). The rest of the PDF is generated entirely on-device from your locally cached data without any network requests.
+If you choose to include an optional personalised cover letter from Arya, generating that letter requires an additional AI processing call to Google's Gemini API, using a summary of your journey (not raw journal text). The rest of the PDF is generated on-device from your locally cached data. One further network request happens per journal photo you have attached: photos are stored in Firebase Storage rather than on your device, so the export downloads each one in order to include it. No other data leaves your device during an export.
 
 The exported file is unencrypted. We do not transmit or receive the exported file on our servers. Once shared, you are solely responsible for the security and further distribution of that file.
 
@@ -372,7 +377,7 @@ These providers may process your data in the United States and other countries. 
 
 • Crisis signal records (≤100 char excerpt + timestamp in crisisFlags): auto-expire after 90 days; also deleted with account; user-deletable at any time via Settings → Arya Settings.
 
-• Voice audio files: deleted from your device as soon as transcription succeeds — never stored on our servers. If transcription fails (you are offline, or the request errors) the recording is queued on your device so it can be retried and your words are not lost. Queued recordings are capped at 10, are deleted automatically once transcribed or after 7 days at the latest, and are removed immediately if you delete your account. While queued they sit in the app&#x27;s private storage, which on iOS is included in device backups.
+• Voice audio files: deleted from your device as soon as transcription succeeds — never stored on our servers. If transcription fails (you are offline, or the request errors) the recording is queued on your device so it can be retried and your words are not lost. Queued recordings are capped at 10, are deleted automatically once transcribed or after 7 days at the latest, and are removed immediately if you delete your account. While queued they sit in the app's private storage, which on iOS is included in device backups.
 
 • Chat image data: not stored as standalone files on our servers — used transiently for AI processing only.
 
@@ -384,9 +389,11 @@ These providers may process your data in the United States and other countries. 
 
 • AI and rate-limit counters keyed to your account (aiUsage/{uid}, aiUsageJournal/{uid}, aiUsageMeter/{uid}, rateLimits/{uid}, ttsUsage/{uid}): deleted with account.
 
-• Device-rotation ceiling records (deviceIdsByUid): the distinct device-ID hashes your account presented on a given day, used to stop one account cycling through devices to lift limits. Keyed to your UID, self-expire after 3 days, and deleted immediately when you delete your account.</p>
-<p class="section-body">• Deletion-residue breadcrumbs (deletionResidue): written ONLY if part of an account deletion fails, so we can find and finish it. It records your UID and which collections survived — no journal, chat or profile content — and expires after 30 days. If your deletion completes normally, which is the expected case, no such record is created.</p>
-<p class="section-body">• Device-level anti-abuse counters (aiUsageByDevice, keyed to the truncated device-ID hash): each record carries a 60-day expiry stamp, refreshed while the device stays active. Because the server never sees the raw device ID, these cannot be looked up by account and so are not deleted by name when you delete your account — they expire on that timer instead.
+• Device-rotation ceiling records (deviceIdsByUid): the distinct device-ID hashes your account presented on a given day, used to stop one account cycling through devices to lift limits. Keyed to your UID, self-expire after 3 days, and deleted immediately when you delete your account.
+
+• Deletion-residue breadcrumbs (deletionResidue): written ONLY if part of an account deletion fails, so we can find and finish it. It records your UID and which collections survived — no journal, chat or profile content — and expires after 30 days. If your deletion completes normally, which is the expected case, no such record is created.
+
+• Device-level anti-abuse counters (aiUsageByDevice, keyed to the truncated device-ID hash): each record carries a 60-day expiry stamp, refreshed while the device stays active. Because the server never sees the raw device ID, these cannot be looked up by account and so are not deleted by name when you delete your account — they expire on that timer instead.
 
 • IP-keyed request throttles (rateLimitsByIp): self-purge within roughly two hours.
 
@@ -400,7 +407,7 @@ These providers may process your data in the United States and other countries. 
 
 • Feedback submissions: each record is written with a 365-day expiry stamp and is removed when that expiry lapses; also deleted immediately when you delete your account.
 
-• Account deletion OTP (deletionRequests/{uid}): deleted within 15 minutes of use (or expiry).
+• Account deletion OTP (deletionRequests/{uid}): the CODE stops working after 15 minutes; the document holding it — which also carries your email address and an install identifier — is kept for up to 7 days so the request can be retried, and is deleted as soon as the deletion completes. See §1(R).
 
 • On-device AI caches (MMKV): cleared on logout and account deletion.
 
@@ -450,7 +457,10 @@ Deleting immediately: the in-app Delete Account flow also offers a "Delete now" 
 
 Data deleted (in both cases, once erasure runs):
 • All documents in the users/{uid} subcollections: entries, entriesArchive, chatArchive, insights, reports
-• aiUsage/{uid}, aiUsageJournal/{uid}, aiUsageMeter/{uid}, ttsUsage/{uid} and rateLimits/{uid} documents
+• aiUsage/{uid}, aiUsageJournal/{uid}, aiUsageMeter/{uid}, ttsUsage/{uid}, and rateLimits/{uid} documents
+• deviceIdsByUid: the record linking your account to this device
+• aiUsageInflight: short-lived markers written while an AI request is in flight. These are keyed by request, not by account, so the erasure routine cannot look them up — they are cleared when the request settles and, if a request is abandoned mid-flight, are deleted seven days later either way. We list them because they carry your UID while they exist, not because they are searched for and deleted.
+• deletionResidue/{uid}: written ONLY if part of the erasure above failed, so the failure is not forgotten. It holds your UID and which step failed — no journal, chat or profile content — and is deleted as soon as a retry completes, or expires automatically after 30 days
 • deletionRequests/{uid} document
 • All documents in feedback where uid matches
 • All documents in chatReports where uid matches (AI-response reports you submitted)
