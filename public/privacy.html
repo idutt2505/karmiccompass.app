@@ -459,7 +459,6 @@ Data deleted (in both cases, once erasure runs):
 • All documents in the users/{uid} subcollections: entries, entriesArchive, chatArchive, insights, reports
 • aiUsage/{uid}, aiUsageJournal/{uid}, aiUsageMeter/{uid}, ttsUsage/{uid}, and rateLimits/{uid} documents
 • deviceIdsByUid: the record linking your account to this device
-• aiUsageInflight: short-lived markers written while an AI request is in flight. These are keyed by request, not by account, so the erasure routine cannot look them up — they are cleared when the request settles and, if a request is abandoned mid-flight, are deleted seven days later either way. We list them because they carry your UID while they exist, not because they are searched for and deleted.
 • deletionResidue/{uid}: written ONLY if part of the erasure above failed, so the failure is not forgotten. It holds your UID and which step failed — no journal, chat or profile content — and is deleted as soon as a retry completes, or expires automatically after 30 days
 • deletionRequests/{uid} document
 • All documents in feedback where uid matches
@@ -469,7 +468,7 @@ Data deleted (in both cases, once erasure runs):
 • Journal image files stored in our cloud storage (Firebase Storage, users/{uid}/journalImages/)
 • Your Firebase Authentication account
 
-What is not deleted by name: three device- or IP-keyed anti-abuse records (aiUsageByDevice, rateLimitsByIp, processedWebhookEvents) cannot be looked up by account, because the server holds only a one-way hash rather than your identifier. They are not searched for and erased; they expire on their own timers instead — see §9 for each period.
+What is not deleted by name: three device- or IP-keyed anti-abuse records (aiUsageByDevice, rateLimitsByIp, processedWebhookEvents) cannot be looked up by account, because the server holds only a one-way hash rather than your identifier. They are not searched for and erased; they expire on their own timers instead — see §9 for each period. A fourth record belongs here for the same reason: aiUsageInflight, the short-lived markers written while an AI request is in flight, is keyed by request rather than by account, so the erasure routine cannot look those up either. They are cleared when the request settles and, if a request is abandoned mid-flight, are deleted seven days later regardless. We list them because they carry your UID while they exist, not because they are searched for and deleted.
 
 Residual data in encrypted Google Cloud backups may persist for up to 90 days. Subscription billing records are retained per RevenueCat and applicable financial law.</p>
   </div>
