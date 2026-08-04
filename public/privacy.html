@@ -77,115 +77,115 @@
     <p class="section-heading">How It Works</p>
     <p class="section-body">Karmic Compass is operated by Diksha Dutt (operating as KarmicCompass). Here is what we collect, why, and how:
 
-• You give us: name, date of birth, gender, country, journal entries, chat messages, and optionally voice recordings and photos.
-• We generate: AI-powered insights, karma/dharma scores, astrological readings, quiz scores, and badges from your content.
-• Your voice audio is transcribed by Google's Gemini AI and deleted from your device as soon as transcription succeeds — only the text transcript is stored. If transcription fails (you are offline, or the request errors) the recording is queued on your device so your words are not lost, and is deleted once transcribed or after 7 days at the latest. See §1(F).
-• Photos you attach in Arya's chat are sent to Gemini Vision for AI processing and are not kept as files on our servers. Photos you attach to a journal entry ARE stored in our cloud storage for the life of your account, so we can show them back to you in your journal.
-• A stable anonymous device ID is stored on your device (persists across reinstalls). It enforces the one-trial-per-device policy, and a one-way hash of it travels with AI requests so a per-device anti-abuse cap can be applied — see §1(I).
-• Your passcode (if set) is stored only in your device's Keychain (iOS) / Keystore (Android) — never transmitted to us.
-• A background task runs every 12+ hours solely to reschedule local notifications — no data is sent to our servers during this.
-• We do not sell your data. We do not share it for advertising. Your content is not used to train any AI model.
-• You can delete your account and all data at any time from Settings.</p>
+1. You give us: name, date of birth, gender, country, journal entries, chat messages, and optionally voice recordings and photos.
+2. We generate: AI-powered insights, karma/dharma scores, astrological readings, quiz scores, and badges from your content.
+3. Your voice audio is transcribed by Google's Gemini AI and deleted from your device as soon as transcription succeeds — only the text transcript is stored. If transcription fails (you are offline, or the request errors) the recording is queued on your device so your words are not lost, and is deleted once transcribed or after 7 days at the latest. See §1(F).
+4. Photos you attach in Arya's chat are sent to Gemini Vision for AI processing and are not kept as files on our servers. Photos you attach to a journal entry ARE stored in our cloud storage for the life of your account, so we can show them back to you in your journal.
+5. A stable anonymous device ID is stored on your device (persists across reinstalls). It enforces the one-trial-per-device policy, and a one-way hash of it travels with AI requests so a per-device anti-abuse cap can be applied — see §1(I).
+6. Your passcode (if set) is stored only in your device's Keychain (iOS) / Keystore (Android) — never transmitted to us.
+7. A background task runs every 12+ hours solely to reschedule local notifications — no data is sent to our servers during this.
+8. We do not sell your data. We do not share it for advertising. Your content is not used to train any AI model.
+9. You can delete your account and all data at any time from Settings.</p>
   </div>
 
   <div class="section">
     <p class="section-heading">1. Information We Collect</p>
     <p class="section-body">The following is a complete, code-verified list of every category of data we collect:
 
-A. ACCOUNT &amp; IDENTITY
-• Name, email address, date of birth, gender, country — collected at onboarding.
-• Your stated intention at onboarding.
-• Firebase UID — your unique account identifier.
-• Google Sign-In ID token / Apple identity token — used for authentication only; not shared beyond Google/Apple auth infrastructure.
+1.1 ACCOUNT &amp; IDENTITY
+1.1.1 Name, email address, date of birth, gender, country — collected at onboarding.
+1.1.2 Your stated intention at onboarding.
+1.1.3 Firebase UID — your unique account identifier.
+1.1.4 Google Sign-In ID token / Apple identity token — used for authentication only; not shared beyond Google/Apple auth infrastructure.
 
 B. JOURNAL &amp; CHAT CONTENT (stored in Firestore: users/{uid})
-• Journal entries: text, date, mood rating (1–5), AI-generated karma score, dharma score, emotions, and qualitative analysis dimensions.
-• Chat messages with Arya: text, timestamp, role (user/ai), language code.
-• Archived chat messages: older messages archived to a subcollection when active chat exceeds a threshold.
-• Commitments you make with Arya (text, date, followedUp flag).
-• Personal notes you ask Arya to remember (text, date).
-• Starred messages from your chat (text, timestamp).
-• Daily intention text.
-• Your chat session count and first chat date.
+1.1.5 Journal entries: text, date, mood rating (1–5), AI-generated karma score, dharma score, emotions, and qualitative analysis dimensions.
+1.1.6 Chat messages with Arya: text, timestamp, role (user/ai), language code.
+1.1.7 Archived chat messages: older messages archived to a subcollection when active chat exceeds a threshold.
+1.1.8 Commitments you make with Arya (text, date, followedUp flag).
+1.1.9 Personal notes you ask Arya to remember (text, date).
+1.1.10 Starred messages from your chat (text, timestamp).
+1.1.11 Daily intention text.
+1.1.12 Your chat session count and first chat date.
 
 C. AI-GENERATED INFERENCES (stored in Firestore: users/{uid})
-• Life digest: AI-generated psychological and behavioural themes derived from your journal content.
-• AI insights: periodic AI-generated observations about your patterns.
-• Weekly narratives and life reports.
-• Session history: summaries of past chat sessions.
-• Unresolved emotional threads detected in conversations.
-• Karma and dharma scores.
-• Last karma/dharma snapshot (for delta commentary).
+1.1.13 Life digest: AI-generated psychological and behavioural themes derived from your journal content.
+1.1.14 AI insights: periodic AI-generated observations about your patterns.
+1.1.15 Weekly narratives and life reports.
+1.1.16 Session history: summaries of past chat sessions.
+1.1.17 Unresolved emotional threads detected in conversations.
+1.1.18 Karma and dharma scores.
+1.1.19 Last karma/dharma snapshot (for delta commentary).
 
 D. WELLNESS &amp; BEHAVIOURAL DATA (stored in Firestore: users/{uid})
-• Mood history: mood check-in entries.
-• Quiz history: quiz attempt records, scores, difficulty paths, and high scores.
-• Active 30-day challenges and progress.
-• Earned badges.
-• Preferred discussion topics (inferred from chat, not explicitly selected).
-• Milestones acknowledged.
+1.1.20 Mood history: mood check-in entries.
+1.1.21 Quiz history: quiz attempt records, scores, difficulty paths, and high scores.
+1.1.22 Active 30-day challenges and progress.
+1.1.23 Earned badges.
+1.1.24 Preferred discussion topics (inferred from chat, not explicitly selected).
+1.1.25 Milestones acknowledged.
 
 E. PREFERENCES &amp; SETTINGS (stored in Firestore: users/{uid})
-• Arya reply language: label, locale code, Gemini language name (e.g. "Hindi / hi-IN").
-• Arya tone preference and response length preference.
-• Blocked topics list.
-• Incognito Mode state.
+1.1.26 Arya reply language: label, locale code, Gemini language name (e.g. "Hindi / hi-IN").
+1.1.27 Arya tone preference and response length preference.
+1.1.28 Blocked topics list.
+1.1.29 Incognito Mode state.
 
-F. VOICE TRANSCRIPTIONS
-• When you use the microphone button, your audio is recorded on-device, encoded as base64, and transmitted to our secure proxy server for transcription via Google's Gemini API. The audio data is never written to Firestore or Firebase Storage. The original audio file is deleted from your device as soon as transcription succeeds. If transcription fails — you are offline, or the request errors — the recording is queued on your device so it can be retried and your words are not lost; queued recordings are capped at 10, are deleted once transcribed or after 7 days at the latest, and are removed immediately if you delete your account. While queued they sit in the app's private storage, which on iOS is included in device backups. See §9. The resulting text transcript is stored as part of your journal entry or chat message.
+1.2 VOICE TRANSCRIPTIONS
+1.2.1 When you use the microphone button, your audio is recorded on-device, encoded as base64, and transmitted to our secure proxy server for transcription via Google's Gemini API. The audio data is never written to Firestore or Firebase Storage. The original audio file is deleted from your device as soon as transcription succeeds. If transcription fails — you are offline, or the request errors — the recording is queued on your device so it can be retried and your words are not lost; queued recordings are capped at 10, are deleted once transcribed or after 7 days at the latest, and are removed immediately if you delete your account. While queued they sit in the app's private storage, which on iOS is included in device backups. See §9. The resulting text transcript is stored as part of your journal entry or chat message.
 
-G. IMAGES
-• Chat images: When you attach a photo in Arya's chat, it is resized and re-encoded on-device (longest edge reduced to at most 3072px, JPEG quality ~90%, and re-compressed further if still over 6 MB) and sent as base64 to our proxy for Gemini Vision AI processing. Chat images are not stored as standalone files on our servers. Because the image is re-encoded on your device before upload, EXIF metadata — including any GPS/location coordinates, device identifiers, and original timestamps — is stripped and is not transmitted.
-• Journal images: If you attach a photo to a journal entry, the image file is stored in our cloud storage (Firebase Storage, path users/{uid}/journalImages/) so we can display it in your journal. It is kept for the life of your account and is deleted when you delete your account.
+1.3 IMAGES
+1.3.1 Chat images: When you attach a photo in Arya's chat, it is resized and re-encoded on-device (longest edge reduced to at most 3072px, JPEG quality ~90%, and re-compressed further if still over 6 MB) and sent as base64 to our proxy for Gemini Vision AI processing. Chat images are not stored as standalone files on our servers. Because the image is re-encoded on your device before upload, EXIF metadata — including any GPS/location coordinates, device identifiers, and original timestamps — is stripped and is not transmitted.
+1.3.2 Journal images: If you attach a photo to a journal entry, the image file is stored in our cloud storage (Firebase Storage, path users/{uid}/journalImages/) so we can display it in your journal. It is kept for the life of your account and is deleted when you delete your account.
 
 H. CRISIS SIGNAL RECORDS (HEALTH-RELATED DATA — GDPR Art. 9)
-• If the App detects crisis-related language (using a keyword list in the app code) in your message, and you are not in Incognito Mode, the first 100 characters of your message and a timestamp are added to a crisisFlags array in your Firestore profile. This is used solely for contextual safety follow-up in future sessions and is never shared externally. See §3 for the lawful basis and your opt-out rights.
+1.3.3 If the App detects crisis-related language (using a keyword list in the app code) in your message, and you are not in Incognito Mode, the first 100 characters of your message and a timestamp are added to a crisisFlags array in your Firestore profile. This is used solely for contextual safety follow-up in future sessions and is never shared externally. See §3 for the lawful basis and your opt-out rights.
 
-I. DEVICE IDENTIFIER (TRIAL ENFORCEMENT)
-• A stable pseudonymous device identifier is generated using a cryptographically random value and stored in your device's Keychain (iOS) / Keystore (Android). If secure storage is unavailable on your device, the App falls back to keeping the same identifier in ordinary, unencrypted app storage — persistence matters more than secrecy here, because the identifier is a random token that says nothing about you. It persists across app reinstalls. It is used for two purposes, and no others: (1) it is linked to your Firebase UID in our Firestore deviceTrials collection to enforce the one-trial-per-device policy; and (2) a truncated one-way hash of it (SHA-256, first 32 hex characters) is sent as a request header with AI requests, so the server can apply a per-device daily anti-abuse cap (aiUsageByDevice) and a server-side trial ledger (deviceTrialLedger). The server does hold the raw identifier for purpose (1) — it is the document key of the deviceTrials record — but it is never sent with your AI requests, where only the truncated hash in (2) is used, and it is never used to identify you. If you delete your account, this marker is retained but your account identity (UID) is removed from it — so the one-trial-per-device protection cannot be reset by deleting and recreating an account. It is NOT an advertising ID (not IDFA or GAID), is not used for tracking across apps or websites, and is never shared with advertising networks.
+1.4 DEVICE IDENTIFIER (TRIAL ENFORCEMENT)
+1.4.1 A stable pseudonymous device identifier is generated using a cryptographically random value and stored in your device's Keychain (iOS) / Keystore (Android). If secure storage is unavailable on your device, the App falls back to keeping the same identifier in ordinary, unencrypted app storage — persistence matters more than secrecy here, because the identifier is a random token that says nothing about you. It persists across app reinstalls. It is used for two purposes, and no others: (1) it is linked to your Firebase UID in our Firestore deviceTrials collection to enforce the one-trial-per-device policy; and (2) a truncated one-way hash of it (SHA-256, first 32 hex characters) is sent as a request header with AI requests, so the server can apply a per-device daily anti-abuse cap (aiUsageByDevice) and a server-side trial ledger (deviceTrialLedger). The server does hold the raw identifier for purpose (1) — it is the document key of the deviceTrials record — but it is never sent with your AI requests, where only the truncated hash in (2) is used, and it is never used to identify you. If you delete your account, this marker is retained but your account identity (UID) is removed from it — so the one-trial-per-device protection cannot be reset by deleting and recreating an account. It is NOT an advertising ID (not IDFA or GAID), is not used for tracking across apps or websites, and is never shared with advertising networks.
 
-J. PASSCODE &amp; BIOMETRICS
-• If you set a passcode, the 6-digit code is stored in your device's Keychain/Keystore. Passcode-related lockout state (kc_lockout_until, kc_failed_attempts) is also stored in Keychain/Keystore. These are never transmitted to us.
-• Face ID / Touch ID biometrics are used on-device only for Passcode unlock. Biometric data is never transmitted to us or any third party.
+1.5 PASSCODE &amp; BIOMETRICS
+1.5.1 If you set a passcode, the 6-digit code is stored in your device's Keychain/Keystore. Passcode-related lockout state (kc_lockout_until, kc_failed_attempts) is also stored in Keychain/Keystore. These are never transmitted to us.
+1.5.2 Face ID / Touch ID biometrics are used on-device only for Passcode unlock. Biometric data is never transmitted to us or any third party.
 
 K. ON-DEVICE AI CACHES (MMKV encrypted local storage)
-• Daily insights, karma cards, check-in context, horoscope readings, daily readings, cosmic scores, and a local profile snapshot are cached in encrypted on-device storage (MMKV, keyed by account ID) to reduce AI API calls and enable offline viewing. These are cleared on logout and account deletion.
+1.5.3 Daily insights, karma cards, check-in context, horoscope readings, daily readings, cosmic scores, and a local profile snapshot are cached in encrypted on-device storage (MMKV, keyed by account ID) to reduce AI API calls and enable offline viewing. These are cleared on logout and account deletion.
 
-L. NOTIFICATION &amp; BACKGROUND DATA
-• If you grant notification permission, the App schedules three types of local on-device reminders: journal reminder, mentor check-in, and daily check-in. Notification IDs are stored in AsyncStorage (key: @kc_owned_notifications_v1). Notification content is generic — no personal data is embedded.
-• Your preferred check-in time is stored in AsyncStorage (key: @kc_checkin_time).
-• A background fetch task (DAILY_CHECKIN_REFRESH) runs at most every 12 hours to reschedule check-in notifications. This task makes NO network calls and sends NO data to our servers.
-• Background audio capability allows the Mindful music player to continue when the screen is off.
+1.6 NOTIFICATION &amp; BACKGROUND DATA
+1.6.1 If you grant notification permission, the App schedules three types of local on-device reminders: journal reminder, mentor check-in, and daily check-in. Notification IDs are stored in AsyncStorage (key: @kc_owned_notifications_v1). Notification content is generic — no personal data is embedded.
+1.6.2 Your preferred check-in time is stored in AsyncStorage (key: @kc_checkin_time).
+1.6.3 A background fetch task (DAILY_CHECKIN_REFRESH) runs at most every 12 hours to reschedule check-in notifications. This task makes NO network calls and sends NO data to our servers.
+1.6.4 Background audio capability allows the Mindful music player to continue when the screen is off.
 
-M. PUSH NOTIFICATION TOKENS
-• Opaque Expo Push Token persisted to your Firestore profile (and an array of historical tokens for delivery resilience) so we can deliver Compass push notifications via APNs (iOS) / FCM (Android). The token is not a personal identifier and cannot be used to message you outside our app. You can opt out of "A letter from Arya" push notifications at any time from Settings.
+1.7 PUSH NOTIFICATION TOKENS
+1.7.1 Opaque Expo Push Token persisted to your Firestore profile (and an array of historical tokens for delivery resilience) so we can deliver Compass push notifications via APNs (iOS) / FCM (Android). The token is not a personal identifier and cannot be used to message you outside our app. You can opt out of "A letter from Arya" push notifications at any time from Settings.
 
-N. ABUSE-PREVENTION SIGNALS
-• For the locked-out account-deletion endpoint, your IP address is SHA-256 hashed (truncated to 32 hex characters) and stored briefly to rate-limit OTP requests (rateLimitsByIp). The raw IP is never persisted; only the irreversible hash.
-• A daily AI-action count keyed to the truncated device-ID hash described in (I) is stored in aiUsageByDevice, so one handset cannot cycle through throwaway trial accounts. A deviceTrialLedger record keyed to the same hash records that the device has consumed its trial.
-• RevenueCat webhook events are recorded briefly (processedWebhookEvents) so a retried billing event is not applied twice; these records carry the RevenueCat app user ID, which is your Firebase UID.
-• When you use the email-based deletion flow, the App also sends an Expo installation ID, which is stored on the pending deletion request and checked when you confirm the code, so a code intercepted elsewhere cannot be redeemed from another install.
-• Device attestation (Firebase App Check). At app start the App asks Apple's App Attest (iOS) or Google Play Integrity (Android) to vouch that it is a genuine, unmodified copy of KarmicCompass running on a real device, and sends that attestation to Firebase. It contains no account data and no content — it says nothing about you, only about the app and the device. We rely on legitimate interests (GDPR Art. 6(1)(f)) for it: it is a security and anti-fraud control, not a consent-based purpose, which is why it runs before the consent screen rather than after it. Analytics and crash reporting are consent-based and do NOT run before you choose (see §8).
+1.8 ABUSE-PREVENTION SIGNALS
+1.8.1 For the locked-out account-deletion endpoint, your IP address is SHA-256 hashed (truncated to 32 hex characters) and stored briefly to rate-limit OTP requests (rateLimitsByIp). The raw IP is never persisted; only the irreversible hash.
+1.8.2 A daily AI-action count keyed to the truncated device-ID hash described in (I) is stored in aiUsageByDevice, so one handset cannot cycle through throwaway trial accounts. A deviceTrialLedger record keyed to the same hash records that the device has consumed its trial.
+1.8.3 RevenueCat webhook events are recorded briefly (processedWebhookEvents) so a retried billing event is not applied twice; these records carry the RevenueCat app user ID, which is your Firebase UID.
+1.8.4 When you use the email-based deletion flow, the App also sends an Expo installation ID, which is stored on the pending deletion request and checked when you confirm the code, so a code intercepted elsewhere cannot be redeemed from another install.
+1.8.5 Device attestation (Firebase App Check). At app start the App asks Apple's App Attest (iOS) or Google Play Integrity (Android) to vouch that it is a genuine, unmodified copy of KarmicCompass running on a real device, and sends that attestation to Firebase. It contains no account data and no content — it says nothing about you, only about the app and the device. We rely on legitimate interests (GDPR Art. 6(1)(f)) for it: it is a security and anti-fraud control, not a consent-based purpose, which is why it runs before the consent screen rather than after it. Analytics and crash reporting are consent-based and do NOT run before you choose (see §8).
 
-O. SUBSCRIPTION &amp; BILLING
-• Subscription status (isBasic, tier, subscriptionPlan, premiumExpiresAt, and grace-period fields) is set in your Firestore profile by our RevenueCat webhook when subscription events occur. RevenueCat uses your Firebase UID as the app user ID. We do not receive full payment card details.
+1.9 SUBSCRIPTION &amp; BILLING
+1.9.1 Subscription status (isBasic, tier, subscriptionPlan, premiumExpiresAt, and grace-period fields) is set in your Firestore profile by our RevenueCat webhook when subscription events occur. RevenueCat uses your Firebase UID as the app user ID. We do not receive full payment card details.
 
-P. FEEDBACK &amp; AI-RESPONSE REPORTS
-• If you submit in-app feedback, we store your message text (capped at 1,000 characters), star rating (1–5), a severity label derived from that rating, the email address on your account, your Firebase UID, and the submission timestamp in a Firestore feedback collection.
-• If you report a message in your chat with Arya (the "Report" action on a message), we store a record in a Firestore chatReports collection containing: your Firebase UID, the message identifier, whether the message was yours or Arya's, the reason you selected, up to the first 500 characters of the reported message text, and the submission timestamp. Where the reported message is one you wrote, that excerpt is your own content. Before it leaves your device the excerpt is scrubbed for email addresses, phone numbers, and card-like number sequences. These reports are used only to review AI-safety and quality problems. They are not shared externally and are not used to train any AI model.
+1.10 FEEDBACK &amp; AI-RESPONSE REPORTS
+1.10.1 If you submit in-app feedback, we store your message text (capped at 1,000 characters), star rating (1–5), a severity label derived from that rating, the email address on your account, your Firebase UID, and the submission timestamp in a Firestore feedback collection.
+1.10.2 If you report a message in your chat with Arya (the "Report" action on a message), we store a record in a Firestore chatReports collection containing: your Firebase UID, the message identifier, whether the message was yours or Arya's, the reason you selected, up to the first 500 characters of the reported message text, and the submission timestamp. Where the reported message is one you wrote, that excerpt is your own content. Before it leaves your device the excerpt is scrubbed for email addresses, phone numbers, and card-like number sequences. These reports are used only to review AI-safety and quality problems. They are not shared externally and are not used to train any AI model.
 
-Q. AI &amp; VOICE USAGE QUOTAS
-• A daily call count (date → count) is stored in Firestore (aiUsage/{uid}) to enforce per-tier daily limits server-side. Separate per-account counters record journal analyses (aiUsageJournal/{uid}), per-feature and overall daily totals (aiUsageMeter/{uid}), and short-lived request throttling (rateLimits/{uid}).
-• A ttsUsage/{uid} collection is reserved for a future text-to-speech quota. The App does not write to it today, so in practice it holds nothing about you; we list it because our deletion routine clears it and we would rather over-declare than leave a UID-keyed collection undisclosed.
+1.11 AI &amp; VOICE USAGE QUOTAS
+1.11.1 A daily call count (date → count) is stored in Firestore (aiUsage/{uid}) to enforce per-tier daily limits server-side. Separate per-account counters record journal analyses (aiUsageJournal/{uid}), per-feature and overall daily totals (aiUsageMeter/{uid}), and short-lived request throttling (rateLimits/{uid}).
+1.11.2 A ttsUsage/{uid} collection is reserved for a future text-to-speech quota. The App does not write to it today, so in practice it holds nothing about you; we list it because our deletion routine clears it and we would rather over-declare than leave a UID-keyed collection undisclosed.
 
-R. SUPPORT &amp; DELETION REQUEST DATA
-• Emails you send us, retained to resolve enquiries.
-• For email-based account deletion: a 6-digit OTP, expiry timestamp, email address and an install identifier are stored in Firestore (deletionRequests/{uid}). The CODE stops working after 15 minutes. The DOCUMENT itself is kept for up to 7 days so a request can be retried, and is deleted as soon as the deletion completes. We would rather state the longer figure than the flattering one: this is the only route available to someone who cannot log in, so it is the route that holds an email address longest.
+1.12 SUPPORT &amp; DELETION REQUEST DATA
+1.12.1 Emails you send us, retained to resolve enquiries.
+1.12.2 For email-based account deletion: a 6-digit OTP, expiry timestamp, email address and an install identifier are stored in Firestore (deletionRequests/{uid}). The CODE stops working after 15 minutes. The DOCUMENT itself is kept for up to 7 days so a request can be retried, and is deleted as soon as the deletion completes. We would rather state the longer figure than the flattering one: this is the only route available to someone who cannot log in, so it is the route that holds an email address longest.
 
-S. CRASH &amp; PERFORMANCE DIAGNOSTICS
-• If you turn on crash reporting in Settings (opt-in, OFF by default), we collect crash reports, error diagnostics and basic performance data through Sentry. This is declared as linked, analytics-purpose data in our iOS privacy manifest. It is processed on the basis of your consent and you can withdraw it at any time with the same toggle — see §3.
-• Operational records that carry your UID but none of your content: aiUsageInflight (a marker written while an AI request is in progress, cleared when it settles), deviceIdsByUid (which device your account has used), and deletionResidue (written only if part of an account erasure failed — see §11).
-• If you are in the EU or UK and waive the 14-day withdrawal right to start using a subscription immediately, we record that waiver on your profile (withdrawalWaiver) and, if the network write fails, temporarily on your device until it can be sent. It is the record that shows the waiver was given knowingly.
+1.13 CRASH &amp; PERFORMANCE DIAGNOSTICS
+1.13.1 If you turn on crash reporting in Settings (opt-in, OFF by default), we collect crash reports, error diagnostics and basic performance data through Sentry. This is declared as linked, analytics-purpose data in our iOS privacy manifest. It is processed on the basis of your consent and you can withdraw it at any time with the same toggle — see §3.
+1.13.2 Operational records that carry your UID but none of your content: aiUsageInflight (a marker written while an AI request is in progress, cleared when it settles), deviceIdsByUid (which device your account has used), and deletionResidue (written only if part of an account erasure failed — see §11).
+1.13.3 If you are in the EU or UK and waive the 14-day withdrawal right to start using a subscription immediately, we record that waiver on your profile (withdrawalWaiver) and, if the network write fails, temporarily on your device until it can be sent. It is the record that shows the waiver was given knowingly.
 
 No-AI-training commitment: We never use your content to train our own models, and neither does Google. Our primary AI provider, Google Cloud Vertex AI, excludes customer content from Google's model training per the Google Cloud Terms (https://cloud.google.com/terms/data-processing-addendum). On the rare occasions our system temporarily falls back to the Google Gemini Developer API (only when Vertex AI is unavailable), we use a paid (pay-as-you-go) tier, under which Google does not use your prompts or responses to train or improve its models either (per Google's Gemini API Additional Terms, ai.google.dev/gemini-api/terms — we review this commitment annually and on any Google terms change). If that paid-tier no-training commitment is ever removed or materially weakened, we will either cease use of the Gemini Developer API fallback or obtain fresh consent before continuing to process health-related data through it.</p>
   </div>
@@ -194,25 +194,25 @@ No-AI-training commitment: We never use your content to train our own models, an
     <p class="section-heading">2. How We Use Your Information</p>
     <p class="section-body">We use your data to:
 
-• Personalise Arya's AI responses and generate your wellness scores and insights.
+2.1 Personalise Arya's AI responses and generate your wellness scores and insights.
 
-• Transcribe voice recordings into text for journal entries and chat messages.
+2.2 Transcribe voice recordings into text for journal entries and chat messages.
 
-• Analyse images you attach in Arya's chat to provide contextually relevant responses.
+2.3 Analyse images you attach in Arya's chat to provide contextually relevant responses.
 
-• Provide journal analysis, life digest, and wellness reports.
+2.4 Provide journal analysis, life digest, and wellness reports.
 
-• Remember your preferences — including language — commitments, and conversation history across sessions.
+2.5 Remember your preferences — including language — commitments, and conversation history across sessions.
 
-• Operate, maintain, secure, and improve the App.
+2.6 Operate, maintain, secure, and improve the App.
 
-• Investigate reported errors and improve App stability via crash reporting (Sentry).
+2.7 Investigate reported errors and improve App stability via crash reporting (Sentry).
 
-• Manage your subscription and billing entitlements.
+2.8 Manage your subscription and billing entitlements.
 
-• Send important service communications (e.g. account, billing, or policy updates) and, where you have granted notification permission, Compass push notifications via Expo / APNs / FCM.
+2.9 Send important service communications (e.g. account, billing, or policy updates) and, where you have granted notification permission, Compass push notifications via Expo / APNs / FCM.
 
-• Comply with legal obligations and enforce our Terms.
+2.10 Comply with legal obligations and enforce our Terms.
 
 We do NOT sell your personal data to advertisers or third-party data brokers. We do not share your personal information for cross-context behavioural advertising. We do not use your content to train any AI model.</p>
   </div>
@@ -221,17 +221,17 @@ We do NOT sell your personal data to advertisers or third-party data brokers. We
     <p class="section-heading">3. Lawful Bases, Data Principles &amp; Special Category Data</p>
     <p class="section-body">We process personal data on the following lawful bases, which apply globally where equivalent frameworks exist:
 
-• Contract (GDPR Art. 6(1)(b) / UK GDPR / LGPD Art. 7(V) / DPDPA): processing necessary to provide the App and services you requested, including AI responses, journal analysis, voice transcription, and image analysis.
+3.1 Contract (GDPR Art. 6(1)(b) / UK GDPR / LGPD Art. 7(V) / DPDPA): processing necessary to provide the App and services you requested, including AI responses, journal analysis, voice transcription, and image analysis.
 
-• Legitimate Interests (GDPR Art. 6(1)(f) / UK GDPR / LGPD Art. 7(IX)): improving the App, fraud and trial-abuse prevention (including the truncated-IP-hash rate-limit on the deletion OTP endpoint), and system security — balanced against your rights and expectations through a documented Legitimate Interests Assessment (LIA), summarised in our DPIA at karmiccompass.app/privacy/DPIA. You may object to processing on this basis at any time.
+3.2 Legitimate Interests (GDPR Art. 6(1)(f) / UK GDPR / LGPD Art. 7(IX)): improving the App, fraud and trial-abuse prevention (including the truncated-IP-hash rate-limit on the deletion OTP endpoint), and system security — balanced against your rights and expectations through a documented Legitimate Interests Assessment (LIA), summarised in our DPIA at karmiccompass.app/privacy/DPIA. You may object to processing on this basis at any time.
 
-• Consent (GDPR Art. 6(1)(a) / DPDPA / PDPA / APPI): where we rely on your consent — such as for notification permissions, crash and performance diagnostics (Sentry — opt-in, off by default), and the EU/UK 14-day withdrawal-waiver confirmation — you may withdraw it at any time without affecting prior processing.
+3.3 Consent (GDPR Art. 6(1)(a) / DPDPA / PDPA / APPI): where we rely on your consent — such as for notification permissions, crash and performance diagnostics (Sentry — opt-in, off by default), and the EU/UK 14-day withdrawal-waiver confirmation — you may withdraw it at any time without affecting prior processing.
 
 How to withdraw, precisely: notification consent and crash-report consent are toggles in Settings. The Art. 9 health-data consent is different, and we would rather be plain about it than imply otherwise — journalling, mood and the conversations with Arya ARE the health-related processing, so it cannot be switched off while continuing to use those features. What you can do without deleting anything: turn off 'Safety follow-up memory' in Settings → Arya Settings, which stops crisis flags being stored AND deletes any already held; and use Incognito Mode, in which conversations are not saved at all. To withdraw the health-data consent entirely, delete your account (Settings → Delete Account), which erases the underlying data with it.
 
-• Explicit consent + Vital Interests (GDPR Art. 9(2)(a) primary; 9(2)(c) emergency fallback): see Crisis Flags below.
+3.4 Explicit consent + Vital Interests (GDPR Art. 9(2)(a) primary; 9(2)(c) emergency fallback): see Crisis Flags below.
 
-• Legal Obligation (GDPR Art. 6(1)(c)): where processing is required by applicable law (e.g. financial record-keeping, regulatory demands).
+3.5 Legal Obligation (GDPR Art. 6(1)(c)): where processing is required by applicable law (e.g. financial record-keeping, regulatory demands).
 
 Special Category &amp; Sensitive Data (GDPR Art. 9 / UK GDPR / equivalent):
 The App processes mental-health-adjacent content (journal entries, mood check-ins, emotional patterns, crisis signals) and health-adjacent inferences (karma/dharma scores, psychological themes). Under GDPR Art. 9 and equivalent laws, this qualifies as health-related sensitive personal data. We process such data on the basis of your explicit consent (GDPR Art. 9(2)(a)). That consent is obtained through a dedicated consent screen shown during onboarding, before any journal, mood, or AI feature is used — it explains that your entries may contain health-related data and requires your affirmative agreement to proceed; it is a separate, specific act and is not bundled into general terms acceptance. Crisis-flag storage is also covered by this Art. 9(2)(a) explicit consent (with a dedicated "Safety follow-up memory" opt-out); we rely on Art. 9(2)(c) "vital interests" only as a narrow fallback in a genuine emergency where consent cannot be obtained (see below). You may withdraw your Art. 9(2)(a) consent at any time by deleting your account.
@@ -243,13 +243,13 @@ Data Protection Impact Assessment (DPIA — GDPR Art. 35): Because the App proce
 Data Processing Principles:
 In all our processing activities, we apply and commit to the following principles (consistent with GDPR Art. 5, LGPD Art. 6, and equivalent frameworks):
 
-• Lawfulness, Fairness &amp; Transparency.
-• Purpose Limitation.
-• Data Minimisation.
-• Accuracy.
-• Storage Limitation (see §9).
-• Integrity &amp; Confidentiality.
-• Accountability.</p>
+3.6 Lawfulness, Fairness &amp; Transparency.
+3.7 Purpose Limitation.
+3.8 Data Minimisation.
+3.9 Accuracy.
+3.10 Storage Limitation (see §9).
+3.11 Integrity &amp; Confidentiality.
+3.12 Accountability.</p>
   </div>
 
   <div class="section">
@@ -258,10 +258,10 @@ In all our processing activities, we apply and commit to the following principle
 
 Notwithstanding the above, you have the right at any time to:
 
-• request human review of any AI-generated inference about you;
-• obtain an explanation of how the inference was produced (in plain language);
-• contest the inference and request its correction or deletion;
-• withdraw consent for the automated processing prospectively (delete your account or, for crisisFlags, toggle "Safety follow-up memory" off in Settings).
+3a.1 request human review of any AI-generated inference about you;
+3a.2 obtain an explanation of how the inference was produced (in plain language);
+3a.3 contest the inference and request its correction or deletion;
+3a.4 withdraw consent for the automated processing prospectively (delete your account or, for crisisFlags, toggle "Safety follow-up memory" off in Settings).
 
 To exercise these rights, email privacy@karmiccompass.app (or app.karmiccompass@gmail.com).</p>
   </div>
@@ -319,17 +319,17 @@ Website &amp; cookies: our marketing and legal website (karmiccompass.app) sets 
     <p class="section-heading">7. Incognito Mode</p>
     <p class="section-body">When Incognito Mode is active:
 
-• Your chat messages with Arya are NOT saved to our cloud servers or your Firestore profile.
+7.1 Your chat messages with Arya are NOT saved to our cloud servers or your Firestore profile.
 
-• Voice transcriptions and images generated or attached during Incognito sessions are processed for the AI response only and are not stored in your profile.
+7.2 Voice transcriptions and images generated or attached during Incognito sessions are processed for the AI response only and are not stored in your profile.
 
-• Conversation content exists only in your device's local session memory and is discarded when you exit the chat.
+7.3 Conversation content exists only in your device's local session memory and is discarded when you exit the chat.
 
-• The App does not use product analytics SDKs (e.g. Mixpanel, Amplitude, Segment). No session content or behavioural event data from Incognito sessions is collected.
+7.4 The App does not use product analytics SDKs (e.g. Mixpanel, Amplitude, Segment). No session content or behavioural event data from Incognito sessions is collected.
 
-• Crash and error reports (Sentry) are still collected if the App encounters an unexpected error, but these reports do not include conversation content.
+7.5 Crash and error reports (Sentry) are still collected if the App encounters an unexpected error, but these reports do not include conversation content.
 
-• Safety or abuse-prevention logging at the server proxy layer may still occur where legally required.
+7.6 Safety or abuse-prevention logging at the server proxy layer may still occur where legally required.
 
 Your journal entries and profile data are not affected by Incognito Mode.</p>
   </div>
@@ -338,27 +338,27 @@ Your journal entries and profile data are not affected by Incognito Mode.</p>
     <p class="section-heading">8. Third-Party Services (Sub-Processors)</p>
     <p class="section-body">We engage the following sub-processors. The versioned register is published at karmiccompass.app/privacy/SUBPROCESSORS.
 
-• Firebase / Google Cloud (Google LLC) — Authentication, Firestore, Storage, Cloud Run, Cloud Functions, App Check. Purpose: core infrastructure. Data shared: all profile, journal, chat, and account data. Location: us-central1 (United States). Transfer mechanism: Google Cloud Standard Contractual Clauses (SCCs) per cloud.google.com/terms/data-processing-addendum.
+8.1 Firebase / Google Cloud (Google LLC) — Authentication, Firestore, Storage, Cloud Run, Cloud Functions, App Check. Purpose: core infrastructure. Data shared: all profile, journal, chat, and account data. Location: us-central1 (United States). Transfer mechanism: Google Cloud Standard Contractual Clauses (SCCs) per cloud.google.com/terms/data-processing-addendum.
 
-• Google Cloud Vertex AI (Google LLC) — primary AI model provider. Purpose: AI responses, voice transcription, image analysis, insights, horoscope, quiz generation. Data shared: prompt content as detailed in §4. Location: us-central1 (United States). Transfer mechanism: Google Cloud SCCs. Vertex AI customer content is excluded from Google's model training per Google Cloud Terms.
+8.2 Google Cloud Vertex AI (Google LLC) — primary AI model provider. Purpose: AI responses, voice transcription, image analysis, insights, horoscope, quiz generation. Data shared: prompt content as detailed in §4. Location: us-central1 (United States). Transfer mechanism: Google Cloud SCCs. Vertex AI customer content is excluded from Google's model training per Google Cloud Terms.
 
-• Google Gemini Developer API (Google LLC) — fallback AI model provider used only when Vertex AI is temporarily unavailable. Purpose: same as Vertex AI. Data shared: same as Vertex AI. Location: United States. Transfer mechanism: Google API Services User Data Policy / Google's paid-tier API terms (ai.google.dev/gemini-api/terms). We use the paid (pay-as-you-go) tier, under which Google does not use prompts or responses to train its models.
+8.3 Google Gemini Developer API (Google LLC) — fallback AI model provider used only when Vertex AI is temporarily unavailable. Purpose: same as Vertex AI. Data shared: same as Vertex AI. Location: United States. Transfer mechanism: Google API Services User Data Policy / Google's paid-tier API terms (ai.google.dev/gemini-api/terms). We use the paid (pay-as-you-go) tier, under which Google does not use prompts or responses to train its models.
 
-• RevenueCat (RevenueCat, Inc.) — subscription management and entitlement verification. Purpose: subscription billing state, trial state, restore-purchases. Data shared: Firebase UID (used as app user ID), receipt data from Apple/Google. Location: United States. Transfer mechanism: RevenueCat DPA / SCCs.
+8.4 RevenueCat (RevenueCat, Inc.) — subscription management and entitlement verification. Purpose: subscription billing state, trial state, restore-purchases. Data shared: Firebase UID (used as app user ID), receipt data from Apple/Google. Location: United States. Transfer mechanism: RevenueCat DPA / SCCs.
 
-• Sentry (Functional Software, Inc., d/b/a Sentry) — crash and error monitoring. Purpose: triage stability and error reports. Data shared: SHA-256-pseudonymised Firebase UID (16 hex chars), error stack traces with sensitive-key redaction, truncated error messages (≤120 chars). User-generated content (journal entries, chat messages) is never sent: a client-side Sentry beforeSend hook scrubs the event extra, contexts, and request fields before transmission. Location: United States. Transfer mechanism: Sentry DPA with SCCs.
+8.5 Sentry (Functional Software, Inc., d/b/a Sentry) — crash and error monitoring. Purpose: triage stability and error reports. Data shared: SHA-256-pseudonymised Firebase UID (16 hex chars), error stack traces with sensitive-key redaction, truncated error messages (≤120 chars). User-generated content (journal entries, chat messages) is never sent: a client-side Sentry beforeSend hook scrubs the event extra, contexts, and request fields before transmission. Location: United States. Transfer mechanism: Sentry DPA with SCCs.
 
-• Expo Push Service (Expo, Inc.) — push notification relay. Purpose: deliver Compass push notifications to APNs / FCM. Data shared: Expo Push Token, notification title and body (generic copy, no personal content). Location: United States. Transfer mechanism: Expo Terms / SCCs.
+8.6 Expo Push Service (Expo, Inc.) — push notification relay. Purpose: deliver Compass push notifications to APNs / FCM. Data shared: Expo Push Token, notification title and body (generic copy, no personal content). Location: United States. Transfer mechanism: Expo Terms / SCCs.
 
-• Gmail / Google Workspace SMTP (Google LLC) — server-side only. Purpose: deliver account-deletion OTP emails. Data shared: your registered email address, the 6-digit OTP, message text. Location: United States. Transfer mechanism: Google Workspace DPA / SCCs.
+8.7 Gmail / Google Workspace SMTP (Google LLC) — server-side only. Purpose: deliver account-deletion OTP emails. Data shared: your registered email address, the 6-digit OTP, message text. Location: United States. Transfer mechanism: Google Workspace DPA / SCCs.
 
-• Apple App Store In-App Purchase (Apple Inc.) — iOS distribution and billing. Purpose: subscription processing on iOS. Data shared: per Apple's terms (we do not see card details). Location: per Apple. Transfer mechanism: Apple's standard developer terms and Apple's privacy policy.
+8.8 Apple App Store In-App Purchase (Apple Inc.) — iOS distribution and billing. Purpose: subscription processing on iOS. Data shared: per Apple's terms (we do not see card details). Location: per Apple. Transfer mechanism: Apple's standard developer terms and Apple's privacy policy.
 
-• Google Play In-App Billing (Google LLC) — Android distribution and billing. Purpose: subscription processing on Android. Data shared: per Google Play terms (we do not see card details). Location: per Google. Transfer mechanism: Google Play Developer Distribution Agreement.
+8.9 Google Play In-App Billing (Google LLC) — Android distribution and billing. Purpose: subscription processing on Android. Data shared: per Google Play terms (we do not see card details). Location: per Google. Transfer mechanism: Google Play Developer Distribution Agreement.
 
 Auxiliary providers:
-• Google Fonts — NOT a sub-processor. The typefaces are bundled into the app binary via the @expo-google-fonts packages and loaded from local storage; the App makes no request to any font CDN, so no IP address or other data reaches Google for fonts.
-• Google Sign-In / Apple Sign-In — optional OAuth authentication.
+8.10 Google Fonts — NOT a sub-processor. The typefaces are bundled into the app binary via the @expo-google-fonts packages and loaded from local storage; the App makes no request to any font CDN, so no IP address or other data reaches Google for fonts.
+8.11 Google Sign-In / Apple Sign-In — optional OAuth authentication.
 
 These providers may process your data in the United States and other countries. We share data with them only to the extent necessary to operate the App. The current versioned sub-processor list (with effective dates) is maintained at karmiccompass.app/privacy/SUBPROCESSORS.</p>
   </div>
@@ -367,63 +367,63 @@ These providers may process your data in the United States and other countries. 
     <p class="section-heading">9. Data Retention</p>
     <p class="section-body">Retention periods by data category:
 
-• Account &amp; profile data (name, dob, gender, country, intention, language preference, scores, settings): active account lifetime → erased from active systems after the 7-day deletion grace period (immediately if you choose "Delete now"). See §11.
+9.1 Account &amp; profile data (name, dob, gender, country, intention, language preference, scores, settings): active account lifetime → erased from active systems after the 7-day deletion grace period (immediately if you choose "Delete now"). See §11.
 
-• Journal entries and chat messages (including archived chat): active account lifetime → erased from active systems after the 7-day deletion grace period (immediately if you choose "Delete now").
+9.2 Journal entries and chat messages (including archived chat): active account lifetime → erased from active systems after the 7-day deletion grace period (immediately if you choose "Delete now").
 
-• AI-generated data (life digest, insights, session summaries, memory, reports): active account lifetime → deleted with account.
+9.3 AI-generated data (life digest, insights, session summaries, memory, reports): active account lifetime → deleted with account.
 
-• Wellness &amp; behavioural data (mood history, quiz history, badges, challenges, preferred topics): active account lifetime → deleted with account.
+9.4 Wellness &amp; behavioural data (mood history, quiz history, badges, challenges, preferred topics): active account lifetime → deleted with account.
 
-• Crisis signal records (≤100 char excerpt + timestamp in crisisFlags): auto-expire after 90 days; also deleted with account; user-deletable at any time via Settings → Arya Settings.
+9.5 Crisis signal records (≤100 char excerpt + timestamp in crisisFlags): auto-expire after 90 days; also deleted with account; user-deletable at any time via Settings → Arya Settings.
 
-• Voice audio files: deleted from your device as soon as transcription succeeds — never stored on our servers. If transcription fails (you are offline, or the request errors) the recording is queued on your device so it can be retried and your words are not lost. Queued recordings are capped at 10, are deleted automatically once transcribed or after 7 days at the latest, and are removed immediately if you delete your account. While queued they sit in the app's private storage, which on iOS is included in device backups.
+9.6 Voice audio files: deleted from your device as soon as transcription succeeds — never stored on our servers. If transcription fails (you are offline, or the request errors) the recording is queued on your device so it can be retried and your words are not lost. Queued recordings are capped at 10, are deleted automatically once transcribed or after 7 days at the latest, and are removed immediately if you delete your account. While queued they sit in the app's private storage, which on iOS is included in device backups.
 
-• Chat image data: not stored as standalone files on our servers — used transiently for AI processing only.
+9.7 Chat image data: not stored as standalone files on our servers — used transiently for AI processing only.
 
-• Journal image files (Firebase Storage, users/{uid}/journalImages/): active account lifetime → deleted when your account is deleted.
+9.8 Journal image files (Firebase Storage, users/{uid}/journalImages/): active account lifetime → deleted when your account is deleted.
 
-• Push notification tokens (Expo Push Tokens): active account lifetime → deleted with account.
+9.9 Push notification tokens (Expo Push Tokens): active account lifetime → deleted with account.
 
-• Abuse-prevention IP-hashes (deletion OTP rate-limit): retained for the rate-limit window only (typically minutes to a few hours), then purged.
+9.10 Abuse-prevention IP-hashes (deletion OTP rate-limit): retained for the rate-limit window only (typically minutes to a few hours), then purged.
 
-• AI and rate-limit counters keyed to your account (aiUsage/{uid}, aiUsageJournal/{uid}, aiUsageMeter/{uid}, rateLimits/{uid}, ttsUsage/{uid}): deleted with account.
+9.11 AI and rate-limit counters keyed to your account (aiUsage/{uid}, aiUsageJournal/{uid}, aiUsageMeter/{uid}, rateLimits/{uid}, ttsUsage/{uid}): deleted with account.
 
-• Device-rotation ceiling records (deviceIdsByUid): the distinct device-ID hashes your account presented on a given day, used to stop one account cycling through devices to lift limits. Keyed to your UID, self-expire after 3 days, and deleted immediately when you delete your account.
+9.12 Device-rotation ceiling records (deviceIdsByUid): the distinct device-ID hashes your account presented on a given day, used to stop one account cycling through devices to lift limits. Keyed to your UID, self-expire after 3 days, and deleted immediately when you delete your account.
 
-• Deletion-residue breadcrumbs (deletionResidue): written ONLY if part of an account deletion fails, so we can find and finish it. It records your UID and which collections survived — no journal, chat or profile content — and expires after 30 days. If your deletion completes normally, which is the expected case, no such record is created.
+9.13 Deletion-residue breadcrumbs (deletionResidue): written ONLY if part of an account deletion fails, so we can find and finish it. It records your UID and which collections survived — no journal, chat or profile content — and expires after 30 days. If your deletion completes normally, which is the expected case, no such record is created.
 
-• Device-level anti-abuse counters (aiUsageByDevice, keyed to the truncated device-ID hash): each record carries a 60-day expiry stamp, refreshed while the device stays active. Because the server never sees the raw device ID, these cannot be looked up by account and so are not deleted by name when you delete your account — they expire on that timer instead.
+9.14 Device-level anti-abuse counters (aiUsageByDevice, keyed to the truncated device-ID hash): each record carries a 60-day expiry stamp, refreshed while the device stays active. Because the server never sees the raw device ID, these cannot be looked up by account and so are not deleted by name when you delete your account — they expire on that timer instead.
 
-• IP-keyed request throttles (rateLimitsByIp): self-purge within roughly two hours.
+9.15 IP-keyed request throttles (rateLimitsByIp): self-purge within roughly two hours.
 
-• Billing webhook de-duplication records (processedWebhookEvents, carrying your Firebase UID as the RevenueCat app user ID): self-purge on a 30-day expiry; retained inside that window so a retried billing event is not applied twice.
+9.16 Billing webhook de-duplication records (processedWebhookEvents, carrying your Firebase UID as the RevenueCat app user ID): self-purge on a 30-day expiry; retained inside that window so a retried billing event is not applied twice.
 
-• Server-side device trial ledger (deviceTrialLedger): your UID is replaced with a deleted-account marker on account deletion; the pseudonymous device record itself is retained for trial-abuse prevention.
+9.17 Server-side device trial ledger (deviceTrialLedger): your UID is replaced with a deleted-account marker on account deletion; the pseudonymous device record itself is retained for trial-abuse prevention.
 
-• AI-response reports (chatReports): retained for 365 days from the date you submit the report, then deleted automatically by a scheduled server-side job. They are also deleted immediately if you delete your account.
+9.18 AI-response reports (chatReports): retained for 365 days from the date you submit the report, then deleted automatically by a scheduled server-side job. They are also deleted immediately if you delete your account.
 
-• Device trial record (deviceTrials/{deviceId}): on account deletion your account identity (UID) is removed from it, but the pseudonymous one-trial-per-device marker is retained to prevent trial abuse (legitimate interest, GDPR Art. 6(1)(f)). Consistent with storage limitation (Art. 5(1)(e)): once the UID is removed, the remaining marker is an unlinkable random token that no longer constitutes personal data, so no fixed deletion date is required — it is retained only while the one-trial-per-device control remains operationally necessary.
+9.19 Device trial record (deviceTrials/{deviceId}): on account deletion your account identity (UID) is removed from it, but the pseudonymous one-trial-per-device marker is retained to prevent trial abuse (legitimate interest, GDPR Art. 6(1)(f)). Consistent with storage limitation (Art. 5(1)(e)): once the UID is removed, the remaining marker is an unlinkable random token that no longer constitutes personal data, so no fixed deletion date is required — it is retained only while the one-trial-per-device control remains operationally necessary.
 
-• Feedback submissions: each record is written with a 365-day expiry stamp and is removed when that expiry lapses; also deleted immediately when you delete your account.
+9.20 Feedback submissions: each record is written with a 365-day expiry stamp and is removed when that expiry lapses; also deleted immediately when you delete your account.
 
-• Account deletion OTP (deletionRequests/{uid}): the CODE stops working after 15 minutes; the document holding it — which also carries your email address and an install identifier — is kept for up to 7 days so the request can be retried, and is deleted as soon as the deletion completes. See §1(R).
+9.21 Account deletion OTP (deletionRequests/{uid}): the CODE stops working after 15 minutes; the document holding it — which also carries your email address and an install identifier — is kept for up to 7 days so the request can be retried, and is deleted as soon as the deletion completes. See §1(R).
 
-• On-device AI caches (MMKV): cleared on logout and account deletion.
+9.22 On-device AI caches (MMKV): cleared on logout and account deletion.
 
-• Notification ID registry (AsyncStorage): cleared on logout.
+9.23 Notification ID registry (AsyncStorage): cleared on logout.
 
-• Passcode and lockout data (Keychain/Keystore): cleared when passcode is removed or account is deleted.
+9.24 Passcode and lockout data (Keychain/Keystore): cleared when passcode is removed or account is deleted.
 
-• Device identifier (Keychain/Keystore, linked in deviceTrials): its link to your account is removed from Firestore on account deletion (the pseudonymous trial marker itself is retained for trial-abuse prevention — see §9); persists in Keychain/Keystore until manually cleared by device reset.
+9.25 Device identifier (Keychain/Keystore, linked in deviceTrials): its link to your account is removed from Firestore on account deletion (the pseudonymous trial marker itself is retained for trial-abuse prevention — see §9); persists in Keychain/Keystore until manually cleared by device reset.
 
-• Subscription records (RevenueCat / financial): retained as required by financial and tax law (typically 7 years).
+9.26 Subscription records (RevenueCat / financial): retained as required by financial and tax law (typically 7 years).
 
-• Support communications: retained for 365 days after resolution, to cover the limitation period for any related contract or service dispute. Where a support message contains health-related content (e.g. you describe a mental-health concern), that content is treated as GDPR Art. 9 special-category data — access-restricted, never used for AI training, and deletable on request.
+9.27 Support communications: retained for 365 days after resolution, to cover the limitation period for any related contract or service dispute. Where a support message contains health-related content (e.g. you describe a mental-health concern), that content is treated as GDPR Art. 9 special-category data — access-restricted, never used for AI training, and deletable on request.
 
-• Crash/error logs (Sentry): per Sentry's retention policy (typically up to 90 days).
+9.28 Crash/error logs (Sentry): per Sentry's retention policy (typically up to 90 days).
 
-• Encrypted backup copies: may persist up to 90 days after account deletion before being purged from Google's backup infrastructure.
+9.29 Encrypted backup copies: may persist up to 90 days after account deletion before being purged from Google's backup infrastructure.
 
 Data may be retained beyond these periods where required by law, fraud prevention, security investigations, or dispute resolution.
 
@@ -456,17 +456,17 @@ Cancelling during the 7 days: we email you a one-click cancellation link when th
 Deleting immediately: the in-app Delete Account flow also offers a "Delete now" option, which skips the grace period entirely and erases everything listed below straight away, including your Firebase Authentication account. Choose this if you need the data gone today — it cannot be undone.
 
 Data deleted (in both cases, once erasure runs):
-• All documents in the users/{uid} subcollections: entries, entriesArchive, chatArchive, insights, reports
-• aiUsage/{uid}, aiUsageJournal/{uid}, aiUsageMeter/{uid}, ttsUsage/{uid}, and rateLimits/{uid} documents
-• deviceIdsByUid: the record linking your account to this device
-• deletionResidue/{uid}: written ONLY if part of the erasure above failed, so the failure is not forgotten. It holds your UID and which step failed — no journal, chat or profile content — and is deleted as soon as a retry completes, or expires automatically after 30 days
-• deletionRequests/{uid} document
-• All documents in feedback where uid matches
-• All documents in chatReports where uid matches (AI-response reports you submitted)
-• deviceTrials and deviceTrialLedger: your account identity (UID) is scrubbed from the device records (the pseudonymous one-trial-per-device markers themselves are retained for abuse prevention — see §9)
-• The users/{uid} main document (entire profile, including push tokens and crisisFlags)
-• Journal image files stored in our cloud storage (Firebase Storage, users/{uid}/journalImages/)
-• Your Firebase Authentication account
+11.1 All documents in the users/{uid} subcollections: entries, entriesArchive, chatArchive, insights, reports
+11.2 aiUsage/{uid}, aiUsageJournal/{uid}, aiUsageMeter/{uid}, ttsUsage/{uid}, and rateLimits/{uid} documents
+11.3 deviceIdsByUid: the record linking your account to this device
+11.4 deletionResidue/{uid}: written ONLY if part of the erasure above failed, so the failure is not forgotten. It holds your UID and which step failed — no journal, chat or profile content — and is deleted as soon as a retry completes, or expires automatically after 30 days
+11.5 deletionRequests/{uid} document
+11.6 All documents in feedback where uid matches
+11.7 All documents in chatReports where uid matches (AI-response reports you submitted)
+11.8 deviceTrials and deviceTrialLedger: your account identity (UID) is scrubbed from the device records (the pseudonymous one-trial-per-device markers themselves are retained for abuse prevention — see §9)
+11.9 The users/{uid} main document (entire profile, including push tokens and crisisFlags)
+11.10 Journal image files stored in our cloud storage (Firebase Storage, users/{uid}/journalImages/)
+11.11 Your Firebase Authentication account
 
 What is not deleted by name: three device- or IP-keyed anti-abuse records (aiUsageByDevice, rateLimitsByIp, processedWebhookEvents) cannot be looked up by account, because the server holds only a one-way hash rather than your identifier. They are not searched for and erased; they expire on their own timers instead — see §9 for each period. A fourth record belongs here for the same reason: aiUsageInflight, the short-lived markers written while an AI request is in flight, is keyed by request rather than by account, so the erasure routine cannot look those up either. They are cleared when the request settles and, if a request is abandoned mid-flight, are deleted seven days later regardless. We list them because they carry your UID while they exist, not because they are searched for and deleted.
 
@@ -479,25 +479,25 @@ Residual data in encrypted Google Cloud backups may persist for up to 90 days. S
 
 Transfer safeguards by region:
 
-• EU / EEA &amp; UK: we rely on Google's Standard Contractual Clauses (SCCs) and, where applicable, adequacy decisions for transfers to Google's processing infrastructure. Google's applicable DPA and SCCs are available at cloud.google.com/terms/data-processing-addendum.
+12.1 EU / EEA &amp; UK: we rely on Google's Standard Contractual Clauses (SCCs) and, where applicable, adequacy decisions for transfers to Google's processing infrastructure. Google's applicable DPA and SCCs are available at cloud.google.com/terms/data-processing-addendum.
 
-• India (DPDPA 2023): cross-border data transfers are permitted to countries not blocked by the Government of India. We process your data on Google Cloud infrastructure subject to Google's data processing terms.
+12.2 India (DPDPA 2023): cross-border data transfers are permitted to countries not blocked by the Government of India. We process your data on Google Cloud infrastructure subject to Google's data processing terms.
 
-• Brazil (LGPD): transfers are made under contract with adequate guarantees, including Google's DPA and SCCs.
+12.3 Brazil (LGPD): transfers are made under contract with adequate guarantees, including Google's DPA and SCCs.
 
-• Canada: transfers are made to service providers bound by contractual obligations equivalent to PIPEDA standards.
+12.4 Canada: transfers are made to service providers bound by contractual obligations equivalent to PIPEDA standards.
 
-• UAE (Federal Law No. 45/2021): transfers are made to jurisdictions with adequate protection or under appropriate contractual safeguards consistent with the UAE Data Office's requirements.
+12.5 UAE (Federal Law No. 45/2021): transfers are made to jurisdictions with adequate protection or under appropriate contractual safeguards consistent with the UAE Data Office's requirements.
 
-• Saudi Arabia (Saudi PDPL): we take appropriate contractual and technical measures when transferring data outside the Kingdom, consistent with NDMO transfer rules.
+12.6 Saudi Arabia (Saudi PDPL): we take appropriate contractual and technical measures when transferring data outside the Kingdom, consistent with NDMO transfer rules.
 
-• Turkey (KVKK): data transfers outside Turkey are made only where the destination country offers adequate protection or, if not, with your explicit consent or through a written undertaking approved by the Turkish Personal Data Protection Authority.
+12.7 Turkey (KVKK): data transfers outside Turkey are made only where the destination country offers adequate protection or, if not, with your explicit consent or through a written undertaking approved by the Turkish Personal Data Protection Authority.
 
-• Mexico (LFPDPPP): transfers to third parties outside Mexico are made under data transfer agreements ensuring equivalent protection or with your consent.
+12.8 Mexico (LFPDPPP): transfers to third parties outside Mexico are made under data transfer agreements ensuring equivalent protection or with your consent.
 
-• Thailand (PDPA): international transfers are made under adequate protection standards or appropriate safeguards as required by the PDPA.
+12.9 Thailand (PDPA): international transfers are made under adequate protection standards or appropriate safeguards as required by the PDPA.
 
-• All other jurisdictions: we rely on contractual safeguards with our sub-processors and, where required, seek your consent for cross-border transfers.
+12.10 All other jurisdictions: we rely on contractual safeguards with our sub-processors and, where required, seek your consent for cross-border transfers.
 
 By using the App, you acknowledge that your data is processed in the United States and other countries where our sub-processors operate.</p>
   </div>
@@ -506,58 +506,58 @@ By using the App, you acknowledge that your data is processed in the United Stat
     <p class="section-heading">13. Your Privacy Rights by Region</p>
     <p class="section-body">The following rights apply depending on your jurisdiction. To exercise any right, contact app.karmiccompass@gmail.com or privacy@karmiccompass.app. We respond within 30 days (or sooner where law requires). Identity verification may be required.
 
-── EU / EEA (GDPR) ──
+13.1 EU / EEA (GDPR)
 Right to access, correct, erase ("right to be forgotten"), restrict, port, and object. Right to withdraw consent at any time. Right not to be subject to solely automated decisions producing legal or similarly significant effects (see §3a). Right to lodge a complaint with your local supervisory authority (list at edpb.europa.eu).
 
-── United Kingdom (UK GDPR + Data Protection Act 2018) ──
+13.2 United Kingdom (UK GDPR + Data Protection Act 2018)
 Same rights as EU GDPR above. Lodge complaints with the Information Commissioner's Office (ico.org.uk).
 
-── India (DPDPA 2023 / IT Act / SPDI Rules 2011) ──
+13.3 India (DPDPA 2023 / IT Act / SPDI Rules 2011)
 Right to access, correct, and erase your personal data. Right to nominate a representative. Right to raise grievances with our Grievance Officer (see §17). Right to lodge a complaint with the Data Protection Board of India once operational. Health-adjacent data held by us is classified as Sensitive Personal Data under the SPDI Rules and is handled with heightened protection.
 
-── United States — California (CCPA / CPRA) ──
+13.4 United States — California (CCPA / CPRA)
 Right to know, right to delete, right to correct, right to opt out of sale or sharing (we do not sell or share data for cross-context behavioural advertising), right to limit use of sensitive personal information, right to non-discrimination. Because we do not sell or share personal information and do not use sensitive personal information for any purpose beyond providing the service you requested (no secondary use, no targeted advertising), the right to limit the use of sensitive personal information is satisfied by default under CPRA §1798.121, and no separate "Limit the Use of My Sensitive Personal Information" or "Do Not Sell or Share My Personal Information" link is required. Submit access, deletion, or correction requests at app.karmiccompass@gmail.com.
 
-── Brazil (LGPD) ──
+13.5 Brazil (LGPD)
 Right to confirmation of processing, access, correction, anonymisation, portability, deletion, information about third parties, and to revoke consent. Lodge complaints with the Autoridade Nacional de Proteção de Dados (gov.br/anpd).
 
-── Canada (PIPEDA / Quebec Law 25) ──
+13.6 Canada (PIPEDA / Quebec Law 25)
 Right to access, correct, and withdraw consent. Quebec residents have additional rights under Law 25 including portability, right to be informed of automated decision-making, and the right to de-index. Lodge complaints with the Office of the Privacy Commissioner of Canada (priv.gc.ca).
 
-── Australia (Privacy Act 1988 + Australian Privacy Principles) ──
+13.7 Australia (Privacy Act 1988 + Australian Privacy Principles)
 Right to access and correct personal information held about you. Right to anonymity where practicable. Nothing in these Terms excludes applicable non-excludable consumer guarantees under Australian Consumer Law. Lodge complaints with the Office of the Australian Information Commissioner (oaic.gov.au).
 
-── South Africa (POPIA) ──
+13.8 South Africa (POPIA)
 Right to access, correct, delete, and object to processing. Lodge complaints with the Information Regulator (inforegulator.org.za).
 
-── Singapore (PDPA 2012, amended 2021) ──
+13.9 Singapore (PDPA 2012, amended 2021)
 Right to access and correct personal data. Right to withdraw consent (with reasonable notice). Right to data portability (where applicable). Lodge complaints with the Personal Data Protection Commission (pdpc.gov.sg).
 
-── Japan (APPI, amended 2022) ──
+13.10 Japan (APPI, amended 2022)
 Right to disclosure, correction, addition, deletion, cessation of use, and removal. Right to have third-party provision stopped. Lodge complaints with the Personal Information Protection Commission (ppc.go.jp).
 
-── South Korea (PIPA) ──
+13.11 South Korea (PIPA)
 Right to access, correct, delete, and suspend processing. Minimum age for consent is 14; users under 14 require legal guardian consent. Lodge complaints with the Personal Information Protection Commission (pipc.go.kr).
 
-── United Arab Emirates (UAE PDPL — Federal Law No. 45 of 2021) ──
+13.12 United Arab Emirates (UAE PDPL — Federal Law No. 45 of 2021)
 Right to access, correct, and request deletion of personal data. Right to object to processing. Right to withdraw consent. Lodge complaints with the UAE Data Office (dataoffice.ae).
 
-── Kingdom of Saudi Arabia (Saudi PDPL — issued by Royal Decree M/19, in force 2023) ──
+13.13 Kingdom of Saudi Arabia (Saudi PDPL — issued by Royal Decree M/19, in force 2023)
 Right to access, correct, and request deletion. Right to object to processing. Right to withdraw consent. Lodge complaints with the Saudi National Data Management Office (ndmo.gov.sa).
 
-── Turkey (KVKK — Law No. 6698) ──
+13.14 Turkey (KVKK — Law No. 6698)
 Right to know whether personal data is processed, to access, to rectify, to delete or destroy, to object to automated processing, and to claim compensation for damages. Lodge complaints with the Personal Data Protection Authority (kvkk.gov.tr).
 
-── Mexico (LFPDPPP — Federal Law on Protection of Personal Data Held by Private Parties) ──
+13.15 Mexico (LFPDPPP — Federal Law on Protection of Personal Data Held by Private Parties)
 ARCO rights: right to Access, Rectification, Cancellation, and Opposition. Right to withdraw consent. Lodge complaints with the Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (inai.org.mx).
 
-── Thailand (PDPA — Personal Data Protection Act B.E. 2562, 2022) ──
+13.16 Thailand (PDPA — Personal Data Protection Act B.E. 2562, 2022)
 Right to access, correct, delete, restrict, port, and object to processing. Right to withdraw consent. Lodge complaints with the Personal Data Protection Committee (pdpc.or.th).
 
-── China (PIPL) ──
+13.17 China (PIPL)
 Note: We do not market to, target, or monitor users in mainland China, and the App is not listed on mainland-China app stores. On that basis we do not currently undertake PIPL cross-border-transfer formalities. Should we identify material usage from mainland China, we will complete the required PIPL cross-border transfer assessment (or restrict access) before continuing to process such data.
 
-── All other jurisdictions ──
+13.18 All other jurisdictions
 We aim to apply the standards of the most protective applicable law as a baseline for all users. Contact us at app.karmiccompass@gmail.com to exercise any rights applicable in your country.</p>
   </div>
 
@@ -566,13 +566,13 @@ We aim to apply the standards of the most protective applicable law as a baselin
     <p class="section-body">The minimum age to use the App varies by jurisdiction (see Terms §2). We do not knowingly collect personal data — including voice recordings or images — from users below the applicable minimum age without verifiable parental or guardian consent.
 
 Karmic Compass is a general-audience wellness app intended for adults; it is not directed to children, contains no child-oriented content, and we do not knowingly market to or collect data from children. At onboarding we ask for your date of birth and compute your age from it. We do not independently verify age — this is a self-declaration, re-checked server-side against the date you gave us, not identity or document verification. Users whose declared age is below the applicable minimum are blocked at onboarding and cannot complete sign-up. Because an account is created before that point, a blocked sign-up can leave an account record (your email or sign-in identity, and your consent choices); we delete those records automatically, and you can ask us to delete them immediately at app.karmiccompass@gmail.com. We do not retain them to build a profile and we collect nothing further from a blocked user. Where local law additionally requires consent for older minors (e.g., India's DPDP Act for under-18s), a parental/guardian-consent step is triggered before the account is activated. Guideline minimums:
-• EU / EEA (GDPR Art. 8): 16 years.
-• South Korea (PIPA): 14 years.
-• Canada (Quebec Law 25): 14 years.
-• Brazil (LGPD Art. 14): 13 years.
-• United Kingdom (ICO Children's Code): 13 years.
-• India (DPDP Act): users under 18 require verifiable parental consent before the account is activated.
-• All other jurisdictions: 13 years (consistent with COPPA and equivalent laws).
+14.1 EU / EEA (GDPR Art. 8): 16 years.
+14.2 South Korea (PIPA): 14 years.
+14.3 Canada (Quebec Law 25): 14 years.
+14.4 Brazil (LGPD Art. 14): 13 years.
+14.5 United Kingdom (ICO Children's Code): 13 years.
+14.6 India (DPDP Act): users under 18 require verifiable parental consent before the account is activated.
+14.7 All other jurisdictions: 13 years (consistent with COPPA and equivalent laws).
 
 If we become aware that we have collected personal data from a user below the applicable minimum age without parental consent, we will delete it promptly. Contact app.karmiccompass@gmail.com if you have concerns.</p>
   </div>
@@ -581,13 +581,13 @@ If we become aware that we have collected personal data from a user below the ap
     <p class="section-heading">15. Data Breach Response</p>
     <p class="section-body">In the event of a personal data breach affecting your information, we will:
 
-• Take immediate steps to contain and investigate the incident.
+15.1 Take immediate steps to contain and investigate the incident.
 
-• Notify relevant supervisory authorities within 72 hours where required by GDPR Art. 33 or equivalent law.
+15.2 Notify relevant supervisory authorities within 72 hours where required by GDPR Art. 33 or equivalent law.
 
-• Notify affected users without undue delay where the breach is likely to result in a high risk to your rights and freedoms (GDPR Art. 34 or equivalent).
+15.3 Notify affected users without undue delay where the breach is likely to result in a high risk to your rights and freedoms (GDPR Art. 34 or equivalent).
 
-• Document the breach and our response in accordance with our legal obligations.
+15.4 Document the breach and our response in accordance with our legal obligations.
 
 Our full breach decision tree, roles, and notification templates are published at karmiccompass.app/privacy/BREACH_RUNBOOK. Notification will be sent to the email address associated with your account where required.</p>
   </div>
@@ -628,90 +628,90 @@ Last updated: 2026-08-02 (v2.0)</p>
   </div>
 
   <div class="section">
-    <p class="section-heading">Changelog</p>
-    <p class="section-body">## v2.0 — 2026-08-02
+    <p class="section-heading">18. Changelog</p>
+    <p class="section-body">18.1 v2.0 — 2026-08-02
 Corrections only. Nothing new is collected, no new purpose, and no new recipient — every change below makes a statement match what the code already did. The version is bumped because these went out AFTER the last consent prompt, so no existing receipt covers them, and a policy corrected silently is the thing a version number exists to prevent.
-• §3: crash and performance diagnostics (Sentry) moved from legitimate interests to CONSENT, and the legitimate-interests entry re-scoped to what actually relies on it (fraud and trial-abuse prevention, including the truncated-IP-hash rate limit on the deletion OTP endpoint, and system security). Sentry is opt-in and off by default, and consent is the honest basis for something you switch on; the governance documents (DPIA, RoPA) now say the same.
-• §5: corrected the claim that an export makes no network requests. The PDF is built on-device, but one request per attached journal photo is made to download it, because photos live in Firebase Storage rather than on the device. No other data leaves the device during an export.
-• §9: separated the OTP CODE from the DOCUMENT that carries it. The code stops working after 15 minutes; the document — which also holds your email address and an install identifier — is kept for up to 7 days so a request cannot be silently replayed. It is now deleted server-side on that schedule rather than relying on a console setting.
-• §11: corrected the retention stated for aiUsageInflight, the short-lived markers written while an AI request is in flight. It said they expire 'within minutes'; the actual figure is seven days for a request abandoned mid-flight, and nothing was performing any figure. Seven days is now both what the policy says and what a server-side sweep does.
-• The published copies at karmiccompass.app/privacy and in the App Store / Play listings were regenerated from this document. Five sections there — §1, §3, §5, §9 and §11 — were still the pre-correction text, so a reader of the published policy was reading an older document than the one in the App.
+18.1.1 §3: crash and performance diagnostics (Sentry) moved from legitimate interests to CONSENT, and the legitimate-interests entry re-scoped to what actually relies on it (fraud and trial-abuse prevention, including the truncated-IP-hash rate limit on the deletion OTP endpoint, and system security). Sentry is opt-in and off by default, and consent is the honest basis for something you switch on; the governance documents (DPIA, RoPA) now say the same.
+18.1.2 §5: corrected the claim that an export makes no network requests. The PDF is built on-device, but one request per attached journal photo is made to download it, because photos live in Firebase Storage rather than on the device. No other data leaves the device during an export.
+18.1.3 §9: separated the OTP CODE from the DOCUMENT that carries it. The code stops working after 15 minutes; the document — which also holds your email address and an install identifier — is kept for up to 7 days so a request cannot be silently replayed. It is now deleted server-side on that schedule rather than relying on a console setting.
+18.1.4 §11: corrected the retention stated for aiUsageInflight, the short-lived markers written while an AI request is in flight. It said they expire 'within minutes'; the actual figure is seven days for a request abandoned mid-flight, and nothing was performing any figure. Seven days is now both what the policy says and what a server-side sweep does.
+18.1.5 The published copies at karmiccompass.app/privacy and in the App Store / Play listings were regenerated from this document. Five sections there — §1, §3, §5, §9 and §11 — were still the pre-correction text, so a reader of the published policy was reading an older document than the one in the App.
 
-## v1.9 — 2026-07-30
-• §1(F): corrected a statement that contradicted §9. The inventory section — the one a reader reaches first — said the recording is "deleted from your device immediately after the transcription request is sent". That is only true when transcription SUCCEEDS. On failure the recording is queued on the device for up to 7 days so your words are not lost, and while queued it sits in app storage that iOS includes in device backups. §9 has described this correctly throughout; §1(F) did not, so the document disagreed with itself about how long audio of your voice is kept. No new data and no new purpose — the fuller §9 statement was always the binding one — but a retention claim a user reads first has to be true.
-• §1(N): newly disclosed the device attestation the App performs at start-up (Firebase App Check via Apple App Attest / Google Play Integrity), together with its lawful basis. It was named only in the Terms' third-party list and never described. It carries no account data and no content; it is a security control under legitimate interests, which is why it runs before the consent screen — analytics and crash reporting are consent-based and still do not.
+18.2 v1.9 — 2026-07-30
+18.2.1 §1(F): corrected a statement that contradicted §9. The inventory section — the one a reader reaches first — said the recording is "deleted from your device immediately after the transcription request is sent". That is only true when transcription SUCCEEDS. On failure the recording is queued on the device for up to 7 days so your words are not lost, and while queued it sits in app storage that iOS includes in device backups. §9 has described this correctly throughout; §1(F) did not, so the document disagreed with itself about how long audio of your voice is kept. No new data and no new purpose — the fuller §9 statement was always the binding one — but a retention claim a user reads first has to be true.
+18.2.2 §1(N): newly disclosed the device attestation the App performs at start-up (Firebase App Check via Apple App Attest / Google Play Integrity), together with its lawful basis. It was named only in the Terms' third-party list and never described. It carries no account data and no content; it is a security control under legitimate interests, which is why it runs before the consent screen — analytics and crash reporting are consent-based and still do not.
 
-## v1.8 — 2026-07-29
-• §4: corrected an over-declaration. The section presents itself as "the exact data sent to Gemini", and stated that up to 50 personal notes are included in the Arya chat prompt; the App sends at most 15. Two further limits that were never disclosed are now stated: each note is truncated to 300 characters, and the notes block as a whole is capped at 1,500 characters. The error was in your favour — less was sent than declared — but a section that claims exactness has to be exact.
-• §10: corrected a claim that understated the App's own protection. The section said content "can appear in your device's app-switcher preview". That is no longer true of the screens that carry personal content: the journal, Arya conversations, Arya memory, account details, sign-in and onboarding are covered by a blank overlay whenever the App is not in the foreground, on BOTH iOS and Android, so they do not appear in the app-switcher card or its stored snapshot. Screens without personal content are not covered, and screen recording during use is still possible — both are stated. Screenshots remain unblocked; that has not changed.
+18.3 v1.8 — 2026-07-29
+18.3.1 §4: corrected an over-declaration. The section presents itself as "the exact data sent to Gemini", and stated that up to 50 personal notes are included in the Arya chat prompt; the App sends at most 15. Two further limits that were never disclosed are now stated: each note is truncated to 300 characters, and the notes block as a whole is capped at 1,500 characters. The error was in your favour — less was sent than declared — but a section that claims exactness has to be exact.
+18.3.2 §10: corrected a claim that understated the App's own protection. The section said content "can appear in your device's app-switcher preview". That is no longer true of the screens that carry personal content: the journal, Arya conversations, Arya memory, account details, sign-in and onboarding are covered by a blank overlay whenever the App is not in the foreground, on BOTH iOS and Android, so they do not appear in the app-switcher card or its stored snapshot. Screens without personal content are not covered, and screen recording during use is still possible — both are stated. Screenshots remain unblocked; that has not changed.
 
-## v1.7 — 2026-07-26
-• §14 (Children's Privacy): removed two claims the code does not support. The policy described the age check as "a real age gate, not a self-declared checkbox"; it is a date-of-birth field, re-checked server-side against the same self-declared date, with no identity or document verification. It also stated that because under-age users are blocked "no personal data is collected from them" — but the account and the consent receipt are created BEFORE date of birth is asked for, so a blocked sign-up did leave records behind. §14 now describes both accurately, and those records are deleted automatically (see below) as well as on request.
-• Under-age sign-ups blocked at onboarding are now erased automatically rather than retained indefinitely: the App requests immediate deletion of the account at the moment of the block, and retries on the next launch if that request could not be delivered.
-• PRIVACY_POLICY_VERSION no longer reuses a bare date, so a corrected policy always requires a fresh consent receipt.
+18.4 v1.7 — 2026-07-26
+18.4.1 §14 (Children's Privacy): removed two claims the code does not support. The policy described the age check as "a real age gate, not a self-declared checkbox"; it is a date-of-birth field, re-checked server-side against the same self-declared date, with no identity or document verification. It also stated that because under-age users are blocked "no personal data is collected from them" — but the account and the consent receipt are created BEFORE date of birth is asked for, so a blocked sign-up did leave records behind. §14 now describes both accurately, and those records are deleted automatically (see below) as well as on request.
+18.4.2 Under-age sign-ups blocked at onboarding are now erased automatically rather than retained indefinitely: the App requests immediate deletion of the account at the moment of the block, and retries on the next launch if that request could not be delivered.
+18.4.3 PRIVACY_POLICY_VERSION no longer reuses a bare date, so a corrected policy always requires a fresh consent receipt.
 
-## v1.6 — 2026-07-26
-• Source-of-truth break repaired. The in-app policy (LegalScreen.js) and the published policy carried the same v1.5 stamp but different bodies: the in-app copy was missing the entire v1.3 changelog block and most of v1.4's body, so users reading the policy inside the App were given weaker commitments than the published one — including the Gemini-fallback no-training basis, the corrected DPO position, the COPPA general-audience statement, the Sentry beforeSend scrub, the CPRA §1798.121 safe harbour, Art. 20 portability, the cookie-banner statement, and the fresh-consent rule for Art. 9 material changes. Both copies are now generated from one source.
-• §1(I) / Summary: corrected two claims about the device identifier. It is not stored only in the Keychain/Keystore — the App deliberately falls back to unencrypted app storage when secure storage fails (src/utils/deviceId.js), and that is now disclosed. It is also not used "solely" for the one-trial-per-device policy: a truncated one-way hash of it is sent with AI requests and used for a per-device daily anti-abuse cap (aiUsageByDevice) and a server-side trial ledger (deviceTrialLedger).
-• §1(N) / §9 / §11: newly disclosed the anti-abuse and billing records that were absent from the inventory — aiUsageByDevice, deviceTrialLedger, processedWebhookEvents (which carries your UID), and the Expo installation ID sent with the email-based deletion flow — together with their expiry periods and the fact that the hash-keyed ones expire on a timer rather than being deleted by name.
-• §1(O): removed isPremium, which the RevenueCat webhook does not write, and added the tier and grace-period fields it does write.
-• §1(P): the feedback record also carries the email address on your account and a severity label derived from your rating; both were undeclared.
-• §1(Q): corrected the claim that a text-to-speech quota "is stored in Firestore (ttsUsage/{uid}) to enforce per-tier voice limits server-side". No code writes that collection — it is reserved, holds nothing today, and is declared only because our deletion routine clears it.
-• §9: feedback retention corrected from "up to 2 years" to the 365-day expiry the code actually stamps on each record (src/components/FeedbackModal.js). Added retention rows for the counters and anti-abuse records above.
-• §9: noted that the published RETENTION.md schedule is operational and may run ahead of what is deployed, and that this policy governs where they differ.
-• §11: the deletion list was materially incomplete. It now names every collection the erasure routine actually clears (functions/userFootprint.js) — including the entries and entriesArchive subcollections, aiUsageJournal, aiUsageMeter, rateLimits, deletionRequests and deviceTrialLedger — and states plainly which records are not deleted by name.
+18.5 v1.6 — 2026-07-26
+18.5.1 Source-of-truth break repaired. The in-app policy (LegalScreen.js) and the published policy carried the same v1.5 stamp but different bodies: the in-app copy was missing the entire v1.3 changelog block and most of v1.4's body, so users reading the policy inside the App were given weaker commitments than the published one — including the Gemini-fallback no-training basis, the corrected DPO position, the COPPA general-audience statement, the Sentry beforeSend scrub, the CPRA §1798.121 safe harbour, Art. 20 portability, the cookie-banner statement, and the fresh-consent rule for Art. 9 material changes. Both copies are now generated from one source.
+18.5.2 §1(I) / Summary: corrected two claims about the device identifier. It is not stored only in the Keychain/Keystore — the App deliberately falls back to unencrypted app storage when secure storage fails (src/utils/deviceId.js), and that is now disclosed. It is also not used "solely" for the one-trial-per-device policy: a truncated one-way hash of it is sent with AI requests and used for a per-device daily anti-abuse cap (aiUsageByDevice) and a server-side trial ledger (deviceTrialLedger).
+18.5.3 §1(N) / §9 / §11: newly disclosed the anti-abuse and billing records that were absent from the inventory — aiUsageByDevice, deviceTrialLedger, processedWebhookEvents (which carries your UID), and the Expo installation ID sent with the email-based deletion flow — together with their expiry periods and the fact that the hash-keyed ones expire on a timer rather than being deleted by name.
+18.5.4 §1(O): removed isPremium, which the RevenueCat webhook does not write, and added the tier and grace-period fields it does write.
+18.5.5 §1(P): the feedback record also carries the email address on your account and a severity label derived from your rating; both were undeclared.
+18.5.6 §1(Q): corrected the claim that a text-to-speech quota "is stored in Firestore (ttsUsage/{uid}) to enforce per-tier voice limits server-side". No code writes that collection — it is reserved, holds nothing today, and is declared only because our deletion routine clears it.
+18.5.7 §9: feedback retention corrected from "up to 2 years" to the 365-day expiry the code actually stamps on each record (src/components/FeedbackModal.js). Added retention rows for the counters and anti-abuse records above.
+18.5.8 §9: noted that the published RETENTION.md schedule is operational and may run ahead of what is deployed, and that this policy governs where they differ.
+18.5.9 §11: the deletion list was materially incomplete. It now names every collection the erasure routine actually clears (functions/userFootprint.js) — including the entries and entriesArchive subcollections, aiUsageJournal, aiUsageMeter, rateLimits, deletionRequests and deviceTrialLedger — and states plainly which records are not deleted by name.
 
-## v1.5 — 2026-07-26
-• § 10: the App no longer blocks screenshots or screen recording. Section rewritten from “Screen Capture Protection” to “Screenshots &amp; Screen Recording” to state plainly that capture is permitted, that content can therefore appear in the device app-switcher preview and be captured by screen-recording software, and that the App Passcode is the control that protects content on a shared device. Owner decision 2026-07-26: users keep full control of their own content.
-• Summary / §1(G) / §9: corrected an inaccurate claim that images are never stored on our servers. Photos attached in Arya's chat remain transient (base64 to the AI proxy, no server-side file), but photos attached to a JOURNAL ENTRY are stored in Firebase Storage (users/{uid}/journalImages/) for the life of the account. §1(G) and the §9 retention table now state both cases separately.
-• §11 / §9: corrected the claim that account deletion is immediate. Confirming deletion deactivates the account and revokes sessions straight away, but erasure runs after a 7-day grace period via a scheduled job. Added: the emailed one-click cancellation link, the in-app "Restore my account" screen shown when you sign in during the grace period (signing in alone does not cancel — deletion is the default), and the "Delete now" option that skips the grace period.
-• §1(P) / §9 / §11: newly disclosed the chatReports collection written when you report a message in your chat with Arya (UID, message id, role, reason, up to 500 locally PII-scrubbed characters of the reported message, timestamp). Retention: 365 days from submission, deleted automatically by a scheduled server-side job, and immediately if you delete your account.
-• §1(Q) / §9: added the ttsUsage/{uid} voice-playback quota counter, previously listed only in the §11 deletion list.
-• §1 / §9 / §11: removed internal editorial markers that had been left in the rendered policy text.
-• §3 / §9: corrected the in-app path for deleting crisis flags from the non-existent "Settings → Privacy" to Settings → Arya Settings ("Safety follow-up memory" toggle / "Clear chat &amp; memory").
+18.6 v1.5 — 2026-07-26
+18.6.1 § 10: the App no longer blocks screenshots or screen recording. Section rewritten from “Screen Capture Protection” to “Screenshots &amp; Screen Recording” to state plainly that capture is permitted, that content can therefore appear in the device app-switcher preview and be captured by screen-recording software, and that the App Passcode is the control that protects content on a shared device. Owner decision 2026-07-26: users keep full control of their own content.
+18.6.2 Summary / §1(G) / §9: corrected an inaccurate claim that images are never stored on our servers. Photos attached in Arya's chat remain transient (base64 to the AI proxy, no server-side file), but photos attached to a JOURNAL ENTRY are stored in Firebase Storage (users/{uid}/journalImages/) for the life of the account. §1(G) and the §9 retention table now state both cases separately.
+18.6.3 §11 / §9: corrected the claim that account deletion is immediate. Confirming deletion deactivates the account and revokes sessions straight away, but erasure runs after a 7-day grace period via a scheduled job. Added: the emailed one-click cancellation link, the in-app "Restore my account" screen shown when you sign in during the grace period (signing in alone does not cancel — deletion is the default), and the "Delete now" option that skips the grace period.
+18.6.4 §1(P) / §9 / §11: newly disclosed the chatReports collection written when you report a message in your chat with Arya (UID, message id, role, reason, up to 500 locally PII-scrubbed characters of the reported message, timestamp). Retention: 365 days from submission, deleted automatically by a scheduled server-side job, and immediately if you delete your account.
+18.6.5 §1(Q) / §9: added the ttsUsage/{uid} voice-playback quota counter, previously listed only in the §11 deletion list.
+18.6.6 §1 / §9 / §11: removed internal editorial markers that had been left in the rendered policy text.
+18.6.7 §3 / §9: corrected the in-app path for deleting crisis flags from the non-existent "Settings → Privacy" to Settings → Arya Settings ("Safety follow-up memory" toggle / "Clear chat &amp; memory").
 
-## v1.4 — 2026-06-24
-• §3 / §3a: crisis-flag lawful basis reframed to Art. 9(2)(a) explicit consent (primary) with Art. 9(2)(c) vital interests only as a narrow emergency fallback.
-• §3a: stated that AI inferences constitute "profiling" under GDPR Art. 4(4), with limited significance (personal reflection only).
-• §4: added a contingency — if Google's paid-tier no-training commitment is weakened, we cease the Gemini fallback or obtain fresh consent before processing health data through it.
-• §6: added a "Website &amp; cookies" statement — the site sets no cookies/analytics/tracking; no consent banner required.
-• §9: added a justification for the 2-year support-email retention and noted health-related support content is handled as Art. 9 data.
-• §13: added the CPRA §1798.121 safe-harbour for the right to limit sensitive personal information (no sale/share → satisfied by default).
+18.7 v1.4 — 2026-06-24
+18.7.1 §3 / §3a: crisis-flag lawful basis reframed to Art. 9(2)(a) explicit consent (primary) with Art. 9(2)(c) vital interests only as a narrow emergency fallback.
+18.7.2 §3a: stated that AI inferences constitute "profiling" under GDPR Art. 4(4), with limited significance (personal reflection only).
+18.7.3 §4: added a contingency — if Google's paid-tier no-training commitment is weakened, we cease the Gemini fallback or obtain fresh consent before processing health data through it.
+18.7.4 §6: added a "Website &amp; cookies" statement — the site sets no cookies/analytics/tracking; no consent banner required.
+18.7.5 §9: added a justification for the 2-year support-email retention and noted health-related support content is handled as Art. 9 data.
+18.7.6 §13: added the CPRA §1798.121 safe-harbour for the right to limit sensitive personal information (no sale/share → satisfied by default).
 
-## v1.3 — 2026-06-24
-• §3: described the dedicated onboarding consent screen behind the Art. 9(2)(a) explicit-consent basis; referenced the documented Legitimate Interests Assessment (LIA) in the DPIA.
-• §4 + §8: linked the Gemini paid-tier no-training commitment to Google's API terms (ai.google.dev/gemini-api/terms) + annual-review note.
-• §8: confirmed the Sentry beforeSend hook scrubs user-generated content (extra/contexts/request).
-• §9: clarified the post-deletion device marker is no longer personal data (unlinkable token), so storage limitation is met without a fixed deletion date.
-• §13: tightened the mainland-China (PIPL) position — no targeting/monitoring; assessment/restriction if material usage appears.
-• §14: stated the app is a general-audience adult app, not directed to children; under-min users are blocked at onboarding (no collection → COPPA satisfied).
-• §17: removed the incorrect DPO self-designation (Art. 37(3)); stated a DPO is not required under Art. 37(1) at current scale.
+18.8 v1.3 — 2026-06-24
+18.8.1 §3: described the dedicated onboarding consent screen behind the Art. 9(2)(a) explicit-consent basis; referenced the documented Legitimate Interests Assessment (LIA) in the DPIA.
+18.8.2 §4 + §8: linked the Gemini paid-tier no-training commitment to Google's API terms (ai.google.dev/gemini-api/terms) + annual-review note.
+18.8.3 §8: confirmed the Sentry beforeSend hook scrubs user-generated content (extra/contexts/request).
+18.8.4 §9: clarified the post-deletion device marker is no longer personal data (unlinkable token), so storage limitation is met without a fixed deletion date.
+18.8.5 §13: tightened the mainland-China (PIPL) position — no targeting/monitoring; assessment/restriction if material usage appears.
+18.8.6 §14: stated the app is a general-audience adult app, not directed to children; under-min users are blocked at onboarding (no collection → COPPA satisfied).
+18.8.7 §17: removed the incorrect DPO self-designation (Art. 37(3)); stated a DPO is not required under Art. 37(1) at current scale.
 
-## v1.2 — 2026-06-24
-• §1(G): clarified that on-device re-encoding strips EXIF metadata (GPS/location, device, timestamps) before image upload — it is not transmitted.
-• §4 + §8: no-AI-training commitment now holds on BOTH paths — Vertex AI (customer-content carve-out) and the rare Gemini Developer API fallback (paid pay-as-you-go tier, under which Google does not train on prompts/responses).
-• §5: linked the Export Data feature to data-portability rights (Art. 20 et al.) and noted the PDF format + machine-readable copy on request.
-• §9: added a storage-limitation statement for the post-deletion device trial marker.
-• §14: replaced "self-attestation" language with the real DOB-based age gate + parental-consent flow.
-• §16: material changes affecting health (Art. 9) data or new consent-based purposes now require fresh explicit consent, not continued-use acceptance.
-• §17: tightened EU/EEA/UK wording — no targeting/monitoring; Art. 27 representative to be appointed if material EU usage is identified.
+18.9 v1.2 — 2026-06-24
+18.9.1 §1(G): clarified that on-device re-encoding strips EXIF metadata (GPS/location, device, timestamps) before image upload — it is not transmitted.
+18.9.2 §4 + §8: no-AI-training commitment now holds on BOTH paths — Vertex AI (customer-content carve-out) and the rare Gemini Developer API fallback (paid pay-as-you-go tier, under which Google does not train on prompts/responses).
+18.9.3 §5: linked the Export Data feature to data-portability rights (Art. 20 et al.) and noted the PDF format + machine-readable copy on request.
+18.9.4 §9: added a storage-limitation statement for the post-deletion device trial marker.
+18.9.5 §14: replaced "self-attestation" language with the real DOB-based age gate + parental-consent flow.
+18.9.6 §16: material changes affecting health (Art. 9) data or new consent-based purposes now require fresh explicit consent, not continued-use acceptance.
+18.9.7 §17: tightened EU/EEA/UK wording — no targeting/monitoring; Art. 27 representative to be appointed if material EU usage is identified.
 
-## v1.1 — 2026-05-28
-• §1: added Push Notification Tokens (Expo) and Abuse-Prevention Signals (truncated-IP-hash) inventory categories.
-• §1 + §2: added explicit no-AI-training commitment with Vertex AI customer-content carve-out reference.
-• §3: added Art. 9(2)(c) "vital interests" lawful basis for crisisFlags; 90-day auto-expiry and opt-out (Safety follow-up memory toggle).
-• §3a (NEW): Automated Decision-Making disclosure (GDPR Art. 22) — right to human review, explanation, contestation.
-• §4: added Vertex AI primary / Gemini Developer API fallback distinction and no-training reference.
-• §8: full sub-processor register format — purpose, data shared, location, transfer mechanism for each provider; added Expo Push Service, Gmail/Workspace SMTP, Apple/Google IAP; pointer to versioned register at /privacy/SUBPROCESSORS.
-• §9: added retention rows for push tokens and abuse-prevention IP-hashes; added 90-day auto-expiry for crisisFlags.
-• §11: added IP-hash rate-limit note for email-based deletion.
-• §15: GDPR Art. 33 72-hour timeline; pointer to /privacy/BREACH_RUNBOOK.
-• §17: replaced "not yet required" EU/UK representative language with explicit Art. 27 placeholders flagged for production; added postal address placeholder; added privacy@karmiccompass.app.
-• Updated "Last updated" to 2026-05-28; tagged v1.1.
-• New regulatory artefacts published: /privacy/DPIA, /privacy/RoPA, /privacy/BREACH_RUNBOOK, /privacy/SUBPROCESSORS.
+18.10 v1.1 — 2026-05-28
+18.10.1 §1: added Push Notification Tokens (Expo) and Abuse-Prevention Signals (truncated-IP-hash) inventory categories.
+18.10.2 §1 + §2: added explicit no-AI-training commitment with Vertex AI customer-content carve-out reference.
+18.10.3 §3: added Art. 9(2)(c) "vital interests" lawful basis for crisisFlags; 90-day auto-expiry and opt-out (Safety follow-up memory toggle).
+18.10.4 §3a (NEW): Automated Decision-Making disclosure (GDPR Art. 22) — right to human review, explanation, contestation.
+18.10.5 §4: added Vertex AI primary / Gemini Developer API fallback distinction and no-training reference.
+18.10.6 §8: full sub-processor register format — purpose, data shared, location, transfer mechanism for each provider; added Expo Push Service, Gmail/Workspace SMTP, Apple/Google IAP; pointer to versioned register at /privacy/SUBPROCESSORS.
+18.10.7 §9: added retention rows for push tokens and abuse-prevention IP-hashes; added 90-day auto-expiry for crisisFlags.
+18.10.8 §11: added IP-hash rate-limit note for email-based deletion.
+18.10.9 §15: GDPR Art. 33 72-hour timeline; pointer to /privacy/BREACH_RUNBOOK.
+18.10.10 §17: replaced "not yet required" EU/UK representative language with explicit Art. 27 placeholders flagged for production; added postal address placeholder; added privacy@karmiccompass.app.
+18.10.11 Updated "Last updated" to 2026-05-28; tagged v1.1.
+18.10.12 New regulatory artefacts published: /privacy/DPIA, /privacy/RoPA, /privacy/BREACH_RUNBOOK, /privacy/SUBPROCESSORS.
 
-## v1.0 — May 2026
-• Prior version (pre-r257 audit fixes).</p>
+18.11 v1.0 — May 2026
+18.11.1 Prior version (pre-r257 audit fixes).</p>
   </div>
 
 </main>

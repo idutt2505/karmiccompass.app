@@ -111,8 +111,8 @@ Subscription auto-renews monthly at the displayed price unless cancelled at leas
 
 During the trial, you have access to every Compass feature — Arya AI chat, Incognito Mode, Deep Memory, all Summarise periods, full chat history scroll-back and search, personalised insights, and language preferences. Nothing is feature-locked during the trial. The only difference is the size of the daily allowance:
 
-• Arya conversations: up to 30 messages per day during the trial (Compass subscribers have up to 150 messages per day).
-• Journal entries analysed by Arya: up to 30 per day during the trial (Compass subscribers: up to 150 per day).
+5.1 Arya conversations: up to 30 messages per day during the trial (Compass subscribers have up to 150 messages per day).
+5.2 Journal entries analysed by Arya: up to 30 per day during the trial (Compass subscribers: up to 150 per day).
 
 See section 7 for the full comparison.
 
@@ -136,29 +136,29 @@ Australian Consumer Law: Nothing in these Terms excludes, restricts, or modifies
     <p class="section-heading">7. Compass vs Trial — Feature Comparison</p>
     <p class="section-body">The App operates across two tiers. The trial includes every feature Compass includes; the difference is the daily allowance.
 
-── Trial (first 7 days after onboarding) ──
-• Arya chat: up to 30 messages per day.
-• Journal entries analysed: up to 30 per day.
-• Voice notes transcribed: up to 40 per day. This one is identical on both tiers — subscribing does not raise it.
-• A separate anti-abuse cap of 150 AI actions per day applies to the device rather than to you, and is shared by every trial or unsubscribed account used on that device. If several such accounts share one phone they draw on the same 150, so it is possible to be stopped by this cap while your own daily allowance is untouched. Compass subscribers are exempt from it entirely. It is not a tier difference and subscribing is not the way it is lifted — it exists only to stop one device from cycling through throwaway trial accounts.
+7.1 Trial (first 7 days after onboarding)
+7.1.1 Arya chat: up to 30 messages per day.
+7.1.2 Journal entries analysed: up to 30 per day.
+7.1.3 Voice notes transcribed: up to 40 per day. This one is identical on both tiers — subscribing does not raise it.
+7.1.4 A separate anti-abuse cap of 150 AI actions per day applies to the device rather than to you, and is shared by every trial or unsubscribed account used on that device. If several such accounts share one phone they draw on the same 150, so it is possible to be stopped by this cap while your own daily allowance is untouched. Compass subscribers are exempt from it entirely. It is not a tier difference and subscribing is not the way it is lifted — it exists only to stop one device from cycling through throwaway trial accounts.
 
-── Compass (paid subscription) ──
-• Arya chat: up to 150 messages per day.
-• Journal entries analysed: up to 150 per day.
+7.2 Compass (paid subscription)
+7.2.1 Arya chat: up to 150 messages per day.
+7.2.2 Journal entries analysed: up to 150 per day.
 
-── Identical on both tiers ──
-• Incognito Mode, Arya settings (language, tone, memory), Deep Memory.
-• All summarise periods: this session, today, weekly, fortnightly, monthly, quarterly, half-yearly and yearly (each period also requires enough entries to cover it).
-• Full chat archive scroll-back and search.
-• AI context: up to 30 recent journal entries, full digest, 40-message conversation window.
-• Karma quizzes: 5 per level per day (easy, moderate and hard are counted separately).
-• Reports, summaries, the daily reading and the memory letter have no separate daily cap of their own — they are bounded only by the overall daily ceiling below. Today’s Insight: no daily limit.
+7.3 Identical on both tiers
+7.3.1 Incognito Mode, Arya settings (language, tone, memory), Deep Memory.
+7.3.2 All summarise periods: this session, today, weekly, fortnightly, monthly, quarterly, half-yearly and yearly (each period also requires enough entries to cover it).
+7.3.3 Full chat archive scroll-back and search.
+7.3.4 AI context: up to 30 recent journal entries, full digest, 40-message conversation window.
+7.3.5 Karma quizzes: 5 per level per day (easy, moderate and hard are counted separately).
+7.3.6 Reports, summaries, the daily reading and the memory letter have no separate daily cap of their own — they are bounded only by the overall daily ceiling below. Today’s Insight: no daily limit.
 
-── Overall daily limit ──
-• A combined ceiling of 1,000 AI actions per day applies to both tiers as an anti-abuse measure. Every AI action counts towards it — Arya messages, journal analyses, quizzes, reports, summaries, readings and insights alike. A typical day is around 18 actions, so ordinary use does not approach it. This ceiling is identical on both tiers: subscribing does not raise it, and if you reach it the App will say so rather than blaming an individual feature.
+7.4 Overall daily limit
+7.4.1 A combined ceiling of 1,000 AI actions per day applies to both tiers as an anti-abuse measure. Every AI action counts towards it — Arya messages, journal analyses, quizzes, reports, summaries, readings and insights alike. A typical day is around 18 actions, so ordinary use does not approach it. This ceiling is identical on both tiers: subscribing does not raise it, and if you reach it the App will say so rather than blaming an individual feature.
 
-── When a request fails through no fault of yours ──
-• If a request fails because of a problem on our side — our AI provider being unavailable, timing out, or rate-limiting us — that message or entry is returned to your allowance and does not count against you. In that situation the App tells you the fault is ours; it does not tell you that you have reached your daily limit.
+7.5 When a request fails through no fault of yours
+7.5.1 If a request fails because of a problem on our side — our AI provider being unavailable, timing out, or rate-limiting us — that message or entry is returned to your allowance and does not count against you. In that situation the App tells you the fault is ours; it does not tell you that you have reached your daily limit.
 
 All limits reset at 00:00 UTC and are enforced server-side; they cannot be bypassed by the client. Trial status is verified server-side against the trialStart timestamp stored in your account.</p>
   </div>
@@ -197,13 +197,13 @@ All AI requests pass through our secure proxy server. Safety filters (BLOCK_MEDI
     <p class="section-heading">11. Device Permissions</p>
     <p class="section-body">The App requests the following device permissions:
 
-• Microphone (required for voice features): When you tap the microphone button in the Journal or Arya chat, your audio is recorded on-device, encoded as base64, and sent to Google's Gemini API via our secure proxy for transcription. The audio file is deleted from your device as soon as transcription succeeds. If transcription fails, the recording is queued on your device for retry and is deleted once transcribed or after 7 days at the latest (see Privacy Policy §1(F)). Only the resulting text transcript is stored.
+11.1 Microphone (required for voice features): When you tap the microphone button in the Journal or Arya chat, your audio is recorded on-device, encoded as base64, and sent to Google's Gemini API via our secure proxy for transcription. The audio file is deleted from your device as soon as transcription succeeds. If transcription fails, the recording is queued on your device for retry and is deleted once transcribed or after 7 days at the latest (see Privacy Policy §1(F)). Only the resulting text transcript is stored.
 
-• Camera &amp; Photo Library (optional): Required only if you choose to attach a photo in Arya's chat or to a journal entry. The image is resized on-device (longest edge reduced to at most 3072px, JPEG quality ~90%, and re-compressed further if still over 6 MB). A photo attached in chat is sent as base64 to Gemini Vision via our proxy and is not kept as a file on our servers. A photo attached to a journal entry is uploaded to our cloud storage and kept for the life of your account so it can be shown in your journal — see Privacy Policy §1(G).
+11.2 Camera &amp; Photo Library (optional): Required only if you choose to attach a photo in Arya's chat or to a journal entry. The image is resized on-device (longest edge reduced to at most 3072px, JPEG quality ~90%, and re-compressed further if still over 6 MB). A photo attached in chat is sent as base64 to Gemini Vision via our proxy and is not kept as a file on our servers. A photo attached to a journal entry is uploaded to our cloud storage and kept for the life of your account so it can be shown in your journal — see Privacy Policy §1(G).
 
-• Face ID / Touch ID (optional): Used locally on your device only for Passcode unlock. Biometric data is never transmitted to us or any third party. The passcode itself is stored in your device's Keychain (iOS) or Keystore (Android).
+11.3 Face ID / Touch ID (optional): Used locally on your device only for Passcode unlock. Biometric data is never transmitted to us or any third party. The passcode itself is stored in your device's Keychain (iOS) or Keystore (Android).
 
-• Notifications (optional): If granted, the App schedules three types of local, on-device reminders: journal reminder, mentor check-in, and daily check-in. Notification bodies contain only generic copy — no journal text, chat content, or personal data. A background task runs at most every 12 hours to reschedule these notifications. No data is transmitted to our servers during this background process. Compass push notifications ("a letter from Arya") are delivered via the Expo Push Service to APNs (iOS) / FCM (Android) — see Privacy Policy §8.
+11.4 Notifications (optional): If granted, the App schedules three types of local, on-device reminders: journal reminder, mentor check-in, and daily check-in. Notification bodies contain only generic copy — no journal text, chat content, or personal data. A background task runs at most every 12 hours to reschedule these notifications. No data is transmitted to our servers during this background process. Compass push notifications ("a letter from Arya") are delivered via the Expo Push Service to APNs (iOS) / FCM (Android) — see Privacy Policy §8.
 
 All permissions are requested at the point of use and can be revoked at any time from your device Settings. Revoking a permission disables the corresponding feature but does not affect other App functionality.</p>
   </div>
@@ -268,21 +268,21 @@ You may not copy, reproduce, modify, distribute, publicly display, or create der
 
 Typefaces used: Caveat, Cormorant Garamond, DM Sans, DM Mono — all under SIL OFL 1.1.
 
-This app is built with React Native and Expo, and uses open-source libraries under their respective licences (predominantly MIT and Apache 2.0). A full component-level attribution list is maintained in the project&#x27;s ATTRIBUTIONS.md and is available on request at privacy@karmiccompass.app.</p>
+This app is built with React Native and Expo, and uses open-source libraries under their respective licences (predominantly MIT and Apache 2.0). A full component-level attribution list is maintained in the project's ATTRIBUTIONS.md and is available on request at privacy@karmiccompass.app.</p>
   </div>
 
   <div class="section">
     <p class="section-heading">17. Third-Party Services &amp; Apple Schedule 2 EULA</p>
     <p class="section-body">The App uses the following third-party services:
 
-• Google Firebase (Authentication, Firestore, Storage, Cloud Run, Cloud Functions, App Check, Vertex AI / Gemini API) — core infrastructure.
-• RevenueCat — subscription management. RevenueCat uses your Firebase UID as its app user ID.
-• Sentry (Functional Software, Inc.) — crash and error monitoring.
-• Apple App Store / Google Play — distribution and billing.
-• Google Sign-In and Apple Sign-In — optional authentication.
-• Google Fonts — NOT a sub-processor. Typefaces are bundled into the app binary and loaded locally; no font request leaves the device.
-• Expo Push Notification Service (operated by Expo, Inc.) — relays push notifications to Apple Push Notification service (APNs, iOS) and Firebase Cloud Messaging (FCM, Android).
-• Gmail / Google Workspace SMTP (server-side only) — used to send account deletion verification emails.
+17.1 Google Firebase (Authentication, Firestore, Storage, Cloud Run, Cloud Functions, App Check, Vertex AI / Gemini API) — core infrastructure.
+17.2 RevenueCat — subscription management. RevenueCat uses your Firebase UID as its app user ID.
+17.3 Sentry (Functional Software, Inc.) — crash and error monitoring.
+17.4 Apple App Store / Google Play — distribution and billing.
+17.5 Google Sign-In and Apple Sign-In — optional authentication.
+17.6 Google Fonts — NOT a sub-processor. Typefaces are bundled into the app binary and loaded locally; no font request leaves the device.
+17.7 Expo Push Notification Service (operated by Expo, Inc.) — relays push notifications to Apple Push Notification service (APNs, iOS) and Firebase Cloud Messaging (FCM, Android).
+17.8 Gmail / Google Workspace SMTP (server-side only) — used to send account deletion verification emails.
 
 Apple App Store EULA — Schedule 2 §3.2 Recitals (Apple Paid Applications Schedule):
 
@@ -395,43 +395,43 @@ Last updated: 2026-08-02 (v1.6)</p>
   </div>
 
   <div class="section">
-    <p class="section-heading">Changelog</p>
-    <p class="section-body">## v1.6 — 2026-08-02
-• §24 (Changes to These Terms): corrected a promise the App has never kept. It said we would notify you of material changes 'via an in-app notice or email at least 7 days before the changes take effect'. There is no advance-notice mechanism — no scheduled email, no in-app pre-announcement — and Privacy Policy §16 has always described the real behaviour: you see the change at first launch after it happens. Two documents in one agreement said opposite things about the same question. §24 now matches §16.
-• No practice changed. What was already true and remains true is the stronger half: a change that materially alters how your data is processed asks for fresh explicit consent at first launch, before the new processing starts, which the policy-version check on the consent receipt enforces.
+    <p class="section-heading">26. Changelog</p>
+    <p class="section-body">26.1 v1.6 — 2026-08-02
+26.1.1 §24 (Changes to These Terms): corrected a promise the App has never kept. It said we would notify you of material changes 'via an in-app notice or email at least 7 days before the changes take effect'. There is no advance-notice mechanism — no scheduled email, no in-app pre-announcement — and Privacy Policy §16 has always described the real behaviour: you see the change at first launch after it happens. Two documents in one agreement said opposite things about the same question. §24 now matches §16.
+26.1.2 No practice changed. What was already true and remains true is the stronger half: a change that materially alters how your data is processed asks for fresh explicit consent at first launch, before the new processing starts, which the policy-version check on the consent receipt enforces.
 
-## v1.5 — 2026-07-26
-• §2 (Eligibility): corrected "this is a real age gate, not self-attestation". The App asks for your date of birth and computes your age from it; it does not verify age against any document or identity source. The section now says so plainly. The block itself, and the India under-18 parental-consent step, are unchanged.
+26.2 v1.5 — 2026-07-26
+26.2.1 §2 (Eligibility): corrected "this is a real age gate, not self-attestation". The App asks for your date of birth and computes your age from it; it does not verify age against any document or identity source. The section now says so plainly. The block itself, and the India under-18 parental-consent step, are unchanged.
 
-## v1.4 — 2026-07-26
-• Published Terms brought back into line with the in-app Terms. docs/terms.html and the website copy had drifted behind LegalScreen.js: they still described the trial as feature-limited in §7, omitted the quiz cap, the 1,000-action ceiling, the server-fault refund clause and the journal-photo storage disclosure in §11, and listed only six Summarise periods where the code has eight. Both copies are now generated from one source.
-• §7: replaced "Compass subscribers are simply not subject to it" — which read as a contradiction of the adjacent sentence saying subscribing is not how the cap is lifted — with a plain statement that Compass subscribers are exempt from it entirely.
-• §7: the Summarise list now names all eight periods the code ships (this session, today, weekly, fortnightly, monthly, quarterly, half-yearly, yearly — SUMMARISE_PERIODS in MentorScreen.js), and confirms trial users get all of them (the premium flag is satisfied by isTrial).
-• §15: the deletion list was materially incomplete — it named a handful of collections while the erasure routine (functions/userFootprint.js) clears several more. It now points at Privacy §11, which lists every collection by name, and discloses the device-level anti-abuse counters that expire on a timer rather than being deleted by name.
+26.3 v1.4 — 2026-07-26
+26.3.1 Published Terms brought back into line with the in-app Terms. docs/terms.html and the website copy had drifted behind LegalScreen.js: they still described the trial as feature-limited in §7, omitted the quiz cap, the 1,000-action ceiling, the server-fault refund clause and the journal-photo storage disclosure in §11, and listed only six Summarise periods where the code has eight. Both copies are now generated from one source.
+26.3.2 §7: replaced "Compass subscribers are simply not subject to it" — which read as a contradiction of the adjacent sentence saying subscribing is not how the cap is lifted — with a plain statement that Compass subscribers are exempt from it entirely.
+26.3.3 §7: the Summarise list now names all eight periods the code ships (this session, today, weekly, fortnightly, monthly, quarterly, half-yearly, yearly — SUMMARISE_PERIODS in MentorScreen.js), and confirms trial users get all of them (the premium flag is satisfied by isTrial).
+26.3.4 §15: the deletion list was materially incomplete — it named a handful of collections while the erasure routine (functions/userFootprint.js) clears several more. It now points at Privacy §11, which lists every collection by name, and discloses the device-level anti-abuse counters that expire on a timer rather than being deleted by name.
 
-## v1.3 — 2026-07-26
-• §5 / §7: corrected the Compass Arya allowance from 400 messages per day to the 150 the server actually enforces (DAILY_AI_LIMIT_COMPASS) — the old figure over-promised by 250 messages, and §7 stated it a second time. Added the journal-analysis allowance, which was never disclosed.
-• §5 / §7: corrected the trial length from 11 days to the 7 the server enforces (TRIAL_DURATION_MS / TRIAL_DAYS). The 11-day figure appeared in both the §5 prose and the §7 tier heading and was wrong in every published copy.
-• §5 / §7: removed the trial restrictions on Summarise periods and chat-history scroll-back/search, in BOTH places they appeared — §7's trial block still listed them after an earlier partial edit, so the document contradicted itself. The code has never applied them, so the Terms understated what a trial includes.
-• §7: removed the per-feature daily caps (reports 3/kind, summaries 20, reading 3, letter 3). Those caps were deliberately removed server-side; only the quiz retains one (5 per level per day). The shared 1,000-action daily ceiling is now described instead.
-• §7 (NEW): added the server-fault clause — if a request fails because our AI provider is unavailable, times out or rate-limits us, that message or entry is returned to your allowance and the App says the fault is ours rather than telling you that you have reached your limit.
-• §7 (NEW): disclosed the per-device daily cap that applies to trial and free accounts, which had never been stated anywhere in the Terms.
+26.4 v1.3 — 2026-07-26
+26.4.1 §5 / §7: corrected the Compass Arya allowance from 400 messages per day to the 150 the server actually enforces (DAILY_AI_LIMIT_COMPASS) — the old figure over-promised by 250 messages, and §7 stated it a second time. Added the journal-analysis allowance, which was never disclosed.
+26.4.2 §5 / §7: corrected the trial length from 11 days to the 7 the server enforces (TRIAL_DURATION_MS / TRIAL_DAYS). The 11-day figure appeared in both the §5 prose and the §7 tier heading and was wrong in every published copy.
+26.4.3 §5 / §7: removed the trial restrictions on Summarise periods and chat-history scroll-back/search, in BOTH places they appeared — §7's trial block still listed them after an earlier partial edit, so the document contradicted itself. The code has never applied them, so the Terms understated what a trial includes.
+26.4.4 §7: removed the per-feature daily caps (reports 3/kind, summaries 20, reading 3, letter 3). Those caps were deliberately removed server-side; only the quiz retains one (5 per level per day). The shared 1,000-action daily ceiling is now described instead.
+26.4.5 §7 (NEW): added the server-fault clause — if a request fails because our AI provider is unavailable, times out or rate-limits us, that message or entry is returned to your allowance and the App says the fault is ours rather than telling you that you have reached your limit.
+26.4.6 §7 (NEW): disclosed the per-device daily cap that applies to trial and free accounts, which had never been stated anywhere in the Terms.
 
-## v1.2 — 2026-06-24
-• §2: replaced the stale "self-attestation only" age language with the real DOB age gate + India under-18 parental-consent flow, to match the actual app and Privacy Policy §14 (App Store legal-consistency audit).
+26.5 v1.2 — 2026-06-24
+26.5.1 §2: replaced the stale "self-attestation only" age language with the real DOB age gate + India under-18 parental-consent flow, to match the actual app and Privacy Policy §14 (App Store legal-consistency audit).
 
-## v1.1 — 2026-05-28
-• §2 (Eligibility): removed specific numeric promises per country; replaced with self-attestation language.
-• §6 (Refunds): added EU/UK 14-day withdrawal in-app confirmation requirement (CRD Art. 16(m)).
-• §13 (User Content): removed "without your explicit consent" carve-out; added absolute no-AI-training statement and Google Cloud Vertex AI exclusion reference.
-• §17 (Third-Party Services): added full Apple Paid Applications Schedule 2 §3.2 EULA recitals; added Expo Push Service, Sentry (Functional Software, Inc.), Gmail/Google Workspace SMTP.
-• §19 (Liability): replaced "$10 USD" floor with US$100 / 12-months-of-fees standard; added carve-outs for non-excludable consumer law (UK CRA 2015, EU UCP Directive, ACL, India CPA 2019).
-• §23 (Dispute Resolution): rewrote JAMS arbitration clause with JAMS Consumer Minimum Standards, delegation clause, severability of class-waiver, EU/UK/India local-court carve-out.
-• §25 (Contact): added placeholder for registered office address.
-• Updated "Last updated" to 2026-05-28; tagged v1.1.
+26.6 v1.1 — 2026-05-28
+26.6.1 §2 (Eligibility): removed specific numeric promises per country; replaced with self-attestation language.
+26.6.2 §6 (Refunds): added EU/UK 14-day withdrawal in-app confirmation requirement (CRD Art. 16(m)).
+26.6.3 §13 (User Content): removed "without your explicit consent" carve-out; added absolute no-AI-training statement and Google Cloud Vertex AI exclusion reference.
+26.6.4 §17 (Third-Party Services): added full Apple Paid Applications Schedule 2 §3.2 EULA recitals; added Expo Push Service, Sentry (Functional Software, Inc.), Gmail/Google Workspace SMTP.
+26.6.5 §19 (Liability): replaced "$10 USD" floor with US$100 / 12-months-of-fees standard; added carve-outs for non-excludable consumer law (UK CRA 2015, EU UCP Directive, ACL, India CPA 2019).
+26.6.6 §23 (Dispute Resolution): rewrote JAMS arbitration clause with JAMS Consumer Minimum Standards, delegation clause, severability of class-waiver, EU/UK/India local-court carve-out.
+26.6.7 §25 (Contact): added placeholder for registered office address.
+26.6.8 Updated "Last updated" to 2026-05-28; tagged v1.1.
 
-## v1.0 — May 2026
-• Prior version (pre-r257 audit fixes).</p>
+26.7 v1.0 — May 2026
+26.7.1 Prior version (pre-r257 audit fixes).</p>
   </div>
 
 </main>
