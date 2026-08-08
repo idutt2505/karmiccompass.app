@@ -66,9 +66,9 @@
 </nav>
 
 <div class="hero">
-  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.6</p>
+  <p class="hero-eyebrow">Legal &nbsp;·&nbsp; v1.7</p>
   <h1 class="hero-title">Terms &amp; Conditions</h1>
-  <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-08-02</p>
+  <p class="hero-meta">Diksha Dutt (operating as KarmicCompass) &nbsp;·&nbsp; Last updated: 2026-08-09</p>
 </div>
 
 <main>
@@ -210,7 +210,7 @@ All permissions are requested at the point of use and can be revoked at any time
 
   <div class="section">
     <p class="section-heading">12. Data Export</p>
-    <p class="section-body">The App provides an "Export Data" feature in Settings that generates a PDF report containing your journal entries, chat history with Arya, wellness summary, badges, and scores.
+    <p class="section-body">The App provides an "Export Data" feature in Settings that generates a PDF report containing your journal entries, chat history with Arya, wellness summary, badges, scores, your Wisdom Collection (starred messages), Arya's compressed memory summary, session summaries, and — if any exist — your safety records (see Privacy Policy §3), so an export answers a data-access request completely.
 
 The PDF is generated on-device from your locally cached data, except that each attached journal photo is downloaded from Firebase Storage so it can be included. If you choose to include an optional personalised letter from Arya, one additional AI call is made to Google's Gemini API using a journey summary (not raw journal text). The rest of the PDF requires no network calls.
 
@@ -391,47 +391,50 @@ For questions, concerns, or disputes regarding these Terms, write to us at the a
 
 Grievance Officer (India): see Privacy Policy §17.
 
-Last updated: 2026-08-02 (v1.6)</p>
+Last updated: 2026-08-09 (v1.7)</p>
   </div>
 
   <div class="section">
     <p class="section-heading">26. Changelog</p>
-    <p class="section-body">26.1 v1.6 — 2026-08-02
-26.1.1 §24 (Changes to These Terms): corrected a promise the App has never kept. It said we would notify you of material changes 'via an in-app notice or email at least 7 days before the changes take effect'. There is no advance-notice mechanism — no scheduled email, no in-app pre-announcement — and Privacy Policy §16 has always described the real behaviour: you see the change at first launch after it happens. Two documents in one agreement said opposite things about the same question. §24 now matches §16.
-26.1.2 No practice changed. What was already true and remains true is the stronger half: a change that materially alters how your data is processed asks for fresh explicit consent at first launch, before the new processing starts, which the policy-version check on the consent receipt enforces.
+    <p class="section-body">26.1 v1.7 — 2026-08-09
+26.1.1 §12 (Export Data): the export previously omitted four stored categories — starred messages (Wisdom Collection), Arya's compressed memory summary, session summaries, and safety records — so a data-access answer was incomplete. All four are now included in the PDF and §12 names them. Safety records are listed with their provenance tag (typed / voice transcript / origin unrecorded) and their 90-day retention is restated where they appear.
 
-26.2 v1.5 — 2026-07-26
-26.2.1 §2 (Eligibility): corrected "this is a real age gate, not self-attestation". The App asks for your date of birth and computes your age from it; it does not verify age against any document or identity source. The section now says so plainly. The block itself, and the India under-18 parental-consent step, are unchanged.
+26.2 v1.6 — 2026-08-02
+26.2.1 §24 (Changes to These Terms): corrected a promise the App has never kept. It said we would notify you of material changes 'via an in-app notice or email at least 7 days before the changes take effect'. There is no advance-notice mechanism — no scheduled email, no in-app pre-announcement — and Privacy Policy §16 has always described the real behaviour: you see the change at first launch after it happens. Two documents in one agreement said opposite things about the same question. §24 now matches §16.
+26.2.2 No practice changed. What was already true and remains true is the stronger half: a change that materially alters how your data is processed asks for fresh explicit consent at first launch, before the new processing starts, which the policy-version check on the consent receipt enforces.
 
-26.3 v1.4 — 2026-07-26
-26.3.1 Published Terms brought back into line with the in-app Terms. docs/terms.html and the website copy had drifted behind LegalScreen.js: they still described the trial as feature-limited in §7, omitted the quiz cap, the 1,000-action ceiling, the server-fault refund clause and the journal-photo storage disclosure in §11, and listed only six Summarise periods where the code has eight. Both copies are now generated from one source.
-26.3.2 §7: replaced "Compass subscribers are simply not subject to it" — which read as a contradiction of the adjacent sentence saying subscribing is not how the cap is lifted — with a plain statement that Compass subscribers are exempt from it entirely.
-26.3.3 §7: the Summarise list now names all eight periods the code ships (this session, today, weekly, fortnightly, monthly, quarterly, half-yearly, yearly — SUMMARISE_PERIODS in MentorScreen.js), and confirms trial users get all of them (the premium flag is satisfied by isTrial).
-26.3.4 §15: the deletion list was materially incomplete — it named a handful of collections while the erasure routine (functions/userFootprint.js) clears several more. It now points at Privacy §11, which lists every collection by name, and discloses the device-level anti-abuse counters that expire on a timer rather than being deleted by name.
+26.3 v1.5 — 2026-07-26
+26.3.1 §2 (Eligibility): corrected "this is a real age gate, not self-attestation". The App asks for your date of birth and computes your age from it; it does not verify age against any document or identity source. The section now says so plainly. The block itself, and the India under-18 parental-consent step, are unchanged.
 
-26.4 v1.3 — 2026-07-26
-26.4.1 §5 / §7: corrected the Compass Arya allowance from 400 messages per day to the 150 the server actually enforces (DAILY_AI_LIMIT_COMPASS) — the old figure over-promised by 250 messages, and §7 stated it a second time. Added the journal-analysis allowance, which was never disclosed.
-26.4.2 §5 / §7: corrected the trial length from 11 days to the 7 the server enforces (TRIAL_DURATION_MS / TRIAL_DAYS). The 11-day figure appeared in both the §5 prose and the §7 tier heading and was wrong in every published copy.
-26.4.3 §5 / §7: removed the trial restrictions on Summarise periods and chat-history scroll-back/search, in BOTH places they appeared — §7's trial block still listed them after an earlier partial edit, so the document contradicted itself. The code has never applied them, so the Terms understated what a trial includes.
-26.4.4 §7: removed the per-feature daily caps (reports 3/kind, summaries 20, reading 3, letter 3). Those caps were deliberately removed server-side; only the quiz retains one (5 per level per day). The shared 1,000-action daily ceiling is now described instead.
-26.4.5 §7 (NEW): added the server-fault clause — if a request fails because our AI provider is unavailable, times out or rate-limits us, that message or entry is returned to your allowance and the App says the fault is ours rather than telling you that you have reached your limit.
-26.4.6 §7 (NEW): disclosed the per-device daily cap that applies to trial and free accounts, which had never been stated anywhere in the Terms.
+26.4 v1.4 — 2026-07-26
+26.4.1 Published Terms brought back into line with the in-app Terms. docs/terms.html and the website copy had drifted behind LegalScreen.js: they still described the trial as feature-limited in §7, omitted the quiz cap, the 1,000-action ceiling, the server-fault refund clause and the journal-photo storage disclosure in §11, and listed only six Summarise periods where the code has eight. Both copies are now generated from one source.
+26.4.2 §7: replaced "Compass subscribers are simply not subject to it" — which read as a contradiction of the adjacent sentence saying subscribing is not how the cap is lifted — with a plain statement that Compass subscribers are exempt from it entirely.
+26.4.3 §7: the Summarise list now names all eight periods the code ships (this session, today, weekly, fortnightly, monthly, quarterly, half-yearly, yearly — SUMMARISE_PERIODS in MentorScreen.js), and confirms trial users get all of them (the premium flag is satisfied by isTrial).
+26.4.4 §15: the deletion list was materially incomplete — it named a handful of collections while the erasure routine (functions/userFootprint.js) clears several more. It now points at Privacy §11, which lists every collection by name, and discloses the device-level anti-abuse counters that expire on a timer rather than being deleted by name.
 
-26.5 v1.2 — 2026-06-24
-26.5.1 §2: replaced the stale "self-attestation only" age language with the real DOB age gate + India under-18 parental-consent flow, to match the actual app and Privacy Policy §14 (App Store legal-consistency audit).
+26.5 v1.3 — 2026-07-26
+26.5.1 §5 / §7: corrected the Compass Arya allowance from 400 messages per day to the 150 the server actually enforces (DAILY_AI_LIMIT_COMPASS) — the old figure over-promised by 250 messages, and §7 stated it a second time. Added the journal-analysis allowance, which was never disclosed.
+26.5.2 §5 / §7: corrected the trial length from 11 days to the 7 the server enforces (TRIAL_DURATION_MS / TRIAL_DAYS). The 11-day figure appeared in both the §5 prose and the §7 tier heading and was wrong in every published copy.
+26.5.3 §5 / §7: removed the trial restrictions on Summarise periods and chat-history scroll-back/search, in BOTH places they appeared — §7's trial block still listed them after an earlier partial edit, so the document contradicted itself. The code has never applied them, so the Terms understated what a trial includes.
+26.5.4 §7: removed the per-feature daily caps (reports 3/kind, summaries 20, reading 3, letter 3). Those caps were deliberately removed server-side; only the quiz retains one (5 per level per day). The shared 1,000-action daily ceiling is now described instead.
+26.5.5 §7 (NEW): added the server-fault clause — if a request fails because our AI provider is unavailable, times out or rate-limits us, that message or entry is returned to your allowance and the App says the fault is ours rather than telling you that you have reached your limit.
+26.5.6 §7 (NEW): disclosed the per-device daily cap that applies to trial and free accounts, which had never been stated anywhere in the Terms.
 
-26.6 v1.1 — 2026-05-28
-26.6.1 §2 (Eligibility): removed specific numeric promises per country; replaced with self-attestation language.
-26.6.2 §6 (Refunds): added EU/UK 14-day withdrawal in-app confirmation requirement (CRD Art. 16(m)).
-26.6.3 §13 (User Content): removed "without your explicit consent" carve-out; added absolute no-AI-training statement and Google Cloud Vertex AI exclusion reference.
-26.6.4 §17 (Third-Party Services): added full Apple Paid Applications Schedule 2 §3.2 EULA recitals; added Expo Push Service, Sentry (Functional Software, Inc.), Gmail/Google Workspace SMTP.
-26.6.5 §19 (Liability): replaced "$10 USD" floor with US$100 / 12-months-of-fees standard; added carve-outs for non-excludable consumer law (UK CRA 2015, EU UCP Directive, ACL, India CPA 2019).
-26.6.6 §23 (Dispute Resolution): rewrote JAMS arbitration clause with JAMS Consumer Minimum Standards, delegation clause, severability of class-waiver, EU/UK/India local-court carve-out.
-26.6.7 §25 (Contact): added placeholder for registered office address.
-26.6.8 Updated "Last updated" to 2026-05-28; tagged v1.1.
+26.6 v1.2 — 2026-06-24
+26.6.1 §2: replaced the stale "self-attestation only" age language with the real DOB age gate + India under-18 parental-consent flow, to match the actual app and Privacy Policy §14 (App Store legal-consistency audit).
 
-26.7 v1.0 — May 2026
-26.7.1 Prior version (pre-r257 audit fixes).</p>
+26.7 v1.1 — 2026-05-28
+26.7.1 §2 (Eligibility): removed specific numeric promises per country; replaced with self-attestation language.
+26.7.2 §6 (Refunds): added EU/UK 14-day withdrawal in-app confirmation requirement (CRD Art. 16(m)).
+26.7.3 §13 (User Content): removed "without your explicit consent" carve-out; added absolute no-AI-training statement and Google Cloud Vertex AI exclusion reference.
+26.7.4 §17 (Third-Party Services): added full Apple Paid Applications Schedule 2 §3.2 EULA recitals; added Expo Push Service, Sentry (Functional Software, Inc.), Gmail/Google Workspace SMTP.
+26.7.5 §19 (Liability): replaced "$10 USD" floor with US$100 / 12-months-of-fees standard; added carve-outs for non-excludable consumer law (UK CRA 2015, EU UCP Directive, ACL, India CPA 2019).
+26.7.6 §23 (Dispute Resolution): rewrote JAMS arbitration clause with JAMS Consumer Minimum Standards, delegation clause, severability of class-waiver, EU/UK/India local-court carve-out.
+26.7.7 §25 (Contact): added placeholder for registered office address.
+26.7.8 Updated "Last updated" to 2026-05-28; tagged v1.1.
+
+26.8 v1.0 — May 2026
+26.8.1 Prior version (pre-r257 audit fixes).</p>
   </div>
 
 </main>
